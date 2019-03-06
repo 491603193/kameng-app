@@ -365,6 +365,20 @@
         el.insertAdjacentHTML('afterend', html);
         return el;
     };
+    u.openWin = function (name) {
+        var delay = 0;
+        if(api.systemType != 'ios'){
+            delay = 300;
+        }
+        api.openWin({
+            name: name,
+            url: api.wgtRootDir + name + '.html',
+            bounces:false,
+            delay: delay,
+            slidBackEnabled:true,
+            vScrollBarEnabled:false
+        });
+    };
     u.html = function(el, html){
         if(!u.isElement(el)){
             console.warn('$api.html Function need el param, el param must be DOM Element');

@@ -17,12 +17,17 @@ html,body {
 	-webkit-user-select:none;
 	width: 100%;
 }
+@font-face {
+    font-family: hiragino;
+    src:url('haira.OTF')
+}
 body {
 	line-height: 1.5;
 	font-size: 0.8rem;
 	color: #212121;
 	background-color: #f5f5f5;
 	outline: 0;
+    font-family: hiragino;
 }
 html,body,header,section,footer,div,ul,ol,li,img,a,span,em,del,legend,center,strong,var,fieldset,form,label,dl,dt,dd,cite,input,hr,time,mark,code,figcaption,figure,textarea,h1,h2,h3,h4,h5,h6,p{
 	margin:0;

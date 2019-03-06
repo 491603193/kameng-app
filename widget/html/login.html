@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>登录</title>
+  <link rel="stylesheet" href="../css/aui.css">
+  <link rel="stylesheet" href="../css/km.css">
+</head>
+<body class="background-fff">
+  <header class="login-head"></header>
+  <div class="login-content">
+    <ul class="login-list">
+      <li class="login-list-item">
+          <div class="login-item-lable">手机号</div>
+          <div class="login-item-input">
+            <input type="number" placeholder="请输入中国大陆手机号码">
+          </div>
+      </li>
+      <li class="login-list-item login-list-item-code">
+          <div class="login-item-lable">验证码</div>
+          <div class="login-item-input login-item-input-code">
+            <input type="number" placeholder="请输入验证码">
+          </div>
+          <div class="login-item-code" onclick="getCode()" id="code">获取验证码</div>
+      </li>
+    </ul>
+  </div>
+  <button class="btn color-pink background-fff" onclick="login()">登录</button>
+</body>
+<script src="../script/api.js"></script>
+<script src="../script/index/login.js"></script>
+<script src="../script/plug.js"></script>
+</html>

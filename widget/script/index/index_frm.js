@@ -13,3 +13,6 @@ var slide3 = new auiSlide({
     "pageStyle":'dot',
     'dotPosition':'center'
 })
+function openDetail () {
+  $api.openWin('/html/classify/product_detail')
+}

@@ -4,7 +4,7 @@ apiready = function(){
   $api.fixStatusBar(header)
 }
 var tab = new auiTab({
-    element:document.getElementById("tab"),
+  element:document.getElementById("tab"),
 },function(ret){
   var fyc = $api.byId('fyc')
   var yc = $api.byId('yc')

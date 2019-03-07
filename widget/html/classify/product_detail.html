@@ -4,27 +4,196 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>纸尿裤系列</title>
+  <title>商品</title>
   <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/aui-slide.css">
   <link rel="stylesheet" href="../../css/km.css">
 </head>
 <body>
-  <header class="win" id="aui-header">
-    <div class="back-icon" onclick="api.closeWin()">
-      <img src="../../image/back.svg">
+  <div id="app">
+    <div id="big" :class="{pay: zhezhao}">
+      <header class="win bacground-f7 product-detail-win" id="aui-header">
+        <div class="back-icon" @click="api.closeWin()">
+          <img src="../../image/back.svg">
+        </div>
+        <div class="aui-tab bacground-f7" id="tab">
+          <a href="#shop" class="aui-tab-item" :class="title === 1 ? 'aui-active' : ''" @click="setTitle(1)">商品</a>
+          <a href="#detail" class="aui-tab-item" :class="title === 2 ? 'aui-active' : ''" @click="setTitle(2)">详情</a>
+          <a href="#comment" class="aui-tab-item" :class="title === 3 ? 'aui-active' : ''" @click="setTitle(3)">评价</a>
+        </div>
+        <div class="share-icon">
+          <img src="../../image/share.svg">
+        </div>
+      </header>
+      <div class="product-detail-banner" id="shop" name="shop">
+        <div id="aui-slide3">
+          <div class="aui-slide-wrap" >
+              <div class="aui-slide-node bg-dark">
+                  <img src="../../image/index/zhanwei.png" />
+              </div>
+              <div class="aui-slide-node bg-dark">
+                  <img src="../../image/index/zhanwei2.png" />
+              </div>
+              <div class="aui-slide-node bg-dark">
+                  <img src="../../image/index/zhanwei.png" />
+              </div>
+              <div class="aui-slide-node bg-dark">
+                  <img src="../../image/index/zhanwei2.png" />
+              </div>
+          </div>
+          <div class="aui-slide-page-wrap"><!--分页容器--></div>
+        </div>
+      </div>
+      <div class="product-detail-sell">
+        <div class="product-detail-sell-left">即将开售</div>
+        <div class="product-detail-sell-right">
+          <p class="product-detail-time">02.28 <span class="color-yellow">10:00</span> 开抢</p>
+          <div class="product-detail-limit">限量1000组</div>
+        </div>
+      </div>
+      <div class="product-detail-section background-fff">
+        <p class="product-detail-section-title">
+          <span class="color-red">￥150</span>
+          <span class="color-999">价格￥49.9</span>
+        </p>
+        <p class="product-detail-name">卡萌·萌动纸装尿裤</p>
+        <p class="product-detail-num color-999">
+          快递：10.00
+          <span>销量：0件</span>
+        </p>
+      </div>
+      <div class="product-detail-select background-fff" @click="getBack()">
+        选择分类
+        <img src="../../image/go.svg">
+      </div>
+      <div class="product-photo-detail background-fff">
+        <div class="title" id="detail" name="detail">图文详情</div>
+        <div class="detail-img">
+          <img src="holder.js/375px500">
+        </div>
+        <div class="product-detail-select" id="comment" name="comment">
+          商品评价（10条）
+          <img src="../../image/go.svg">
+        </div>
+        <div class="product-detail-comments">
+          <div class="product-detail-comment-item">
+            <div class="comment-user">
+              <img src="holder.js/30x30">
+              <span>卡萌代理</span>
+            </div>
+            <p class="time">2019-02-23 规格36P*2包*1箱</p>
+            <div class="comment-photo">
+              <img src="holder.js/164x164">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="win-title">纸尿裤系列</div>
-    <div class="share-icon">
-      <img src="../../image/share.svg">
+    <!-- 遮罩 -->
+    <div id="film" class="film" :class="{asf: zhezhao}">
+      <div class="film-zhanwei" @click="recover()"></div>
+      <div class="film-content">
+        <div class="film-content-title">
+          <img src="holder.js/102x102" class="product">
+          <div>
+            <p class="price">￥150.00</p>
+            <p class="kc">库存100</p>
+            <p class="select">已选择{{size}}</p>
+          </div>
+          <img src="../../image/close.svg" class="close" @click="recover">
+        </div>
+        <div class="film-standard">
+          <p>规格</p>
+          <div class="aui-tab" id="tab1">
+            <div class="aui-tab-item" :class="size === 'XL' ? 'aui-active' : ''" @click="setSize('XL')">XL</div>
+            <div class="aui-tab-item" :class="size === 'L' ? 'aui-active' : ''" @click="setSize('L')">L</div>
+            <div class="aui-tab-item" :class="size === 'M' ? 'aui-active' : ''" @click="setSize('M')">M</div>
+            <div class="aui-tab-item":class="size === 'S' ? 'aui-active' : ''" @click="setSize('S')">S</div>
+          </div>
+        </div>
+        <div class="film-standard">
+          <p>颜色</p>
+          <div class="aui-tab" id="tab2">
+            <div class="aui-tab-item aui-tab-item1" :class="color === 1 ? 'aui-active' : ''" @click="setColor(1)">白色</div>
+          </div>
+        </div>
+        <div class="film-num">
+          <div class="text">数量</div>
+          <div class="box">
+            <div class="j background-f6 color-999" @click="numJ()">一</div>
+            <div class="num background-e3">{{num}}</div>
+            <div class="add background-e3"  @click="numAdd()">＋</div>
+          </div>
+        </div>
+      </div>
     </div>
-  </header>
+    <!-- 遮罩 end-->
+    <footer class="foot product-detail-foot">
+      <div class="aui-col-xs-2 background-fff">
+        <div class="aui-badge">3</div>
+        <img src="../../image/shopping/shopcar.svg" class="aui-iconfont">
+      </div>
+      <div class="aui-col-xs-5 background-febb1f" @click="getBack()">加入购物车</div>
+      <div class="aui-col-xs-5 background-fda9c5">立即购买</div>
+    </footer>
+  </div>
 </body>
+<script src="../../script/holder.js"></script>
 <script src="../../script/api.js"></script>
+<script src="../../script/aui-tab.js"></script>
+<script src="../../script/aui-slide.js"></script>
+<script src="../../script/jquery-3.3.1.min.js"></script>
+<script src="../../script/classify/product_detail.js"></script>
+<script src="../../script/vue.min.js"></script>
 <script>
-  apiready = function(){
-    api.parseTapmode();
-    var header = $api.byId('aui-header');
-    $api.fixStatusBar(header);
-  };
+  var app = new Vue({
+  el: '#app',
+  data: {
+    zhezhao: false,
+    size: 'XL',
+    color: 1,
+    title: 1,
+    num: 1
+  },
+  mounted () {
+    var slide3 = new auiSlide({
+      container:document.getElementById("aui-slide3"),
+      // "width":300,
+      "height": 311,
+      "speed":500,
+      "autoPlay": 3000, //自动播放
+      "loop":true,
+      "pageShow":true,
+      "pageStyle":'dot',
+      'dotPosition':'center'
+    })
+  },
+  methods: {
+    getBack () {
+      this.zhezhao = true
+    },
+    recover () {
+      this.zhezhao = false
+    },
+    setSize (id) {
+      if (this.size === id) return this.size = 0
+      this.size = id
+    },
+    setColor (id) {
+      if (this.color === id) return this.color = 0
+      this.color = id
+    },
+    setTitle (id) {
+      this.title = id
+    },
+    numJ () {
+      if (this.num === 0) return
+      this.num--
+    },
+    numAdd () {
+      this.num++
+    }
+  }
+})
 </script>
 </html>

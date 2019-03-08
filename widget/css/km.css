@@ -899,5 +899,23 @@ input[type="text"].index-input-search {
   background-color: #fff;
   padding: 10px;
   border-radius: 5px;
+  margin-top: 10px;
+}
+.product-detail-comment-item .msg {
+  font-size: 13px;
+  color: #333;
+  margin-top: 10px;
+}
+.product-comment .product-detail-comment-item .comment-photo {
+  margin-top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.product-comment .product-detail-comment-item .comment-photo .item-img {
+  margin-top: 10px;
+  width: 32%;
+  height: 105px;
+  border-radius: 5px;
 }
 /* product-comment-frm end */

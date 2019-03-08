@@ -713,7 +713,7 @@ input[type="text"].index-input-search {
   height: 49px;
   line-height: 49px;
   font-size: 16px;
-  color-#333;
+  color: #333;
   border-bottom: 1px solid #eee;
 }
 .detail-img,
@@ -931,3 +931,6 @@ input[type="text"].index-input-search {
   border-radius: 5px;
 }
 /* product-comment-frm end */
+/* shop_pay */
+
+/* shop_pay end*/

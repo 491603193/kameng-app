@@ -11,7 +11,28 @@
 <body>
   <div id="app">
     <div class="product-comment">
-
+      <div class="product-detail-comments">
+          <div class="product-detail-comment-item" v-for="(item, index) in comments" :key="index">
+            <div class="comment-user">
+              <img :src="item.head">
+              <span>{{item.name}}</span>
+            </div>
+            <p class="time">{{item.name}} {{item.state}}</p>
+            <p class="msg" v-if="item.msg">{{item.msg}}</p>
+            <div class="comment-photo">
+              <img v-for="(img, imgIndex) in item.imgs"
+                :src="img"
+                :class="item.imgs.length > 1 ? 'item-img' : ''"
+                :key="imgIndex"
+              />
+              <div
+                class="item-img"
+                v-if="item.imgs.length > 1 && (item.imgs.length % 3 !== 0)"
+                v-for="(el, dl) in (3 - item.imgs.length % 3)"
+              ></div>
+            </div>
+          </div>
+        </div>
     </div>
     <!-- 遮罩 -->
     <div id="film" class="film" :class="{asf: zhezhao}">
@@ -62,26 +83,26 @@
     </footer>
   </div>
 </body>
+<script src="../../script/holder.js"></script>
 <script src="../../script/api.js"></script>
 <script src="../../script/vue.min.js"></script>
-<script src="../../script/holder.js"></script>
 <script>
 new Vue({
   el: '#app',
   data: {
     comments: [{
-      head: 'holder.js/102x102',
+      head: '../../image/head.jpg',
       name: '卡萌代理',
       time: '2019-02-03',
       state: '规格36P*2包*1箱',
       imgs: ['../../image/index/zhanwei.png']
     },{
-      head: 'holder.js/102x102',
+      head: '../../image/head1.jpg',
       name: '卡萌代理',
       time: '2019-02-03',
       state: '规格36P*2包*1箱',
       msg: '好又实惠',
-      imgs: ['../../image/index/zhanwei.png', '../../image/index/zhanwei.png2', '../../image/index/zhanwei.png']
+      imgs: ['../../image/index/zhanwei.png', '../../image/index/zhanwei2.png', '../../image/index/zhanwei.png']
     }],
     zhezhao: false,
     size: 'XL',

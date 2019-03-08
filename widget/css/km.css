@@ -47,6 +47,13 @@
   margin-top: -12.5px;
   z-index: 100;
 }
+.login-tx {
+  height: 24px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -12px;
+}
 /* login end*/
 /* 公共 */
 .color-pink {
@@ -895,10 +902,15 @@ input[type="text"].index-input-search {
   width: 100%;
   padding: 8px 0 58px 0;
 }
+.product-comment .product-detail-comments {
+  margin-top: 0;
+}
 .product-comment .product-detail-comment-item {
   background-color: #fff;
   padding: 10px;
   border-radius: 5px;
+}
+.product-comment .product-detail-comment-item:not(:first-of-type) {
   margin-top: 10px;
 }
 .product-detail-comment-item .msg {

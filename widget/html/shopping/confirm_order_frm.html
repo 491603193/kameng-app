@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>云仓下单</title>
+  <title>确认订单</title>
   <link rel="stylesheet" href="../../css/aui.css">
   <link rel="stylesheet" href="../../css/km.css">
 </head>
@@ -24,16 +24,21 @@
     </div>
     <div class="shop-pay-site-ban"></div>
     <div class="shop-pay-state">
-      <div class="shop-pay-state-head">
-        <img src="../../image/index/zhanwei.png" class="product">
-        <div class="shop-pay-status">
-          <p class="title">{{title}}</p>
-          <p class="status">规格：{{status}}</p>
-          <p class="num color-red">{{num}}个库存</p>
+      <div
+        v-for="(item, index) in products"
+        :key="index"
+      >
+        <div class="shop-pay-state-head">
+          <img :src="item.img" class="product">
+          <div class="shop-pay-status">
+            <p class="title">{{item.name}}</p>
+            <p class="status">规格：{{item.status}}</p>
+            <p class="num color-red">{{item.kucun}}个库存</p>
+          </div>
+          <div class="nums">X{{item.num}}</div>
         </div>
-        <div class="nums">X{{nums}}</div>
+        <div class="line line1">运费 ￥{{item.freight}}</div>
       </div>
-      <div class="line line1">快递 ￥10.00</div>
       <div class="line line2">商品总价 <span>￥10.00+10个库存</span></div>
       <div class="line">合计：<span class="color-red">￥10.00+10库存</span></div>
       <div class="message">
@@ -98,13 +103,24 @@
       sonsignee: '戴永明',
       mobel: '13548974111',
       site: '山东省烟台市高新区马山街道蓝海路创业1号国家级孵化器D座',
-      title: '卡萌·萌动装纸尿裤',
-      status: 'L',
-      num: 2,
-      nums: 5,
       message: '',
       payPlan: 1,
-      alert: false
+      alert: false,
+      products: [{
+        name: '卡萌·萌动装纸尿裤L码',
+        num: 5,
+        status: 'L',
+        kucun: 2,
+        freight: '10.00',
+        img: '../../image/index/zhanwei.png'
+      },{
+        name: '卡萌·萌动装纸尿裤L码',
+        num: 5,
+        status: 'L',
+        kucun: 4,
+        freight: '10.00',
+        img: '../../image/index/zhanwei2.png'
+      }]
     },
     methods: {
       goConfirm () {

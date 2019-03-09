@@ -134,7 +134,7 @@
         <img src="../../image/shopping/shopcar.svg" class="aui-iconfont">
       </div>
       <div class="aui-col-xs-5 background-febb1f" @click="getBack()">加入购物车</div>
-      <div class="aui-col-xs-5 background-fda9c5">立即购买</div>
+      <div class="aui-col-xs-5 background-fda9c5" @click="goPay()">立即购买</div>
     </footer>
   </div>
 </body>
@@ -195,6 +195,9 @@
     },
     openComment () {
       $api.openWin('/html/classify/product_comment_win')
+    },
+    goPay () {
+      $api.openWin('/html/shopping/shop_pay_win')
     }
   }
 })

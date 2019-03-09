@@ -13,7 +13,8 @@
     <div class="back-icon" onclick="api.closeWin()">
       <img src="../../image/back.svg">
     </div>
-    <div class="win-title">商品评价</div>
+    <div class="win-title">发表评论</div>
+    <span class="float-right color-pink">发布</span>
   </header>
 </body>
 <script src="../../script/api.js"></script>
@@ -25,8 +26,8 @@
     var headerPos = $api.offset(header);
     var body_h = $api.offset($api.dom('body')).h;
     api.openFrame({
-        name: '/html/classify/product_comment_frm',
-        url: api.wgtRootDir + '/html/classify/product_comment_frm.html',
+        name: '/html/classify/product_frm',
+        url: api.wgtRootDir + '/html/classify/product_frm.html',
         bounces: true,
         rect: {
           x: 0,

@@ -57,7 +57,7 @@
 /* login end*/
 /* 公共 */
 .color-pink {
-  color: #feabc5;
+  color: #feabc5 !important;
 }
 .color-yellow {
   color: #feeb19;
@@ -1194,3 +1194,27 @@ input[type="text"].index-input-search {
   overflow: hidden;
 }
 /* shop_pay end*/
+/* add_comment */
+.add-comment {
+  width: 100%;
+  padding: 14px 15px;
+  border-bottom: 1px solid #eee;
+}
+.add-comment .text {
+  width: 100%;
+  height: 80px;
+  padding-bottom: 10px;
+  font-size: 14px;
+}
+.add-comment .text::-webkit-input-placeholder {
+  color: #999;
+}
+.add-comment-photots {
+  display: flex;
+  justify-content: space-between;
+}
+.add-comment-photots .el {
+  width: 24%;
+  height: 81px;
+}
+/* add_comment end*/

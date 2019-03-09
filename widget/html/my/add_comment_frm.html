@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>发表评价</title>
+  <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/km.css">
+
+</head>
+<body>
+  <div id="app">
+    <div class="add-comment background-fff">
+      <textarea placeholder="说说你的使用心得，分享给想买的他们吧" class="text"></textarea>
+      <div class="add-comment-photots">
+        <img src="../../image/takephoto.png" class="el">
+        <div class="el"
+          v-if="(imgs.length % 4) !== 0"
+          v-for="(el, index) in (4 - imgs.length % 4)"
+        ></div><!-- 占位 -->
+      </div>
+    </div>
+    <div class="add-comment-anonymity">
+      <input id="color-input-red" class="chat-button-location-radio-input" type="checkbox" name="color-input-red" value="#f0544d" />
+      <label  for="color-input-red"></label >
+
+    </div>
+  </div>
+</body>
+<script src="../../script/api.js"></script>
+<script src="../../script/vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      imgs: ['../../image/takephoto.png'] // 上传的图片
+    }
+  })
+</script>
+</html>

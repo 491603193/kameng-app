@@ -4,107 +4,204 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
   <title>首页</title>
   <link rel="stylesheet" href="../css/aui.css">
   <link rel="stylesheet" href="../css/aui-slide.css">
   <link rel="stylesheet" href="../css/km.css">
+  <link rel="stylesheet" href="../css/index_frm.css">
 </head>
 <body class="background-fff">
-  <div class="index-flex" id="header">
-      <div class="index-search-logo">
-        <img src="../image/index/logo.png">
-      </div>
-      <div class="index-search">
-        <div class="index-search-icon">
-          <img src="../image/index/search.svg">
+  <div class="index-main">
+    <div class="index-flex" id="header">
+        <div class="index-search-logo">
+          <img src="../image/index/logo.png">
         </div>
-        <input type="text" placeholder="搜索商品" class="index-input-search">
-      </div>
-      <div class="index-msg-icon">
-        <div class="index-msg-top">
-          <img src="../image/index/msg.svg">
-          <div class="aui-dot index-msg-dot"></div>
+        <div class="index-search">
+          <div class="index-search-icon">
+            <img src="../image/index/search.svg">
+          </div>
+          <input type="text" placeholder="搜索商品" class="index-input-search">
         </div>
-        <p class="index-msg-text">消息</p>
+        <div class="index-msg-icon">
+          <div class="index-msg-top">
+            <img src="../image/index/msg.svg">
+            <div class="aui-dot index-msg-dot"></div>
+          </div>
+          <p class="index-msg-text">消息</p>
+        </div>
+      </div>
+    <header class="index-head">
+      <div id="aui-slide3" style="top: 70px;">
+        <div class="aui-slide-wrap" >
+            <div class="aui-slide-node bg-dark">
+                <img src="../image//index/sild1.png" />
+            </div>
+            <div class="aui-slide-node bg-dark">
+                <img src="../image//index/sild2.png" />
+            </div>
+            <div class="aui-slide-node bg-dark">
+                <img src="../image//index/sild3.png" />
+            </div>
+            <div class="aui-slide-node bg-dark">
+                <img src="../image//index/sild4.png" />
+            </div>
+        </div>
+        <div class="aui-slide-page-wrap"><!--分页容器--></div>
+      </div>
+    </header>
+    <div class="index-section">
+      <section class="aui-grid aui-margin-b-15">
+        <div class="aui-row">
+          <div class="aui-col-xs-3">
+            <img src="../image/index/icon1.png" class="aui-iconfont">
+                <div class="aui-grid-label">云仓</div>
+            </div>
+            <div class="aui-col-xs-3">
+                <img src="../image/index/icon2.png" class="aui-iconfont">
+                <div class="aui-grid-label">非云仓</div>
+            </div>
+            <div class="aui-col-xs-3">
+                <img src="../image/index/icon3.png" class="aui-iconfont">
+                <div class="aui-grid-label">品牌专区</div>
+            </div>
+            <div class="aui-col-xs-3">
+                <img src="../image/index/icon4.png" class="aui-iconfont">
+                <div class="aui-grid-label">我得收入</div>
+            </div>
+        </div>
+      </section>
+    </div>
+    <div class="index-content-logo">
+      <div class="index-line"></div>
+      <img src="../image/index/indexlogo.png" class="index-centent-logo">
+      <div class="index-line"></div>
+    </div>
+    <div class="index-product-list">
+      <div class="index-product-list-item" onclick="openDetail()">
+        <div class="index-product-img">
+          <img src="../image/index/zhanwei.png">
+          <div class="index-product-buy">02.08 10:00开售</div>
+        </div>
+        <div class="index-product-text">
+          <p class="index-product-title">卡萌·萌动装纸尿裤</p>
+          <p class="index-product-describe">产品描述卡萌萌动纸尿裤</p>
+          <p class="index-product-price">￥ 150/箱</p>
+        </div>
+      </div>
+      <div class="index-product-list-item" onclick="openDetail()">
+        <div class="index-product-img">
+          <img src="../image/index/zhanwei2.png">
+        </div>
+        <div class="index-product-text">
+          <p class="index-product-title">卡萌·萌动装纸尿裤</p>
+          <p class="index-product-describe">产品描述卡萌萌动纸尿裤</p>
+          <p class="index-product-price">￥ 150/箱</p>
+        </div>
+      </div>
+      <div class="index-product-list-item" onclick="openDetail()">
+        <div class="index-product-img">
+          <img src="../image/index/zhanwei.png">
+        </div>
+        <div class="index-product-text">
+          <p class="index-product-title">卡萌·萌动装纸尿裤</p>
+          <p class="index-product-describe">产品描述卡萌萌动纸尿裤</p>
+          <p class="index-product-price">￥ 150/箱</p>
+        </div>
       </div>
     </div>
-  <header class="index-head">
-    <div id="aui-slide3" style="top: 70px;">
-      <div class="aui-slide-wrap" >
-          <div class="aui-slide-node bg-dark">
-              <img src="../image//index/sild1.png" />
-          </div>
-          <div class="aui-slide-node bg-dark">
-              <img src="../image//index/sild2.png" />
-          </div>
-          <div class="aui-slide-node bg-dark">
-              <img src="../image//index/sild3.png" />
-          </div>
-          <div class="aui-slide-node bg-dark">
-              <img src="../image//index/sild4.png" />
-          </div>
-      </div>
-      <div class="aui-slide-page-wrap"><!--分页容器--></div>
-    </div>
-  </header>
-  <div class="index-section">
-    <section class="aui-grid aui-margin-b-15">
-      <div class="aui-row">
-        <div class="aui-col-xs-3">
-          <img src="../image/index/icon1.png" class="aui-iconfont">
-              <div class="aui-grid-label">云仓</div>
-          </div>
-          <div class="aui-col-xs-3">
-              <img src="../image/index/icon2.png" class="aui-iconfont">
-              <div class="aui-grid-label">非云仓</div>
-          </div>
-          <div class="aui-col-xs-3">
-              <img src="../image/index/icon3.png" class="aui-iconfont">
-              <div class="aui-grid-label">品牌专区</div>
-          </div>
-          <div class="aui-col-xs-3">
-              <img src="../image/index/icon4.png" class="aui-iconfont">
-              <div class="aui-grid-label">我得收入</div>
-          </div>
-      </div>
-    </section>
   </div>
-  <div class="index-content-logo">
-    <div class="index-line"></div>
-    <img src="../image/index/indexlogo.png" class="index-centent-logo">
-    <div class="index-line"></div>
-  </div>
-  <div class="index-product-list">
-    <div class="index-product-list-item" onclick="openDetail()">
-      <div class="index-product-img">
-        <img src="../image/index/zhanwei.png">
-        <div class="index-product-buy">02.08 10:00开售</div>
+  <div id="indexZhe">
+    <div class="index-zhezhao"></div>
+<!--     <div class="zhezhao-content">
+      <div class="content color-333">
+        <p>亲爱滴小伙伴们：</p>
+        <p class="text-indext-2">自9月6号起，<span class="color-red">转账账号更新啦！</span></p>
+        <p class="zhezhaobottom">为了不影响下单，请跟新并收藏以下账号呦！</p>
+        <p class="el-border-dashed">
+          <span class="letter-spacing">支付宝</span>：<span>初晓晓</span>
+        </p>
+        <p class="el-border-dashed">
+          <span class="letter-spacing">头&nbsp;&nbsp;&nbsp;像</span>：<span>卡萌logo</span>
+        </p>
+        <p class="el-border-dashed">
+          <span class="letter-spacing">银行卡</span>：<span>中国银行烟台分行</span>
+        </p>
+        <p class="el-border-dashed">
+          <span class="letter-spacing">账&nbsp;&nbsp;&nbsp;号</span>：<span>621790 60000 14159627</span>
+        </p>
+        <p class="el-border-dashed">
+          <span class="letter-spacing">持卡人</span>：<span>初晓晓</span>
+        </p>
+        <p class="color-956780">充值最低100元起，打款请备注 上级备案姓名+自己备案姓名+级别（备案姓名以卡萌助手显示名为准）</p>
+        <p class="text-indext-2">祝顺</p>
+        <p>商祺！</p>
+        <p class="right">烟台等等商贸有限公司</p>
       </div>
-      <div class="index-product-text">
-        <p class="index-product-title">卡萌·萌动装纸尿裤</p>
-        <p class="index-product-describe">产品描述卡萌萌动纸尿裤</p>
-        <p class="index-product-price">￥ 150/箱</p>
+      <img src="../image/bg01.png" class="index-tuzi">
+      <img src="../image/indexclose.svg" class="index-close">
+    </div> -->
+    <div class="c">
+      <div id="aui-slide4">
+        <div class="aui-slide-wrap">
+          <div class="aui-slide-node">
+            <div class="content color-333">
+              <p>亲爱滴小伙伴们：</p>
+              <p class="text-indext-2">自9月6号起，<span class="color-red">转账账号更新啦！</span></p>
+              <p class="zhezhaobottom">为了不影响下单，请跟新并收藏以下账号呦！</p>
+              <p class="el-border-dashed">
+                <span class="letter-spacing">支付宝</span>：<span>初晓晓</span>
+              </p>
+              <p class="el-border-dashed">
+                <span class="letter-spacing">头&nbsp;&nbsp;&nbsp;像</span>：<span>卡萌logo</span>
+              </p>
+              <p class="el-border-dashed">
+                <span class="letter-spacing">银行卡</span>：<span>中国银行烟台分行</span>
+              </p>
+              <p class="el-border-dashed">
+                <span class="letter-spacing">账&nbsp;&nbsp;&nbsp;号</span>：<span>621790 60000 14159627</span>
+              </p>
+              <p class="el-border-dashed">
+                <span class="letter-spacing">持卡人</span>：<span>初晓晓</span>
+              </p>
+              <p class="color-956780">充值最低100元起，打款请备注 上级备案姓名+自己备案姓名+级别（备案姓名以卡萌助手显示名为准）</p>
+              <p class="text-indext-2">祝顺</p>
+              <p>商祺！</p>
+              <p class="right">烟台等等商贸有限公司</p>
+            </div>
+            <img src="../image/bg01.png" class="index-tuzi">
+          </div>
+          <div class="aui-slide-node">
+            <div class="content color-333">
+              <p>亲爱滴小伙伴们：</p>
+              <p class="text-indext-2">自9月6号起，<span class="color-red">转账账号更新啦！</span></p>
+              <p class="zhezhaobottom">为了不影响下单，请跟新并收藏以下账号呦！</p>
+              <p class="el-border-dashed">
+                <span class="letter-spacing">支付宝</span>：<span>初晓晓</span>
+              </p>
+              <p class="el-border-dashed">
+                <span class="letter-spacing">头&nbsp;&nbsp;&nbsp;像</span>：<span>卡萌logo</span>
+              </p>
+              <p class="el-border-dashed">
+                <span class="letter-spacing">银行卡</span>：<span>中国银行烟台分行</span>
+              </p>
+              <p class="el-border-dashed">
+                <span class="letter-spacing">账&nbsp;&nbsp;&nbsp;号</span>：<span>621790 60000 14159627</span>
+              </p>
+              <p class="el-border-dashed">
+                <span class="letter-spacing">持卡人</span>：<span>初晓晓</span>
+              </p>
+              <p class="color-956780">充值最低100元起，打款请备注 上级备案姓名+自己备案姓名+级别（备案姓名以卡萌助手显示名为准）</p>
+              <p class="text-indext-2">祝顺</p>
+              <p>商祺！</p>
+              <p class="right">烟台等等商贸有限公司</p>
+            </div>
+            <img src="../image/bg01.png" class="index-tuzi">
+          </div>
+        </div>
+        <div class="aui-slide-page-wrap"></div>
       </div>
-    </div>
-    <div class="index-product-list-item" onclick="openDetail()">
-      <div class="index-product-img">
-        <img src="../image/index/zhanwei2.png">
-      </div>
-      <div class="index-product-text">
-        <p class="index-product-title">卡萌·萌动装纸尿裤</p>
-        <p class="index-product-describe">产品描述卡萌萌动纸尿裤</p>
-        <p class="index-product-price">￥ 150/箱</p>
-      </div>
-    </div>
-    <div class="index-product-list-item" onclick="openDetail()">
-      <div class="index-product-img">
-        <img src="../image/index/zhanwei.png">
-      </div>
-      <div class="index-product-text">
-        <p class="index-product-title">卡萌·萌动装纸尿裤</p>
-        <p class="index-product-describe">产品描述卡萌萌动纸尿裤</p>
-        <p class="index-product-price">￥ 150/箱</p>
-      </div>
+      <img src="../image/indexclose.svg" class="index-close">
     </div>
   </div>
 </body>

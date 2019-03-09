@@ -366,6 +366,10 @@ img {
 .aui-text-indigo {
 	color: #3f51b5 !important;
 }
+
+.aui-bg-white {
+	background-color: #fff !important;
+}
 .aui-bg-default {
 	background-color: #f5f5f5 !important;
 }
@@ -393,6 +397,8 @@ img {
 .aui-bg-indigo {
 	background-color: #3f51b5 !important;
 }
+
+
 /*警告、成功颜色*/
 .aui-warning,
 .aui-warning label,
@@ -696,6 +702,11 @@ button, .aui-btn {
 	color: #ffffff !important;
 	background-color: #dd191b !important;
 }
+.aui-btn-pink {
+	color: #feabc5 !important;
+	background-color: #ffffff !important;
+}
+
 .aui-btn-block {
 	display: block;
 	width: 100%;
@@ -1905,9 +1916,10 @@ input[type="search"]::-webkit-search-cancel-button {
     padding: 0 0.75rem;
     width: 100%;
     z-index: 99;
-    height: 1.9rem;
     line-height: 1.9rem;
-   	position: relative;
+   	position: fixed;
+	padding-top: 25px;
+	box-sizing: border-box;
     background-color: rgba(0,0,0,.6);
     color: #ffffff;
     display: -webkit-box;
@@ -1927,19 +1939,19 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 /*toast*/
 .aui-toast {
-	background: rgba(0, 0, 0, 0.7);
+	background: rgba(0, 0, 0, 0.6);
 	text-align: center;
 	border-radius: 0.25rem;
 	color: #ffffff;
 	position: fixed;
 	z-index: 3;
-	top: 45%;
+	top: 50%;
 	left: 50%;
 	width: 7.5em;
 	min-height: 6em;
-	margin-left: -3.75em;
-	margin-top: -4rem;
+	transform: translate3d(-50%,-50%,0);
 	display: none;
+	margin-top: 0!important;
 }
 .aui-toast .aui-iconfont {
 	margin-top: 0.2rem;
@@ -1947,18 +1959,19 @@ input[type="search"]::-webkit-search-cancel-button {
 	font-size: 2.6rem;
 }
 .aui-toast-content {
-  margin: 0 0 0.75rem;
+	margin: 0.4rem 0 0.75rem;
+	font-size: 0.65rem;
 }
 .aui-toast-loading {
     background-color: #ffffff;
     border-radius: 100%;
-    margin: 0.75rem 0;
+    margin: 1.15rem 0 0 0;
     -webkit-animation-fill-mode: both;
         	animation-fill-mode: both;
     border: 2px solid #ffffff;
     border-bottom-color: transparent;
-    height: 2.25rem;
-    width: 2.25rem;
+    height: 1.6rem;
+    width: 1.6rem;
     background: transparent !important;
     display: inline-block;
     -webkit-animation: rotate 1s 0s linear infinite;

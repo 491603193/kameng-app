@@ -4,21 +4,45 @@
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <link rel="stylesheet" type="text/css" href="./css/aui.css" />
 </head>
 <body>
 
 </body>
 <script type="text/javascript" src="./script/api.js"></script>
+<script type="text/javascript" src="./script/api-ajax.js"></script>
+<script type="text/javascript" src="./script/api-local.js"></script>
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
-        api.openWin({
-            name: '/html/login.html',
-            url: api.wgtRootDir + '/html/login.html',
-            bounces: true,
-            animation: {type: 'none'}
-        })
+        // $api.clearStorage();
+        var userId = $apiLocal.getUserId();
+        if (userId) {
+           loadData(userId)
+        } else {
+            api.openWin({
+                name: '/html/login.html',
+                url: api.wgtRootDir + '/html/login.html',
+                bounces: true,
+                slidBackEnabled: false,
+                animation: {type: 'none'}
+            })
+        }
     };
+    function loadData (userId) {
+        $apiAjax.postBody("/login/login",{
+            userId: userId,
+        },function (ret) {
+            $api.setStorage($apiLocal.USER_ID,ret.userId)
+            $api.setStorage($apiLocal.USER,ret)
+            api.openWin({
+                name: '/html/index_win.html',
+                url: api.wgtRootDir + '/html/index_win.html',
+                bounces: true,
+                slidBackEnabled: false,
+                animation: {type: 'none'}
+            })
+        }, true);
+
+    }
 </script>
 </html>

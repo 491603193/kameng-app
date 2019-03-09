@@ -65,9 +65,10 @@
       }]
     }, function(ret, err) {
       var index = ret.index;
+      aa.openFem(index)
     });
   };
-  new Vue({
+  var aa = new Vue({
     el: '#head',
     data: {
       state: 0,

@@ -510,7 +510,7 @@
             }
         }
     };
-  u.openWin = function (name) {
+  u.openWin = function (name, pageParam) {
         var delay = 0;
         if(api.systemType != 'ios'){
             delay = 300;
@@ -521,7 +521,8 @@
             bounces: false,
             delay: delay,
             slidBackEnabled: true,
-            vScrollBarEnabled: false
+            vScrollBarEnabled: false,
+            pageParam: pageParam
         });
     };
     u.openFrame = function(name, header){

@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="../../css/index/index.css">
 </head>
 <body class="aui-bg-white" >
-  <div id="app">
     <div class="index-flex" id="header">
       <div class="index-search-logo">
         <img src="../../image/index/logo.png">
@@ -30,15 +29,14 @@
       </div>
     </div>
     <header class="index-head">
-      <div id="aui-slide3" style="top: 70px;">
+      <div id="aui-slide3" style="top: 75px;">
         <div class="aui-slide-wrap" id="arraySlide">
-
         </div>
         <div class="aui-slide-page-wrap"><!--分页容器--></div>
       </div>
     </header>
     <div class="index-section">
-      <section class="aui-grid aui-margin-b-15">
+      <section class="aui-grid ">
         <div class="aui-row">
           <div class="aui-col-xs-3">
                 <img src="../../image/index/icon1.png" class="aui-iconfont">
@@ -54,7 +52,7 @@
           </div>
           <div class="aui-col-xs-3">
               <img src="../../image/index/icon4.png" class="aui-iconfont">
-              <div class="aui-grid-label">我得收入</div>
+              <div class="aui-grid-label">我的收入</div>
           </div>
         </div>
       </section>
@@ -65,9 +63,7 @@
       <div class="index-line"></div>
     </div>
     <div class="index-product-list" id="index-product-list">
-
     </div>
-  </div>
 </body>
 <script src="../../script/api.js"></script>
 <script src="../../script/api-ajax.js"></script>
@@ -75,35 +71,64 @@
 <script src="../../script/aui-slide.js"></script>
 <script src="../../script/template.js"></script>
 <script type="text/html" id="templateHeader">
-     {{each images as entity i}}
-        <div class="aui-slide-node bg-dark">
-          <img src="{{imgPath}}{{entity.adPic}}" />
-        </div>
-    {{/each}}
+  {{each images as entity i}}
+    <div class="aui-slide-node bg-dark" onclick="openPage('{{entity.name}}','{{entity.linkType}}','{{entity.linkUrl}}','{{entity.linkParam}}')">
+      <img src="{{imgPath}}{{entity.adPic}}" />
+    </div>
+  {{/each}}
 </script>
 <script type="text/html" id="index-product-list-item">
   {{each itemArray as entity i}}
     <div class="index-product-list-item" onclick="openDetail()">
       <div class="index-product-img">
         <img src="{{imgPath}}{{entity.productListPic}}">
-        {{if isTimingUp}}
+        {{if entity.isTimingUp}}
           <div class="index-product-buy">{{entity.downTime | dateFormat:'MM.dd hh:mm'}} 开售</div>
         {{/if}}
       </div>
       <div class="index-product-text">
         <p class="index-product-title">{{entity.productName}}</p>
         <p class="index-product-describe">{{entity.productRemark}}</p>
-        <p class="index-product-price">￥ 150/箱</p>
+        <p class="index-product-price">
+          {{if entity.productType == '1'}}  云仓
+            {{if entity.stockMinPrice == entity.stockMaxPrice}}
+              {{entity.stockMinPrice}}
+            {{else}}
+              {{entity.stockMinPrice}} - {{entity.stockMaxPrice}}
+            {{/if}}个
+          {{else}} ￥
+            {{if entity.productMinPrice == entity.productMaxPrice}}
+              {{entity.productMinPrice}}
+            {{else}}
+              {{entity.productMinPrice}} - {{entity.productMaxPrice}}
+            {{/if}}
+          {{/if}}
+        </p>
       </div>
     </div>
   {{/each}}
+  <div class="no_line aui-text-white"><span>没有更多了</span></div>
 </script>
+<script src="../../script/aui-pull-refresh.js"></script>
 <script>
   apiready = function(){
     var header = $api.byId('header');
     $api.fixStatusBar(header);
     getAuiSlide();
     getHotProducts();
+  }
+
+  function openPage (name, linkType, linkUrl, linkParam) {
+    if (linkType === '1'){
+      api.openWin({
+        name: 'web_age_win',
+        url: './web_age_win.html',
+        pageParam: {
+          linkUrl: linkUrl,
+          name: name
+        }
+      });
+    }
   }
 
   function  getHotProducts () {
@@ -128,7 +153,6 @@
       $api.html($api.byId('arraySlide'), html);
       new auiSlide({
         container:document.getElementById("aui-slide3"),
-        // "width":300,
         "height":161,
         "speed":500,
         "autoPlay": 3000, //自动播放

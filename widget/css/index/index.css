@@ -1,12 +1,12 @@
 /* index_frm */
 .index-head {
     width: 100%;
-    height: 248px;
+    height: 240px;
     background-image: url('../../image/index/background.png');
     background-size: 100%;
     background-position: top;
     background-repeat: no-repeat;
-    padding: 0 15px;
+    padding: 4px 15px;
     overflow: hidden;
 }
 .index-flex {
@@ -29,11 +29,13 @@
     height: 100%;
 }
 .index-search {
-    width: 68%;
+    width: 64%;
     padding: 6px 5px 6px 30px;
     position: relative;
     background-color: rgba(255,255,255,.3);
     border-radius: 20px;
+    margin: 2px 4px 2px 4px;
+    height: 30px;
 }
 .index-search-icon {
     width: 16px;
@@ -44,8 +46,8 @@
     margin-top: -8px;
 }
 input[type="text"].index-input-search {
-    font-size: 12px;
-    height: 1.2rem;
+    font-size: 13px;
+    height: 1rem;
     color: #fff;
 }
 .index-search-icon img {
@@ -56,7 +58,7 @@ input[type="text"].index-input-search {
     color: rgba(255,255,255,.4);
 }
 .index-msg-top {
-    width: 16px;
+    width: 17px;
     position: relative;
 }
 .index-msg-top img {
@@ -66,7 +68,7 @@ input[type="text"].index-input-search {
 .index-msg-dot {
     position: absolute;
     top: -5px;
-    right: -5px;
+    right: -8px;
 }
 .index-msg-text {
     text-align: center;
@@ -91,7 +93,7 @@ input[type="text"].index-input-search {
     margin: 0 auto;
 }
 .index-section .aui-grid .aui-grid-label {
-    font-size: 12px;
+    font-size: 13px;
     color: #333;
 }
 .index-content-logo {
@@ -110,7 +112,7 @@ input[type="text"].index-input-search {
     background-color: #fff8eb;
 }
 .index-product-list {
-    margin-top: 15px;
+    margin-top: 10px;
     padding: 0 15px;
     padding-bottom: 50px;
 }
@@ -160,8 +162,24 @@ input[type="text"].index-input-search {
     -webkit-box-orient: vertical;
 }
 .index-product-price {
-    font-size: 13px;
+    font-size: 16px;
     color: #feabc5;
     position: absolute;
     bottom: 0;
+}
+/** 没有更多数据了 */
+.no_line{
+    font-size: 13px;
+    height: 25px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    background-color: #fff;
+    margin-top: 28px;
+}
+.no_line span{
+    position: relative;
+    top: -12px;
+    background: #fff;
+    padding: 0 20px;
+    color: #bbb;
 }

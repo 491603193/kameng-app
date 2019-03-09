@@ -5,28 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>纸尿裤系列</title>
-  <link rel="stylesheet" href="../../css/aui.css">
-  <link rel="stylesheet" href="../../css/km.css">
+  <link rel="stylesheet" href="../../../css/aui.css">
 </head>
 <body>
-  <header class="win" id="aui-header">
-    <div class="back-icon" onclick="api.closeWin()">
-      <img src="../../image/back.svg">
-    </div>
-    <div class="win-title">纸尿裤系列</div>
-  </header>
+<header class="aui-bar aui-bar-nav aui-bar-light" id="aui-header">
+  <a class="aui-pull-left aui-btn" onclick="api.closeWin()">
+    <span class="aui-iconfont aui-icon-left"></span>
+  </a>
+  <div class="aui-title" id="title"></div>
+</header>
 </body>
-<script src="../../script/api.js"></script>
+<script src="../../../script/api.js"></script>
 <script>
   apiready = function(){
     api.parseTapmode();
+    $api.html($api.byId('title'), api.pageParam.productLabelName)
     var header = $api.byId('aui-header');
     $api.fixStatusBar(header);
     var headerPos = $api.offset(header);
-    var body_h = $api.offset($api.dom('body')).h;
     api.openFrame({
-        name: '/html/classify/product_frm',
-        url: api.wgtRootDir + '/html/classify/product_frm.html',
+        name: '/html/goods/product/product_frm',
+        url: api.wgtRootDir + '/html/goods/product/product_frm.html',
         bounces: true,
         rect: {
           x: 0,

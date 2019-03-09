@@ -28,12 +28,12 @@
 		firstTouchY, initialScroll;
 	auiPullToRefresh.prototype = {
 		params: {
-            container: document.querySelector('.aui-refresh-content'),
-			friction: 2.5,
-			triggerDistance: 100,
-			callback:false
-        },
-        _init : function(callback) {
+					container: document.querySelector('.aui-refresh-content'),
+					friction: 2.5,
+					triggerDistance: 100,
+					callback:false
+			},
+      _init : function(callback) {
 			var self = this;
 			var loadingHtml = '<div class="aui-refresh-load"><div class="aui-refresh-pull-arrow"></div></div>';
 			self.params.container.insertAdjacentHTML('afterbegin', loadingHtml);

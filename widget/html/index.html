@@ -42,8 +42,8 @@
       bounces: false
     },
     {
-      name: '/html/classify/index.html',
-      url: './classify/index.html',
+      name: '/html/goods/index.html',
+      url: './goods/index.html',
       useWKWebView: false
     },
     {
@@ -255,64 +255,49 @@
   }
   //清空徽章值
   function clearBadge() {
-    api.ajax({
-      url: base.ip.kmservice + "/mUserMessageAction/clearUserMessage",
-      method: 'post',
-      timeout: 30,
-      dataType: 'json',
-      returnAll: false,
-      data: {
-        values: {
-          userId: $api.getStorage('userId')
-        }
-      }
-    }, function (ret, err) {
-      if (!!ret && ret.success) {
-        $api.setStorage('messageNum',0);
-        var NVTabBar = api.require('NVTabBar');
-        NVTabBar.setBadge({
-          index: 2
-        });
-        isFlushMessageNum = false;
-        messageInitFinish = true;
-      }
-    });
+    // $api.setStorage('messageNum',0);
+    // var NVTabBar = api.require('NVTabBar');
+    // NVTabBar.setBadge({
+    //   index: 2
+    // });
+    // isFlushMessageNum = false;
+    // messageInitFinish = true;
   }
   //刷新徽章值
   function isFlushMessage() {
     if(selectIndex === 2 && isFlushMessageNum && messageInitFinish){
-      var jsfun = 'loading(1);';
-      api.execScript({
-        frameName: 'notice/user_message_frm',
-        script: jsfun
-      });
+      // var jsfun = 'loading(1);';
+      // api.execScript({
+      //   frameName: 'notice/user_message_frm',
+      //   script: jsfun
+      // });
     }
   }
   //定时检查徽章值
   function flushAsyncUserMessage() {
-    api.ajax({
-      url: base.ip.kmservice + "/mUserMessageAction/getUserMessageNum",
-      method: 'post',
-      timeout: 30,
-      dataType: 'json',
-      returnAll: false,
-      data: {
-        values: {
-          userId: base.storage.getLocalStorage("userId")
-        }
-      }
-    }, function (ret, err) {
-      if (!!ret && ret.success) {
-        var messageNum = ret.data;
-        var num =  base.storage.getLocalStorage("messageNum");
-        if(messageNum>num){
-          isFlushMessageNum = true;
-          setBadge(messageNum);
-          isFlushMessage();
-        }
-      }
-      setTimeout("flushAsyncUserMessage()",8000);
-    });
+    // api.ajax({
+    //   url: base.ip.kmservice + "/mUserMessageAction/getUserMessageNum",
+    //   method: 'post',
+    //   timeout: 30,
+    //   dataType: 'json',
+    //   returnAll: false,
+    //   data: {
+    //     values: {
+    //       userId: base.storage.getLocalStorage("userId")
+    //     }
+    //   }
+    // }, function (ret, err) {
+    //   if (!!ret && ret.success) {
+    //     var messageNum = ret.data;
+    //     var num =  base.storage.getLocalStorage("messageNum");
+    //     if(messageNum>num){
+    //       isFlushMessageNum = true;
+    //       setBadge(messageNum);
+    //       isFlushMessage();
+    //     }
+    //   }
+    //   setTimeout("flushAsyncUserMessage()",8000);
+    // });
   }
 
 

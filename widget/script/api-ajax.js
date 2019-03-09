@@ -125,6 +125,7 @@
       method: 'post',
       dataType: 'json',
       headers: {
+        'userId': $api.getStorage('userId'),
         'Content-Type': 'application/json;charset=utf-8'
       },
       data: {

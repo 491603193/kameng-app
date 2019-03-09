@@ -14,11 +14,8 @@
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
-        // $api.clearStorage();
         var userId = $apiLocal.getUserId();
-        if (userId) {
-           loadData(userId)
-        } else {
+        if (!userId || userId === 'undefined') {
             api.openWin({
                 name: '/html/login.html',
                 url: api.wgtRootDir + '/html/login.html',
@@ -26,10 +23,12 @@
                 slidBackEnabled: false,
                 animation: {type: 'none'}
             })
+        } else {
+            loadData(userId)
         }
     };
     function loadData (userId) {
-        $apiAjax.postBody("/login/login",{
+        $apiAjax.postBody("/user/get",{
             userId: userId,
         },function (ret) {
             $api.setStorage($apiLocal.USER_ID,ret.userId)

@@ -67,8 +67,8 @@ function initFrameGroupData () {
       bounces: false
     },
     {
-      name: '/html/user/index.html',
-      url: api.wgtRootDir + '/html/user/index.html',
+      name: '/html/my/index.html',
+      url: api.wgtRootDir + '/html/my/index.html',
       bounces: true
     }
   ];

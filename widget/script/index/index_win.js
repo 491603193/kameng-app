@@ -44,7 +44,7 @@ function initFrameGroupData () {
   bottomGroupArr = [
     {
       name: '/html/index_frm.html',
-      url: api.wgtRootDir + '/html/index_frm.html',
+      url: api.wgtRootDir + '/html/index/index.html',
       pageParam: {
         showMode: 1
       },
@@ -69,7 +69,7 @@ function initFrameGroupData () {
     {
       name: '/html/user/index.html',
       url: api.wgtRootDir + '/html/user/index.html',
-      bounces: true
+      bounces: false
     }
   ];
 }

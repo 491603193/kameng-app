@@ -7,7 +7,37 @@
   <title>发表评价</title>
   <link rel="stylesheet" href="../../css/aui.css">
   <link rel="stylesheet" href="../../css/km.css">
+  <style>
 
+    #color-input-red +label{
+      display: block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      position: absolute;
+      top: 2px;
+      left: 15px;
+      border: 1px solid #666;
+      background: #fff;
+    }
+    #color-input-red +label::before {
+      content: "\2714";
+      font-size: 16px;
+      display: block;
+      text-align: center;
+      color: #666;
+    }
+    #color-input-red:checked + label {
+      background:
+    }
+    #color-input-red:checked + label::before {
+      color: white;
+    }
+    input[type=checkbox]{
+      visibility: hidden;
+    }
+  </style>
 </head>
 <body>
   <div id="app">

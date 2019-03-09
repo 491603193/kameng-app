@@ -4,6 +4,7 @@
  */
 (function(window){
     var u = {};
+
     var isAndroid = (/android/gi).test(navigator.appVersion);
     var uzStorage = function(){
         var ls = window.localStorage;
@@ -523,99 +524,44 @@
             }
         }
     };
-    u.toast = function(title, text, time){
-        var opts = {};
-        var show = function(opts, time){
-            api.showProgress(opts);
-            setTimeout(function(){
-                api.hideProgress();
-            },time);
-        };
-        if(arguments.length === 1){
-            var time = time || 500;
-            if(typeof title === 'number'){
-                time = title;
-            }else{
-                opts.title = title+'';
-            }
-            show(opts, time);
-        }else if(arguments.length === 2){
-            var time = time || 500;
-            var text = text;
-            if(typeof text === "number"){
-                var tmp = text;
-                time = tmp;
-                text = null;
-            }
-            if(title){
-                opts.title = title;
-            }
-            if(text){
-                opts.text = text;
-            }
-            show(opts, time);
-        }
-        if(title){
-            opts.title = title;
-        }
-        if(text){
-            opts.text = text;
-        }
-        time = time || 500;
-        show(opts, time);
-    };
-    u.post = function(/*url,data,fnSuc,dataType*/){
-        var argsToJson = parseArguments.apply(null, arguments);
-        var json = {};
-        var fnSuc = argsToJson.fnSuc;
-        argsToJson.url && (json.url = argsToJson.url);
-        argsToJson.data && (json.data = argsToJson.data);
-        if(argsToJson.dataType){
-            var type = argsToJson.dataType.toLowerCase();
-            if (type == 'text'||type == 'json') {
-                json.dataType = type;
-            }
-        }else{
-            json.dataType = 'json';
-        }
-        json.method = 'post';
-        api.ajax(json,
-            function(ret,err){
-                if (ret) {
-                    fnSuc && fnSuc(ret);
-                }
-            }
-        );
-    };
-    u.get = function(/*url,fnSuc,dataType*/){
-        var argsToJson = parseArguments.apply(null, arguments);
-        var json = {};
-        var fnSuc = argsToJson.fnSuc;
-        argsToJson.url && (json.url = argsToJson.url);
-        //argsToJson.data && (json.data = argsToJson.data);
-        if(argsToJson.dataType){
-            var type = argsToJson.dataType.toLowerCase();
-            if (type == 'text'||type == 'json') {
-                json.dataType = type;
-            }
-        }else{
-            json.dataType = 'text';
-        }
-        json.method = 'get';
-        api.ajax(json,
-            function(ret,err){
-                if (ret) {
-                    fnSuc && fnSuc(ret);
-                }
-            }
-        );
-    };
 
-/*end*/
+    u.openWin = function(name){
+        api.parseTapmode();
+        var delay = 0;
+        if(api.systemType != 'ios'){
+            delay = 300;
+        }
+        api.openWin({
+            name: ''+name+'',
+            url: ''+name+'.html',
+            bounces: false,
+            delay: delay,
+            slidBackEnabled:true,
+            vScrollBarEnabled:false
+        });
+    }
 
+    u.openFrame = function(name, header){
+        api.parseTapmode();
+        var header = $api.byId(header);
+        $api.fixStatusBar(header);
+        var headerPos = $api.offset(header);
+        var body_h = $api.offset($api.dom('body')).h;
+        api.openFrame({
+            name: name,
+            url: name+'.html',
+            bounces: true,
+            rect: {
+                x: 0,
+                y: headerPos.h,
+                w: 'auto',
+                h: 'auto'
+            }
+        })
+
+    };
 
     window.$api = u;
-
 })(window);
 
 

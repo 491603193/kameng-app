@@ -33,7 +33,7 @@ function initFrameGroupData () {
       headerHeight: 0
     },
     {
-      name: 'my',
+      name: 'user',
       title: '我的',
       normal: 'widget://image/NVTabBar/banner4.png',
       highlight: 'widget://image/NVTabBar/banner4.png',
@@ -67,8 +67,8 @@ function initFrameGroupData () {
       bounces: false
     },
     {
-      name: '/html/my/index.html',
-      url: api.wgtRootDir + '/html/my/index.html',
+      name: '/html/user/index.html',
+      url: api.wgtRootDir + '/html/user/index.html',
       bounces: true
     }
   ];

@@ -6,37 +6,155 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>登录</title>
   <link rel="stylesheet" href="../css/aui.css">
-  <link rel="stylesheet" href="../css/km.css">
+  <link rel="stylesheet" href="../css/index/login.css">
 </head>
-<body class="background-fff">
+<body class="aui-bg-white">
   <header class="login-head"></header>
   <div class="login-content">
     <ul class="login-list">
       <li class="login-list-item">
-          <div class="login-item-lable">手机号</div>
+          <div class="login-item-lable">手 机 号</div>
           <div class="login-item-input">
-            <input type="number" placeholder="请输入中国大陆手机号码">
+            <input id="loginName" type="number" placeholder="请输入中国大陆手机号码">
           </div>
       </li>
       <li class="login-list-item login-list-item-code" style="position: relative; padding-right: 65px;">
           <div class="login-item-lable">图形验证码</div>
           <div class="login-item-input login-item-input-code">
-            <input type="number" placeholder="请输入验证码">
+            <input id="verifyCode" type="number" placeholder="请输入验证码">
           </div>
-          <img src="data:image/jpg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a HBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCABQAMgDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD0Z5Lp mIjiSNQcb5DuP1Cr1H1I+nFMks38qQx3M/2kowSRpOASMA7cbeP938DVrO4fIw69evfmklV3QBJC h3KcgDoCCRz6jI/Gqe1x7kUUhSMTTTYSQJtEg2lWOBjkDqccEZyT7AN88tGhkLxhtrK6rjIyDghh kZHBB557GrDuEUEhiMgfKpPU47f5FR3Fv50lux8siKQuQy7iQVZeORg/N1OeMjHOQx3Hxj7z+Yzq 5yoOMKMAYGB7Z5z1PsKZN5zRKqRoSwIcGUrj5T0IGeuB24JPbBgdZYJWMERKjaSXbCkE4OMZOQBn kdxz1xLDc+YQHjkQsxCgjI475HGDjIz6jvxQhJ23ImtZoC8ltPJwvEbkybjz13N9MYK89Sez/tck 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 zdylxGvmRKcdwMMBnHXqSeQOhWkUnu7feDdj/9k=" class="login-tx">
+          <img id="baseImage" src="../image/loading_more.gif" class="login-tx" onclick="getCodeImage()">
       </li>
       <li class="login-list-item login-list-item-code">
-          <div class="login-item-lable">验证码</div>
+          <div class="login-item-lable">短信验证码</div>
           <div class="login-item-input login-item-input-code">
-            <input type="number" placeholder="请输入验证码">
+            <input id="smsCode" type="number" placeholder="请输入验证码">
           </div>
-          <div class="login-item-code" onclick="getCode()" id="code">获取验证码</div>
+          <div class="login-item-code" onclick="getDXCode()" id="code">获取验证码</div>
       </li>
     </ul>
   </div>
-  <button class="btn color-pink background-fff" onclick="login()">登录</button>
+  <button class="btn aui-btn-pink" onclick="login()">登录</button>
 </body>
 <script src="../script/api.js"></script>
-<script src="../script/index/login.js"></script>
+<script src="../script/api-ajax.js"></script>
+<script src="../script/api-local.js"></script>
+<script src="../script/validate.js"></script>
+<script>
+  var verifyKey;
+  var noSend = false;
+  var loginName;
+  var msgSendSuccess = false;
+  apiready = function () {
+    api.parseTapmode();
+    getCodeImage();
+    var oldDate = $api.getStorage($apiLocal.SMSCODETIME);
+    if(oldDate){
+      var newDate = new Date().getTime();
+      var min = 59-parseInt((newDate-oldDate)/1000)
+      if(0 < min){
+        noSend = true;
+        msgPostSuccess(min)
+      }
+    }
+    listenerBack();
+  }
+
+  function login () {
+    if(!msgSendSuccess){
+      $apiAjax.setErrorMessage("请先获取验证码");
+      return;
+    }
+    var smsCode = $api.val($api.byId('smsCode'));
+    if (!$val.valEmpty(smsCode,'短信验证码')) return;
+    $apiAjax.postBody("/login/login",{
+      loginName: loginName,
+      smsCode: smsCode
+    },function (ret) {
+      if(ret){
+        $api.setStorage($apiLocal.USER_ID, ret.userId);
+        $api.setStorage($apiLocal.USER, ret);
+        $api.openWin('./index_win')
+      }
+    }, true);
+  }
+
+  function getCodeImage () {
+    $apiAjax.get("/login/getImageVerifyCode",{},function (ret) {
+      document.getElementById("baseImage").src= 'data:image/jpg;base64,' + ret.verifyFile;
+      verifyKey = ret.verifyKey;
+    })
+  }
+  function getDXCode () {
+    if (!verifyKey) {
+      $apiAjax.setErrorMessage("网络错误，请稍后重试");
+      return;
+    }
+    loginName = $api.val($api.byId('loginName'));
+    var verifyCode = $api.val($api.byId('verifyCode'));
+    var validate = $val.valPhone(loginName) && $val.valEmpty(verifyCode,'图形验证码');
+    if (!validate || noSend) return;
+    $apiAjax.postBody("/login/sendSmsCode",{
+      verifyCode: verifyCode,
+      loginName: loginName,
+      verifyKey: verifyKey
+    },function (ret) {
+        if(!ret){
+          getCodeImage()
+        } else {
+          $api.setStorage($apiLocal.SMSCODETIME, new Date().getTime());
+          msgPostSuccess(59)
+        }
+    }, true);
+  }
+
+  function msgPostSuccess (count) {
+    msgSendSuccess = true;
+    $apiAjax.successToast('发送成功');
+    noSend = true
+    var pendingText = count+'秒后重试'
+    var code = $api.byId("code")
+    $api.html(code, pendingText)
+
+    var timer = setInterval(function () {
+      // $api.setStorage($apiLocal.SMSCODETIME, new Date().getTime())
+      count--
+      pendingText = count + `秒后重试`
+      $api.html(code, pendingText)
+      if (count === 0) {
+        clearInterval(timer)
+        noSend = false
+        pendingText = '获取验证码'
+        $api.html(code, pendingText)
+      }
+    }, 1000)
+  }
+
+
+  function listenerBack () {
+    api.addEventListener({
+      name: 'keyback'
+    }, function (ret, err) {
+      api.toast({
+        msg: '再按一次返回键退出应用',
+        duration: 2000,
+        location: 'bottom'
+      });
+      api.addEventListener({
+        name: 'keyback'
+      }, function (ret, err) {
+        api.closeWidget({
+          id: api.appId,  //填写自己的id
+          retData: {name: 'closeWidget'},
+          silent: true
+        });
+      });
+      setTimeout(function () {
+        exitApp();
+      }, 2000)
+    });
+  }
+
+</script>
 <script src="../script/plug.js"></script>
 </html>

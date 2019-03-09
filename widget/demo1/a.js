@@ -5,7 +5,7 @@ function toastLoading () {
   },function(ret){
       console.log(JSON.stringify(ret));0
       setTimeout(function(){
-          toast.hide();
+          // toast.hide();
       }, 3000)
   })
 }

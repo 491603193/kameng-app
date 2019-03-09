@@ -13,14 +13,15 @@
 	<preference name="appBackground" value="rgba(255,255,255,1)"/>
 	<preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
 	<preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
-	<preference name="hScrollBarEnabled" value="true"/>
-	<preference name="vScrollBarEnabled" value="true"/>
+	<preference name="hScrollBarEnabled" value="false"/>
+	<preference name="vScrollBarEnabled" value="false"/>
 	<preference name="autoLaunch" value="true"/>
 	<preference name="fullScreen" value="false"/>
 	<preference name="autoUpdate" value="true" />
-	<preference name="smartUpdate" value="false" />
+	<preference name="smartUpdate" value="true" />
 	<preference name="debug" value="true"/>
 	<preference name="statusBarAppearance" value="true"/>
+	<preference name="iOS7StatusBarAppearance" value="true" />
 	<permission name="readPhoneState" />
 	<permission name="camera" />
 	<permission name="record" />

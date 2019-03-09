@@ -97,7 +97,7 @@
 	<script type="text/javascript">
 		var pullRefresh = new auiPullToRefresh({
 			container: document.querySelector('.aui-refresh-content'),
-			triggerDistance: 100
+			triggerDistance: 100,
 		},function(ret){
 			if(ret.status=="success"){
 				setTimeout(function(){
@@ -117,7 +117,7 @@
 					        '</div>';
 						wrap.insertAdjacentHTML('afterbegin', html);
 					}
-					pullRefresh.cancelLoading(); //刷新成功后调用此方法隐藏
+					// pullRefresh.cancelLoading(); //刷新成功后调用此方法隐藏
 				},1500)
 			}
 		})

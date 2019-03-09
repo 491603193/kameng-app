@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>分类</title>
+  <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/product/index.css">
+</head>
+<body>
+  <header class="classify-head" id="header">
+    <img src="../../image/index/indexlogo.png" class="classify-logo">
+    <div class="classify-search">
+      <img src="../../image/classify/search.svg">
+      <input type="text" placeholder="搜索商品">
+    </div>
+  </header>
+  <div class="classify-content">
+    <div class="classify-left" id="tab">
+      <div class="aui-tab-item aui-active">非云仓</div>
+      <div class="aui-tab-item">云仓</div>
+      <div class="aui-tab-item">用心选</div>
+    </div>
+    <div class="classify-right" id="fyc">
+      <div class="classify-content-title">
+        <div class="classify-line"></div>
+        <div class="classify-title">非云仓</div>
+        <div class="classify-line"></div>
+      </div>
+      <div class="classify-content-product">
+        <section class="aui-grid">
+          <div class="aui-row" id="label-a">
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="classify-right" id="yc" style="display: none;">
+      <div class="classify-content-title">
+        <div class="classify-line"></div>
+        <div class="classify-title">云仓</div>
+        <div class="classify-line"></div>
+      </div>
+      <div class="classify-content-product">
+        <section class="aui-grid">
+          <div class="aui-row" id="label-b">
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="classify-right" id="yxx" style="display: none;">
+      <div class="classify-content-title">
+        <div class="classify-line"></div>
+        <div class="classify-title">用心选</div>
+        <div class="classify-line"></div>
+      </div>
+      <div class="classify-content-product">
+        <section class="aui-grid">
+          <div class="aui-row" id="label-c">
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="../../script/api.js"></script>
+<script src="../../script/api-ajax.js"></script>
+<script src="../../script/api-local.js"></script>
+<script src="../../script/aui-tab.js"></script>
+<script src="../../script/template.js"></script>
+<script type="text/html" id="templateLabelA">
+  {{each itemArray as entity i}}
+    <div class="aui-col-xs-4" onclick="openProductList('{{entity.productLabelId}}','{{entity.productLabelName}}')">
+      <img src="{{imgPath}}{{entity.productLabelPic}}">
+      <div class="aui-grid-label">{{entity.productLabelName}}</div>
+    </div>
+  {{/each}}
+</script>
+<script type="text/html" id="templateLabelB">
+  {{each itemArray as entity i}}
+    <div class="aui-col-xs-4" onclick="openProductList('{{entity.productLabelId}}','{{entity.productLabelName}}')">
+      <img src="{{imgPath}}{{entity.productLabelPic}}">
+      <div class="aui-grid-label">{{entity.productLabelName}}</div>
+    </div>
+  {{/each}}
+</script>
+<script type="text/html" id="templateLabelC">
+  {{each itemArray as entity i}}
+    <div class="aui-col-xs-4" onclick="openProductList('{{entity.productLabelId}}','{{entity.productLabelName}}')">
+      <img src="{{imgPath}}{{entity.productLabelPic}}">
+      <div class="aui-grid-label">{{entity.productLabelName}}</div>
+    </div>
+  {{/each}}
+</script>
+<script>
+  apiready = function(){
+    api.parseTapmode();
+    var header = $api.byId('header')
+    $api.fixStatusBar(header)
+    getProductLabel();
+
+  }
+
+  function  getProductLabel () {
+    $apiAjax.postBody("/product/label/list",{
+      level: $apiLocal.getUser().level
+    },function (ret) {
+      labelA(ret['1']);
+      labelB(ret['2']);
+      labelC(ret['3']);
+    }, true);
+  }
+
+  function labelA (data) {
+    var html = template('templateLabelA', {
+      itemArray: data,
+      imgPath: $apiAjax.hbcs_image
+    });
+    $api.html($api.byId('label-a'), html);
+  }
+  function labelB (data) {
+    var html = template('templateLabelB', {
+      itemArray: data,
+      imgPath: $apiAjax.hbcs_image
+    });
+    $api.html($api.byId('label-b'), html);
+  }
+  function labelC (data) {
+    var html = template('templateLabelC', {
+      itemArray: data,
+      imgPath: $apiAjax.hbcs_image
+    });
+    $api.html($api.byId('label-c'), html);
+  }
+
+
+  new auiTab({
+    element:document.getElementById("tab"),
+  },function(ret){
+    var fyc = $api.byId('fyc')
+    var yc = $api.byId('yc')
+    var yxx = $api.byId('yxx')
+    if (ret.index === 1) {
+      fyc.style.display = 'block';
+      yc.style.display = 'none';
+      yxx.style.display = 'none';
+    } else if (ret.index === 2) {
+      fyc.style.display = 'none';
+      yc.style.display = 'block';
+      yxx.style.display = 'none';
+    } else {
+      fyc.style.display = 'none';
+      yc.style.display = 'none';
+      yxx.style.display = 'block';
+    }
+  });
+  function openProductList (productLabelId, productLabelName) {
+    $api.openWin('/html/goods/product/product_win', {
+      productLabelName: productLabelName,
+      productLabelId: productLabelId
+    })
+  }
+</script>
+</html>

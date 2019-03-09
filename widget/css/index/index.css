@@ -1,0 +1,185 @@
+/* index_frm */
+.index-head {
+    width: 100%;
+    height: 240px;
+    background-image: url('../../image/index/background.png');
+    background-size: 100%;
+    background-position: top;
+    background-repeat: no-repeat;
+    padding: 4px 15px;
+    overflow: hidden;
+}
+.index-flex {
+    width: 100%;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #feabc5;
+    padding-bottom: 5px;
+    z-index: 1000;
+}
+.index-search-logo {
+    width: 16%;
+    height: 24px;
+    margin-left: 15px;
+}
+.index-search-logo img {
+    width: 100%;
+    height: 100%;
+}
+.index-search {
+    width: 64%;
+    padding: 6px 5px 6px 30px;
+    position: relative;
+    background-color: rgba(255,255,255,.3);
+    border-radius: 20px;
+    margin: 2px 4px 2px 4px;
+    height: 30px;
+}
+.index-search-icon {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    margin-top: -8px;
+}
+input[type="text"].index-input-search {
+    font-size: 13px;
+    height: 1rem;
+    color: #fff;
+}
+.index-search-icon img {
+    width: 100%;
+    height: 100%;
+}
+.index-input-search::-webkit-input-placeholder {
+    color: rgba(255,255,255,.4);
+}
+.index-msg-top {
+    width: 17px;
+    position: relative;
+}
+.index-msg-top img {
+    width: 100%;
+    height: 100%;
+}
+.index-msg-dot {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+}
+.index-msg-text {
+    text-align: center;
+    color: #fff;
+    font-size: 10px;
+    margin-top: 4px;
+}
+.index-msg-icon {
+    margin-top: 5px;
+    margin-right: 15px;
+}
+.index-head #aui-slide3,
+.index-head .aui-slide-wrap,
+.index-head .aui-slide-node,
+.index-head .aui-slide-node img {
+    border-radius: 10px;
+}
+.index-section .aui-grid .aui-iconfont {
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+}
+.index-section .aui-grid .aui-grid-label {
+    font-size: 13px;
+    color: #333;
+}
+.index-content-logo {
+    display: flex;
+    align-items: center;
+    justify-centent: space-between;
+    padding: 0 15px;
+}
+.index-centent-logo {
+    width: 50px;
+    display: block;
+}
+.index-line {
+    width: calc(50% - 27px);
+    height: 1px;
+    background-color: #fff8eb;
+}
+.index-product-list {
+    margin-top: 10px;
+    padding: 0 15px;
+    padding-bottom: 50px;
+}
+.index-product-list-item {
+    display: flex;
+}
+.index-product-list-item:not(:first-of-type) {
+    margin-top: 18px;
+}
+.index-product-img {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #eee;
+    position: relative;
+}
+.index-product-buy {
+    width: 100%;
+    height: 21px;
+    line-height: 22px;
+    text-align: center;
+    font-size: 11px;
+    color: #fff;
+    background-color: #ffba1f;
+    position: absolute;
+    bottom: 0;
+}
+.index-product-text {
+    width: calc(100% - 115px);
+    margin-left: 15px;
+    position: relative;
+    padding-bottom: 21px;
+}
+.index-product-title {
+    font-size: 16px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.index-product-describe {
+    margin-top: 5px;
+    font-szie: 13px;
+    color: #999;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.index-product-price {
+    font-size: 16px;
+    color: #feabc5;
+    position: absolute;
+    bottom: 0;
+}
+/** 没有更多数据了 */
+.no_line{
+    font-size: 13px;
+    height: 25px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    background-color: #fff;
+    margin-top: 28px;
+}
+.no_line span{
+    position: relative;
+    top: -12px;
+    background: #fff;
+    padding: 0 20px;
+    color: #bbb;
+}

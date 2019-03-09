@@ -1,6 +1,6 @@
 /*
- * APICloud JavaScript Library
- * Copyright (c) 2014 apicloud.com
+ * 衣永康
+ * 异步请求
  */
 (function(window){
 
@@ -125,6 +125,7 @@
       method: 'post',
       dataType: 'json',
       headers: {
+        'userId': $api.getStorage('userId'),
         'Content-Type': 'application/json;charset=utf-8'
       },
       data: {

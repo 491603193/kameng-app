@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>卡萌</title>
+</head>
+<body class="background-fff">
+  <div data-menu-index="0"></div>
+  <div style="display: none;" data-menu-index="1"></div>
+  <div style="display: none;" data-menu-index="2"></div>
+  <div style="display: none;" data-menu-index="3"></div>
+</body>
+<script src="../script/api.js"></script>
+<script>
+  apiready = function () {
+    initFrameGroup();
+    openFrameGroup();
+    exitApp();
+    // initBadgeNum();
+    // flushAsyncUserMessage();
+    listener();
+  };
+
+  //添加推送监听
+  function listener() {
+    var push = api.require('push');
+    push.setListener(function( ret, err ){
+    });
+  }
+
+  var selectIndex = 1;
+  var isFlushMessageNum = false;
+  var messageInitFinish = false;
+  var isInitCenter = false;
+  var frames = [
+    {
+      name: '/html/index_frm.html',
+      url: './index/index.html',
+      pageParam: {
+        showMode: 1
+      },
+      bounces: false
+    },
+    {
+      name: '/html/goods/index.html',
+      url: './goods/index.html',
+      useWKWebView: false
+    },
+    {
+      name: '/html/shopping/index.html',
+      url: './shopping/index.html',
+      useWKWebView: false
+    },
+    {
+      name: '/html/user/index.html',
+      url: './user/index.html',
+      useWKWebView: false
+    }
+  ];
+
+  function openFrameGroup() {
+    api.openFrameGroup({
+      name: 'group',
+      scrollEnabled: false,
+      rect: {
+        x: 0,
+        y: 0,
+        w: 'auto',
+        h: api.winHeight - 50
+      },
+      index: 0,
+      preload: 0,
+      bgColor: '#ebebeb',
+      frames: frames
+    }, function (ret, err) {
+      if (ret) {
+        //alert( JSON.stringify( ret ) );
+      } else {
+        //alert( JSON.stringify( err ) );
+      }
+    });
+  }
+
+
+  function initFrameGroup() {
+    var NVTabBar = api.require('NVTabBar');
+    var height = 50;
+    var textSize = 13.0;
+    var itemh = 20.0;
+    var itemw = 20.0;
+    var marginB = -1.3;
+    var textMarginB = 1.0;
+    var baImg = 'rgba(0,0,0,0)';
+    NVTabBar.open({
+      styles: {
+        bg: '#fff',
+        //bg:"widget://image/NVTabBar/tabbar_bg.png",
+        h: height,
+        dividingLine: {
+          width: 1.2,
+          color: '#d8d8d8'
+        },
+        badge: {            //（可选项）JSON对象；徽章样式配置；若不传则去内部字段默认值
+          bgColor: '#F62514', //（可选项）字符串类型；徽章背景色，支持rgb、rgba、#；默认：#ff0
+          numColor: '#fff',//（可选项）字符串类型；徽章数字字体颜色，支持rgb、rgba、#；默认：#fff
+          size: 6.0,       //（可选项）数字类型；徽章半径大小；默认值：6.0
+          fontSize: 12      // (可选项) 数字类型;设置徽章字体大小;默认值: 10 ;注意:仅支持iOS。
+        }
+      },
+      items: [{
+        w: api.winWidth / 4.0,
+        bg: {
+          marginB: marginB,
+          image: baImg
+        },
+        iconRect: {
+          w: itemw,
+          h: itemh
+        },
+        icon: {
+          normal: 'widget://image/NVTabBar/banner1.png',
+          highlight: 'widget://image/NVTabBar/banner1.png',
+          selected: 'widget://image/NVTabBar/red1.png',
+        },
+        title: {
+          text: '商品',
+          size: textSize,
+          normal: '#696969',
+          selected: '#fea8c5',
+          marginB: textMarginB
+        }
+      }, {
+        w: api.winWidth / 4.0,
+        bg: {
+          marginB: marginB,
+          image: baImg
+        },
+        iconRect: {
+          w: itemw,
+          h: itemh
+        },
+        icon: {
+          normal: 'widget://image/NVTabBar/banner2.png',
+          highlight: 'widget://image/NVTabBar/banner2.png',
+          selected: 'widget://image/NVTabBar/red2.png',
+        },
+        title: {
+          text: '分类',
+          size: textSize,
+          normal: '#696969',
+          selected: '#fea8c5',
+          marginB: textMarginB
+        }
+      }, {
+        w: api.winWidth / 4.0,
+        bg: {
+          marginB: marginB,
+          image: baImg
+        },
+        iconRect: {
+          w: itemw,
+          h: itemh
+        },
+        icon: {
+          normal: 'widget://image/NVTabBar/banner3.png',
+          highlight: 'widget://image/NVTabBar/banner3.png',
+          selected: 'widget://image/NVTabBar/red3.png',
+        },
+        title: {
+          text: '购物车',
+          size: textSize,
+          normal: '#696969',
+          selected: '#fea8c5',
+          marginB: textMarginB
+        }
+      }, {
+        w: api.winWidth / 4.0,
+        bg: {
+          marginB: marginB,
+          image: baImg
+        },
+        iconRect: {
+          w: itemw,
+          h: itemh
+        },
+        icon: {
+          normal: 'widget://image/NVTabBar/banner4.png',
+          highlight: 'widget://image/NVTabBar/banner4.png',
+          selected: 'widget://image/NVTabBar/red4.png',
+        },
+        title: {
+          text: '我的',
+          size: textSize,
+          normal: '#696969',
+          selected: '#fea8c5',
+          marginB: textMarginB
+        }
+      }],
+      selectedIndex: 0
+    }, function (ret, err) {
+      if (ret.eventType==='click') {
+        selectIndex = ret.index;
+
+        api.setFrameGroupIndex({
+          name: 'group',
+          index: selectIndex,
+          scroll: true
+        });
+        isFlushMessage();
+      }
+      if(ret.eventType==='show'){
+        initBadgeNum();
+      }
+    });
+  }
+
+  //添加返回按钮的监听
+  function exitApp() {
+    api.addEventListener({
+      name: 'keyback'
+    }, function (ret, err) {
+      api.toast({
+        msg: '再按一次返回键退出应用',
+        duration: 2000,
+        location: 'bottom'
+      });
+      api.addEventListener({
+        name: 'keyback'
+      }, function (ret, err) {
+        api.closeWidget({
+          id: api.appId,  //填写自己的id
+          retData: {name: 'closeWidget'},
+          silent: true
+        });
+      });
+      setTimeout(function () {
+        exitApp();
+      }, 2000)
+    });
+  }
+  //初始化下标
+  function initBadgeNum() {
+    var num = $api.getStorage('messageNum');
+    if (!!num && num > 0) {
+      setBadge(num);
+    }
+  }
+  //设置徽章值
+  function setBadge(index) {
+    var NVTabBar = api.require('NVTabBar');
+    NVTabBar.setBadge({
+      index: 2,
+      badge: '' + index
+    });
+  }
+  //清空徽章值
+  function clearBadge() {
+    // $api.setStorage('messageNum',0);
+    // var NVTabBar = api.require('NVTabBar');
+    // NVTabBar.setBadge({
+    //   index: 2
+    // });
+    // isFlushMessageNum = false;
+    // messageInitFinish = true;
+  }
+  //刷新徽章值
+  function isFlushMessage() {
+    if(selectIndex === 2 && isFlushMessageNum && messageInitFinish){
+      // var jsfun = 'loading(1);';
+      // api.execScript({
+      //   frameName: 'notice/user_message_frm',
+      //   script: jsfun
+      // });
+    }
+  }
+  //定时检查徽章值
+  function flushAsyncUserMessage() {
+    // api.ajax({
+    //   url: base.ip.kmservice + "/mUserMessageAction/getUserMessageNum",
+    //   method: 'post',
+    //   timeout: 30,
+    //   dataType: 'json',
+    //   returnAll: false,
+    //   data: {
+    //     values: {
+    //       userId: base.storage.getLocalStorage("userId")
+    //     }
+    //   }
+    // }, function (ret, err) {
+    //   if (!!ret && ret.success) {
+    //     var messageNum = ret.data;
+    //     var num =  base.storage.getLocalStorage("messageNum");
+    //     if(messageNum>num){
+    //       isFlushMessageNum = true;
+    //       setBadge(messageNum);
+    //       isFlushMessage();
+    //     }
+    //   }
+    //   setTimeout("flushAsyncUserMessage()",8000);
+    // });
+  }
+
+
+</script>
+</html>

@@ -14,6 +14,7 @@
 	      	transform: translate3d(0, 0, 0);
 }
 .aui-refresh-load {
+	background-color: #feabc5;
 	width: 100%;
 	height: 2.2rem;
 	position: absolute;

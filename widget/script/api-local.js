@@ -17,7 +17,7 @@
         return $api.getStorage(USER_ID)
     };
 
-    u.getUser = function(el){
+    u.getUser = function(){
         return $api.getStorage(USER)
     };
 

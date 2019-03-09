@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>商品</title>
-  <link rel="stylesheet" href="../../css/aui.css">
-  <link rel="stylesheet" href="../../css/aui-slide.css">
-  <link rel="stylesheet" href="../../css/km.css">
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/aui-slide.css">
+  <link rel="stylesheet" href="../../../css/km.css">
 </head>
 <body>
   <div id="app">
     <div id="big" :class="{pay: zhezhao}">
       <header class="win bacground-f7 product-detail-win" id="aui-header">
         <div class="back-icon" @click="api.closeWin()">
-          <img src="../../image/back.svg">
+          <img src="../../../image/back.svg">
         </div>
         <div class="aui-tab bacground-f7" id="tab">
           <a href="#shop" class="aui-tab-item" :class="title === 1 ? 'aui-active' : ''" @click="setTitle(1)">商品</a>
@@ -22,23 +22,23 @@
           <a href="#comment" class="aui-tab-item" :class="title === 3 ? 'aui-active' : ''" @click="setTitle(3)">评价</a>
         </div>
         <div class="share-icon">
-          <img src="../../image/share.svg">
+          <img src="../../../image/share.svg">
         </div>
       </header>
       <div class="product-detail-banner" id="shop" name="shop">
         <div id="aui-slide3">
           <div class="aui-slide-wrap" >
               <div class="aui-slide-node bg-dark">
-                  <img src="../../image/index/zhanwei.png" />
+                  <img src="../../../image/index/zhanwei.png" />
               </div>
               <div class="aui-slide-node bg-dark">
-                  <img src="../../image/index/zhanwei2.png" />
+                  <img src="../../../image/index/zhanwei2.png" />
               </div>
               <div class="aui-slide-node bg-dark">
-                  <img src="../../image/index/zhanwei.png" />
+                  <img src="../../../image/index/zhanwei.png" />
               </div>
               <div class="aui-slide-node bg-dark">
-                  <img src="../../image/index/zhanwei2.png" />
+                  <img src="../../../image/index/zhanwei2.png" />
               </div>
           </div>
           <div class="aui-slide-page-wrap"><!--分页容器--></div>
@@ -64,7 +64,7 @@
       </div>
       <div class="product-detail-select background-fff" @click="getBack()">
         选择分类
-        <img src="../../image/go.svg">
+        <img src="../../../image/go.svg">
       </div>
       <div class="product-photo-detail background-fff">
         <div class="title" id="detail" name="detail">图文详情</div>
@@ -73,7 +73,7 @@
         </div>
         <div class="product-detail-select" id="comment" name="comment" @click="openComment()">
           商品评价（10条）
-          <img src="../../image/go.svg">
+          <img src="../../../image/go.svg">
         </div>
         <div class="product-detail-comments">
           <div class="product-detail-comment-item">
@@ -100,7 +100,7 @@
             <p class="kc">库存100</p>
             <p class="select">已选择{{size}}</p>
           </div>
-          <img src="../../image/close.svg" class="close" @click="recover">
+          <img src="../../../image/close.svg" class="close" @click="recover">
         </div>
         <div class="film-standard">
           <p>规格</p>
@@ -131,20 +131,20 @@
     <footer class="foot product-detail-foot">
       <div class="aui-col-xs-2 background-fff">
         <div class="aui-badge">3</div>
-        <img src="../../image/shopping/shopcar.svg" class="aui-iconfont">
+        <img src="../../../image/shopping/shopcar.svg" class="aui-iconfont">
       </div>
       <div class="aui-col-xs-5 background-febb1f" @click="getBack()">加入购物车</div>
       <div class="aui-col-xs-5 background-fda9c5" @click="goPay()">立即购买</div>
     </footer>
   </div>
 </body>
-<script src="../../script/holder.js"></script>
-<script src="../../script/api.js"></script>
-<script src="../../script/aui-tab.js"></script>
-<script src="../../script/aui-slide.js"></script>
-<script src="../../script/jquery-3.3.1.min.js"></script>
-<script src="../../script/classify/product_detail.js"></script>
-<script src="../../script/vue.min.js"></script>
+<script src="../../../script/holder.js"></script>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/aui-tab.js"></script>
+<script src="../../../script/aui-slide.js"></script>
+<script src="../../../script/jquery-3.3.1.min.js"></script>
+<script src="../../../script/classify/product_detail.js"></script>
+<script src="../../../script/vue.min.js"></script>
 <script>
   var app = new Vue({
   el: '#app',

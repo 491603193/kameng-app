@@ -38,7 +38,7 @@
     <div class="index-section">
       <section class="aui-grid ">
         <div class="aui-row">
-          <div class="aui-col-xs-3">
+          <div class="aui-col-xs-3" onclick="openlogistics()">
                 <img src="../../image/index/icon1.png" class="aui-iconfont">
               <div class="aui-grid-label">云仓</div>
           </div>
@@ -167,6 +167,9 @@
   function openDetail () {
     $api.openWin('/html/classify/product_detail')
   }
+  function openlogistics () {
+  $api.openWin('/html/my/logistics_detail_win')
+}
 </script>
 
 

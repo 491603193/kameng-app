@@ -1,0 +1,48 @@
+.agency-back {
+  width: 100%;
+  height: 100vh;
+  background-image: url('../image/agency.jpg');
+  background-position: center;
+  background-size: 100% 100%;
+}
+.agency-content {
+  width: 80%;
+  position: absolute;
+  left: 50%;
+  margin-left: -40%;
+  padding: 25px 15px;
+  border-radius: 5px;
+  top: 30%;
+}
+.agency-content .line1 {
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+.agency-content .line2 {
+  padding-top: 10px;
+}
+.agency-text {
+  padding: 10px 15px;
+  border: 1px solid #eee;
+  margin-top: 10px;
+}
+.agency-btn {
+  width: 76%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  border: none;
+  background-color: #fda9c5;
+  position: absolute;
+  left: 50%;
+  margin-left: -38%;
+  bottom: 5%;
+  border-radius: 20px;
+}
+.aui-text-center {
+  margin-top: 30px;
+}
+.shop-pay-remind .remind {
+  height: auto;
+}

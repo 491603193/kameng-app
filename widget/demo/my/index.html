@@ -4,9 +4,98 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>个人中心</title>
+  <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/km.css">
 </head>
-<body>
-
+<body class="background-fff">
+  <header class="win bacground-f7" id="aui-header">个人中心</header>
+  <div class="my-head">
+    <div class="my-flex">
+      <div class="my-head-img">
+        <img src="holder.js/60x60">
+      </div>
+      <div class='my-head-name'>
+        <p class="name font-16 color-fff">刘先生</p>
+        <p class="rank color-fff">一级  去升级>>
+          <span class="right">保证金：¥1000 >></span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="my-card">
+    <div class="el left">
+      <p class="incom">我的总收入</p>
+      <p class="money color-f7931e">￥100000</p>
+      <p class="look color-ccc">查看明细 >></p>
+    </div>
+    <div class="el">
+      <p class="incom">可提现收入</p>
+      <p class="money color-999">￥5000</p>
+      <p class="look color-ccc">查看明细 >></p>
+    </div>
+  </div>
+  <div class="my-click">
+    <div class="my-click-row">
+      <div class="el left">
+        <div class="my-click-icon">
+          <img src="../../image/my/wdye.png">
+        </div>
+        <p class="font-14 color-333">我的余额</p>
+      </div>
+      <div class="el" onclick="openWddd()">
+        <div class="my-click-icon">
+          <img src="../../image/my/wddd.png">
+        </div>
+        <p class="font-14 color-333">我的订单</p>
+      </div>
+    </div>
+    <div class="my-click-row">
+      <div class="el left">
+        <div class="my-click-icon">
+          <img src="../../image/my/wdtd.png">
+        </div>
+        <p class="font-14 color-333">我的团队</p>
+      </div>
+      <div class="el">
+        <div class="my-click-icon">
+          <img src="../../image/my/wdyc.png">
+        </div>
+        <p class="font-14 color-333">我的云仓</p>
+      </div>
+    </div>
+    <div class="my-click-row">
+      <div class="el left">
+        <div class="my-click-icon">
+          <img src="../../image/my/dlsj.png">
+          <div class="dot color-fff">1</div>
+        </div>
+        <p class="font-14 color-333">代理升级</p>
+      </div>
+      <div class="el">
+        <div class="my-click-icon">
+          <img src="../../image/my/shdz.png">
+        </div>
+        <p class="font-14 color-333">收货地址</p>
+      </div>
+    </div>
+    <div class="my-click-row">
+      <div class="el left">
+        <div class="my-click-icon">
+          <img src="../../image/my/sqzs.png">
+        </div>
+        <p class="font-14 color-333">授权证书</p>
+      </div>
+      <div class="el">
+        <div class="my-click-icon">
+          <img src="../../image/my/bzzx.png">
+        </div>
+        <p class="font-14 color-333">帮助中心</p>
+      </div>
+    </div>
+  </div>
 </body>
+<script src="../../script/holder.js"></script>
+<script src="../../script/api.js"></script>
+<script src="../../script/my/index.js"></script>
 </html>

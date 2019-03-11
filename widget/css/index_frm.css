@@ -11,12 +11,12 @@
 }
 .c {
   width: 90%;
-  height: 513px;
+  height: 450px;
   position: absolute;
   left: 50%;
   margin-left: -45%;
   top: 50%;
-  margin-top: -45vh;
+  margin-top: -225px;
   z-index: 1300;
 }
 .c .aui-slide-node {
@@ -60,7 +60,7 @@
 }
 .aui-slide-node .content {
   width: 88%;
-  height: 72%;
+  height: 84%;
   border: 1px solid #de717c;
   border-radius: 10px;
   position: absolute;
@@ -73,7 +73,7 @@
 }
 .zhezhaobottom {
   padding-bottom: 2px;
-  border-bottom: 1px solid #de717c;
+  border-bottom: 1px solid #f2a3ab;
 }
 .text-indext-2 {
   text-indent: 2em;
@@ -87,8 +87,17 @@
 }
 .color-956780 {
   padding-bottom: 5px;
-  border-bottom: 1px solid #de717c;
+  border-bottom: 1px solid #f2a3ab;
 }
 .aui-slide-node .right {
   text-align: right;
+}
+.c .hare {
+  width: 120px;
+  height: 87px;
+  position: absolute;
+  left: 50%;
+  margin-left: -60px;
+  top: -41px;
+  z-index: 1400;
 }

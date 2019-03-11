@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>发表评论</title>
+  <title>管理仓变动记录</title>
   <link rel="stylesheet" href="../../css/aui.css">
   <link rel="stylesheet" href="../../css/km.css">
 </head>
@@ -13,12 +13,10 @@
     <div class="back-icon" onclick="api.closeWin()">
       <img src="../../image/back.svg">
     </div>
-    <div class="win-title">发表评论</div>
-    <span class="float-right color-pink">发布</span>
+    <div class="win-title">管理仓变动记录</div>
   </header>
 </body>
 <script src="../../script/api.js"></script>
-<script src="../../script/vue.min.js"></script>
 <script>
   apiready = function(){
     api.parseTapmode();
@@ -27,8 +25,8 @@
     var headerPos = $api.offset(header);
     var body_h = $api.offset($api.dom('body')).h;
     api.openFrame({
-        name: '/html/classify/product_frm',
-        url: api.wgtRootDir + '/html/classify/product_frm.html',
+        name: '/html/my/manage_change_record_frm',
+        url: api.wgtRootDir + '/html/my/manage_change_record_frm.html',
         bounces: true,
         rect: {
           x: 0,
@@ -37,6 +35,6 @@
           h: 'auto'
         }
     })
-  }
+  };
 </script>
 </html>

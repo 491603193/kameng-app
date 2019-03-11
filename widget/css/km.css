@@ -68,6 +68,9 @@
 .color-956780 {
   color: #956780;
 }
+.color-blue {
+  color: #63c1db !important;
+}
 .background-f6 {
   background-color: #f6f6f6;
 }
@@ -91,6 +94,9 @@
 }
 .color-333 {
   color: #333;
+}
+.color-febb1f {
+  color: #febb1f;
 }
 .background-color-febb1f {
   background-color: #febb1f;
@@ -116,11 +122,17 @@
 .background-febb1f {
   background-color: #febb1f;
 }
+.background-fffaf3 {
+  background-color: #fffaf3;
+}
 .login-item-input input[type="number"]::-webkit-input-placeholder {
   color: #ccc;
 }
 .font-15 {
   font-size: 15px;
+}
+.font-13 {
+  font-size: 13px;
 }
 .font-17 {
   font-size: 17px;
@@ -1450,3 +1462,123 @@ input[type="text"].index-input-search {
   left: -10px;
 }
 /* my_order_frm end*/
+/* logistics-detail */
+.logistics-head {
+  width: 100%;
+  padding: 17px 20px;
+  display: flex;
+  align-items: center;
+}
+.logistics-detail-img {
+  width: 75px;
+  height: 75px;
+  display: block;
+}
+.logistics-detail-text {
+  margin-left: 10px;
+}
+.logistics-detail-text .copy {
+  width: 54px;
+  height: 16px;
+  display: inline-block;
+  font-size: 11px;
+  text-align: center;
+  line-height: 16px;
+  border: 1px solid #febb1f;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+.logistics-detail-list .title {
+  height: 45px;
+  line-height: 45px;
+  padding: 0 15px;
+  border-bottom: 1px solid #eee;
+}
+.logistics-detail-row {
+  display: flex;
+}
+.logistics-detail-row .icon1,
+.logistics-detail-row .icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 15px;
+  justify-content: center;
+}
+.logistics-detail-row .icon {
+  margin-left: 1.75px;
+}
+.logistics-detail-row .icon1 {
+  padding-top: 12px;
+}
+.logistics-blue-dot {
+  width: 16px;
+  height: 16px;
+}
+.logistics-long-line {
+  width: 1px;
+  height: calc(100% - 16px);
+  background: #ddd;
+}
+.logistics-hui-dot {
+  width: 12px;
+  height: 12px;
+}
+.logistics-short-line {
+  width: 1px;
+  height: 16px;
+  background: #ddd;
+}
+.logistics-detail-row .text {
+  width: 100%;
+  padding: 12px 15px 12px 0;
+  border-bottom: 1px solid #eee;
+}
+.logistics-detail-row .logistics-detail-text {
+  border-bottom: none;
+}
+/* logistics-detail end*/
+/* 新遮罩样式 */
+.zhezhao-back {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0,0,0,.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* 遮罩end */
+/* my-yc */
+.yc-head {
+  padding: 16px 10px 16px 15px;
+}
+.yc-head .yc-num {
+  width: 100%;
+  height: 44px;
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 44px;
+  border: 1px solid #eee;
+  padding: 5px;
+}
+.yc-head .font-12 {
+  margin-top: 10px;
+}
+.yc-head .font-15 {
+  margin-top: 34px;
+  text-align: right;
+}
+.yc-btn {
+  width: 86.66%;
+  height: 43px;
+  line-height: 43px;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  border-radius: 22px;
+  margin-top: 60px;
+}
+/* my-yc end*/

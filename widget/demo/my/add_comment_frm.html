@@ -7,7 +7,39 @@
   <title>发表评价</title>
   <link rel="stylesheet" href="../../css/aui.css">
   <link rel="stylesheet" href="../../css/km.css">
+  <style>
 
+    #color-input-red +label{
+      display: block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      margin-top: -12px;
+      left: 15px;
+      border: 1px solid #999;
+      background: #fff;
+    }
+    label::before {
+      content: "\2714";
+      font-size: 14px;
+      display: block;
+      text-align: center;
+      color: #999;
+    }
+    #color-input-red:checked + label {
+      background: #feabc5;
+      border: none;
+    }
+    #color-input-red:checked + label::before {
+      color: white;
+    }
+    input[type=checkbox]{
+      visibility: hidden;
+    }
+  </style>
 </head>
 <body>
   <div id="app">
@@ -21,10 +53,11 @@
         ></div><!-- 占位 -->
       </div>
     </div>
-    <div class="add-comment-anonymity">
+    <div class="add-comment-anonymity background-fff">
       <input id="color-input-red" class="chat-button-location-radio-input" type="checkbox" name="color-input-red" value="#f0544d" />
       <label  for="color-input-red"></label >
-
+      <span class="niming color-333 font-15">匿名</span>
+      <span class="color-999 font-14">你的评价能帮助其他人呦</span>
     </div>
   </div>
 </body>

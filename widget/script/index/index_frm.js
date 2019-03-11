@@ -27,3 +27,6 @@ var slide4 = new auiSlide({
 function openDetail () {
   $api.openWin('/html/classify/product_detail')
 }
+function zheZhaoHidden () {
+  $api.byId('indexZhe').style.display = "none"
+}

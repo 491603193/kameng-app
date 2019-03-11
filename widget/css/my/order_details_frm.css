@@ -1,0 +1,148 @@
+.shop-pay-state .line3,
+.shop-pay-state .line1 {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+.order-details-el {
+  margin-top: 10px;
+}
+.order-details-el:first-of-type {
+  margin-top: 0;
+}
+.background-fff .shop-pay-state {
+  padding-bottom: 10px;
+}
+.weiquan {
+  width: 100%;
+  height: 40px;
+  padding-top: 10px;
+}
+.weiquan-btn {
+  width: 90px;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #999;
+  text-align: center;
+  border-radius: 20px;
+  float: right;
+}
+.yfh-btn {
+  width: 90px;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #999;
+  text-align: center;
+  border-radius: 20px;
+}
+.yfh {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.yfh .right {
+  margin-left: 10px;
+}
+.wqxx {
+  padding-top: 10px;
+  padding-left: 5px;
+}
+.wqxx-title {
+  position: relative;
+}
+.wqxx-title::before {
+  content: '';
+  width: 1.5px;
+  height: 11px;
+  position: absolute;
+  left: 0;
+  background-color: #feabc5;
+  top: 50%;
+  margin-top: -5.5px;
+  left: -5px;
+}
+.wqxx .font-12 {
+  margin-top: 5px;
+}
+.ddxx {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+}
+.ddxx .color-666 {
+  padding-left: 5px;
+  margin-top: 5px;
+}
+.ddxx-border {
+  width: 100%;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+.ddxx-bottom {
+  padding-top: 15px;
+}
+.zhezhao {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.3);
+}
+.alert-weiquan {
+  width: 250px;
+  background-color: #fff;
+  position: absolute;
+  left: 50%;
+  margin-left: -125px;
+  top: 50%;
+  margin-top: -146.65px;
+  border-radius: 10px;
+  padding: 25px 15px;
+}
+.alert-weiquan .title {
+  text-align: center;
+}
+.alert-mobel {
+  width: 100%;
+  height: 36px;
+  line-height: 36px;
+  margin-top: 16px;
+  border: 1px solid #eee;
+  font-size: 13px;
+  text-indent: 1em;
+}
+.alert-mobel::-webkit-input-placeholder {
+  color: #ddd;
+}
+.alert-text {
+  width: 100%;
+  height: 112.3px;
+  padding: 12px;
+  font-size: 13px;
+  margin-top: 9px;
+  border: 1px solid #eee;
+}
+.alert-text::-webkit-input-placeholder {
+  color: #ddd;
+}
+.alert-btn {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+.alert-btn div {
+  width: 90px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border: 1px solid #666;
+  border-radius: 15px;
+}
+.alert-btn .background-fda9c5 {
+  border: none;
+  margin-left: 9px;
+}
+.wq-state {
+  height: 100vh;
+  overflow: hidden;
+}

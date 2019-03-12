@@ -13,18 +13,15 @@
 </head>
 <body>
   <div id="app" :class="(juJue || tongYi) ? 'pay' : ''">
-    <header class="aui-row background-fff yc1-head">
-      <div class="aui-col-xs-6">
-        <p class="font-15 color-333">我的管理仓</p>
-        <p class="yc1-num color-333">50</p>
-        <p class="font-11 color-999">查看变动记录>></p>
-        <button class="yc1-btn color-fff font-16 background-color-feabc5">购买</button>
-      </div>
-      <div class="aui-col-xs-6">
+    <header class="aui-row background-fff yc1-head yc2-head">
+      <div class="aui-col-xs-12">
         <p class="font-15 color-333">我的个人仓</p>
-        <p class="yc1-num color-333">30</p>
+        <p class="yc1-num yc2-flex color-333">
+          <img src="../../image/my/grcicon.png" class="yc2-icon">
+          <span class="yc2-num">50</span>
+        </p>
         <p class="font-11 color-999">查看变动记录>></p>
-        <button class="yc1-btn color-fff font-16 background-blue" @click="diaoRu = true">调入</button>
+        <button class="yc1-btn yc2-btn color-fff font-16 background-color-feabc5">购买</button>
       </div>
     </header>
     <div class="yc1-title color-333 font-16">云仓购买订单</div>

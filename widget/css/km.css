@@ -62,6 +62,12 @@
 .color-yellow {
   color: #feeb19;
 }
+.color-f15a24 {
+  color: #f15a24;
+}
+.color-a0c161 {
+  color: #a0c161;
+}
 .color-666 {
   color: #666;
 }
@@ -154,6 +160,9 @@
 }
 .margin-left-10 {
   margin-left: 10px;
+}
+.margin-top-20 {
+  margin-top: 20px;
 }
 .border-bottom {
   border-bottom: 1px solid #eee;

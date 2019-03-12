@@ -11,7 +11,8 @@
 <body class="aui-bg-white">
   <div id="app">
     <div class="index-product-list">
-      <div class="index-product-list-item" v-for="entity in entities" onclick="openDetail()">
+      <div class="index-product-list-item" v-for="entity in entities"
+           @click="openDetail(entity.productId)">
         <div class="index-product-img">
           <img :src="imgPath + entity.productListPic">
           <div class="index-product-buy" v-if="entity.isTimingUp">{{entity.downTime}} 开售</div>
@@ -62,7 +63,7 @@
   var vm = new Vue({
     el: '#app',
     data: {
-      imgPath: $apiAjax.hbcs_image,
+      imgPath: $apiAjax.kameng_image,
       noData: false,
       noMoreData: false,
       entities: []
@@ -80,8 +81,11 @@
         // 拼接
         return month+"."+day+" "+hours+":"+minutes;
       },
-      openDetail: function(){
-        $api.openWin('/html/classify/product_detail')
+      openDetail: function(productId){
+        var url = $apiAjax.kameng_web + '/goods/' + productId + '/' + $apiLocal.getUserId();
+        $api.openWin('/html/goods/product/product_detail_win', {
+          url: url
+        })
       },
       loading: function(pageNo){
         var self = this;

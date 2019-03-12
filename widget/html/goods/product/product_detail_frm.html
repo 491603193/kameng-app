@@ -7,24 +7,12 @@
   <title>商品</title>
   <link rel="stylesheet" href="../../../css/aui.css">
   <link rel="stylesheet" href="../../../css/aui-slide.css">
-  <link rel="stylesheet" href="../../../css/km.css">
+  <link rel="stylesheet" href="../../../css/product/detail.css">
+  <!--<link rel="stylesheet" href="../../../css/km.css">-->
 </head>
 <body>
   <div id="app">
-    <div id="big" :class="{pay: zhezhao}">
-      <header class="win bacground-f7 product-detail-win" id="aui-header">
-        <div class="back-icon" @click="api.closeWin()">
-          <img src="../../../image/back.svg">
-        </div>
-        <div class="aui-tab bacground-f7" id="tab">
-          <a href="#shop" class="aui-tab-item" :class="title === 1 ? 'aui-active' : ''" @click="setTitle(1)">商品</a>
-          <a href="#detail" class="aui-tab-item" :class="title === 2 ? 'aui-active' : ''" @click="setTitle(2)">详情</a>
-          <a href="#comment" class="aui-tab-item" :class="title === 3 ? 'aui-active' : ''" @click="setTitle(3)">评价</a>
-        </div>
-        <div class="share-icon">
-          <img src="../../../image/share.svg">
-        </div>
-      </header>
+    <div id="big" :class="{pay: showSelSpec}">
       <div class="product-detail-banner" id="shop" name="shop">
         <div id="aui-slide3">
           <div class="aui-slide-wrap" >
@@ -90,39 +78,80 @@
       </div>
     </div>
     <!-- 遮罩 -->
-    <div id="film" class="film" :class="{asf: zhezhao}">
-      <div class="film-zhanwei" @click="recover()"></div>
-      <div class="film-content">
-        <div class="film-content-title">
-          <img src="holder.js/102x102" class="product">
-          <div>
-            <p class="price">￥150.00</p>
-            <p class="kc">库存100</p>
-            <p class="select">已选择{{size}}</p>
-          </div>
-          <img src="../../../image/close.svg" class="close" @click="recover">
-        </div>
-        <div class="film-standard">
-          <p>规格</p>
-          <div class="aui-tab" id="tab1">
-            <div class="aui-tab-item" :class="size === 'XL' ? 'aui-active' : ''" @click="setSize('XL')">XL</div>
-            <div class="aui-tab-item" :class="size === 'L' ? 'aui-active' : ''" @click="setSize('L')">L</div>
-            <div class="aui-tab-item" :class="size === 'M' ? 'aui-active' : ''" @click="setSize('M')">M</div>
-            <div class="aui-tab-item":class="size === 'S' ? 'aui-active' : ''" @click="setSize('S')">S</div>
-          </div>
-        </div>
-        <div class="film-standard">
-          <p>颜色</p>
-          <div class="aui-tab" id="tab2">
-            <div class="aui-tab-item aui-tab-item1" :class="color === 1 ? 'aui-active' : ''" @click="setColor(1)">白色</div>
-          </div>
-        </div>
-        <div class="film-num">
-          <div class="text">数量</div>
-          <div class="box">
-            <div class="j background-f6 color-999" @click="numJ()">一</div>
-            <div class="num background-e3">{{num}}</div>
-            <div class="add background-e3"  @click="numAdd()">＋</div>
+
+    <div class="yd-popup yd-popup-bottom yd-popup-show " style="width: 100%; height: 75%;"><!---->
+      <div class="yd-popup-content">
+        <div id="film" class="film">
+          <div class="film-zhanwei"></div>
+          <div class="film-content">
+            <div class="film-content-title">
+              <img src="../../assets/f5.jpg" class="product">
+              <div>
+                <p class="price">￥150.00</p>
+                <p class="kc">库存100</p>
+                <p class="select">已选择 L</p>
+              </div>
+              <img src="../../assets/close.svg" class="close" @click="popup.showSelSpec = false">
+            </div>
+            <div class="film-spec">
+              <div class="film-standard">
+                <p>规格</p>
+                <div class="aui-tab" id="tab1">
+                  <div class="aui-tab-item aui-active">XL</div>
+                  <div class="aui-tab-item">L11111</div>
+                  <div class="aui-tab-item">M111111</div>
+                  <div class="aui-tab-item">S1111111</div>
+                  <div class="aui-tab-item">L11111</div>
+                  <div class="aui-tab-item">M111111</div>
+                  <div class="aui-tab-item">S1111111</div>
+                  <div class="aui-tab-item">L11111</div>
+                  <div class="aui-tab-item">M111111</div>
+                  <div class="aui-tab-item">S1111111</div>
+                </div>
+              </div>
+              <div class="film-standard">
+                <p>颜色</p>
+                <div class="aui-tab" id="tab2">
+                  <div class="aui-tab-item aui-tab-item1 aui-active">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                  <div class="aui-tab-item aui-tab-item1">白色</div>
+                </div>
+              </div>
+            </div>
+            <div class="film-num">
+              <div class="text">数量</div>
+              <div class="box">
+                <div class="j background-f6 color-999">一</div>
+                <input class="num background-e3" v-model="num"/>
+                <div class="add background-e3">＋</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -146,10 +175,10 @@
 <script src="../../../script/classify/product_detail.js"></script>
 <script src="../../../script/vue.min.js"></script>
 <script>
-  var app = new Vue({
+  new Vue({
   el: '#app',
   data: {
-    zhezhao: false,
+    showSelSpec: false,
     size: 'XL',
     color: 1,
     title: 1,
@@ -170,10 +199,10 @@
   },
   methods: {
     getBack () {
-      this.zhezhao = true
+      this.showSelSpec = true
     },
     recover () {
-      this.zhezhao = false
+      this.showSelSpec = false
     },
     setSize (id) {
       if (this.size === id) return this.size = 0

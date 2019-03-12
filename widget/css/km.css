@@ -840,7 +840,7 @@ input[type="text"].index-input-search {
   left: 0;
   overflow: hidden;
   z-index: 200;
-  display: none;
+  display: block;
 }
 .pay {
   height: 100vh;

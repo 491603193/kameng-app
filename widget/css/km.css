@@ -843,7 +843,7 @@ input[type="text"].index-input-search {
   left: 0;
   overflow: hidden;
   z-index: 200;
-  display: none;
+  display: block;
 }
 .margin-top-10 {
   margin-top: 10px;

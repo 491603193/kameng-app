@@ -137,7 +137,7 @@
     },function (ret) {
       var html = template('index-product-list-item', {
         itemArray: ret,
-        imgPath: $apiAjax.hbcs_image
+        imgPath: $apiAjax.kameng_image
       });
       $api.html($api.byId('index-product-list'), html);
     }, true);
@@ -148,7 +148,7 @@
     },function (ret) {
        var html = template('templateHeader', {
          images: ret,
-         imgPath: $apiAjax.hbcs_image
+         imgPath: $apiAjax.kameng_image
        });
       $api.html($api.byId('arraySlide'), html);
       new auiSlide({

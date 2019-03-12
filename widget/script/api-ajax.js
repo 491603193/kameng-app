@@ -6,8 +6,9 @@
 
   var u = {};
 
-  u.hbcs_api = 'http://192.168.0.199:8031';
-  u.hbcs_image = 'http://res.qiangdaoapp.com/kameng';
+  u.kameng_api = 'http://192.168.0.199:8031';
+  u.kameng_image = 'http://res.qiangdaoapp.com/kameng';
+  u.kameng_web = 'http://192.168.0.199:8081';
 
   "use strict";
   var auiToast = function() {
@@ -114,7 +115,7 @@
 
   u.postBody = function(url, data, fnSuc, progressType){
     var postJson = {
-      url: u.hbcs_api + url,
+      url: u.kameng_api + url,
       method: 'post',
       dataType: 'json',
       headers: {
@@ -130,7 +131,7 @@
 
   u.get = function(url, data, fnSuc, progressType){
     var postJson = {
-      url: u.hbcs_api + url,
+      url: u.kameng_api + url,
       dataType: 'json',
       method: 'get',
       data: {

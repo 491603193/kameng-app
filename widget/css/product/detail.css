@@ -1,0 +1,265 @@
+.yd-slider {
+    min-height: 4rem;
+}
+.yd-cell-item {
+    background-color: #fff;
+    margin-top: 10px;
+}
+.product-photo-detail {
+    margin-top: 10px;
+    padding-bottom: 70px;
+}
+.product-photo-detail .title {
+    padding: 0 15px;
+    height: 49px;
+    line-height: 49px;
+    font-size: 16px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+}
+.product-photo-detail .content {
+    padding: 5px 10px;
+}
+.product-detail-foot {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    z-index: 16000;
+    border-top: 1px solid #eee;
+}
+.product-detail-foot .aui-iconfont {
+    height: 22px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -11px;
+    left: 50%;
+    margin-left: -11px;
+}
+.goods-add {
+    background-color: #febb1f;
+}
+.goods-buy {
+    background-color: #fda9c5;
+}
+.product-detail-sell {
+    width: 100%;
+    height: 50px;
+    background-image: url('../../assets/sell.jpg');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*margin-top: 55px;*/
+    display: flex;
+    justify-content: space-between;
+    padding: 0 19px;
+}
+.product-detail-sell-left {
+    color: #fff;
+    font-size: 15px;
+    line-height: 50px;
+}
+.product-detail-time {
+    color: #fff;
+    cont-size: 12px;
+    margin-top: 5px;
+}
+.product-detail-limit {
+    width: 124px;
+    float: right;
+    font-size: 12px;
+    color: #fff;
+    padding: 0.1px 2px;
+    border-radius: 20px;
+    text-align: center;
+    background-color: #fa7065;
+    margin-top: 2px;
+}
+.product-detail-section {
+    width: 100%;
+    padding: 18px 15px 10px 15px;
+}
+.product-detail-section-title .color-red {
+    font-size: 16px;
+}
+.product-detail-section-title .color-999 {
+    margin-left: 10px;
+    font-size: 12px;
+    text-decoration: line-through;
+}
+.product-detail-name {
+    font-size: 16px;
+    color: #333;
+    margin-top: 5px;
+}
+.product-detail-num {
+    font-size: 12px;
+    margin-top: 15px;
+}
+.product-detail-num span {
+    margin-left: 18%;
+}
+.pay {
+    height: 100vh;
+    display: block;
+    overflow: hidden;
+}
+
+.asf {
+    display: block;
+}
+.film {
+}
+.film-content {
+    width: 100%;
+    top: 0;
+    position: absolute;
+    bottom: 0;
+    background-color: #fff;
+}
+
+.film-content-title {
+    width: 100%;
+    position: fixed;
+    padding: 19px 15px;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+}
+
+.film-content-title .product {
+    width: 102px;
+    height: 102px;
+    position: fixed;
+    left: 15px;
+    top: -26px;
+    border-radius: 3px;
+}
+
+.film-content-title div {
+    margin-left: 122px;
+    margin-top: -12px;
+}
+
+.film-content-title .price {
+    font-size: 18px;
+    color: #dc0024;
+}
+
+.film-content-title .kc {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #999;
+}
+
+.film-content-title .select {
+    margin-top: 5px;
+    color: #333;
+    font-size: 12px;
+}
+
+.film-content-title .close {
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: 12px;
+    right: 14px;
+}
+
+.film-standard {
+    padding: 13px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.film-zhanwei {
+    width: 100%;
+    height: 137px;
+}
+
+.film-standard p {
+    font-size: 14px;
+    color: #333;
+}
+
+.film-standard .aui-tab {
+    flex-wrap: wrap;
+}
+.film-spec {
+    margin-top: 98px;
+    padding-bottom: 108px;
+}
+
+.film-standard .aui-tab-item {
+    width: auto;
+    height: 29px;
+    padding: 0 10px;
+    border-radius: 2px;
+    line-height: 29px;
+    text-align: center;
+    color: #333;
+    font-size: 13px;
+    background-color: #f4f4f4;
+    border: 1px solid #eee;
+}
+
+.film-standard .aui-tab-item {
+    margin-top: 5px;
+    margin-left: 18px;
+}
+
+.film-standard .aui-active {
+    border: none;
+    background-color: #feabc5;
+    color: #fff;
+}
+
+.film-standard .aui-tab {
+    margin-top: 8px;
+    display: flex;
+}
+
+.film-standard .aui-tab-item1 {
+    width: 60px;
+}
+
+.film-num {
+    width: 100%;
+    padding: 8px 15px 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    line-height: 32px;
+    position: fixed;
+    bottom: 50px;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+}
+
+.film-num .text {
+    font-size: 14px;
+    color: #333;
+}
+
+.film-num .box {
+    display: flex;
+    text-align: center;
+    line-height: 30px;
+    border: 1px solid #eee;
+}
+
+.film-num .j,
+.film-num .add {
+    width: 30px;
+    height: 30px;
+}
+
+.film-num .num {
+    width: 60px;
+    border: none;
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    text-align: center;
+}
+.asf {
+    display: block;
+}

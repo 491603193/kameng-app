@@ -36,6 +36,9 @@ html,body,header,section,footer,div,ul,ol,li,img,a,span,em,del,legend,center,str
 	font-style:normal;
     outline: none;
 }
+[v-cloak] {
+	display: none;
+}
 *:active {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }

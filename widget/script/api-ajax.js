@@ -99,24 +99,17 @@
   }
 
   u.setErrorMessage = function(errorMessage){
-    var errorObj = document.getElementById('error-msg');
-    if(errorObj) errorObj.parentNode.removeChild(errorObj)
-    //新建一个div元素节点
-    var div = window.document.createElement("div");
-    var divId = document.createAttribute("id"); //创建属性
-    divId.value = 'error-msg';
-    div.setAttributeNode(divId);
-    div.innerHTML = '<div class="aui-tips aui-margin-b-15" id="error-msg">\n' +
-      '    <i class="aui-iconfont aui-icon-info"></i>' +
-      '    <div class="aui-tips-title">'+errorMessage+'</div>' +
-      ' <i class="aui-iconfont"></i>'
-      '</div>';
-    window.document.body.appendChild(div);
-    window.document.body.insertBefore(div, document.body.firstElementChild);
-    setTimeout(function () {
-      var errorObj = document.getElementById('error-msg');
-      if(errorObj) errorObj.parentNode.removeChild(errorObj)
-    },4000)
+    var frameName = api.frameName;
+    if(frameName){
+      var jsfun = '$api.setErrorMessage("'+errorMessage+'");';
+      api.execScript({
+        script: jsfun
+      });
+    } else {
+      $api.setErrorMessage(errorMessage);
+    }
+
+
   };
 
   u.postBody = function(url, data, fnSuc, progressType){
@@ -164,7 +157,7 @@
       toast.hide();
       if(ret){
         if (ret.code === 0) {
-          callBack(ret.data || true)
+          callBack(ret.data || true, ret.page || {})
         } else{
           u.setErrorMessage(ret.msg)
           callBack(false)

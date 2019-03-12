@@ -1,6 +1,6 @@
 /*
- * APICloud JavaScript Library
- * Copyright (c) 2014 apicloud.com
+ * 衣永康
+ * 本地存储
  */
 (function(window){
     var u = {};

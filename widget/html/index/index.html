@@ -68,7 +68,7 @@
 <script src="../../script/api.js"></script>
 <script src="../../script/api-ajax.js"></script>
 <script src="../../script/api-local.js"></script>
-<script src="../../script/aui-slide.js"></script>
+<script src="../../script/aui/aui-slide.js"></script>
 <script src="../../script/template.js"></script>
 <script type="text/html" id="templateHeader">
   {{each images as entity i}}
@@ -97,10 +97,10 @@
               {{entity.stockMinPrice}} - {{entity.stockMaxPrice}}
             {{/if}}个
           {{else}} ￥
-            {{if entity.productMinPrice == entity.productMaxPrice}}
-              {{entity.productMinPrice}}
+            {{if entity.productMinPriceE == entity.productMaxPriceE}}
+              {{entity.productMinPriceE}}
             {{else}}
-              {{entity.productMinPrice}} - {{entity.productMaxPrice}}
+              {{entity.productMinPriceE}} - {{entity.productMaxPriceE}}
             {{/if}}
           {{/if}}
         </p>
@@ -109,7 +109,7 @@
   {{/each}}
   <div class="no_line aui-text-white"><span>没有更多了</span></div>
 </script>
-<script src="../../script/aui-pull-refresh.js"></script>
+<script src="../../script/aui/aui-pull-refresh.js"></script>
 <script>
   apiready = function(){
     var header = $api.byId('header');

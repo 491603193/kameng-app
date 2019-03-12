@@ -18,8 +18,8 @@
   </header>
   <div class="classify-content">
     <div class="classify-left" id="tab">
-      <div class="aui-tab-item aui-active">非云仓</div>
-      <div class="aui-tab-item">云仓</div>
+      <div class="aui-tab-item aui-active">云仓</div>
+      <div class="aui-tab-item">非云仓</div>
       <div class="aui-tab-item">用心选</div>
     </div>
     <div class="classify-right" id="fyc">
@@ -66,7 +66,7 @@
 <script src="../../script/api.js"></script>
 <script src="../../script/api-ajax.js"></script>
 <script src="../../script/api-local.js"></script>
-<script src="../../script/aui-tab.js"></script>
+<script src="../../script/aui/aui-tab.js"></script>
 <script src="../../script/template.js"></script>
 <script type="text/html" id="templateLabelA">
   {{each itemArray as entity i}}
@@ -102,9 +102,7 @@
   }
 
   function  getProductLabel () {
-    $apiAjax.postBody("/product/label/list",{
-      level: $apiLocal.getUser().level
-    },function (ret) {
+    $apiAjax.postBody("/product/label/list",{},function (ret) {
       labelA(ret['1']);
       labelB(ret['2']);
       labelC(ret['3']);

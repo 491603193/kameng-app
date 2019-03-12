@@ -527,8 +527,6 @@ input[type="text"].index-input-search {
 .shop-list-item {
   padding: 20px 15px;
   display: flex;
-}
-.shop-list-item:not(:last-of-type) {
   border-bottom: 1px solid #eee;
 }
 .shop-list-left {
@@ -641,6 +639,7 @@ input[type="text"].index-input-search {
   position: fixed;
   display: flex;
   bottom: 0;
+  border-top: 1px solid #eee;
 }
 .shop-foot-left {
   width: 70%;
@@ -856,6 +855,12 @@ input[type="text"].index-input-search {
 }
 .margin-top-10 {
   margin-top: 10px;
+}
+.margin-top-12 {
+  margin-top: 12px;
+}
+.margin-right-f10 {
+  margin-right: -10px;
 }
 .pay {
   height: 100vh;

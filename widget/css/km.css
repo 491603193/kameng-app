@@ -77,6 +77,9 @@
 .background-e3 {
   background-color: #e3e3e3;
 }
+.background-blue {
+  background-color: #63c1db;
+}
 .color-999 {
   color: #999;
 }
@@ -842,6 +845,9 @@ input[type="text"].index-input-search {
   z-index: 200;
   display: none;
 }
+.margin-top-10 {
+  margin-top: 10px;
+}
 .pay {
   height: 100vh;
   display: block;
@@ -1168,7 +1174,7 @@ input[type="text"].index-input-search {
 }
 .shop-pay-remind .remind {
   width: 68%;
-  height: 200px;
+  height: 210px;
   position: absolute;
   top: 50%;
   margin-top: -100px;

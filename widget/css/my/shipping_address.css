@@ -1,0 +1,30 @@
+.address-list {
+  padding: 0 15px;
+}
+.address-list-item {
+  position: relative;
+  padding: 15px 20px 15px 0;
+}
+.address-list-item:not(:last-of-type) {
+  border-bottom: 1px solid #eee;
+}
+.address-compile {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -8px;
+}
+.address-btn {
+  width: 90%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  left: 50%;
+  margin-left: -45%;
+  top: 50%;
+  margin-top: -20px;
+  border-radius: 20px;
+  border: none;
+}

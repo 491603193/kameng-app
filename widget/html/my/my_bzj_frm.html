@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>我的保证金</title>
+  <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/km.css">
+</head>
+<body>
+ <div id="app">
+   <header class="bzj-head background-fda9c5">
+     <p class="bzj-head-text color-fff font-12">我的保证金</p>
+     <p class="bzj-price color-fff">￥5860.00</p>
+   </header>
+   <div class="bzj-content background-fff margin-top-10">
+     <div class="font-16 color-333 margin-top-10">明细</div>
+     <div class="bzj-detail-el">
+       <p class="font-15 color-333">保证金充值<span class="color-red">+2000</span></p>
+       <p class="bzj-time font-12 color-999 margin-top-5">2019-02-22 12:00:01</p>
+     </div>
+     <div class="bzj-detail-el">
+       <p class="font-15 color-333">后台调增保证金<span class="color-666">-1000</span></p>
+       <p class="bzj-time font-12 color-999 margin-top-5">2019-02-22 12:00:01</p>
+     </div>
+   </div>
+ </div>
+</body>
+<script src="../../script/api.js"></script>
+<script src="../../script/vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+
+    }
+  })
+</script>
+</html>

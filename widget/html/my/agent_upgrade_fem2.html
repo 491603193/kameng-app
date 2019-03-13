@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>选择升级级别</title>
+  <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/km.css">
+</head>
+<body>
+  <div id="app" class="margin-top-10">
+    <div class="agent2-content background-fff">
+      <p class="color-333 font-15">您当前保证金金额为¥500，还需充值¥1500</p>
+      <input type="text" class="color-red font-14 margin-top-5" value="￥1500">
+    </div>
+    <button class="agent1-btn background-color-feabc5 color-fff" @click="openFrm()">立即充值</button>
+  </div>
+</body>
+<script src="../../script/api.js"></script>
+<script src="../../script/vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    methods: {
+      openFrm () {
+        api.setFrameGroupIndex({
+            name: 'agentgroup',
+            index: 2
+        });
+      }
+    }
+  })
+</script>
+</html>

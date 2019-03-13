@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>购入库存</title>
+  <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/km.css">
+  <link rel="stylesheet" href="../../css/my/my_yc1.css">
+  <style>
+    .shop-pay-remind .remind1 {
+      width: 68%;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      margin-top: -100px;
+      left: 50%;
+      margin-left: -34%;
+      z-index: 300;
+      border-radius: 10px;
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="record-back" :class="tongYi ? 'pay' : ''">
+    <div class="agent3-content background-fff margin-top-10">
+      <p class="font-15 color-333">升级所需购入库存数量为326</p>
+      <p class="font-16 color-333">合计：<span class="color-red">￥156000</span></p>
+    </div>
+    <div class="background-fff yc3-pay">
+      <p class="font-13 color-333">您将向您的上级代理XXX(186*****2)购入云仓库存，以下为其支付宝和微信收款码，请先打款后提交购入申请</p>
+      <div class="aui-row">
+        <div class="aui-col-xs-12">
+          <img src="holder.js/139x128">
+          <img src="holder.js/139x128">
+        </div>
+      </div>
+    </div>
+    <div class="background-fff margin-top-10 yc3-remark">
+      <p class="font-15 color-333">打款备注</p>
+      <textarea placeholder="请填写打款备注内容" class="font-13"></textarea>
+      <p class="font-15 color-333 margin-top-20">打款凭证</p>
+      <div class="yc3-imgs">
+        <img src="../../image/takephoto.png" class="yc3-img-el">
+      </div>
+      <button class="yc-btn background-color-feabc5">完成</button>
+    </div>
+    <div v-show="tongYi">
+      <div class="zhezhao-back" @click="tongYi = false"></div>
+      <!-- 提醒 -->
+      <div class="shop-pay-remind">
+        <div class="remind1">
+          <div class="remind-relative">
+            <div class="remind-absolute">
+              <img src="../../image/success.svg">
+            </div>
+            <p class="aui-text-center font-17 color-333">提交成功</p>
+            <p class="aui-text-center font-14 color-333 margin-top-10">您的升级申请已经提交上级代理XXX(186*****222)处进行审核，请耐心等待。</p>
+            <div class="background-color-feabc5 color-fff font-15 aui-text-center agent3-btn" @click="tongYi = false">提醒ta尽快审核</div>
+          </div>
+        </div>
+      </div>
+      <!-- 提醒 end-->
+    </div>
+  </div>
+</body>
+<script src="../../script/holder.js"></script>
+<script src="../../script/api.js"></script>
+<script src="../../script/vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      tongYi: true
+    }
+  })
+</script>
+</html>

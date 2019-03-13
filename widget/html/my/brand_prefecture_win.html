@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>品牌专区</title>
+  <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/km.css">
+  <style>
+    .win {
+      border-bottom: 1px solid #eee;
+    }
+    .aui-col-xs-3 {
+      text-align: center;
+      font-size: 14px;
+      color: #999;
+    }
+    .aui-row {
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px solid #eee;
+    }
+    .width-4em {
+      width: 4em;
+      height: 38px;
+      margin: 0 auto;
+    }
+    .active {
+      color: #feabc5;
+      border-bottom: 2px solid #feabc5;
+    }
+  </style>
+</head>
+<body>
+  <div id="aui-header">
+    <header class="win bacground-f7">
+      <div class="back-icon" onclick="api.closeWin()">
+        <img src="../../image/back.svg">
+      </div>
+      <div class="win-title">品牌专区</div>
+    </header>
+    <div class="aui-row background-fff" id="head">
+      <div class="aui-col-xs-3" @click="openFem(0)">
+        <div class="width-4em" :class="state === 0 ? 'active' : ''">常用海报</div>
+      </div>
+      <div class="aui-col-xs-3" @click="openFem(1)">
+        <div class="width-4em" :class="state === 1 ? 'active' : ''">营销活动</div>
+      </div>
+      <div class="aui-col-xs-3" @click="openFem(2)">
+        <div class="width-4em" :class="state === 2 ? 'active' : ''">品牌文化</div>
+      </div>
+      <div class="aui-col-xs-3" @click="openFem(3)">
+        <div class="width-4em" :class="state === 3 ? 'active' : ''">卡萌宝宝</div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="../../script/api.js"></script>
+<script src="../../script/vue.min.js"></script>
+<script>
+  apiready = function(){
+    api.parseTapmode();
+    var header = $api.byId('aui-header');
+    $api.fixStatusBar(header);
+    var headerPos = $api.offset(header);
+    var body_h = $api.offset($api.dom('body')).h;
+    api.openFrameGroup({
+      name: 'mygroup',
+      rect: {
+          x: 0,
+          y: headerPos.h,
+          w: 'auto',
+          h: 'auto'
+      },
+      frames: [{
+          name: '/html/my/brand_prefecture_hbfrm',
+          url: api.wgtRootDir + '/html/my/brand_prefecture_hbfrm.html',
+          bgColor: '#f5f5f5'
+        }, {
+          name: '/html/my/brand_prefecture_hdfrm',
+          url: api.wgtRootDir + '/html/my/brand_prefecture_hdfrm.html',
+          bgColor: '#f5f5f5'
+      }, {
+          name: '/html/my/brand_prefecture_whfrm',
+          url: api.wgtRootDir + '/html/my/brand_prefecture_whfrm.html',
+          bgColor: '#f5f5f5'
+      }, {
+          name: '/html/my/brand_prefecture_bbfrm',
+          url: api.wgtRootDir + '/html/my/brand_prefecture_bbfrm.html',
+          bgColor: '#f5f5f5'
+      }]
+    }, function(ret, err) {
+      var index = ret.index;
+      aa.openFem(index)
+    });
+  };
+  var aa = new Vue({
+    el: '#head',
+    data: {
+      state: 0,
+    },
+    methods: {
+      openFem (id) {
+        this.state = id
+        api.setFrameGroupIndex({
+            name: 'mygroup',
+            index: id
+        });
+      }
+    }
+  })
+</script>
+</html>

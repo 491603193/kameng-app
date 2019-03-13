@@ -1203,24 +1203,24 @@ input[type="text"].index-input-search {
   padding: 15px;
 }
 .shop-pay-remind .remind-absolute {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background-color: #fff;
   position: absolute;
   left: 50%;
-  margin-left: -50px;
-  top: -50px;
+  margin-left: -40px;
+  top: -40px;
 }
 .shop-pay-remind .remind-absolute img {
-  width: 70px;
-  height: 70px;
+  width: 55px;
+  height: 55px;
   display: block;
   position: absolute;
   top: 50%;
-  margin-top: -35px;
+  margin-top: -27.5px;
   left: 50%;
-  margin-left: -35px;
+  margin-left: -27.5px;
 }
 .shop-pay-remind .font-17 {
   margin-top: 36px;
@@ -1602,3 +1602,154 @@ input[type="text"].index-input-search {
   margin-top: 60px;
 }
 /* my-yc end*/
+/* brand_prefecture_frm */
+.bbfrm-head {
+  padding: 16px 15px;
+  display: flex;
+  align-tiems: center;
+}
+.bbfm-head-img {
+  width: 45px;
+  height: 45px;
+}
+.bbfm-head-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.bbfrm-text {
+  width: calc(100% - 55px);
+  margin-left: 10px;
+}
+.margin-top-5 {
+  margin-top: 5px;
+}
+.margin-left-5 {
+  margin-left: 5px;
+}
+.margin-left-15 {
+  margin-left: 15px;
+}
+.bbfrm-content-text {
+  padding: 0 15px;
+}
+.bbfrm-imgs {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  flex-wrap: wrap;
+}
+.bbfrm-img-el {
+  width: 32%;
+  height: 110px;
+  margin-top: 10px;
+}
+.bbr-foot {
+  width: 100%;
+  height: 44px;
+  line-height: 44px;
+  display: flex;
+  justify-content: space-between;
+}
+.bbr-foot img {
+  width: 13px;
+  height: 13px;
+}
+.bbr-foot .right {
+  display: flex;
+}
+.bbr-foot .right .item {
+  display: flex;
+  align-items: center;
+}
+.bbfrm-share {
+  width: 66.66%;
+  height: 270px;
+  position: absolute;
+  z-index: 500;
+  left: 50%;
+  margin-left: -33.33%;
+  top: 50%;
+  margin-top: -135px;
+  border-radius: 10px;
+  padding: 20px 0;
+  padding-left: 15%;
+}
+.wxshare-row1 {
+  display: flex;
+  align-items: center;
+}
+.wxshare-row1 img {
+  width: 15px;
+  height: 15px;
+}
+.wx-share-line {
+  width: 15px;
+  height: 1px;
+  background-color: #999;
+}
+.wxshare-btn {
+  width: 101px;
+  height: 30px;
+  border-radius: 15px;
+  line-height: 30px;
+  margin-top: 35px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wxshare-btn img {
+  width: 15px;
+  height: 15px;
+}
+/* brand_prefecture_frm  end*/
+/* agent_upgrade_frm1 */
+.agent1-list {
+  padding: 0 15px 26px 15px;
+}
+.agent1-list-item {
+  display: flex;
+  align-items: center;
+  padding-top: 26px;
+}
+.agent1-list-item .aui-radio {
+  width: 17px;
+  height: 17px;
+}
+.agent1-list-item .aui-radio:checked {
+  background-color: #feabc5;
+  border: solid 1px #feabc5;
+}
+.agent1-btn {
+  width: 90%;
+  height: 40px;
+  line-height: 40px;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  text-align: center;
+  border-radius: 20px;
+  margin-top: 60px;
+}
+.agent2-content {
+  padding: 15px;
+}
+.agent2-content .color-red {
+  border: 1px solid #eee;
+  margin-top: 5px;
+  padding: 5px 10px;
+}
+/* agent_upgrade_frm1 end*/
+/* agent_upgrade_frm3*/
+.agent3-content {
+  padding: 18px 15px 10px 15px;
+  border-bottom: 1px solid #eee;
+}
+.agent3-content .font-16 {
+  margin-top: 16px;
+}
+.shop-pay-remind .agent3-btn {
+  width: 137.5px;
+}
+/* agent_upgrade_frm3 end*/

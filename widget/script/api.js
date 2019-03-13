@@ -31,7 +31,14 @@
       dataType: dataType
     }
   }
-
+  u.toast = function (msg) {
+    if (msg)
+    api.toast({
+      msg: msg,
+      duration: 2000,
+      location: 'bottom'
+    });
+  }
   u.trim = function (str) {
     if (String.prototype.trim) {
       return str == null ? "" : String.prototype.trim.call(str)
@@ -477,6 +484,40 @@
     var ls = uzStorage()
     if (ls) {
       ls.clear()
+    }
+  }
+
+  u.setPrefs = function (key, value) {
+    if (arguments.length === 2) {
+      let v = value
+      if (typeof v === 'object') {
+        v = JSON.stringify(v)
+        v = 'obj-' + v
+      } else {
+        v = 'str-' + v
+      }
+      api.setPrefs({
+        key: key,
+        value: v
+      })
+    }
+  }
+
+  u.getPrefs = function (key) {
+    if (key) {
+      let v = api.getPrefs({
+        sync: true,
+        key: key
+      })
+      if (!v) {
+        return
+      }
+      if (v.indexOf('obj-') === 0) {
+        v = v.slice(4)
+        return JSON.parse(v)
+      } else if (v.indexOf('str-') === 0) {
+        return v.slice(4)
+      }
     }
   }
 

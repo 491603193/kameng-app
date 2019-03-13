@@ -1,0 +1,396 @@
+
+.color-pink {
+    color: #feabc5 !important;
+}
+.color-yellow {
+    color: #feeb19;
+}
+.color-f15a24 {
+    color: #f15a24;
+}
+.color-a0c161 {
+    color: #a0c161;
+}
+.color-666 {
+    color: #666;
+}
+.color-956780 {
+    color: #956780;
+}
+.color-blue {
+    color: #63c1db !important;
+}
+.background-f6 {
+    background-color: #f6f6f6;
+}
+.background-e3 {
+    background-color: #e3e3e3;
+}
+.background-blue {
+    background-color: #63c1db;
+}
+.color-999 {
+    color: #999;
+}
+.color-fff {
+    color: #fff;
+}
+.color-ccc {
+    color: #ccc;
+}
+.color-red {
+    color: #dc0024 !important;
+}
+.color-f7931e {
+    color: #f7931e;
+}
+.color-333 {
+    color: #333;
+}
+.color-febb1f {
+    color: #febb1f;
+}
+.background-color-febb1f {
+    background-color: #febb1f;
+}
+.bacground-f7 {
+    background-color: #f7f7f7;
+}
+.background-color-feabc5 {
+    background-color: #feabc5;
+}
+.background-fff {
+    background-color: #fff;
+}
+.background-fda9c5 {
+    background-color: #fda9c5;
+}
+.background-fffbf3 {
+    background-color: #fffbf3;
+}
+.bacground-ffe2cf {
+    background-color: #ffe2cf;
+}
+.background-febb1f {
+    background-color: #febb1f;
+}
+.background-fffaf3 {
+    background-color: #fffaf3;
+}
+.login-item-input input[type="number"]::-webkit-input-placeholder {
+    color: #ccc;
+}
+.font-15 {
+    font-size: 15px;
+}
+.font-13 {
+    font-size: 13px;
+}
+.font-17 {
+    font-size: 17px;
+}
+.font-11 {
+    font-size: 11px;
+}
+.font-12 {
+    font-size: 12px;
+}
+.font-14 {
+    font-size: 14px;
+}
+.font-16 {
+    font-size: 16px;
+}
+.margin-left-10 {
+    margin-left: 10px;
+}
+.margin-top-20 {
+    margin-top: 20px;
+}
+.border-bottom {
+    border-bottom: 1px solid #eee;
+}
+
+.foot {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    border-top: 1px solid #eee;
+}
+.shop-foot-left {
+    width: 70%;
+    height: 100%;
+    font-size: 12px;
+    color: #333;
+    background-color: #fff;
+    padding-left: 15px;
+}
+.shop-foot-left span {
+    font-size: 16px;
+    color: #dc0024;
+}
+.shop-foot-right {
+    width: 30%;
+    height: 100%;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+}
+.shop-foot-left-delete input {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+}
+.shop-foot-left-delete {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding-left: 15px;
+}
+.shop-foot-left-delete div {
+    font-size: 14px;
+    color: #333;
+    margin-left: 10px;
+}
+
+.film {
+    width: 100%;
+    height: calc(100vh - 50px);
+    background-color: rgba(0,0,0,.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 200;
+    display: block;
+}
+
+.shop-pay-head {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 15px;
+    font-size: 11px;
+}
+.shop-pay-site {
+    padding: 18px 15px;
+}
+.shop-pay-site-line {
+    margin-left: 22px;
+    font-size: 13px;
+    color: #333;
+}
+.shop-pay-site-line .right {
+    float: right;
+    margin-right: 8px;
+}
+.shop-pay-site-line2 {
+    position: relative;
+}
+.shop-pay-site-msg {
+    margin: 10px 17px 0 22px;
+    font-size: 13px;
+}
+.shop-pay-site-line2 .site-icon {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 5px;
+    left: 0;
+}
+.shop-pay-site-line2 .go-icon {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 0;
+    top: 5px;
+}
+.shop-pay-site-ban {
+    width: 100%;
+    height: 6px;
+    background-image: url('../image/bianline.jpg');
+}
+.shop-pay-state {
+    padding: 0 15px 17px 15px;
+    background-color: #fff;
+    margin-top: 10px;
+    overflow: hidden;
+}
+.shop-pay-state-head {
+    display: flex;
+    position: relative;
+    margin-top: 17px;
+}
+.shop-pay-state-head .product {
+    width: 82px;
+    height: 82px;
+    border: 1px solid #eee;
+}
+.shop-pay-status {
+    width: calc(100% - 115px);
+    margin-left: 11px;
+}
+.shop-pay-status .title {
+    font-szie: 16px;
+    color: #333;
+}
+.shop-pay-status .status {
+    color: #999;
+    font-size: 12px;
+    margin-top: 5px;
+}
+.shop-pay-status .num {
+    margin-top: 13px;
+    font-size: 16px;
+}
+.shop-pay-state-head .nums {
+    position: absolute;
+    font-size: 12px;
+    color: #333;
+    top: 0;
+    right: 0;
+}
+.shop-pay-state .line {
+    margin-top: 15px;
+    padding-bottom: 10px;
+    font-size: 15px;
+    border-bottom: 1px solid #eee;
+}
+.shop-pay-state .line span {
+    float: right;
+}
+.shop-pay-state .line1 {
+    margin-top: 20px;
+    text-align: right;
+}
+.shop-pay-state .line2 {
+    border-bottom: 1px solid #eee;
+}
+.shop-pay-state .message {
+    display: flex;
+    align-items: center;
+}
+.shop-pay-state .text {
+    width: 70%;
+    margin-lef: 10px;
+}
+.shop-pay-state .text::-webkit-input-placeholder {
+    color: #ddd;
+}
+.shop-pay-lan label {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    position: relative;
+    transform: translateY(2px);
+}
+.shop-pay-lan label::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    margin-top: -4px;
+    left: 50%;
+    margin-left: -4px;
+}
+.shop-pay-lan input[type='radio'] {
+    display: none;
+}
+.shop-pay-lan input[type='radio']:checked + label::before {
+    background: #a0c161;
+}
+.shop-pay-lan {
+    margin-top: 10px;
+    padding: 0 15px;
+}
+.shop-pay-lan .line {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    padding: 15px 0;
+}
+.shop-pay-lan .line1 {
+    font-szie: #333;
+    font-szie: 16px;
+    padding: 15px 0;
+}
+.shop-pay-foot-left {
+    width: 70%;
+    padding: 0 15px;
+}
+.shop-pay-foot-left .font-15 {
+    height: 22px;
+    line-height: 34px;
+}
+.shop-pay-foot-left .font-11 {
+    height: 20px;
+    line-height: 28px;
+}
+.shop-pay-foot-right {
+    width: 30%;
+    text-align: center;
+}
+.shop-pay-remind .film {
+    display: block;
+    height: 100vh;
+}
+.shop-pay-remind .remind {
+    width: 68%;
+    height: 210px;
+    position: absolute;
+    top: 50%;
+    margin-top: -100px;
+    left: 50%;
+    margin-left: -34%;
+    z-index: 300;
+    border-radius: 10px;
+    background-color: #fff;
+}
+.shop-pay-remind .remind-relative {
+    position: relative;
+    padding: 15px;
+}
+.shop-pay-remind .remind-absolute {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    margin-left: -40px;
+    top: -40px;
+}
+.shop-pay-remind .remind-absolute img {
+    width: 55px;
+    height: 55px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -27.5px;
+    left: 50%;
+    margin-left: -27.5px;
+}
+.shop-pay-remind .font-17 {
+    margin-top: 36px;
+}
+.shop-pay-remind .background-color-feabc5 {
+    width: 47%;
+    height: 34px;
+    line-height: 34px;
+    margin: 0 auto;
+    margin-top: 28px;
+    border-radius: 20px;
+}
+.zhezhao-di {
+    height: 100vh;
+    overflow: hidden;
+}

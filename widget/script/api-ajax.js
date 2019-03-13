@@ -120,6 +120,7 @@
       dataType: 'json',
       headers: {
         'userId': $api.getStorage('userId'),
+        'userName': escape($api.getStorage('userName')),
         'Content-Type': 'application/json;charset=utf-8'
       },
       data: {
@@ -134,6 +135,11 @@
       url: u.kameng_api + url,
       dataType: 'json',
       method: 'get',
+      headers: {
+        'userId': $api.getStorage('userId'),
+        'userName': escape($api.getStorage('userName')),
+        'Content-Type': 'application/json;charset=utf-8'
+      },
       data: {
         values: data
       }

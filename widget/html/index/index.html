@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>首页</title>
   <link rel="stylesheet" href="../../css/aui.css">
-  <link rel="stylesheet" href="../../css/aui-slide.css">
+  <link rel="stylesheet" href="../../css/aui/aui-slide.css">
   <link rel="stylesheet" href="../../css/index/index.css">
 </head>
 <body class="aui-bg-white" >
@@ -79,7 +79,7 @@
 </script>
 <script type="text/html" id="index-product-list-item">
   {{each itemArray as entity i}}
-    <div class="index-product-list-item" onclick="openDetail()">
+    <div class="index-product-list-item" onclick="openDetail('{{entity.productId}}')">
       <div class="index-product-img">
         <img src="{{imgPath}}{{entity.productListPic}}">
         {{if entity.isTimingUp}}
@@ -121,8 +121,8 @@
   function openPage (name, linkType, linkUrl, linkParam) {
     if (linkType === '1'){
       api.openWin({
-        name: 'web_age_win',
-        url: './web_age_win.html',
+        name: 'web_win',
+        url: './web_win.html',
         pageParam: {
           linkUrl: linkUrl,
           name: name
@@ -164,8 +164,11 @@
     }, true);
   }
 
-  function openDetail () {
-    $api.openWin('/html/classify/product_detail')
+  function openDetail (productId) {
+    var url = $apiAjax.kameng_web + '/goods/' + productId + '/' + $apiLocal.getUserId();
+    $api.openWin('/html/goods/product/product_detail_win', {
+      url: url
+    })
   }
   function openlogistics () {
   $api.openWin('/html/my/logistics_detail_win')

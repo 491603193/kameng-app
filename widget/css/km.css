@@ -1039,13 +1039,13 @@ input[type="text"].index-input-search {
 }
 .shop-pay-site-msg {
   margin: 10px 17px 0 22px;
-  font-size: 12px;
+  font-size: 13px;
 }
 .shop-pay-site-line2 .site-icon {
   width: 16px;
   height: 16px;
   position: absolute;
-  top: 0;
+  top: 5px;
   left: 0;
 }
 .shop-pay-site-line2 .go-icon {
@@ -1061,13 +1061,15 @@ input[type="text"].index-input-search {
   background-image: url('../image/bianline.jpg');
 }
 .shop-pay-state {
-  padding: 17px 15px;
+  padding: 0 15px 17px 15px;
   background-color: #fff;
   margin-top: 10px;
+  overflow: hidden;
 }
 .shop-pay-state-head {
   display: flex;
   position: relative;
+  margin-top: 17px;
 }
 .shop-pay-state-head .product {
   width: 82px;
@@ -1099,8 +1101,10 @@ input[type="text"].index-input-search {
   right: 0;
 }
 .shop-pay-state .line {
-  padding: 20px 0;
-  font-size: 16px;
+  margin-top: 15px;
+  padding-bottom: 10px;
+  font-size: 15px;
+  border-bottom: 1px solid #eee;
 }
 .shop-pay-state .line span {
   float: right;
@@ -1110,7 +1114,6 @@ input[type="text"].index-input-search {
   text-align: right;
 }
 .shop-pay-state .line2 {
-  border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
 }
 .shop-pay-state .message {
@@ -1753,6 +1756,7 @@ input[type="text"].index-input-search {
   width: 137.5px;
 }
 /* agent_upgrade_frm3 end*/
+<<<<<<< HEAD
 /* my_bzj */
 .bzj-head {
   width: 100%;
@@ -1784,3 +1788,5 @@ input[type="text"].index-input-search {
   border-bottom: 1px solid #eee;
 }
 /* my_bzj end */
+=======
+>>>>>>> 9f52fe6ff3ecdb0ab55263dc59d673d7c544bf9c

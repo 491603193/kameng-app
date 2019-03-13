@@ -73,8 +73,9 @@
     },function (ret) {
       if(ret){
         $api.setStorage($apiLocal.USER_ID, ret.userId);
+        $api.setStorage($apiLocal.USER_NAME,ret.name)
         $api.setStorage($apiLocal.USER, ret);
-        $api.openWin('/html/index/index')
+        $api.openWin('/html/index')
       }
     }, true);
   }

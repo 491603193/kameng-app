@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name = "format-detection" content = "telephone=no">
   <title>确认订单</title>
-  <link rel="stylesheet" href="../../css/aui.css">
-  <link rel="stylesheet" href="../../css/km.css">
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/cart/confirm.css">
 </head>
 <body>
   <div id="app" style="padding-bottom: 60px;" :class="alert ? 'zhezhao-di': ''">
@@ -18,9 +18,9 @@
         <span class="right">{{mobel}}</span>
       </div>
       <div class="shop-pay-site-line2">
-        <img src="../../image/site.svg" class="site-icon">
+        <img src="../../../image/site.svg" class="site-icon">
         <div class="shop-pay-site-msg">收货地址：{{site}}</div>
-        <img src="../../image/go.svg" class="go-icon">
+        <img src="../../../image/go.svg" class="go-icon">
       </div>
     </div>
     <div class="shop-pay-site-ban"></div>
@@ -32,13 +32,13 @@
         <div class="shop-pay-state-head">
           <img :src="item.img" class="product">
           <div class="shop-pay-status">
-            <p class="title">{{item.name}}</p>
-            <p class="status">规格：{{item.status}}</p>
+            <p class="title text-overflow">{{item.name}}</p>
+            <p class="status text-overflow">规格：{{item.status}}</p>
             <p class="num color-red">{{item.kucun}}个库存</p>
           </div>
           <div class="nums">X{{item.num}}</div>
         </div>
-        <div class="line line1">运费 ￥{{item.freight}}</div>
+        <div class="line">配送方式 <span>运费 ￥{{item.freight}}</span></div>
       </div>
       <div class="line line2">商品总价 <span>￥10.00+10个库存</span></div>
       <div class="line">合计：<span class="color-red">￥10.00+10库存</span></div>
@@ -77,11 +77,11 @@
       <div class="remind">
         <div class="remind-relative">
           <div class="remind-absolute">
-            <img src="../../image/alert.png">
+            <img src="../../../image/alert.png">
           </div>
           <p class="aui-text-center font-17 color-333">提醒</p>
           <p class="aui-text-center font-14 color-333">您的个人库存不足，请先购入库存后，继续购买</p>
-          <div class="background-color-feabc5 color-fff font-15 aui-text-center">确定</div>
+          <div class="background-color-feabc5 color-fff font-15 aui-text-center" @click="alert = true">确定</div>
         </div>
       </div>
     </div>
@@ -95,8 +95,8 @@
     </footer>
   </div>
 </body>
-<script src="../../script/api.js"></script>
-<script src="../../script/vue.min.js"></script>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/vue.min.js"></script>
 <script>
   new Vue({
     el: '#app',
@@ -106,7 +106,7 @@
       site: '山东省烟台市高新区马山街道蓝海路创业1号国家级孵化器D座',
       message: '',
       payPlan: 1,
-      alert: false,
+      alert: true,
       products: [{
         name: '卡萌·萌动装纸尿裤L码',
         num: 5,

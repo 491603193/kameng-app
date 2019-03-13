@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>购物车</title>
+  <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/cart/index.css">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <div class="shop-fixed">
+      <header class="aui-bar aui-bar-nav aui-bar-light" id="aui-header">
+        <a class="aui-pull-left aui-btn" onclick="api.closeWin()">
+          <span class="aui-iconfont"></span>
+        </a>
+        <div class="aui-title" id="title">购物车</div>
+        <a class="aui-pull-right" @click="edit()">
+      <span>
+        <template v-if="isEdit">完成</template>
+        <template v-else>编辑</template>
+      </span>
+        </a>
+      </header>
+      <div class="shop-tab">
+        <div class="aui-tab background-fff" id="tab">
+          <div class="aui-tab-item aui-active">云仓产品</div>
+          <div class="aui-tab-item">非云仓产品</div>
+        </div>
+      </div>
+    </div>
+    <!-- 云仓 -->
+    <div class="shop-zhanwei"></div>
+    <div id="shop-zhanwei" class="cart-list">
+      <div class="yun" v-show="isYun">
+        <div class="shop-list">
+          <template v-for="(entity, index) in entityA" :key="entity.productId+entity.productStockId">
+            <label v-if="entity.validStatus === '0'">
+              <div class="shop-list-item aui-bg-white">
+                <div class="shop-list-left" v-bind:class="{ 'shop-list-left-edit': isEdit }">
+                  <input class="aui-radio" type="checkbox" v-model="entity.checked">
+                  <img :src="imgPath + entity.stockPic">
+                </div>
+                <div class="shop-list-right relative">
+                  <p class="shop-list-title">{{entity.productName}}</p>
+                  <p class="shop-list-standard">规格： {{entity.dbSortsName}}</p>
+                  <div class="shop-btn1 margin-right-f10">
+                    <div class="shop-kc absolute">{{entity.stockPrice}} 云仓</div>
+                    <div class="shop-box">
+                      <div class="shop-subtract" @click.prevent="subNum(index)">一</div>
+                      <div class="shop-num">{{entity.productNum}}</div>
+                      <div class="shop-add" @click.prevent="addNum(index)">＋</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </label>
+            <label v-else>
+              <div class="shop-list-item aui-bg-white">
+                <div class="shop-list-left" v-bind:class="{ 'shop-list-left-edit': isEdit }">
+                  <input class="aui-radio" type="checkbox" readonly v-show="isEdit">
+                  <img :src="imgPath + entity.stockPic">
+                </div>
+                <div class="shop-list-right relative">
+                  <p class="shop-list-title">{{entity.productName}}</p>
+                  <p class="shop-list-standard">规格： {{entity.dbSortsName}}</p>
+                  <div class="shop-btn1 margin-top-12">
+                    <div class="shop-kc absolute">{{entity.stockPrice}} 云仓</div>
+                    <div class="font-12 color-red">{{entity.validStatusMsg}}</div>
+                    <div class="shop-delete" @click="deleteSorts(index)">
+                      <img src="../../image/delete.svg">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </template>
+        </div>
+      </div>
+      <!-- 非云仓 -->
+      <div class="yun" v-show="!isYun">
+        <div class="shop-list">
+          <template v-for="(entity, index) in entityB" :key="entity.productId+entity.productStockId">
+            <label v-if="entity.validStatus === '0'">
+              <div class="shop-list-item aui-bg-white">
+                <div class="shop-list-left" v-bind:class="{ 'shop-list-left-edit': isEdit }">
+                  <input class="aui-radio" type="checkbox" v-model="entity.checked">
+                  <img :src="imgPath + entity.stockPic">
+                </div>
+                <div class="shop-list-right relative">
+                  <p class="shop-list-title">{{entity.productName}}</p>
+                  <p class="shop-list-standard">规格： {{entity.dbSortsName}}</p>
+                  <div class="shop-btn1 margin-right-f10">
+                    <div class="shop-kc absolute">￥ {{entity.productPrice}}</div>
+                    <div class="shop-box">
+                      <div class="shop-subtract" @click.prevent="subNum(index)">一</div>
+                      <div class="shop-num">{{entity.productNum}}</div>
+                      <div class="shop-add" @click.prevent="addNum(index)">＋</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </label>
+            <label v-else>
+              <div class="shop-list-item aui-bg-white">
+                <div class="shop-list-left" v-bind:class="{ 'shop-list-left-edit': isEdit }">
+                  <input class="aui-radio" type="checkbox" readonly v-show="isEdit">
+                  <img :src="imgPath + entity.stockPic">
+                </div>
+                <div class="shop-list-right relative">
+                  <p class="shop-list-title">{{entity.productName}}</p>
+                  <p class="shop-list-standard">规格： {{entity.dbSortsName}}</p>
+                  <div class="shop-btn1 margin-top-12">
+                    <div class="shop-kc absolute">￥ {{entity.stockPrice}}</div>
+                    <div class="font-12 color-red">{{entity.validStatusMsg}}</div>
+                    <div class="shop-delete" @click="deleteSorts(index)">
+                      <img src="../../image/delete.svg">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </template>
+        </div>
+      </div>
+    </div>
+    <div class="no-data" v-show="noData">
+      <i class="no-cart aui-icon-cart"></i>
+      <div class="text">快去购买商品吧~</div>
+    </div>
+    <footer id="shopClose" class="foot" v-show="!isEdit">
+      <div class="shop-foot-left">
+        总计：<span>{{totalMoney}}</span>
+      </div>
+      <div class="shop-foot-right background-color-feabc5" @click="submitCart()">结算(<span>{{selectNum}}</span>)</div>
+    </footer>
+    <footer id="shopDelete" class="foot" v-show="isEdit">
+      <div class="shop-foot-left-delete shop-foot-left-delete-edit" @click.prevent="selDeleteCheck()">
+          <input class="aui-radio" type="checkbox" v-model="isCheckedAll" readonly>
+          <div v-if="isCheckedAll">全不选</div>
+          <div v-else>全选</div>
+      </div>
+      <div class="shop-foot-right background-color-febb1f" @click="deleteSel()">删除(<span>{{selectNum}}</span>)</div>
+    </footer>
+    </div>
+</body>
+<script src="../../script/api.js"></script>
+<script src="../../script/api-ajax.js"></script>
+<script src="../../script/api-loading.js"></script>
+<script src="../../script/vue.min.js"></script>
+<script src="../../script/aui/aui-tab.js"></script>
+<script src="../../script/aui/aui-dialog.js" ></script>
+<script src="index.js"></script>
+<script></script>
+</html>

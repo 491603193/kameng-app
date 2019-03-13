@@ -35,52 +35,6 @@
         </div>
     </div>
     <!-- 遮罩 -->
-    <div id="film" class="film" :class="{asf: zhezhao}">
-      <div class="film-zhanwei" @click="recover()"></div>
-      <div class="film-content">
-        <div class="film-content-title">
-          <img src="holder.js/102x102" class="product">
-          <div>
-            <p class="price">￥150.00</p>
-            <p class="kc">库存100</p>
-            <p class="select">已选择{{size}}</p>
-          </div>
-          <img src="../../../image/close.svg" class="close" @click="recover">
-        </div>
-        <div class="film-standard">
-          <p>规格</p>
-          <div class="aui-tab" id="tab1">
-            <div class="aui-tab-item" :class="size === 'XL' ? 'aui-active' : ''" @click="setSize('XL')">XL</div>
-            <div class="aui-tab-item" :class="size === 'L' ? 'aui-active' : ''" @click="setSize('L')">L</div>
-            <div class="aui-tab-item" :class="size === 'M' ? 'aui-active' : ''" @click="setSize('M')">M</div>
-            <div class="aui-tab-item":class="size === 'S' ? 'aui-active' : ''" @click="setSize('S')">S</div>
-          </div>
-        </div>
-        <div class="film-standard">
-          <p>颜色</p>
-          <div class="aui-tab" id="tab2">
-            <div class="aui-tab-item aui-tab-item1" :class="color === 1 ? 'aui-active' : ''" @click="setColor(1)">白色</div>
-          </div>
-        </div>
-        <div class="film-num">
-          <div class="text">数量</div>
-          <div class="box">
-            <div class="j background-f6 color-999" @click="numJ()">一</div>
-            <div class="num background-e3">{{num}}</div>
-            <div class="add background-e3"  @click="numAdd()">＋</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- 遮罩 end-->
-    <footer class="foot product-detail-foot">
-      <div class="aui-col-xs-2 background-fff">
-        <div class="aui-badge">3</div>
-        <img src="../../../image/shopping/shopcar.svg" class="aui-iconfont">
-      </div>
-      <div class="aui-col-xs-5 background-febb1f" @click="getBack()">加入购物车</div>
-      <div class="aui-col-xs-5 background-fda9c5" @click="goPay()">立即购买</div>
-    </footer>
   </div>
 </body>
 <script src="../../../script/holder.js"></script>

@@ -118,6 +118,7 @@ input[type="text"].index-input-search {
 }
 .index-product-list-item {
     display: flex;
+
 }
 .index-product-list-item:not(:first-of-type) {
     margin-top: 18px;

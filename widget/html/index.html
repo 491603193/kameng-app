@@ -12,29 +12,37 @@
 </body>
 <script src="../script/api.js"></script>
 <script>
+  // 购物车是否加载完成
+  var cartFinish = false;
   apiready = function () {
     initFrameGroup();
     openFrameGroup();
     exitApp();
-    // initBadgeNum();
+    initBadgeNum();
     // flushAsyncUserMessage();
     listener();
   };
-
-  //添加推送监听
   function listener() {
+    // 添加推送监听
     var push = api.require('push');
     push.setListener(function( ret, err ){
     });
+    // 购物车监听
+    api.setFrameClient({
+      frameName: '/html/cart/index'
+    }, function(ret, err) {
+      if(ret.state === 2){
+        cartFinish = true
+      }
+    });
   }
-
   var selectIndex = 1;
   var isFlushMessageNum = false;
   var messageInitFinish = false;
   var isInitCenter = false;
   var frames = [
     {
-      name: '/html/index_frm.html',
+      name: '/html/index_frm',
       url: './index/index.html',
       pageParam: {
         showMode: 1
@@ -42,22 +50,21 @@
       bounces: false
     },
     {
-      name: '/html/goods/index.html',
+      name: '/html/goods/index',
       url: './goods/index.html',
       useWKWebView: false
     },
     {
-      name: '/html/shopping/index.html',
-      url: './shopping/index.html',
+      name: '/html/cart/index',
+      url: './cart/index.html',
       useWKWebView: false
     },
     {
-      name: '/html/user/index.html',
+      name: '/html/user/index',
       url: './user/index.html',
       useWKWebView: false
     }
   ];
-
   function openFrameGroup() {
     api.openFrameGroup({
       name: 'group',
@@ -69,7 +76,7 @@
         h: api.winHeight - 50
       },
       index: 0,
-      preload: 0,
+      preload: 3,
       bgColor: '#ebebeb',
       frames: frames
     }, function (ret, err) {
@@ -80,8 +87,6 @@
       }
     });
   }
-
-
   function initFrameGroup() {
     var NVTabBar = api.require('NVTabBar');
     var height = 50;
@@ -200,7 +205,6 @@
     }, function (ret, err) {
       if (ret.eventType==='click') {
         selectIndex = ret.index;
-
         api.setFrameGroupIndex({
           name: 'group',
           index: selectIndex,
@@ -213,7 +217,6 @@
       }
     });
   }
-
   //添加返回按钮的监听
   function exitApp() {
     api.addEventListener({
@@ -240,10 +243,17 @@
   }
   //初始化下标
   function initBadgeNum() {
-    var num = $api.getStorage('messageNum');
+    var num = getCartNum()
     if (!!num && num > 0) {
       setBadge(num);
+    } else {
+      clearBadge()
     }
+  }
+  function getCartNum () {
+    var cart1 = $api.getPrefs('cart1')
+    var cart2 = $api.getPrefs('cart2')
+    return cart1.length + cart2.length
   }
   //设置徽章值
   function setBadge(index) {
@@ -255,13 +265,12 @@
   }
   //清空徽章值
   function clearBadge() {
-    // $api.setStorage('messageNum',0);
-    // var NVTabBar = api.require('NVTabBar');
-    // NVTabBar.setBadge({
-    //   index: 2
-    // });
-    // isFlushMessageNum = false;
-    // messageInitFinish = true;
+    var NVTabBar = api.require('NVTabBar');
+    NVTabBar.setBadge({
+      index: 2
+    });
+    isFlushMessageNum = false;
+    messageInitFinish = true;
   }
   //刷新徽章值
   function isFlushMessage() {
@@ -300,6 +309,39 @@
     // });
   }
 
+  function openCart(){
+    initBadgeNum()
+    var NVTabBar = api.require('NVTabBar');
+    NVTabBar.setSelect({
+      index: 2,
+      selected: true,
+    });
+    if (cartFinish) {
+      api.execScript({
+        name: '/html/index.html',
+        frameName: '/html/cart/index',
+        script: 'vm.initCart()'
+      })
+    }
+    setTimeout(function () {
+      api.setFrameGroupIndex({
+        name: 'group',
+        index: 2,
+        scroll: true
+      });
+    },300)
+  }
+
+  function flushCart() {
+    initBadgeNum()
+    if (cartFinish) {
+      api.execScript({
+        name: '/html/index.html',
+        frameName: '/html/cart/index',
+        script: 'vm.initCart()'
+      })
+    }
+  }
 
 </script>
 </html>

@@ -441,7 +441,7 @@ img {
     height: 100%;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.5);
     opacity: 0;
     z-index: 8;
     visibility: hidden;
@@ -2505,7 +2505,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 @font-face {
 	font-family: "aui_iconfont";
-	src: url('aui-iconfont.ttf') format('truetype');
+	src: url('aui/aui-iconfont.ttf') format('truetype');
 }
 .aui-iconfont {
 	position: relative;

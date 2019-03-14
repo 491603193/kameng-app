@@ -489,13 +489,14 @@
 
   u.setPrefs = function (key, value) {
     if (arguments.length === 2) {
-      let v = value
+      var v = value
       if (typeof v === 'object') {
         v = JSON.stringify(v)
         v = 'obj-' + v
       } else {
         v = 'str-' + v
       }
+      alert('set'+key+"========"+value);
       api.setPrefs({
         key: key,
         value: v
@@ -505,10 +506,11 @@
 
   u.getPrefs = function (key) {
     if (key) {
-      let v = api.getPrefs({
+      var v = api.getPrefs({
         sync: true,
         key: key
       })
+      alert('get'+key+"========"+v);
       if (!v) {
         return
       }
@@ -577,7 +579,7 @@
   }
   u.openWin = function (name, pageParam) {
     var delay = 0
-    if (api.systemType != 'ios') {
+    if (api.systemType !== 'ios') {
       delay = 300
     }
     api.openWin({

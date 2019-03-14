@@ -52,17 +52,29 @@
     </div>
     <div class="shop-pay-lan background-fff">
       <div class="line1">支付方式</div>
-      <div class="line border-bottom">
-        <div>
+     <label>
+        <div class="line border-bottom">
+        <div style="display: flex;">
           <input type="radio" id="zx" name="pay" checked>
-          <label for="zx"></label>
+          <div class="zx"></div>
+          <div class="margin-left-10 color-666">在线支付</div>
         </div>
-        <div class="margin-left-10 color-666">在线支付</div>
       </div>
-      <div class="line">
+    </label>
+    <label>
+        <div class="line border-bottom">
+        <div style="display: flex;">
+          <input type="radio" id="yc" name="pay" checked>
+          <div class="yc"></div>
+          <div class="margin-left-10 color-666">云仓支付</div>
+        </div>
+      </div>
+    </label>
+    <label>
+        <div class="line">
         <div>
           <input type="radio" id="ye" name="pay">
-          <label for="ye"></label>
+          <div class="ye"></div>
         </div>
         <div class="margin-left-10 color-666">
           余额支付
@@ -71,6 +83,7 @@
           </span>
         </div>
       </div>
+    </label>
     </div>
     <div class="shop-pay-remind" v-show="showRemind">
       <div class="film"></div>

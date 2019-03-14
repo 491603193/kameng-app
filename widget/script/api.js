@@ -497,7 +497,6 @@
       } else {
         v = 'str-' + v
       }
-      alert('set'+key+"========"+value);
       api.setPrefs({
         key: key,
         value: v
@@ -511,7 +510,6 @@
         sync: true,
         key: key
       })
-      alert('get'+key+"========"+v);
       if (!v) {
         return
       }

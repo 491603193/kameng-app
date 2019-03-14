@@ -48,7 +48,7 @@
   apiready = function () {
     api.parseTapmode();
     getCodeImage();
-    var oldDate = $api.getStorage($apiLocal.SMSCODETIME);
+    var oldDate = $apiLocal.getSmsCodeTime();
     if(oldDate){
       var newDate = new Date().getTime();
       var min = 59-parseInt((newDate-oldDate)/1000)
@@ -72,9 +72,9 @@
       smsCode: smsCode
     },function (ret) {
       if(ret){
-        $api.setStorage($apiLocal.USER_ID, ret.userId);
-        $api.setStorage($apiLocal.USER_NAME,ret.name)
-        $api.setStorage($apiLocal.USER, ret);
+        $apiLocal.setUserId(ret.userId)
+        $apiLocal.setUserName(ret.name)
+        $apiLocal.setUser(ret)
         $api.openWin('/html/index')
       }
     }, true);
@@ -103,7 +103,7 @@
         if(!ret){
           getCodeImage()
         } else {
-          $api.setStorage($apiLocal.SMSCODETIME, new Date().getTime());
+          $apiLocal.setSmsCodeTime(new Date().getTime());
           msgPostSuccess(59)
         }
     }, true);
@@ -118,7 +118,6 @@
     $api.html(code, pendingText)
 
     var timer = setInterval(function () {
-      // $api.setStorage($apiLocal.SMSCODETIME, new Date().getTime())
       count--
       pendingText = count + `秒后重试`
       $api.html(code, pendingText)

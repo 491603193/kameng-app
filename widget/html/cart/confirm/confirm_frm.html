@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,41 +10,44 @@
   <link rel="stylesheet" href="../../../css/cart/confirm.css">
 </head>
 <body>
-  <div id="app" style="padding-bottom: 60px;" :class="alert ? 'zhezhao-di': ''">
+  <div id="app" style="padding-bottom: 60px;" v-bind:class="{'remind-di': showRemind}">
     <header class="shop-pay-head bacground-ffe2cf color-f7931e">请仔细核对订单信息！</header>
-    <div class="shop-pay-site background-fff">
+    <div class="shop-pay-site background-fff" v-show="hasAddress">
       <div class="shop-pay-site-line">
-        <span>收货人：{{sonsignee}}</span>
-        <span class="right">{{mobel}}</span>
+        <span>收货人：{{userAddress.receiverName}}</span>
+        <span class="right">{{userAddress.receiverPhone}}</span>
       </div>
       <div class="shop-pay-site-line2">
         <img src="../../../image/site.svg" class="site-icon">
-        <div class="shop-pay-site-msg">收货地址：{{site}}</div>
+        <div class="shop-pay-site-msg">收货地址：{{userAddress.receiverAddress}}</div>
+        <img src="../../../image/go.svg" class="go-icon">
+      </div>
+    </div>
+    <div class="shop-pay-site background-fff" v-show="!hasAddress">
+      <div class="shop-pay-site-line2">
+        <div class="shop-pay-site-msg">请先选择您的收货地址~</div>
         <img src="../../../image/go.svg" class="go-icon">
       </div>
     </div>
     <div class="shop-pay-site-ban"></div>
     <div class="shop-pay-state">
-      <div
-        v-for="(item, index) in products"
-        :key="index"
-      >
+      <div v-for="(item, index) in entity" :key="index" class="shop-pay-state-detail">
         <div class="shop-pay-state-head">
           <img :src="item.img" class="product">
           <div class="shop-pay-status">
-            <p class="title text-overflow">{{item.name}}</p>
-            <p class="status text-overflow">规格：{{item.status}}</p>
-            <p class="num color-red">{{item.kucun}}个库存</p>
+            <p class="title text-overflow">{{item.productName}}</p>
+            <p class="status text-overflow">规格：{{item.dbSortsName}}</p>
+            <p class="num color-red">{{item.stockNum}}个库存</p>
           </div>
-          <div class="nums">X{{item.num}}</div>
+          <div class="nums">X{{item.productNum}}</div>
         </div>
-        <div class="line">配送方式 <span>运费 ￥{{item.freight}}</span></div>
+        <div class="line-charge" v-if="!item.isLogistics">&nbsp; <span>运费  ￥{{item.productPrice}}</span></div>
       </div>
-      <div class="line line2">商品总价 <span>￥10.00+10个库存</span></div>
-      <div class="line">合计：<span class="color-red">￥10.00+10库存</span></div>
+      <div class="line line2">商品总价 <span>10个库存</span></div>
+      <div class="line">合计：<span class="color-red">￥10.00 + 10库存</span></div>
       <div class="message">
         备注留言：
-        <input type="text" placeholder="请写备注内容" v-model="message" class="text">
+        <input type="text" placeholder="请写备注内容" v-model="remark" class="text">
       </div>
     </div>
     <div class="shop-pay-lan background-fff">
@@ -64,28 +67,24 @@
         <div class="margin-left-10 color-666">
           余额支付
           <span class="color-999">
-            （可用余额
-            <span class="color-red">￥100</span>
-            ）
+            （可用余额 <span class="color-red">￥100</span> ）
           </span>
         </div>
       </div>
     </div>
-    <!-- 提醒 -->
-    <div class="shop-pay-remind" v-show="alert">
+    <div class="shop-pay-remind" v-show="showRemind">
       <div class="film"></div>
       <div class="remind">
         <div class="remind-relative">
           <div class="remind-absolute">
-            <img src="../../../image/alert.png">
+            <img :src="imgPath">
           </div>
           <p class="aui-text-center font-17 color-333">提醒</p>
-          <p class="aui-text-center font-14 color-333">您的个人库存不足，请先购入库存后，继续购买</p>
-          <div class="background-color-feabc5 color-fff font-15 aui-text-center" @click="alert = true">确定</div>
+          <p class="aui-text-center font-14 color-333">您的个人库存不足，请先购入库存后继续购买</p>
+          <div class="background-color-feabc5 color-fff font-15 aui-text-center" @click="showRemind = false">确定</div>
         </div>
       </div>
     </div>
-     <!-- 提醒 end-->
     <footer class="foot" style="z-index: 0;">
       <div class="shop-pay-foot-left background-fff">
         <p class="color-red font-15">总金额：10库存</p>
@@ -96,34 +95,55 @@
   </div>
 </body>
 <script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
 <script src="../../../script/vue.min.js"></script>
 <script>
-  new Vue({
+  apiready = function(){
+    api.parseTapmode();
+    vm.selProductStock = api.pageParam.list
+    vm.isCloud = api.pageParam.isCloud
+    vm.getData()
+  }
+  var vm = new Vue({
     el: '#app',
     data: {
-      sonsignee: '戴永明',
-      mobel: '13548974111',
-      site: '山东省烟台市高新区马山街道蓝海路创业1号国家级孵化器D座',
-      message: '',
-      payPlan: 1,
-      alert: true,
-      products: [{
-        name: '卡萌·萌动装纸尿裤L码',
-        num: 5,
-        status: 'L',
-        kucun: 2,
-        freight: '10.00',
-        img: '../../image/index/zhanwei.png'
-      },{
-        name: '卡萌·萌动装纸尿裤L码',
-        num: 5,
-        status: 'L',
-        kucun: 4,
-        freight: '10.00',
-        img: '../../image/index/zhanwei2.png'
-      }]
+      isCloud: true,
+      selProductStock: [],
+      userAccount: {},
+      hasAddress: false,
+      userAddrId: '',
+      userAddress: {},
+      entity: [],
+      remark: '',
+      showRemind: false,
+      imgPath: $apiAjax.kameng_image,
+    },
+    computed: {
+      totalMoney: function () {
+        if (this.isYun) {
+          return this.entityA.length === 0;
+        } else {
+          return this.entityB.length === 0;
+        }
+      }
     },
     methods: {
+      getData () {
+        var self = this;
+        $apiAjax.postBody("/product/stock/listPlaceOrder",{
+          userAddrId: self.userAddrId,
+          list: self.selProductStock
+        },function (ret) {
+          if(ret){
+            if (ret.userAddress) {
+              self.hasAddress = true
+              self.userAddress = ret.userAddress
+            }
+            self.entity = ret.list
+            self.userAccount = ret.userAccount
+          }
+        }, true);
+      },
       goConfirm () {
         $api.openWin('/html/shopping/confirm_order_win')
       }

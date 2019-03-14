@@ -75,7 +75,30 @@ var vm = new Vue({
   methods: {
     submitCart: function () { // 结算
       if(this.selectNum > 0){
-        $api.openWin('/html/cart/confirm/confirm_win')
+        var cartsParam = {
+          isCloud: this.isYun,
+          list: []
+        }
+        if (this.isYun) {
+          for (var i = 0; i< this.entityA.length; i++) {
+            if(this.entityA[i].checked) {
+              cartsParam.list.push({
+                productStockId: this.entityA[i].productStockId,
+                productNum: this.entityA[i].productNum
+              })
+            }
+          }
+        } else {
+          for (var i = 0; i< this.entityB.length; i++) {
+            if(this.entityB[i].checked) {
+              cartsParam.list.push({
+                productStockId: this.entityB[i].productStockId,
+                productNum: this.entityB[i].productNum
+              })
+            }
+          }
+        }
+        $api.openWin('/html/cart/confirm/confirm_win', cartsParam)
       } else {
         $api.toast("请先选择要购买的商品呦~")
       }
@@ -120,13 +143,16 @@ var vm = new Vue({
       },function(ret){
         if(ret){
           if (ret.buttonIndex === 2) {
-            var cart = $api.getPrefs(cartName)
-            cart.splice(index,1)
-            $api.setPrefs(cartName, cart)
-            if (this.isYun) {
+            var cart = $apiLocal.getUserCloudCart()
+            if (self.isYun) {
+              cart.splice(index,1)
+              $apiLocal.setUserCloudCart(cart)
               self.entityA.splice(index, 1)
             } else {
-              self.entityA.splice(index, 1)
+              cart = $apiLocal.getUserCommonCart()
+              cart.splice(index,1)
+              $apiLocal.setUserCommonCart(cart)
+              self.entityB.splice(index, 1)
             }
             $api.toast('删除成功！')
             api.execScript({
@@ -178,27 +204,27 @@ var vm = new Vue({
       })
     },
     deleteIndex (index) {
-      var cart = $api.getPrefs('cart1')
+      var cart = $apiLocal.getUserCloudCart()
       if (this.isYun) {
         cart.splice(index,1)
-        $api.setPrefs('cart1', cart)
+        $apiLocal.setUserCloudCart(cart)
         this.entityA.splice(index, 1)
       } else {
-        cart = $api.getPrefs('cart2')
+        cart = $apiLocal.getUserCommonCart()
         cart.splice(index,1)
-        $api.setPrefs('cart2', cart)
+        $apiLocal.setUserCommonCart(cart)
         this.entityB.splice(index, 1)
       }
     },
     subNum (index) {
       var entity = this.entityA[index]
-      var cart = $api.getPrefs('cart1')
+      var cart = $apiLocal.getUserCloudCart()
       if (this.isYun) {
         if (entity.productNum > 1){
           --entity.productNum
           // 本地操作
           --cart[index].productNum
-          $api.setPrefs('cart1', cart)
+          $apiLocal.setUserCloudCart(cart)
         } else {
           $api.toast('啧啧，该宝贝不能再减少了~')
         }
@@ -207,9 +233,9 @@ var vm = new Vue({
         if (entity.productNum > 1){
           --entity.productNum
           // 本地操作
-          cart = $api.getPrefs('cart2')
+          cart = $apiLocal.setUserCommonCart()
           --cart[index].productNum
-          $api.setPrefs('cart1', cart)
+          $apiLocal.setUserCommonCart(cart)
         } else {
           $api.toast('啧啧，该宝贝不能再减少了~')
         }
@@ -217,13 +243,13 @@ var vm = new Vue({
     },
     addNum (index) {
       var entity = this.entityA[index]
-      var cart = $api.getPrefs('cart1')
+      var cart = $apiLocal.getUserCloudCart()
       if (this.isYun) {
         if(entity.productNum < entity.stockNum){
           ++entity.productNum
           // 本地操作
           ++cart[index].productNum
-          $api.setPrefs('cart1', cart)
+          $apiLocal.setUserCloudCart(cart)
         } else {
           $api.toast('库存不足')
         }
@@ -232,9 +258,9 @@ var vm = new Vue({
         if(entity.productNum < entity.stockNum){
           ++entity.productNum
           // 本地操作
-          cart = $api.getPrefs('cart2')
+          cart = $apiLocal.getUserCommonCart()
           ++cart[index].productNum
-          $api.setPrefs('cart2', cart)
+          $apiLocal.setUserCommonCart(cart)
         } else {
           $api.toast('库存不足')
         }
@@ -242,8 +268,8 @@ var vm = new Vue({
     },
 
     initCart () {
-      var cart1 = $api.getPrefs('cart1')
-      var cart2 = $api.getPrefs('cart2')
+      var cart1 = $apiLocal.getUserCloudCart()
+      var cart2 = $apiLocal.getUserCommonCart()
       this.getCartData(cart1,cart2);
     },
     getCartData (data1, data2) {

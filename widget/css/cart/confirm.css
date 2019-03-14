@@ -177,11 +177,11 @@
     font-size: 11px;
 }
 .shop-pay-site {
-    padding: 18px 15px;
+    padding: 10px 10px;
 }
 .shop-pay-site-line {
     margin-left: 22px;
-    font-size: 13px;
+    font-size: 14px;
     color: #333;
 }
 .shop-pay-site-line .right {
@@ -192,7 +192,7 @@
     position: relative;
 }
 .shop-pay-site-msg {
-    margin: 10px 17px 0 22px;
+    margin: 5px 17px 5px 22px;
     font-size: 13px;
 }
 .shop-pay-site-line2 .site-icon {
@@ -212,18 +212,28 @@
 .shop-pay-site-ban {
     width: 100%;
     height: 6px;
-    background-image: url('../image/bianline.jpg');
+    background-image: url('../../image/bianline.jpg');
 }
 .shop-pay-state {
     padding: 0 15px 17px 15px;
     background-color: #fff;
-    margin-top: 10px;
     overflow: hidden;
+}
+.shop-pay-state-detail {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.shop-pay-state .line-charge{
+    font-size: 15px;
+}
+.shop-pay-state .line-charge span{
+    float: right;
 }
 .shop-pay-state-head {
     display: flex;
     position: relative;
-    margin-top: 17px;
+    margin-top: 15px;
 }
 .shop-pay-state-head .product {
     width: 82px;
@@ -270,6 +280,7 @@
 .shop-pay-state .line2 {
     border-bottom: 1px solid #eee;
 }
+
 .shop-pay-state .message {
     display: flex;
     align-items: center;
@@ -390,7 +401,7 @@
     margin-top: 28px;
     border-radius: 20px;
 }
-.zhezhao-di {
+.remind-di {
     height: 100vh;
     overflow: hidden;
 }

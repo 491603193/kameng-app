@@ -26,13 +26,14 @@
     api.openFrame({
         name: '/html/cart/confirm/confirm_frm',
         url: api.wgtRootDir + '/html/cart/confirm/confirm_frm.html',
-        bounces: true,
+        bounces: false,
         rect: {
           x: 0,
           y: headerPos.h,
           w: 'auto',
           h: 'auto'
-        }
+        },
+        pageParam: api.pageParam
     })
   };
 </script>

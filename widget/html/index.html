@@ -11,14 +11,18 @@
   <div style="display: none;" data-menu-index="3"></div>
 </body>
 <script src="../script/api.js"></script>
+<script src="../script/api-local.js"></script>
 <script>
   // 购物车是否加载完成
   var cartFinish = false;
+  var selectIndex = 1;
+  var isFlushMessageNum = false;
+  var messageInitFinish = false;
   apiready = function () {
     initFrameGroup();
     openFrameGroup();
     exitApp();
-    initBadgeNum();
+    // initBadgeNum();
     // flushAsyncUserMessage();
     listener();
   };
@@ -36,33 +40,23 @@
       }
     });
   }
-  var selectIndex = 1;
-  var isFlushMessageNum = false;
-  var messageInitFinish = false;
-  var isInitCenter = false;
   var frames = [
     {
       name: '/html/index_frm',
       url: './index/index.html',
-      pageParam: {
-        showMode: 1
-      },
       bounces: false
     },
     {
       name: '/html/goods/index',
       url: './goods/index.html',
-      useWKWebView: false
     },
     {
       name: '/html/cart/index',
       url: './cart/index.html',
-      useWKWebView: false
     },
     {
       name: '/html/user/index',
       url: './user/index.html',
-      useWKWebView: false
     }
   ];
   function openFrameGroup() {
@@ -76,7 +70,7 @@
         h: api.winHeight - 50
       },
       index: 0,
-      preload: 3,
+      preload: 0,
       bgColor: '#ebebeb',
       frames: frames
     }, function (ret, err) {
@@ -251,9 +245,8 @@
     }
   }
   function getCartNum () {
-    var cart1 = $api.getPrefs('cart1')
-    var cart2 = $api.getPrefs('cart2')
-    return cart1.length + cart2.length
+    var num = $apiLocal.getUserCloudCart().length + $apiLocal.getUserCommonCart().length
+    return num
   }
   //设置徽章值
   function setBadge(index) {

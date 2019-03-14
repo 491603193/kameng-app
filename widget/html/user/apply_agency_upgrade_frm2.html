@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>完善资料</title>
+  <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/km.css">
+  <style>
+    .agent2-list-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      position: relative;
+    }
+    .agent2-list-item:last-of-type {
+      border: none;
+    }
+    .agency2-list-title {
+      border: none;
+    }
+    .agent2-list-item .agency-long-input {
+      width: 80%;
+      height: 30px;
+      line-height: 30px;
+      margin-left: 10px;
+    }
+    .agent2-list-item  .agency-short-input {
+      width: 50%;
+      height: 30px;
+      line-height: 30px;
+      margin-left: 10px;
+    }
+    .agent2-list-item  .agency-short-input::-webkit-input-placeholder,
+    .agent2-list-item .agency-long-input::-webkit-input-placeholder {
+      color: #ccc;
+      font-size: 14px;
+    }
+    .agent1-list {
+      padding-bottom: 0;
+    }
+    .agency2-code {
+      position: absolute;
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="margin-top-10">
+    <ul class="agent1-list background-fff">
+      <li class="font-16 color-333 agent2-list-item agency2-list-title">请完善您的个人资料</li>
+      <li class="agent2-list-item font-14">
+        电话
+        <input type="number" placeholder="请输入电话号码" class="agency-long-input">
+      </li>
+      <li class="agent2-list-item font-14">
+        验证码
+        <input type="number" placeholder="请输入验证码" class="agency-short-input">
+        <div class="agency2-code font-14" :class="!codeState ? 'color-blue' : 'color-999'" @click="getCode">{{codeText}}</div>
+      </li>
+      <li class="agent2-list-item font-14">
+        姓名
+        <input type="text" placeholder="请输入姓名" class="agency-long-input">
+      </li>
+    </ul>
+    <button class="agent1-btn background-color-feabc5 color-fff" @click="openFrm()">下一步</button>
+  </div>
+</body>
+<script src="../../script/api.js"></script>
+<script src="../../script/vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      codeText: '获取验证码',
+      codeState: false
+    },
+    methods: {
+      openFrm () {
+        api.setFrameGroupIndex({
+            name: 'agentgroup',
+            index: 2
+        });
+      },
+      getCode () {
+        if (this.codeState) return
+        this.codeState = true
+        let count = 59
+        this.codeText = count + '秒后重试'
+        let _this = this
+        let timer = setInterval(()=> {
+          count--
+          _this.codeText = count + '秒后重试'
+          if (count === 0) {
+            clearInterval(timer)
+            _this.codeState = false
+            _this.codeText = '获取验证码'
+          }
+        }, 1000)
+      }
+    }
+  })
+</script>
+</html>

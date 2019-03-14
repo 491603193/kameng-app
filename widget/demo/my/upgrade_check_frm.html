@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>我的云仓</title>
+  <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/km.css">
+  <link rel="stylesheet" href="../../css/my/order_details_frm.css">
+  <link rel="stylesheet" href="../../css/my/my_yc1.css">
+</head>
+<body>
+  <div id="app" :class="(juJue || tongYi) ? 'pay' : ''">
+    <div class="background-fff yc1-template">
+    <p class="background-fff yc1-row font-13 color-333">
+      魏婷(186*****222)-总代
+      <span class="font-11 color-999">2019-2-13 08:30:19</span>
+    </p>
+    <div class="aui-row yc1-row1">
+      <div class="aui-col-xs-3">申请购入：</div>
+      <div class="aui-col-xs-9">100库存</div>
+    </div>
+    <div class="aui-row yc1-row2">
+      <div class="aui-col-xs-3">申请购入：</div>
+      <div class="aui-col-xs-9">新申请100个库存，已经微信打款，打款凭证件已上传</div>
+    </div>
+    <div class="aui-row yc1-row3">
+      <div class="aui-col-xs-3 margin-top-10">申请凭证：</div>
+      <div class="aui-col-xs-9">
+        <img v-for="(item, index) in imgs" :key="index" :src="item" class="margin-top-10 yc1-el">
+        <div
+          v-if="(imgs.length % 3) !== 0"
+          class="margin-top-10 yc1-el"
+          v-for="(el, zwIndex) in (3 - (imgs.length % 3))"
+          :key="zwIndex"
+        ></div>
+      </div>
+    </div>
+    <div class="yc1-row4">
+      <div class="yc1-turn yc1-select" @click="juJue = true">拒绝</div>
+      <div class="yc1-affirm yc1-select" @click="tongYi = true">同意</div>
+    </div>
+  </div>
+    <div v-show="juJue || tongYi">
+      <div class="zhezhao" @click="zheZhao()"></div>
+      <div class="alert-weiquan" v-show="juJue">
+        <p class="title font-17 color-333">拒绝原因</p>
+        <textarea placeholder="请填写拒绝原因" class="alert-text yc1-alert-text"></textarea>
+        <div class="alert-btn">
+          <div class="font-12 color-333" @click="juJue = false">取消</div>
+          <div class="background-fda9c5 color-fff font-12">确定</div>
+        </div>
+      </div>
+        <!-- 提醒 -->
+      <div class="shop-pay-remind" v-show="tongYi">
+        <div class="remind">
+          <div class="remind-relative">
+            <div class="remind-absolute">
+              <img src="../../image/alert.png">
+            </div>
+            <p class="aui-text-center font-17 color-333">提醒</p>
+            <p class="aui-text-center font-14 color-333 margin-top-10">您的个人库存不足，请先购入库存后，再继续调拨</p>
+            <div class="background-color-feabc5 color-fff font-15 aui-text-center" @click="tongYi = false">确定</div>
+          </div>
+        </div>
+      </div>
+      <!-- 提醒 end-->
+    </div>
+  </div>
+</body>
+<script src="../../script/api.js"></script>
+<script src="../../script/vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      who: 'templateA',
+      imgs: ['../../image/index/zhanwei.png', '../../image/index/zhanwei.png'],
+      juJue: false,
+      tongYi: false
+    },
+    methods: {
+      zheZhao () {
+        this.juJue = false
+        this.tongYi = false
+      }
+    }
+  })
+</script>
+</html>

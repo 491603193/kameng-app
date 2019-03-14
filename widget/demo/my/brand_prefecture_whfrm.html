@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>品牌文化</title>
+  <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/km.css">
+</head>
+<body>
+ <div id="app">
+   <div class="bbfrm-head background-fff">
+     <div class="bbfm-head-img">
+       <img src="../../image/head.jpg">
+     </div>
+     <div class="bbfrm-text">
+       <p class="font-16 color-333">卡萌纸尿裤</p>
+       <p class="font-13 color-999 margin-top-5">2019-02-26 14:05:56</p>
+     </div>
+   </div>
+   <div class="background-fff bbfrm-content-text">
+     <p class="font-15 color-333">坚持做纯国产母婴品牌，让中国宝宝和妈妈用上安全放心的产品，安全是卡萌做任何产品的前提，用心选厂，严苛选材。未来卡萌将不断努力，努力让国人建立起对中国造的信心，让世界建立起对中国母婴产品的信心，成为中国最有影响力的十大母婴品牌之一。</p>
+     <div class="bbfrm-imgs">
+       <img v-for="(item, index) in imgs" :src="item" :key="index" class="bbfrm-img-el">
+       <div
+        class="bbfrm-img-el"
+        v-if="imgs.length % 3 !== 0"
+        v-for="(el, elIndex) in (3 - (imgs.length % 3))"
+        :key="elIndex"
+       ></div>
+     </div>
+     <div class="bbr-foot font-13 color-999">
+      <div class="left">
+         积分数 <span class="margin-left-10">12</span>
+      </div>
+      <div class="right">
+        <div class="item">
+          <img src="../../image/download.svg">
+          <div class="margin-left-5">下载</div>
+         </div>
+        <div class="item margin-left-15">
+          <img src="../../image/transmit.svg">
+          <div class="margin-left-5">下载</div>
+        </div>
+      </div>
+     </div>
+   </div>
+ </div>
+</body>
+<script src="../../script/api.js"></script>
+<script src="../../script/vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      imgs: ['../../image/index/zhanwei.png', '../../image/index/zhanwei2.png', '../../image/index/zhanwei.png', '../../image/index/zhanwei2.png', '../../image/index/zhanwei.png']
+    }
+  })
+</script>
+</html>

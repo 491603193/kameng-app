@@ -33,18 +33,21 @@
     <div class="shop-pay-state">
       <div v-for="(item, index) in entity" :key="index" class="shop-pay-state-detail">
         <div class="shop-pay-state-head">
-          <img :src="item.img" class="product">
+          <img :src="imgPath + item.img" class="product">
           <div class="shop-pay-status">
             <p class="title text-overflow">{{item.productName}}</p>
             <p class="status text-overflow">规格：{{item.dbSortsName}}</p>
-            <p class="num color-red">{{item.stockNum}}个库存</p>
+            <p class="num color-red">
+              <template v-if="isCloud">{{item.stockNum}}个云仓</template>
+              <template v-else>{{item.stockNum}} 元</template>
+            </p>
           </div>
           <div class="nums">X{{item.productNum}}</div>
         </div>
-        <div class="line-charge" v-if="!item.isLogistics">&nbsp; <span>运费  ￥{{item.productPrice}}</span></div>
+        <div class="line-charge" v-if="!item.isLogistics">&nbsp; <span>运费  ￥{{item.productLogisticsPrice}}</span></div>
       </div>
-      <div class="line line2">商品总价 <span>10个库存</span></div>
-      <div class="line">合计：<span class="color-red">￥10.00 + 10库存</span></div>
+      <div class="line line2">商品总价 <span>{{showMoney}}</span></div>
+      <div class="line">合计：<span class="color-red">￥{{mailMoney}} + {{showMoney}}</span></div>
       <div class="message">
         备注留言：
         <input type="text" placeholder="请写备注内容" v-model="remark" class="text">
@@ -76,10 +79,10 @@
           <input type="radio" id="ye" name="pay">
           <div class="ye"></div>
         </div>
-        <div class="margin-left-10 color-666">
+        <div class="margin-left-10 color-666" v-if="!isCloud || mailMoney > 0">
           余额支付
           <span class="color-999">
-            （可用余额 <span class="color-red">￥100</span> ）
+            （可用余额 <span class="color-red">￥{{userAccount.advancePayment}}</span> ）
           </span>
         </div>
       </div>
@@ -100,8 +103,8 @@
     </div>
     <footer class="foot" style="z-index: 0;">
       <div class="shop-pay-foot-left background-fff">
-        <p class="color-red font-15">总金额：10库存</p>
-        <p class="color-999 font-11">(运费： ￥10.00)</p>
+        <p class="color-red font-15">总金额：{{showMoney}}</p>
+        <p class="color-999 font-11">(运费： ￥{{mailMoney}})</p>
       </div>
       <div class="shop-pay-foot-right background-color-feabc5 color-fff" @click="goConfirm()">提交订单</div>
     </footer>
@@ -132,12 +135,30 @@
       imgPath: $apiAjax.kameng_image,
     },
     computed: {
-      totalMoney: function () {
-        if (this.isYun) {
-          return this.entityA.length === 0;
-        } else {
-          return this.entityB.length === 0;
+      mailMoney: function () {
+        var money = 0;
+        for (var i = 0; i < this.entity.length; i++) {
+          money += this.entity[i].productLogisticsPrice
         }
+        return money
+      },
+      showMoney: function () {
+        if (this.isCloud) {
+          return this.totalMoney + '个云仓'
+        } else {
+          return this.totalMoney + '元'
+        }
+      },
+      totalMoney: function () {
+        var totalMoney = 0;
+        for (var i = 0; i < this.entity.length; i++) {
+          if (this.isCloud) {
+            totalMoney += this.entity[i].stockPrice
+          } else {
+            totalMoney += this.entity[i].productPrice
+          }
+        }
+        return totalMoney
       }
     },
     methods: {

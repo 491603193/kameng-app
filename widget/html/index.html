@@ -33,7 +33,7 @@
     });
     // 购物车监听
     api.setFrameClient({
-      frameName: '/html/cart/index'
+      frameName: '/html/order/cart/index'
     }, function(ret, err) {
       if(ret.state === 2){
         cartFinish = true
@@ -51,8 +51,8 @@
       url: './goods/index.html',
     },
     {
-      name: '/html/cart/index',
-      url: './cart/index.html',
+      name: '/html/order/cart/index',
+      url: './order/cart/index.html',
     },
     {
       name: '/html/user/index',
@@ -312,7 +312,7 @@
     if (cartFinish) {
       api.execScript({
         name: '/html/index.html',
-        frameName: '/html/cart/index',
+        frameName: '/html/order/cart/index',
         script: 'vm.initCart()'
       })
     }
@@ -330,7 +330,7 @@
     if (cartFinish) {
       api.execScript({
         name: '/html/index.html',
-        frameName: '/html/cart/index',
+        frameName: '/html/order/cart/index',
         script: 'vm.initCart()'
       })
     }

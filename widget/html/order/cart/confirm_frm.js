@@ -87,7 +87,7 @@ var vm = new Vue({
       this.showPaySuccessRemind = false
       api.execScript({
         name: '/html/index.html',
-        frameName: '/html/cart/index',
+        frameName: '/html/order/cart/index',
         script: 'vm.deleteSel()'
       })
       setTimeout(function () {

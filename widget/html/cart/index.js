@@ -108,11 +108,15 @@ var vm = new Vue({
       if (this.isCheckedAll) {
         if (this.isYun) {
           for (var i = 0; i< this.entityA.length; i++) {
-            this.entityA[i].checked = true
+            if (this.entityA[i].validStatus !== '0' || this.isEdit){
+              this.entityA[i].checked = true
+            }
           }
         } else {
           for (var i = 0; i< this.entityB.length; i++) {
-            this.entityB[i].checked = true
+            if (this.entityB[i].validStatus !== '0' || this.isEdit){
+              this.entityB[i].checked = true
+            }
           }
         }
       } else {
@@ -164,10 +168,26 @@ var vm = new Vue({
       })
     },
     edit () {
-      if (this.isEdit) this.isEdit = false
-      else this.isEdit = true
+      if (this.isEdit){
+        this.isEdit = false
+        if (this.isYun) {
+          for (var j = 0; j < this.entityA.length; j++) {
+            if (this.entityA[j].validStatus !== '0' && this.entityA[j].checked) {
+              this.entityA[j].checked = false
+            }
+          }
+        } else {
+          for (var j = 0; j < this.entityB.length; j++) {
+            if (this.entityB[j].validStatus !== '0' && this.entityB[j].checked) {
+              this.entityB[j].checked = false
+            }
+          }
+        }
+      } else {
+        this.isEdit = true
+      }
     },
-    deleteSel () {
+    confirmDeleteSel () {
       var self = this;
       dialog.alert({
         title:"温馨提示",
@@ -176,31 +196,34 @@ var vm = new Vue({
       },function(ret) {
         if(ret){
           if (ret.buttonIndex === 2) {
-            var selnum = self.selectNum;
-            for (var i = 0; i < selnum; i++) {
-              if (self.isYun) {
-                for (var j = 0; j < self.entityA.length; j++) {
-                  if (self.entityA[j].checked) {
-                    self.deleteIndex(j)
-                    break
-                  }
-                }
-              } else {
-                for (var j = 0; j < self.entityB.length; j++) {
-                  if (self.entityB[j].checked) {
-                    self.deleteIndex(j)
-                    break
-                  }
-                }
-              }
-            }
-            $api.toast('删除成功！')
-            api.execScript({
-              name: '/html/index.html',
-              script: 'initBadgeNum()'
-            })
+            self.deleteSel('删除成功')
           }
         }
+      })
+    },
+    deleteSel (msg) {
+      var selnum = this.selectNum;
+      for (var i = 0; i < selnum; i++) {
+        if (this.isYun) {
+          for (var j = 0; j < this.entityA.length; j++) {
+            if (this.entityA[j].checked) {
+              this.deleteIndex(j)
+              break
+            }
+          }
+        } else {
+          for (var j = 0; j < this.entityB.length; j++) {
+            if (this.entityB[j].checked) {
+              this.deleteIndex(j)
+              break
+            }
+          }
+        }
+      }
+      if(msg) $api.toast(msg)
+      api.execScript({
+        name: '/html/index.html',
+        script: 'initBadgeNum()'
       })
     },
     deleteIndex (index) {

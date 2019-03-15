@@ -8,7 +8,6 @@ var dialog = new auiDialog({})
 var vm = new Vue({
   el: '#app',
   data: {
-    remindMsg: '',
     payType: '1',
     isCloud: true,
     selProductStock: [],
@@ -22,13 +21,18 @@ var vm = new Vue({
     entity: [],
     remark: '',
     showRemind: false,
+    remindMsg: '',
+    showPaySuccessRemind: false,
     imgPath: $apiAjax.kameng_image,
   },
   computed: {
+    payMoney: function () {
+      return this.isCloud? this.mailMoney: this.mailMoney + this.totalMoney
+    },
     mailMoney: function () {
       var money = 0;
       for (var i = 0; i < this.entity.length; i++) {
-        money += this.entity[i].productLogisticsPrice
+        money += this.entity[i].freightMoney
       }
       return money
     },
@@ -43,12 +47,22 @@ var vm = new Vue({
       var totalMoney = 0;
       for (var i = 0; i < this.entity.length; i++) {
         if (this.isCloud) {
-          totalMoney += this.entity[i].stockPrice
+          totalMoney += this.entity[i].stockPrice * this.entity[i].productNum
         } else {
-          totalMoney += this.entity[i].productPrice
+          totalMoney += this.entity[i].productPrice * this.entity[i].productNum
         }
       }
       return totalMoney
+    },
+    totalProductNum: function () {
+      var totalProductNum = 0;
+      for (var i = 0; i < this.entity.length; i++) {
+        totalProductNum += this.entity[i].productNum
+      }
+      return totalProductNum
+    },
+    showFooterTotalMoney: function () {
+      return this.isCloud? '支付云仓：' + this.totalMoney + '个' : '总金额：' + (this.totalMoney + this.mailMoney) + '元'
     }
   },
   methods: {
@@ -68,6 +82,17 @@ var vm = new Vue({
           self.userAccount = ret.userAccount
         }
       }, true);
+    },
+    closeConfirm () {
+      this.showPaySuccessRemind = false
+      api.execScript({
+        name: '/html/index.html',
+        frameName: '/html/cart/index',
+        script: 'vm.deleteSel()'
+      })
+      setTimeout(function () {
+        api.closeWin()
+      },300)
     },
     goConfirm () {
       if(!this.userAddrId) {
@@ -99,10 +124,24 @@ var vm = new Vue({
           }
         }
       }
-
-      $apiAjax.successToast("支付成功")
-      return
-      $api.openWin('/html/shopping/confirm_order_win')
+      this.postOrder()
+    },
+    postOrder () {
+      var self = this;
+      $apiAjax.postBody("/order/main/save",{
+        userAddrId: self.userAddrId,
+        payType: self.payType,
+        productType: self.isCloud? '1' : '2',
+        payMoney: self.payMoney,
+        totalProductNum: self.totalProductNum,
+        totalStockNum: self.isCloud? self.totalMoney : 0,
+        orderRemark: self.remark,
+        list: self.entity
+      },function (ret) {
+        if(ret){
+          self.showPaySuccessRemind = true
+        }
+      }, true);
     }
   }
 })

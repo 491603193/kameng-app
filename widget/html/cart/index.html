@@ -59,7 +59,7 @@
             <label v-else>
               <div class="shop-list-item aui-bg-white">
                 <div class="shop-list-left" v-bind:class="{ 'shop-list-left-edit': isEdit }">
-                  <input class="aui-radio" type="checkbox" readonly v-show="isEdit">
+                  <input class="aui-radio" type="checkbox" v-show="isEdit" v-model="entity.checked">
                   <img :src="imgPath + entity.stockPic">
                 </div>
                 <div class="shop-list-right relative">
@@ -68,7 +68,7 @@
                   <div class="shop-btn1 margin-top-12">
                     <div class="shop-kc absolute">{{entity.stockPrice}} 云仓</div>
                     <div class="font-12 color-red">{{entity.validStatusMsg}}</div>
-                    <div class="shop-delete" @click="deleteSorts(index)">
+                    <div class="shop-delete" @click.prevent="deleteSorts(index)">
                       <img src="../../image/delete.svg">
                     </div>
                   </div>
@@ -105,7 +105,7 @@
             <label v-else>
               <div class="shop-list-item aui-bg-white">
                 <div class="shop-list-left" v-bind:class="{ 'shop-list-left-edit': isEdit }">
-                  <input class="aui-radio" type="checkbox" readonly v-show="isEdit">
+                  <input class="aui-radio" type="checkbox" v-show="isEdit" v-model="entity.checked">
                   <img :src="imgPath + entity.stockPic">
                 </div>
                 <div class="shop-list-right relative">
@@ -114,7 +114,7 @@
                   <div class="shop-btn1 margin-top-12">
                     <div class="shop-kc absolute">￥ {{entity.stockPrice}}</div>
                     <div class="font-12 color-red">{{entity.validStatusMsg}}</div>
-                    <div class="shop-delete" @click="deleteSorts(index)">
+                    <div class="shop-delete" @click.prevent="deleteSorts(index)">
                       <img src="../../image/delete.svg">
                     </div>
                   </div>
@@ -141,7 +141,7 @@
           <div v-if="isCheckedAll">全不选</div>
           <div v-else>全选</div>
       </div>
-      <div class="shop-foot-right background-color-febb1f" @click="deleteSel()">删除(<span>{{selectNum}}</span>)</div>
+      <div class="shop-foot-right background-color-febb1f" @click="confirmDeleteSel()">删除(<span>{{selectNum}}</span>)</div>
     </footer>
     </div>
 </body>

@@ -38,13 +38,13 @@
             <p class="title text-overflow">{{item.productName}}</p>
             <p class="status text-overflow">规格：{{item.dbSortsName}}</p>
             <p class="num color-red">
-              <template v-if="isCloud">{{item.stockNum}}个云仓</template>
-              <template v-else>{{item.stockNum}} 元</template>
+              <template v-if="isCloud">{{item.stockPrice}}个云仓</template>
+              <template v-else>{{item.productPrice}} 元</template>
             </p>
           </div>
           <div class="nums">X{{item.productNum}}</div>
         </div>
-        <div class="line-charge" v-if="!item.isLogistics">&nbsp; <span>运费  ￥{{item.productLogisticsPrice}}</span></div>
+        <div class="line-charge" v-if="!item.isLogistics">&nbsp; <span>运费  ￥{{item.freightMoney}}</span></div>
       </div>
       <div class="line line2">商品总价 <span>{{showMoney}}</span></div>
       <div class="line">合计：<span class="color-red">{{showTotalMoney}}</span></div>
@@ -55,6 +55,20 @@
     </div>
     <div class="shop-pay-lan background-fff">
       <div class="line1">支付方式</div>
+      <label v-if="isCloud">
+        <div class="line border-bottom">
+          <div style="display: flex;">
+            <input type="radio" name="cloudPay" checked>
+            <div class="yc"></div>
+            <div class="margin-left-10 color-666">
+              云仓
+              <span class="color-999">
+              （可用云仓 <span class="color-red">￥{{userAccount.personalWarehouse}}</span> ）
+              </span>
+            </div>
+          </div>
+        </div>
+      </label>
       <label v-if="!isCloud || mailMoney>0">
         <div class="line border-bottom">
           <div style="display: flex;">
@@ -65,7 +79,7 @@
         </div>
       </label>
       <label v-if="!isCloud || mailMoney>0">
-        <div class="line border-bottom">
+        <div class="line">
           <div>
             <input type="radio" name="payType" value="4" v-model="payType">
             <div class="ye"></div>
@@ -75,20 +89,6 @@
             <span class="color-999">
               （可用余额 <span class="color-red">￥{{userAccount.advancePayment}}</span> ）
             </span>
-          </div>
-        </div>
-      </label>
-      <label v-if="isCloud">
-        <div class="line">
-          <div style="display: flex;">
-            <input type="radio" name="cloudPay" checked>
-            <div class="yc"></div>
-            <div class="margin-left-10 color-666">
-              云仓
-              <span class="color-999">
-              （可用云仓 <span class="color-red">￥{{userAccount.personalWarehouse}}</span> ）
-              </span>
-            </div>
           </div>
         </div>
       </label>
@@ -106,9 +106,22 @@
         </div>
       </div>
     </div>
+    <div class="shop-pay-remind" v-show="showPaySuccessRemind">
+      <div class="film"></div>
+      <div class="remind">
+        <div class="remind-relative">
+          <div class="remind-absolute">
+            <img src="../../../image/success.svg">
+          </div>
+          <p class="aui-text-center font-17 color-333">支付成功</p>
+          <p class="aui-text-center font-14 color-333">您的订单已成功支付，您可以到我的订单中查看订单状态。</p>
+          <div class="background-color-feabc5 color-fff font-15 aui-text-center" @click="closeConfirm">确定并关闭</div>
+        </div>
+      </div>
+    </div>
     <footer class="foot" style="z-index: 0;">
       <div class="shop-pay-foot-left background-fff">
-        <p class="color-red font-15">总金额：{{showMoney}}</p>
+        <p class="color-red font-15">{{showFooterTotalMoney}}</p>
         <p class="color-999 font-11">(运费： ￥{{mailMoney}})</p>
       </div>
       <div class="shop-pay-foot-right background-color-feabc5 color-fff" @click="goConfirm()">提交订单</div>

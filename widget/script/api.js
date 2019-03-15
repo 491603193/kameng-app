@@ -608,7 +608,6 @@
         h: 'auto'
       }
     })
-
   }
 
   window.$api = u

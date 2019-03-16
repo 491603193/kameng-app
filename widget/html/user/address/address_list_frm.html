@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>收货地址</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/km.css">
+  <link rel="stylesheet" href="../../../css/user/address.css">
+</head>
+<body>
+  <div id="app" style="padding-bottom: 50px;">
+    <div class="address-list margin-top-5 aui-bg-white">
+      <div class="address-list-item" v-for="(item, index) in entities" :key="item.userAddrId" @click="changeAddress(item.userAddrId)">
+        <p class="font-15 color-333">{{item.province}}{{item.city}}{{item.country}}{{item.receiverAddress}}</p>
+        <p class="font-13 color-999 margin-top-5">{{item.receiverName}} <span class="margin-left-15">
+          {{item.receiverPhone}}
+          <template v-if="item.isDefault"> &nbsp;&nbsp;（默认）</template>
+        </span></p>
+        <img src="../../../image/compile.svg" class="address-compile" @click.stop = "openEditAddress(true,item.userAddrId)">
+      </div>
+    </div>
+    <footer class="foot background-fff" @click="openEditAddress(false, '')">
+      <button class="address-btn-list background-fda9c5 color-fff font-15">新增收货地址</button>
+    </footer>
+  </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+  apiready = function (){
+    vm.canSelect = api.pageParam.canSelect
+    vm.loading();
+  };
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      canSelect : false,
+      noData: false,
+      noMoreData: false,
+      entities: []
+    },
+    created: function () {},
+    methods: {
+      openEditAddress: function(isEdit, userAddrId) {
+        $api.openWin('/html/user/address/address_edit_win', {
+          isEdit: isEdit,
+          userAddrId: userAddrId
+        })
+      },
+      changeAddress: function(userAddrId){
+        if (this.canSelect) {
+          api.execScript({
+            name: '/html/order/cart/confirm_win',
+            frameName: '/html/order/cart/confirm_frm',
+            script: 'vm.changeAddress("'+userAddrId+'")'
+          })
+          api.closeWin()
+        }
+      },
+      loading: function(){
+        var self = this;
+        $apiAjax.postBody("/user/address/page", {
+          param: {},
+          page: { pageSize: 1000, pageNo: 1 }
+        },function (ret) {
+          if (ret) {
+            self.noData = ret.length === 0;
+            self.entities = ret
+            self.noMoreData = ret.length > 5;
+          }
+        }, true);
+      }
+    }
+  })
+</script>
+</html>

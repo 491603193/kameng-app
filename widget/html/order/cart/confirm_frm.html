@@ -12,7 +12,7 @@
 <body>
   <div id="app" style="padding-bottom: 60px;" v-bind:class="{'remind-di': showRemind}">
     <header class="shop-pay-head bacground-ffe2cf color-f7931e">请仔细核对订单信息！</header>
-    <div class="shop-pay-site background-fff" v-show="hasAddress">
+    <div class="shop-pay-site background-fff" v-show="hasAddress" @click="openAddress()">
       <div class="shop-pay-site-line">
         <span>收货人：{{userAddress.receiverName}}</span>
         <span class="right">{{userAddress.receiverPhone}}</span>
@@ -23,7 +23,7 @@
         <img src="../../../image/go.svg" class="go-icon">
       </div>
     </div>
-    <div class="shop-pay-site background-fff" v-show="!hasAddress">
+    <div class="shop-pay-site background-fff" v-show="!hasAddress" @click="openAddress()">
       <div class="shop-pay-site-line2">
         <div class="shop-pay-site-msg">请先选择您的收货地址~</div>
         <img src="../../../image/go.svg" class="go-icon">

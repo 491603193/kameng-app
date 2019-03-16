@@ -1,0 +1,92 @@
+.address-ul {
+  padding: 0 15px;
+}
+.address-li-item {
+  width: 100%;
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  color: #666;
+}
+.address-ul .address-li-item:not(:last-of-type) {
+  border-bottom: 1px solid #eee;
+}
+.address-li-item input {
+  width: 60%;
+  height: 22px;
+  display: block;
+  text-align: right;
+}
+.address-li-item input::-webkit-input-placeholder {
+  color: #999;
+  font-size: 15px;
+}
+.select {
+  display: flex;
+  align-items: center;
+}
+.select img {
+  width: 12px;
+  height: 12px;
+  margin-left: 5px;
+}
+.address-li-item .default-address {
+  width: 18px;
+  height: 18px;
+}
+.address-li-item .default-address:checked {
+  background-color: #fda9c5;
+  border: none;
+}
+.address-btn {
+  width: 90%;
+  text-align: center;
+  height: 44px;
+  line-height: 44px;
+  border-radius: 22px;
+  border: none;
+  display: block;
+  margin: 0 auto;
+  margin-top: 16px;
+}
+.background-fda9c5 {
+  background-color: #fda9c5;
+}
+.color-999 {
+  color: #999;
+}
+
+
+
+.address-list {
+  padding: 0 15px;
+}
+.address-list-item {
+  position: relative;
+  padding: 15px 20px 15px 0;
+}
+.address-list-item:not(:last-of-type) {
+  border-bottom: 1px solid #eee;
+}
+.address-compile {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -8px;
+}
+.address-btn-list {
+  width: 90%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  left: 50%;
+  margin-left: -45%;
+  top: 50%;
+  margin-top: -20px;
+  border-radius: 20px;
+  border: none;
+}

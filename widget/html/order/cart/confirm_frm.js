@@ -66,6 +66,10 @@ var vm = new Vue({
     }
   },
   methods: {
+    changeAddress (userAddrId) {
+      this.userAddrId = userAddrId
+      this.getData()
+    },
     getData () {
       var self = this;
       $apiAjax.postBody("/product/stock/listPlaceOrder",{
@@ -82,6 +86,11 @@ var vm = new Vue({
           self.userAccount = ret.userAccount
         }
       }, true);
+    },
+    openAddress () {
+      $api.openWin('/html/user/address/address_list_win', {
+        canSelect : true
+      })
     },
     closeConfirm () {
       this.showPaySuccessRemind = false

@@ -96,7 +96,7 @@ var vm = new Vue({
       this.showPaySuccessRemind = false
       api.execScript({
         name: '/html/index.html',
-        frameName: '/html/order/cart/index',
+        frameName: '/html/user/cart/index',
         script: 'vm.deleteSel()'
       })
       setTimeout(function () {
@@ -137,7 +137,7 @@ var vm = new Vue({
     },
     postOrder () {
       var self = this;
-      $apiAjax.postBody("/order/main/save",{
+      $apiAjax.postBody("/user/main/save",{
         userAddrId: self.userAddrId,
         payType: self.payType,
         productType: self.isCloud? '1' : '2',

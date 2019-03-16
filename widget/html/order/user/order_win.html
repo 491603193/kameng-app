@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>我的订单</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+</head>
+<body>
+  <div>
+    <header class="aui-bar aui-bar-nav aui-bar-light" id="aui-header">
+      <a class="aui-pull-left aui-btn" onclick="api.closeWin()">
+        <span class="aui-iconfont aui-icon-left"></span>
+      </a>
+      <div class="aui-title" id="title">我的订单</div>
+    </header>
+    <div class="aui-tab aui-border-b" id="tab">
+      <div class="aui-tab-item aui-active">全部</div>
+      <div class="aui-tab-item">待付款</div>
+      <div class="aui-tab-item">待发货</div>
+      <div class="aui-tab-item">待收货</div>
+      <div class="aui-tab-item">已完成</div>
+    </div>
+  </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/aui/aui-tab.js" ></script>
+<script>
+  apiready = function(){
+    api.parseTapmode()
+    var header = $api.byId('aui-header')
+    $api.fixStatusBar(header)
+    api.openFrameGroup({
+      name: 'orderGroup',
+      scrollEnabled: true,
+      bgColor: '#f5f5f5',
+      rect: {
+        x: 0,
+        y: $api.offset(header).h + 44,
+        w: 'auto',
+        h: 'auto'
+      },
+      frames: farmes,
+      index: 0,
+      preload: 3
+    }, function(ret) {
+      auiTab.setActive(ret.index + 1)
+    })
+  }
+  var farmes = [{
+    name: '/html/order/user/order_all_frm',
+    url: './order_all_frm.html',
+    bgColor: '#f5f5f5',
+    bounces: true
+  }, {
+    name: '/html/order/user/order_one_frm',
+    url: './order_one_frm.html',
+    bgColor: '#f5f5f5',
+    bounces: true
+  }, {
+    name: '/html/order/user/order_two_frm',
+    url: './order_two_frm.html',
+    bgColor: '#f5f5f5',
+    bounces: true
+  }, {
+    name: '/html/order/user/order_three_frm',
+    url: './order_three_frm.html',
+    bgColor: '#f5f5f5',
+    bounces: true
+  }, {
+    name: '/html/order/user/order_four_frm',
+    url: './order_four_frm.html',
+    bgColor: '#f5f5f5',
+    bounces: true
+  }]
+  var auiTab = new auiTab({
+    element:document.getElementById("tab"),
+  },function(ret){
+    api.setFrameGroupIndex({
+      name: 'orderGroup',
+      index: ret.index - 1,
+      scroll: true
+    })
+  });
+
+
+</script>
+</html>

@@ -1218,7 +1218,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * Sets up aspect ratio metadata for fluid placeholders, in order to preserve proportions when resizing
+	 * Sets up aspect ratio metadata for fluid placeholders, in user to preserve proportions when resizing
 	 *
 	 * @private
 	 * @param el Image DOM element

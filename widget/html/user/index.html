@@ -47,7 +47,7 @@
           </div>
           <p class="font-14 color-333">我的余额</p>
         </div>
-        <div class="el" @click="openWin('html/order/order/my_order_win')">
+        <div class="el" @click="openWin('/html/order/user/order_win')">
           <div class="my-click-icon">
             <img src="../../image/my/wddd.png">
           </div>
@@ -100,12 +100,10 @@
     </div>
   </div>
 </body>
-<script src="../../script/holder.js"></script>
 <script src="../../script/api.js"></script>
-<script src="../../../script/api.js"></script>
-<script src="../../../script/api-ajax.js"></script>
-<script src="../../../script/api-validate.js"></script>
-<script src="../../../script/vue.min.js"></script>
+<script src="../../script/api-ajax.js"></script>
+<script src="../../script/api-validate.js"></script>
+<script src="../../script/vue.min.js"></script>
 <script>
   apiready = function () {
     api.parseTapmode();
@@ -132,16 +130,16 @@
     },
     created: function () {},
     methods: {
-      openWin () {
-
+      openWin (winName) {
+        $api.openWin(winName)
       }
     }
   })
   function openWin (winName) {
-    $api.openWin(winName)
+
     // api.openWin({
     //   name: '/html/my/my_order_win',
-    //   url: api.wgtRootDir + '/html/my/my_order_win.html',
+    //   url: api.wgtRootDir + '/html/my/order_win.html',
     //   bounces: false,
     //   slidBackEnabled: true,
     //   vScrollBarEnabled: false

@@ -28,14 +28,14 @@
         		self.setActive();
         		for(var i=0; i<tabItems.length; i++){
         			tabItems[i].setAttribute("tapmode","");
-        			tabItems[i].setAttribute("data-item-order",i);
+        			tabItems[i].setAttribute("data-item-user",i);
         			tabItems[i].onclick = function(e){
                         if(!self.params.repeatClick){
                             if(this.className.indexOf("aui-active") > -1)return;
                         }
         				if(callback){
                             callback({
-                                index: parseInt(this.getAttribute("data-item-order"))+1,
+                                index: parseInt(this.getAttribute("data-item-user"))+1,
                                 dom:this
                             })
                         };

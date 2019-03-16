@@ -1,3 +1,7 @@
+/*
+ * 衣永康
+ * 分页配置
+ */
 (function(window){
     var u = {};
 

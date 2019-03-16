@@ -23,7 +23,7 @@
         <div>省市区</div>
         <div class="select font-15" :class="addressAllName === '请选择省市区' ? 'color-999' : 'color-666'">
           {{addressAllName}}
-          <img src="../../../image/go.svg">
+          <img src="../../../image/go.svg" alt="">
         </div>
       </li>
       <li class="address-li-item">
@@ -42,6 +42,7 @@
 </body>
 <script src="../../../script/api.js"></script>
 <script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-validate.js"></script>
 <script src="../../../script/vue.min.js"></script>
 <script src="../../../script/aui/aui-dialog.js" ></script>
 <script>
@@ -55,6 +56,7 @@
       vm.setUserAddress([null,null,null])
     }
   };
+  var dialog = new auiDialog({})
   var vm = new Vue({
     el: '#app',
     data: {
@@ -96,6 +98,7 @@
         });
       },
       addAddress: function () {
+        if (!this.valDateForm()) return
         $apiAjax.postBody("/user/address/add", this.address, function (ret) {
           if (ret) {
             $apiAjax.successToast('保存成功！');
@@ -111,6 +114,7 @@
         }, 'submit');
       },
       updateAddress: function () {
+        if (!this.valDateForm()) return
         $apiAjax.postBody("/user/address/update", this.address, function (ret) {
           if (ret) {
             $apiAjax.successToast('保存成功！');
@@ -124,6 +128,12 @@
             },800)
           }
         }, 'submit');
+      },
+      valDateForm: function() {
+        return $val.valEmpty(this.address.receiverName,'姓名')
+          && $val.valPhone(this.address.receiverPhone)
+          && $val.valEmpty(this.address.regionCode, '省市区')
+          && $val.valEmpty(this.address.receiverAddress, '详细地址')
       },
       deleteAddress: function(){
         var self = this;

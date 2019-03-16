@@ -353,7 +353,7 @@ input[type="text"].index-input-search {
 }
 .index-product-describe {
   margin-top: 5px;
-  font-szie: 13px;
+  font-size: 13px;
   color: #999;
   overflow: hidden;
   display: -webkit-box;
@@ -1081,7 +1081,7 @@ input[type="text"].index-input-search {
   margin-left: 11px;
 }
 .shop-pay-status .title {
-  font-szie: 16px;
+  font-size: 16px;
   color: #333;
 }
 .shop-pay-status .status {
@@ -1165,8 +1165,8 @@ input[type="text"].index-input-search {
   padding: 15px 0;
 }
 .shop-pay-lan .line1 {
-  font-szie: #333;
-  font-szie: 16px;
+  color: #333;
+  font-size: 16px;
   padding: 15px 0;
 }
 .shop-pay-foot-left {
@@ -1431,7 +1431,7 @@ input[type="text"].index-input-search {
   color: #333;
 }
 .my-order-el .span-float-right {
-  font-szie: 12px;
+  font-size: 12px;
   color: #f15a24;
 }
 .my-order-small-code {

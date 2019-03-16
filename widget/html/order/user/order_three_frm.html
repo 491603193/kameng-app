@@ -13,7 +13,7 @@
 <div id="app" v-cloak>
   <div class="my-order-el" v-for="(item, index) in entities" :key="item.orderMainId">
     <header class="shop-pay-head background-fffbf3"> 订单编号：{{item.orderMainNo}}
-      <span class="span-float-right">{{getStateName(item.orderState)}}</span>
+      <span class="span-float-right">{{getOrderStateName(item.orderState)}}</span>
     </header>
     <div class="shop-pay-site aui-bg-white">
       <div class="shop-pay-site-line">
@@ -118,8 +118,8 @@
           }
         }, true);
       },
-      getStateName: function(state) {
-        return $apiLocal.getStateName(state)
+      getOrderStateName: function(state) {
+        return $apiLocal.getOrderStateName(state)
       },
       openDetail: function(productId){
         var url = $apiAjax.kameng_web + '/goods/' + productId + '/' + $apiLocal.getUserId();

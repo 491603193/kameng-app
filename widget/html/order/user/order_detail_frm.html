@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>订单详情</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/order/details.css">
+</head>
+<body>
+  <div id="app" v-bind:class="{ 'wq-state': showActivist }">
+    <header class="shop-pay-head background-fffbf3">
+      订单编号: {{entity.orderMainNo}}
+    </header>
+    <div class="shop-pay-site aui-bg-white aui-bg-white">
+      <div class="shop-pay-site-line">
+        <span>收货人：{{entity.receiverName}}</span>
+        <span class="right">{{entity.receiverPhone}}</span>
+      </div>
+      <div class="shop-pay-site-line2">
+        <img src="../../../image/site.svg" class="site-icon">
+        <div class="shop-pay-site-msg">收货地址：{{entity.receiverProvince}}{{entity.receiverCity}}{{entity.receiverCountry}}{{entity.receiverAddress}}</div>
+      </div>
+    </div>
+    <div class="shop-pay-site-ban"></div>
+    <div class="aui-bg-white order-details-el" v-for="(item, index) in entity.orderDealSplitList"
+         :key="item.orderDealSplitId" v-bind:class="{ 'order-details-el': index !== 0 }">
+      <div class="my-order-small-code">
+        订单编号：{{item.orderDealSplitNo}}
+        <span class="aui-text-danger" style="float: right;">{{getOrderStateName(item.orderState)}}</span>
+      </div>
+      <div class="shop-pay-state">
+        <div>
+          <div class="shop-pay-state-head">
+            <img :src="imgPath + item.productStockPic" class="product">
+            <div class="shop-pay-status">
+              <p class="title">{{item.productName}}</p>
+              <p class="status">规格：{{item.specItemNames}}</p>
+              <p class="num">
+                <span class="aui-text-danger aui-font-size-16">
+                  <template v-if="item.orderType === '1'">{{item.stockNum}}云仓 </template>
+                  <template v-else>￥{{item.productMoney}}</template>
+                </span>
+                <span class="freight-charge">运费 ￥{{item.freightMoney}}</span>
+              </p>
+            </div>
+            <div class="nums">X{{item.productNum}}</div>
+          </div>
+          <div class="line line3">已付金额
+            <span class="aui-text-danger" style="float: right;">
+              <template v-if="item.orderType === '1'">{{item.stockNum}} 云仓 <template v-if="item.freightMoney > 0"> + {{item.freightMoney}}元</template></template>
+              <template v-else>{{item.productMoney + item.freightMoney}} 元</template>
+            </span>
+          </div>
+          <div class="weiquan" v-if="item.orderState === '2'">
+            <div class="weiquan-btn aui-font-size-12 color-333" @click="showReturn(item.orderDealSplitId)">维权</div>
+          </div>
+          <div class="yfh" v-if="item.orderState === '3'">
+            <div class="yfh-btn right aui-font-size-12 color-333">确认收货</div>
+            <div class="yfh-btn aui-font-size-12 color-333">查看物流</div>
+          </div>
+          <div class="wqxx" v-if="item.isReturn !== '0'">
+            <div class="wqxx-title aui-font-size-14 color-333">维权信息</div>
+            <p class="color-666 aui-font-size-14">维权时间：{{item.returnTime}}</p>
+            <p class="color-666 aui-font-size-14">我的联系电话：{{item.returnPhone}}</p>
+            <p class="color-666 aui-font-size-14">维权原因：{{item.returnReason}}</p>
+            <p class="color-666 aui-font-size-14">维权状态：{{getReturnStateName(item.isReturn)}}</p>
+            <p class="color-666 aui-font-size-14">维权回复：
+              <template v-if="item.agreeReturnReason">{{item.agreeReturnReason}}</template>
+              <template v-else>暂无</template>
+            </p>
+          </div>
+          <div class="weiquan" v-if="item.status === 4">
+            <div class="weiquan-btn aui-font-size-14 color-333">评价商品</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ddxx aui-bg-white">
+      <div class="wqxx-title aui-font-size-14 color-333">订单信息</div>
+      <div class="ddxx-border">
+        <p class="color-666 aui-font-size-14">商品合计：{{entity.payMoney}}</p>
+        <p class="color-666 aui-font-size-14">商品运费：{{entity.freightMoney}} 元</p>
+        <p class="color-666 aui-font-size-14">备注留言：{{entity.orderRemark}}</p>
+      </div>
+      <div class="ddxx-bottom">
+        <p class="color-666 aui-font-size-14">订单编号：{{entity.orderMainNo}}</p>
+        <p class="color-666 aui-font-size-14">提交时间：{{entity.createTime}}</p>
+        <p class="color-666 aui-font-size-14">支付方式：{{entity.payType}}</p>
+        <p class="color-666 aui-font-size-14">实付金额：{{entity.payMoney}}</p>
+        <p class="color-666 aui-font-size-14">付款时间：{{entity.payTime}}</p>
+      </div>
+    </div>
+    <div v-show="showActivist">
+      <div class="zhezhao" @click="showActivist = false"></div>
+      <div class="alert-weiquan">
+        <p class="title font-17 color-333">维权</p>
+        <input type="number" placeholder="请输入联系电话" class="alert-mobel" v-model="returnPhone">
+        <textarea placeholder="请输入维权原因" class="alert-text" v-model="returnReason"></textarea>
+        <div class="alert-btn">
+          <div class="aui-font-size-12 color-333" @click="showActivist = false">取消</div>
+          <div class="background-fda9c5 aui-text-white aui-font-size-12" @click="setReturn()">确定</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-local.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+  apiready = function (){
+    vm.getData()
+  }
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      orderDealSplitId: '',
+      returnPhone: '',
+      returnReason: '',
+      returnIndex: 0,
+      showActivist: false,
+      imgPath: $apiAjax.kameng_image,
+      entity: {}
+    },
+    methods: {
+      showReturn: function(orderDealSplitId) {
+        this.orderDealSplitId = orderDealSplitId
+        this.showActivist = true
+      },
+      setReturn: function() {
+        var self = this
+        $apiAjax.postBody("/order/deal/split/return", {
+          returnReason: self.returnReason,
+          orderDealSplitId: self.orderDealSplitId,
+          returnPhone: self.returnPhone,
+        },function (ret) {
+          if (ret) {
+            self.showActivist = false
+            $api.toast('维权申请成功！')
+            self.getData()
+          }
+        }, true)
+      },
+      getOrderStateName: function(state) {
+        return $apiLocal.getOrderStateName(state)
+      },
+      getReturnStateName: function(state) {
+        return $apiLocal.getReturnStateName(state)
+      },
+      getData: function() {
+        var self = this
+        $apiAjax.postBody("/order/main/get", {
+          orderMainId: api.pageParam.orderMainId
+        },function (ret) {
+          if (ret) {
+            self.entity = ret
+          }
+        }, true)
+      }
+    }
+  })
+</script>
+</html>

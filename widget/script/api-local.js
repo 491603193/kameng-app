@@ -1,6 +1,6 @@
 /*
  * 衣永康
- * 本地存储 和常量配置
+ * 本地存储 和 常量配置
  */
 (function(window){
     var u = {};
@@ -19,6 +19,13 @@
         '2': '待发货',
         '3': '待收货',
         '4': '已收货',
+    }
+
+    var RETURN_STATE = { // 维权状态 0:未申请维权，1.申请维权， 2.同意维权，3.不同意维权
+        '0': '未申请维权',
+        '1': '维权申请中',
+        '2': '同意维权',
+        '3': '不同意维权'
     }
 
     u.USER_ID = USER_ID;
@@ -89,10 +96,14 @@
     u.getCommonCart = function(){
         return $api.getPrefs(COMMON_CART) || {}
     };
-    u.getStateName = function(state){
+
+    u.getOrderStateName = function(state){
         return ORDER_STATE[state]
     };
 
+    u.getReturnStateName = function(state){
+        return RETURN_STATE[state]
+    };
 
     window.$apiLocal = u;
 })(window);

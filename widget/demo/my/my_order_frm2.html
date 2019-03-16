@@ -58,8 +58,8 @@
       <span class="color-red">￥{{item.total}}</span>
     </div>
     <div class="my-roder-btn background-fff">
-      <div class="pay">立即付款</div>
-      <div class="cancel">取消订单</div>
+      <div class="pay" @click="openDetail()">立即付款</div>
+      <div class="cancel" @click="alert('取消成功')">取消订单</div>
     </div>
   </div>
  </div>
@@ -119,6 +119,11 @@
           img: '../../image/index/zhanwei2.png'
         }]
       }]
+    },
+    methods: {
+      openDetail () {
+        $api.openWin('/demo/shopping/confirm_win')
+      }
     }
   })
 </script>

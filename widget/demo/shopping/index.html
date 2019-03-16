@@ -49,7 +49,7 @@
           </div>
         </div>
       </label>
-      <lable>
+      <label>
         <div class="shop-list-item background-fff">
           <div class="shop-list-left">
             <input class="aui-radio" type="checkbox">
@@ -71,7 +71,7 @@
             </div>
           </div>
         </div>
-      </lable>
+      </label>
     </div>
   </div>
     <!-- 非云仓 -->
@@ -132,14 +132,14 @@
     <div class="shop-foot-left">
       总计：<span>10库存</span>
     </div>
-    <div class="shop-foot-right background-color-feabc5">结算(<span id="footNum">1</span>)</div>
+    <div class="shop-foot-right background-color-feabc5" onclick="openOrder()">结算(<span id="footNum">1</span>)</div>
   </footer>
   <footer id="shopDelete" class="foot" style="display: none;">
     <div class="shop-foot-left-delete">
      <input class="aui-radio" type="checkbox">
      <div>全选</div>
     </div>
-    <div class="shop-foot-right background-color-febb1f">删除(<span id="footNum">1</span>)</div>
+    <div class="shop-foot-right background-color-febb1f" onclick="alert('删除成功')">删除(<span id="footNum">1</span>)</div>
   </footer>
 </body>
 <script src="../../script/api.js"></script>

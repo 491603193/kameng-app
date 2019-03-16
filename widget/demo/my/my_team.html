@@ -12,11 +12,11 @@
 </head>
 <body>
  <div id="app" style="padding-bottom: 20px;">
-   <header class="team-head">
+   <header class="team-head" id="aui-header">
      <div class="color-fff relative">
-       <img src="../../image/back1.svg" class="team-back">
+       <img src="../../image/back1.svg" class="team-back" @click="api.closeWin()">
        <div class="font-18 text-center">我的团队</div>
-       <div class="font-15 history">历史记录</div>
+       <div class="font-15 history" v-show="false">历史记录</div>
      </div>
      <p class="font-13 color-fff team-grade">本月团队绩效</p>
      <p class="color-fff margin-left-5 price">￥56800.00</p>
@@ -55,7 +55,7 @@
    </div>
    <div class="rank-title horizontal">
         <div class="flex-1">团队本月总销售额（元）</div>
-        <!--<div class="red">5000</div>-->
+        <div class="red">5000</div>
         <!--<span class="icon-gengduo"></span>-->
     </div>
     <div class="team-bar-wrap">
@@ -147,6 +147,11 @@
 <script src="../../script/api.js"></script>
 <script src="../../script/vue.min.js"></script>
 <script>
+  apiready = function () {
+    api.parseTapmode();
+    var header = $api.byId('aui-header');
+    $api.fixStatusBar(header);
+  }
   new Vue({
     el: '#app',
     data: {

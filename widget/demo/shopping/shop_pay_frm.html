@@ -43,27 +43,31 @@
     </div>
     <div class="shop-pay-lan background-fff">
       <div class="line1">支付方式</div>
-      <div class="line border-bottom">
-        <div>
-          <input type="radio" id="zx" name="pay" checked>
-          <label for="zx"></label>
+      <label>
+        <div class="line border-bottom">
+          <div>
+            <input type="radio" id="zx" name="pay" checked>
+            <div class="zx box"></div>
+          </div>
+          <div class="margin-left-10 color-666">在线支付</div>
         </div>
-        <div class="margin-left-10 color-666">在线支付</div>
-      </div>
-      <div class="line">
-        <div>
-          <input type="radio" id="ye" name="pay">
-          <label for="ye"></label>
+      </label>
+      <label>
+        <div class="line">
+          <div>
+            <input type="radio" id="ye" name="pay">
+            <div class="box ye"></div>
+          </div>
+          <div class="margin-left-10 color-666">
+            余额支付
+            <span class="color-999">
+              （可用余额
+              <span class="color-red">￥100</span>
+              ）
+            </span>
+          </div>
         </div>
-        <div class="margin-left-10 color-666">
-          余额支付
-          <span class="color-999">
-            （可用余额
-            <span class="color-red">￥100</span>
-            ）
-          </span>
-        </div>
-      </div>
+      </label>
     </div>
     <!-- 提醒 -->
     <div class="shop-pay-remind" v-show="alert">
@@ -108,7 +112,7 @@
     },
     methods: {
       goConfirm () {
-        $api.openWin('/html/shopping/confirm_order_win')
+        $api.openWin('/demo/shopping/confirm_order_win')
       }
     }
   })

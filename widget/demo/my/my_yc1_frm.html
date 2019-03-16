@@ -17,13 +17,13 @@
       <div class="aui-col-xs-6">
         <p class="font-15 color-333">我的管理仓</p>
         <p class="yc1-num color-333">50</p>
-        <p class="font-11 color-999">查看变动记录>></p>
-        <button class="yc1-btn color-fff font-16 background-color-feabc5">购买</button>
+        <p class="font-11 color-999" @click="openDetail('/demo/my/manage_change_record_win')">查看变动记录>></p>
+        <button class="yc1-btn color-fff font-16 background-color-feabc5" @click="pay()">购买</button>
       </div>
       <div class="aui-col-xs-6">
         <p class="font-15 color-333">我的个人仓</p>
         <p class="yc1-num color-333">30</p>
-        <p class="font-11 color-999">查看变动记录>></p>
+        <p class="font-11 color-999" @click="openDetail('/demo/my/personage_change_record_win')">查看变动记录>></p>
         <button class="yc1-btn color-fff font-16 background-blue" @click="diaoRu = true">调入</button>
       </div>
     </header>
@@ -57,7 +57,7 @@
         <textarea placeholder="请填写拒绝原因" class="alert-text yc1-alert-text"></textarea>
         <div class="alert-btn">
           <div class="font-12 color-333" @click="juJue = false">取消</div>
-          <div class="background-fda9c5 color-fff font-12">确定</div>
+          <div class="background-fda9c5 color-fff font-12" @click="juJue = false">确定</div>
         </div>
       </div>
         <!-- 提醒 -->
@@ -80,7 +80,7 @@
         <input type="number" placeholder="请填写数量（<=50）" class="yc1-num-text">
         <div class="alert-btn">
           <div class="font-12 color-333" @click="diaoRu = false">取消</div>
-          <div class="background-fda9c5 color-fff font-12">确定</div>
+          <div class="background-fda9c5 color-fff font-12" @click="diaoRu = false">确定</div>
         </div>
       </div>
      <!-- 调入 end -->
@@ -196,6 +196,12 @@
         this.juJue = false
         this.tongYi = false
         this.diaoRu = false
+      },
+      pay () {
+        $api.openWin('/demo/my/my_yc_win')
+      },
+      openDetail (win) {
+        $api.openWin(win)
       }
     }
   })

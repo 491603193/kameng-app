@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
   <title>收货地址</title>
   <link rel="stylesheet" href="../../css/aui.css">
   <link rel="stylesheet" href="../../css/km.css">
@@ -15,21 +16,21 @@
       <div class="address-list-item">
         <p class="font-15 color-333">山东省烟台市莱山区惠东大厦304</p>
         <p class="font-12 color-999 margin-top-5">戴永明 <span class="margin-left-15">15621565285</span></p>
-        <img src="../../image/compile.svg" class="address-compile">
+        <img src="../../image/compile.svg" class="address-compile" @click="openDetail(1)">
       </div>
       <div class="address-list-item">
         <p class="font-15 color-333">山东省烟台市莱山区惠东大厦304</p>
         <p class="font-12 color-999 margin-top-5">戴永明 <span class="margin-left-15">15621565285</span></p>
-        <img src="../../image/compile.svg" class="address-compile">
+        <img src="../../image/compile.svg" class="address-compile" @click="openDetail(1)">
       </div>
       <div class="address-list-item">
         <p class="font-15 color-333">山东省烟台市莱山区惠东大厦304</p>
         <p class="font-12 color-999 margin-top-5">戴永明 <span class="margin-left-15">15621565285</span></p>
-        <img src="../../image/compile.svg" class="address-compile">
+        <img src="../../image/compile.svg" class="address-compile" @click="openDetail(1)">
       </div>
     </div>
     <footer class="foot background-fff">
-      <button class="address-btn background-fda9c5 color-fff font-15">新增收货地址</button>
+      <button class="address-btn background-fda9c5 color-fff font-15" @click="openDetail()">新增收货地址</button>
     </footer>
   </div>
 </body>
@@ -40,6 +41,20 @@
     el: '#app',
     data: {
 
+    },
+    methods: {
+      openDetail (id) {
+        let pageParam = {
+          isEdit: true
+        }
+        if (id) {
+          $api.openWin('/demo/my/address_edit_win', pageParam)
+        } else {
+          pageParam.isEdit = false
+          $api.openWin('/demo/my/address_edit_win', pageParam)
+        }
+
+      }
     }
   })
 </script>

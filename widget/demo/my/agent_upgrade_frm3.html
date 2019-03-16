@@ -46,7 +46,7 @@
       <div class="yc3-imgs">
         <img src="../../image/takephoto.png" class="yc3-img-el">
       </div>
-      <button class="yc-btn background-color-feabc5">完成</button>
+      <button class="yc-btn background-color-feabc5" @click="tongYi = true;">完成</button>
     </div>
     <div v-show="tongYi">
       <div class="zhezhao-back" @click="tongYi = false"></div>
@@ -74,7 +74,7 @@
   new Vue({
     el: '#app',
     data: {
-      tongYi: true
+      tongYi: false
     }
   })
 </script>

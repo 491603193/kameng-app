@@ -25,6 +25,7 @@
   white-space: nowrap
 }
 .login-item-input {
+  width: 100%;
   margin-left: 14px;
 }
 .login-list-item-code {
@@ -1127,7 +1128,7 @@ input[type="text"].index-input-search {
 .shop-pay-state .text::-webkit-input-placeholder {
   color: #ddd;
 }
-.shop-pay-lan label {
+.shop-pay-lan .box {
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -1136,7 +1137,7 @@ input[type="text"].index-input-search {
   position: relative;
   transform: translateY(2px);
 }
-.shop-pay-lan label::before {
+.shop-pay-lan .box::before {
   content: '';
   width: 8px;
   height: 8px;
@@ -1151,7 +1152,7 @@ input[type="text"].index-input-search {
 .shop-pay-lan input[type='radio'] {
   display: none;
 }
-.shop-pay-lan input[type='radio']:checked + label::before {
+.shop-pay-lan input[type='radio']:checked + .box::before {
   background: #a0c161;
 }
 .shop-pay-lan {
@@ -1580,7 +1581,6 @@ input[type="text"].index-input-search {
   height: 44px;
   margin-top: 10px;
   font-size: 16px;
-  line-height: 44px;
   border: 1px solid #eee;
   padding: 5px;
 }

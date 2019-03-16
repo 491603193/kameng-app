@@ -33,3 +33,6 @@ function getState (id) {
     shopDelete.style.display = "none"
   }
 }
+function openOrder () {
+  $api.openWin('/demo/shopping/shop_pay_win')
+}

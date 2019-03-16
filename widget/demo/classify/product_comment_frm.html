@@ -35,7 +35,7 @@
         </div>
     </div>
     <!-- 遮罩 -->
-    <div id="film" class="film" :class="{asf: zhezhao}">
+    <div id="film" class="film" :class="{asf: zhezhao}" v-show="zhezhao">
       <div class="film-zhanwei" @click="recover()"></div>
       <div class="film-content">
         <div class="film-content-title">
@@ -136,7 +136,7 @@ new Vue({
       this.num++
     },
     goPay () {
-      $api.openWin('/html/shopping/shop_pay_win')
+      $api.openWin('/demo/shopping/shop_pay_win')
     }
   }
 })

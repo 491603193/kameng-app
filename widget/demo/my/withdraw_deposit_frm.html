@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>提现申请</title>
+  <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/km.css">
+  <link rel="stylesheet" href="../../css/withdraw_deposit.css">
+</head>
+<body>
+  <div id="app" :class="tiXian || tiXing ? 'pay' : ''">
+    <div class="head background-fff">
+      <p class="margin-top-10 font-14 color-666 text-center">可提现金额</p>
+      <p class="big-price color-red margin-top-5 text-center">￥12000</p>
+      <div class="aui-row margin-top-20">
+        <div class="aui-col-xs-6 col-left">
+          <p class="font-13 color-999 text-center">扣税金额</p>
+          <p class="font-14 color-333 margin-top-5 text-center">4000.00</p>
+        </div>
+        <div class="aui-col-xs-6">
+          <p class="font-13 color-999 text-center">实际到账金额</p>
+          <p class="font-14 color-333 margin-top-5 text-center">8000.00</p>
+        </div>
+      </div>
+      <p class="font-12 color-999 head-look" @click="openDetail()">查看明细>></p>
+      <div class="head-flex margin-top-12">
+        <div class="left background-fda9c5 color-fff" @click="tiXian = true">全部提现</div>
+        <div class="right background-fff color-pink margin-left-10" @click="tiXian = true">全部转到余额</div>
+      </div>
+    </div>
+    <div class="withdraw-title font-16 color-333">提现记录</div>
+    <div class="withdraw-list">
+      <div class="withdraw-list-item background-fff">
+        <div class="line1">
+          <div class="font-16 color-red">12000 <span class="color-a0c161 font-12">已提现</span></div>
+          <div class="color-999 font-11">02-13 10:12:23</div>
+        </div>
+        <p class="line2 color-666 font-14">扣税金额4000.00，实际到账金额8000.00</p>
+        <div class="line3 font-13 color-blue" @click="openDetail()">查看明细>></div>
+      </div>
+      <div class="withdraw-list-item background-fff">
+        <div class="line1">
+          <div class="font-16 color-red">12000 <span class="color-a0c161 font-12">已提现</span></div>
+          <div class="color-999 font-11">02-13 10:12:23</div>
+        </div>
+        <p class="line2 color-666 font-14">扣税金额4000.00，实际到账金额8000.00</p>
+        <div class="line3 font-13 color-blue" @click="openDetail()">查看明细>></div>
+      </div>
+    </div>
+    <div v-show="tiXian || tiXing">
+      <div class="zhezhao-back" @click="zhezhao()"></div>
+      <div class="shop-pay-remind" v-show="tiXian">
+        <div class="remind">
+          <div class="remind-relative">
+            <div class="remind-absolute">
+              <img src="../../image/alert.png">
+            </div>
+            <p class="aui-text-center font-17 color-333">提醒</p>
+            <p class="aui-text-center font-14 color-333">提现到银行卡需要您先完善个人信息</p>
+            <div class="background-color-feabc5 color-fff font-15 aui-text-center" @click="tiXian = false">去完善</div>
+          </div>
+        </div>
+      </div>
+      <div class="shop-pay-remind" v-show="tiXing">
+        <div class="remind">
+          <div class="remind-relative">
+            <div class="remind-absolute">
+              <img src="../../image/alert.png">
+            </div>
+            <p class="aui-text-center font-17 color-333">提醒</p>
+            <p class="aui-text-center font-14 color-333">未到提现时间不可提现（每月2号到5号可提现）</p>
+            <div class="background-color-feabc5 color-fff font-15 aui-text-center" @click="tiXian = false">确定</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="../../script/api.js"></script>
+<script src="../../script/vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      tiXian: false,
+      tiXing: false
+    },
+    methods: {
+      zhezhao () {
+        this.tiXian = false
+        this.tiXing = false
+      },
+      openDetail () {
+        $api.openWin('/demo/my/income_detail_win')
+      }
+    }
+  })
+</script>
+</html>

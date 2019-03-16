@@ -24,5 +24,5 @@ var tab = new auiTab({
   }
 });
 function openProductList () {
-  $api.openWin('/html/classify/product_win')
+  $api.openWin('/demo/classify/product_win')
 }

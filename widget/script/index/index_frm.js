@@ -25,8 +25,21 @@ var slide4 = new auiSlide({
     'dotPosition':'center'
 })
 function openDetail () {
-  $api.openWin('/html/classify/product_detail')
+  $api.openWin('/demo/classify/product_detail')
+}
+function openIncome () {
+  $api.openWin('/demo/my/income_statistics_win')
 }
 function zheZhaoHidden () {
   $api.byId('indexZhe').style.display = "none"
+}
+function openClass () {
+  var NVTabBar = api.require('NVTabBar');
+  api.setFrameGroupIndex({
+    name: 'indexFrameGroup',
+    index: 1
+  });
+  api.execScript({
+      script: 'changeFrameGroupByIndex(1)'
+  });
 }

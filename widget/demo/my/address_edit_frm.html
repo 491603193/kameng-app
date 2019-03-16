@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>收货地址</title>
+  <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/user/address.css">
+</head>
+<body>
+  <div id="app">
+    <ul class="address-ul margin-top-10 aui-bg-white">
+      <li class="address-li-item">
+        <div>姓名</div>
+        <input type="text" placeholder="请输入收货人姓名" name="receiverName" v-model="address.receiverName">
+      </li>
+      <li class="address-li-item">
+        <div>手机号码</div>
+        <input type="number" placeholder="请输入收货手机号码" name="receiverPhone" v-model="address.receiverPhone">
+      </li>
+      <li class="address-li-item" @click="selAddress()">
+        <div>省市区</div>
+        <div class="select font-15" :class="addressAllName === '请选择省市区' ? 'color-999' : 'color-666'">
+          {{addressAllName}}
+          <img src="../../../image/go.svg" alt="">
+        </div>
+      </li>
+      <li class="address-li-item">
+        <div>详细地址</div>
+        <input type="text" placeholder="例：**小区16号楼128室" name="receiverPhone" v-model="address.receiverAddress">
+      </li>
+      <li class="address-li-item">
+        <div>默认地址</div>
+        <input type="checkbox" class="aui-radio default-address" v-model="address.isDefault">
+      </li>
+    </ul>
+    <button class="address-btn background-fda9c5 aui-text-white font-16" @click="addAddress()" v-if="!isEdit">添加收货地址</button>
+    <button class="address-btn background-fda9c5 aui-text-white font-16" @click="updateAddress()" v-if="isEdit">保存收货地址</button>
+    <button class="address-btn aui-bg-white color-999 font-16" @click="deleteAddress()"  v-if="isEdit">删除收货地址</button>
+  </div>
+</body>
+<script src="../../script/api.js"></script>
+<script src="../../script/api-ajax.js"></script>
+<script src="../../script/api-validate.js"></script>
+<script src="../../script/vue.min.js"></script>
+<script src="../../script/aui/aui-dialog.js" ></script>
+<script>
+  var addressView
+  apiready = function() {
+    addressView = api.require('addressView');
+    if (api.pageParam.isEdit) {
+      vm.isEdit = true
+      vm.getData()
+    } else {
+      vm.setUserAddress([null,null,null])
+    }
+  };
+  var dialog = new auiDialog({})
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      isEdit: false,
+      address: {
+        province: '',
+        city: '',
+        country: '',
+        regionCode: '',
+        isDefault: true
+      }
+    },
+    computed: {
+      addressAllName: function () {
+        var name =  this.address.province + this.address.city + this.address.country
+        return name? name : "请选择省市区"
+      },
+    },
+    created: function () {},
+    methods: {
+      setUserAddress: function (regionCodes) {
+        addressView.open({
+          file_addr: 'widget://res/region.txt', //数据源地址
+          selected_color: '#fda9c5', //颜色
+          pro_id: regionCodes[0], //省id
+          city_id: regionCodes[1], //市id
+          dir_id: regionCodes[2] //区id
+        });
+      },
+      selAddress: function () {
+        var self = this;
+        addressView.show({}, function(ret) {
+          if (ret.status) {
+            self.address.province = ret.data[0].name;
+            self.address.city = ret.data[1].name;
+            self.address.country = ret.data[2].name;
+            self.address.regionCode = ret.data[2].id;
+          }
+        });
+      },
+      addAddress: function () {
+        if (!this.valDateForm()) return
+        $apiAjax.postBody("/user/address/add", this.address, function (ret) {
+          if (ret) {
+            $apiAjax.successToast('保存成功！');
+            api.execScript({
+              name: '/html/user/address/address_list_win',
+              frameName: '/html/user/address/address_list_frm',
+              script: 'vm.loading()'
+            })
+            setTimeout(function () {
+              api.closeWin()
+            },800)
+          }
+        }, 'submit');
+      },
+      updateAddress: function () {
+        if (!this.valDateForm()) return
+        $apiAjax.postBody("/user/address/update", this.address, function (ret) {
+          if (ret) {
+            $apiAjax.successToast('保存成功！');
+            api.execScript({
+              name: '/html/user/address/address_list_win',
+              frameName: '/html/user/address/address_list_frm',
+              script: 'vm.loading()'
+            })
+            setTimeout(function () {
+              api.closeWin()
+            },800)
+          }
+        }, 'submit');
+      },
+      valDateForm: function() {
+        return $val.valEmpty(this.address.receiverName,'姓名')
+          && $val.valPhone(this.address.receiverPhone)
+          && $val.valEmpty(this.address.regionCode, '省市区')
+          && $val.valEmpty(this.address.receiverAddress, '详细地址')
+      },
+      deleteAddress: function(){
+        var self = this;
+        dialog.alert({
+          title:"温馨提示",
+          msg:'是否删除当前收货地址？',
+          buttons:['取消','确定']
+        },function(ret){
+          if(ret){
+            if (ret.buttonIndex === 2) {
+              $apiAjax.postBody("/user/address/delete", {
+                userAddrId: self.address.userAddrId
+              }, function (ret) {
+                if (ret) {
+                  api.execScript({
+                    name: '/html/user/address/address_list_win',
+                    frameName: '/html/user/address/address_list_frm',
+                    script: 'vm.loading()'
+                  })
+                  api.closeWin()
+                }
+              }, true);
+            }
+          }
+        })
+
+      },
+      getData: function () {
+        var self = this
+        $apiAjax.postBody("/user/address/get", {
+          userAddrId: api.pageParam.userAddrId
+        }, function (ret) {
+          if (ret) {
+            self.address = ret
+            self.isEdit = true
+            var regions = []
+            regions.push(parseInt(ret.regionCode.substring(0,2)+'0000'))
+            regions.push(parseInt(ret.regionCode.substring(0,4)+'00'))
+            regions.push(parseInt(ret.regionCode.substring(0,6)))
+            self.setUserAddress(regions);
+          }
+        }, true);
+      }
+    }
+  })
+</script>
+</html>

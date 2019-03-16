@@ -43,32 +43,32 @@ function initFrameGroupData () {
   ];
   bottomGroupArr = [
     {
-      name: '/html/index_frm.html',
-      url: api.wgtRootDir + '/html/index_frm.html',
+      name: '/demo/index_frm.html',
+      url: api.wgtRootDir + '/demo/index_frm.html',
       pageParam: {
         showMode: 1
       },
       bounces: false
     },
     {
-      name: '/html/classify/index.html',
-      url: api.wgtRootDir + '/html/classify/index.html',
+      name: '/demo/classify/index.html',
+      url: api.wgtRootDir + '/demo/classify/index.html',
       pageParam: {
         showMode: 1
       },
       bounces: false
     },
     {
-      name: '/html/shopping/index.html',
-      url: api.wgtRootDir + '/html/shopping/index.html',
+      name: '/demo/shopping/index.html',
+      url: api.wgtRootDir + '/demo/shopping/index.html',
       pageParam: {
         showMode: 1
       },
       bounces: false
     },
     {
-      name: '/html/my/index.html',
-      url: api.wgtRootDir + '/html/my/index.html',
+      name: '/demo/my/index.html',
+      url: api.wgtRootDir + '/demo/my/index.html',
       bounces: true
     }
   ];

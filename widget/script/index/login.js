@@ -3,7 +3,7 @@ var pendingText
 var code
 function login () {
   $api.toast('登录成功')
-  $api.openWin('/html/index_win')
+  $api.openWin('/demo/index_win')
 }
 function getCode () {
   if (panding) return

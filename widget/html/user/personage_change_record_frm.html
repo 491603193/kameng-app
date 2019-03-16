@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>个人仓变动记录</title>
+  <link rel="stylesheet" href="../../css/aui.css">
+  <link rel="stylesheet" href="../../css/km.css">
+  <link rel="stylesheet" href="../../css/apply_agency_frm.css">
+  <style>
+    .record-back {
+      padding: 0 15px;
+    }
+    .record-item {
+      margin-top: 10px;
+    }
+    .record-ddbh {
+      width: 100%;
+      height: 29px;
+      line-height: 29px;
+      padding: 0 10px;
+    }
+    .record-text {
+      width: 70%;
+      padding: 15px 10px 0 10px;
+      position: relative;
+    }
+    .record-num {
+      position: absolute;
+      right: -30%;
+      top: 15px;
+    }
+    .record-time {
+      padding: 2px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="record-back">
+    <div class="record-item background-fff" v-for="(item, index) in records" :key="index">
+      <div class="record-ddbh font-13 background-fffaf3">订单编号：{{item.code}}</div>
+      <div class="record-text font-16">
+        {{item.text}}
+        <p class="record-num font-16" :class="item.state === 1 ? 'color-red' : 'color-666'">{{item.state === 1 ? '+' + item.num : '-' + item.num}}</p>
+      </div>
+      <p class="record-time color-999">{{item.time}}</p>
+    </div>
+  </div>
+</body>
+<script src="../../script/api.js"></script>
+<script src="../../script/vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      records: [{
+        code: '23665541323',
+        text: '购入库存100个',
+        time: '2019-02-13 10:12:23',
+        num: '100',
+        state: 1
+      },{
+        code: '23665541323',
+        text: '购入库存100个',
+        time: '2019-02-13 10:12:23',
+        num: '100',
+        state: 1
+      },{
+        code: '23665541323',
+        text: '购入案说法撒阿飞萨芬萨啊萨法萨法撒案说法撒存100个',
+        time: '2019-02-13 10:12:23',
+        num: '100',
+        state: 2
+      }]
+    }
+  })
+</script>
+</html>

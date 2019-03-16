@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>我的订单</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/order/order.css">
+</head>
+<body>
+<div id="app" v-cloak>
+  <div class="my-order-el" v-for="(item, index) in entities" :key="item.orderMainId">
+    <header class="shop-pay-head background-fffbf3"> 订单编号：{{item.orderMainNo}}
+      <span class="span-float-right">{{getStateName(item.orderState)}}</span>
+    </header>
+    <div class="shop-pay-site aui-bg-white">
+      <div class="shop-pay-site-line">
+        <span>收货人：{{item.userName}}</span>
+        <span class="right">{{item.receiverPhone}}</span>
+      </div>
+      <div class="shop-pay-site-line2">
+        <img src="../../../image/site.svg" class="site-icon">
+        <div class="shop-pay-site-msg">收货地址：{{item.receiverCountry}}{{item.receiverCity}}{{item.receiverProvince}}{{item.receiverAddress}}</div>
+      </div>
+    </div>
+    <div class="shop-pay-site-ban"></div>
+    <div class="aui-bg-white" v-for="(el, elIndex) in item.orderDealList" :key="el.orderDealId">
+      <div class="my-order-small-code">订单编号：{{el.orderDealNo}}</div>
+      <div class="shop-pay-state">
+        <div>
+          <div class="shop-pay-state-head">
+            <img :src="imgPath + el.productStockPic" class="product">
+            <div class="shop-pay-status">
+              <p class="title aui-ellipsis-1">{{el.productName}}</p>
+              <p class="status aui-ellipsis-1">规格：{{el.specItemNames}}</p>
+              <p class="num">
+                <span class="aui-text-danger aui-font-size-16">
+                  <template v-if="el.orderType === '1'">{{el.stockNum}}云仓</template>
+                  <template v-else>￥{{el.productMoney}}</template>
+                </span>
+                <span class="freight-charge" v-if="el.freightMoney > 0">运费 ￥{{el.freightMoney}}</span>
+              </p>
+            </div>
+            <div class="nums">X{{el.productNum}}</div>
+          </div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="my-roder-total aui-bg-white">
+      共计{{item.productNum}}件商品     &nbsp;&nbsp;&nbsp;&nbsp;  合计：
+      <span class="color-red aui-text-danger">
+        <template v-if="item.orderType === '1'">{{item.stockNum}} 云仓</template>
+        <template v-else>{{item.productMoney}} 元</template>
+      </span>
+    </div>
+    <div class="my-roder-btn aui-bg-white" v-if="item.orderState === '1'">
+      <div class="pay">立即付款</div>
+      <div class="cancel" @click="closeOrder(item.orderMainId, index)">取消订单</div>
+    </div>
+  </div>
+  <div class="aui-no-data" v-show="noData">
+    <img src="../../../image/shopping/no_order.svg">
+    <div class="text">没有查到订单，快去下单吧~</div>
+  </div>
+</div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-local.js"></script>
+<script src="../../../script/api-loading.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script src="../../../script/aui/aui-dialog.js" ></script>
+<script>
+  apiready = function (){
+    vm.loading(true);
+    $apiLoading.loadModel(function () {
+      vm.loading(false);
+    });
+  };
+  var dialog = new auiDialog({})
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      imgPath: $apiAjax.kameng_image,
+      noData: false,
+      noMoreData: false,
+      entities: [],
+      stateObj: {
+        '1': '待支付'
+      }
+    },
+    methods: {
+      closeOrder: function (orderMainId, index) {
+        var self = this;
+        dialog.alert({
+          title:"温馨提示",
+          msg:'是否关闭当前订单 ？',
+          buttons:['取消','确定']
+        },function(ret){
+          if(ret){
+            if (ret.buttonIndex === 2) {
+              self.postCloseOrder(orderMainId, index)
+            }
+          }
+        })
+      },
+      postCloseOrder: function(orderMainId, index) {
+        var self = this;
+        $apiAjax.postBody("/order/main/cancel", {
+          orderMainId: orderMainId
+        },function (ret) {
+          if (ret) {
+            self.entities[index].orderState = '0'
+            $api.toast("该订单已取消")
+          }
+        }, true);
+      },
+      getStateName: function(state) {
+        return $apiLocal.getStateName(state)
+      },
+      openDetail: function(productId){
+        var url = $apiAjax.kameng_web + '/goods/' + productId + '/' + $apiLocal.getUserId();
+        $api.openWin('/html/goods/product/product_detail_win', {
+          url: url
+        })
+      },
+      loading: function(isFlush){
+        var self = this;
+        $apiAjax.postBody("/order/main/page", {
+          param: {
+            orderState: '3'
+          },
+          page: $apiLoading.page
+        },function (data, page) {
+          $apiLoading.setPage(page);
+          self.noData = false;
+          if (page.pageNo === 1) {
+            if(data.length === 0) self.noData = true;
+            else self.entities = data
+          } else {
+            self.entities = self.entities.concat(data);
+          }
+          self.noMoreData = page.pageNo > 1 && !page.hasNext && !self.noData;
+        }, isFlush);
+      }
+    }
+  })
+</script>
+</html>

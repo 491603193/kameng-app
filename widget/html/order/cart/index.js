@@ -98,7 +98,7 @@ var vm = new Vue({
             }
           }
         }
-        $api.openWin('/html/order/cart/confirm_win', cartsParam)
+        $api.openWin('/html/user/cart/confirm_win', cartsParam)
       } else {
         $api.toast("请先选择要购买的商品呦~")
       }

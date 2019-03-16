@@ -1,0 +1,187 @@
+
+.my-order-el:not(:first-of-type) {
+    margin-top: 10px;
+}
+.my-order-el .shop-pay-head {
+    height: 44px;
+    line-height: 44px;
+    font-size: 13px;
+    color: #333;
+}
+.span-float-right {
+    float: right;
+}
+.my-order-el .span-float-right {
+    font-szie: 12px;
+    color: #f15a24;
+}
+.my-order-small-code {
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    color: #666;
+    padding: 0 15px;
+}
+.my-order-el .shop-pay-state {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.my-order-el .shop-pay-state .line {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+.my-roder-total {
+    width: 100%;
+    padding: 0 15px;
+    height: 44px;
+    line-height: 44px;
+    color: #333;
+    font-size: 13px;
+    text-align: right;
+    border-bottom: 1px solid #eee;
+}
+.my-roder-total .color-red {
+    font-size: 15px;
+}
+.my-roder-btn {
+    width: 100%;
+    height: 50px;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.my-roder-btn div {
+    width: 90px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: #333;
+    border: 1px solid #999;
+    border-radius: 15px;
+}
+.my-roder-btn .cancel {
+    position: relative;
+    left: -10px;
+}
+
+.shop-pay-head {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 15px;
+    font-size: 11px;
+}
+.shop-pay-site {
+    padding: 10px 15px;
+}
+.shop-pay-site-line {
+    margin-left: 22px;
+    font-size: 13px;
+    color: #666;
+}
+.shop-pay-site-line .right {
+    float: right;
+    margin-right: 8px;
+}
+.shop-pay-site-line2 {
+    position: relative;
+}
+.shop-pay-site-msg {
+    margin: 5px 17px 0 22px;
+    font-size: 13px;
+    color: #666;
+}
+.shop-pay-site-line2 .site-icon {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 5px;
+    left: 0;
+}
+.shop-pay-site-line2 .go-icon {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 0;
+    top: 5px;
+}
+.shop-pay-site-ban {
+    width: 100%;
+    height: 6px;
+    background-image: url('../../image/bianline.jpg');
+}
+.shop-pay-state {
+    padding: 0 15px 17px 15px;
+    background-color: #fff;
+    overflow: hidden;
+}
+.shop-pay-state-head {
+    display: flex;
+    position: relative;
+}
+.shop-pay-state-head .product {
+    width: 82px;
+    height: 82px;
+    border: 1px solid #eee;
+}
+.shop-pay-state-head .freight-charge {
+    color: #666;
+    position: absolute;
+    right: 0;
+    font-size: 13px;
+}
+.shop-pay-status {
+    width: calc(100% - 115px);
+    margin-left: 11px;
+}
+.shop-pay-status .title {
+    font-size: 15px;
+    color: #333;
+}
+.shop-pay-status .status {
+    color: #999;
+    font-size: 14px;
+    margin-top: 5px;
+}
+.shop-pay-status .num {
+    margin-top: 13px;
+    font-size: 16px;
+}
+.shop-pay-state-head .nums {
+    position: absolute;
+    font-size: 13px;
+    color: #333;
+    top: 0;
+    right: 0;
+}
+.shop-pay-state .line {
+    padding-bottom: 10px;
+    font-size: 15px;
+    border-bottom: 1px solid #eee;
+}
+.shop-pay-state .line span {
+    float: right;
+}
+.shop-pay-state .line1 {
+    margin-top: 20px;
+    text-align: right;
+}
+.shop-pay-state .line2 {
+    border-bottom: 1px solid #eee;
+}
+.shop-pay-state .message {
+    display: flex;
+    align-items: center;
+}
+.shop-pay-state .text {
+    width: 70%;
+    margin-lef: 10px;
+}
+.shop-pay-state .text::-webkit-input-placeholder {
+    color: #ddd;
+}
+.background-fffbf3 {
+    background-color: #fffbf3;
+}

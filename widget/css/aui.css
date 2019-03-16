@@ -339,6 +339,9 @@ img {
 .aui-font-size-20 {
 	font-size: 1rem !important;
 }
+.aui-text-gray {
+	color: #666 !important;
+}
 .aui-text-default {
 	color: #212121 !important;
 }
@@ -458,6 +461,42 @@ img {
 img.aui-img-round {
 	border-radius: 50%;
 }
+
+/** 没有更多数据了 */
+.aui-no-line {
+	font-size: 13px;
+	height: 25px;
+	border-top: 1px solid #eee;
+	text-align: center;
+	background-color: #fff;
+	margin-top: 28px;
+}
+.aui-no-line span{
+	position: relative;
+	top: -12px;
+	background: #fff;
+	padding: 0 20px;
+	color: #bbb;
+}
+
+/* 暂无数据 */
+.aui-no-data {
+	text-align: center;
+	width: 100%;
+	margin: 0 auto;
+	position: absolute;
+	top: 35%;
+}
+.aui-no-data img {
+	width: 100%;
+	height: 50px;
+}
+.aui-no-data .text {
+	margin-top: 20px;
+	font-size: 13px;
+	color: #666;
+}
+
 /*基本容器*/
 .aui-content {
 	-webkit-overflow-scrolling: touch;
@@ -1151,14 +1190,14 @@ input[type="search"]::-webkit-search-cancel-button {
     position: relative;
     font-size: 0.7rem;
     text-align: center;
-    color: #212121;
+    color: #999;
     margin-left: -1px;
     -webkit-box-flex: 1;
             box-flex: 1;
 }
 .aui-tab-item.aui-active {
-    color: #039be5;
-    border-bottom: 2px solid #039be5;
+    color: #feabc5;
+    border-bottom: 2px solid #feabc5;
 }
 /*卡片列表布局*/
 .aui-card-list {

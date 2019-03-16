@@ -13,6 +13,14 @@
     var CLOUD_CART = 'cloudCart'; // 云仓购物车
     var COMMON_CART = 'commonCart'; // 非云仓购物车
 
+    var ORDER_STATE = { // 订单状态
+        '0': '已取消',
+        '1': '待支付',
+        '2': '待发货',
+        '3': '待收货',
+        '4': '已收货',
+    }
+
     u.USER_ID = USER_ID;
     u.USER_NAME = USER_NAME;
     u.USER = USER;
@@ -81,7 +89,9 @@
     u.getCommonCart = function(){
         return $api.getPrefs(COMMON_CART) || {}
     };
-
+    u.getStateName = function(state){
+        return ORDER_STATE[state]
+    };
 
 
     window.$apiLocal = u;

@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>购物车</title>
-  <link rel="stylesheet" href="../../css/aui.css">
-  <link rel="stylesheet" href="../../css/cart/index.css">
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/order/index.css">
 </head>
 <body>
   <div id="app" v-cloak>
@@ -59,7 +59,7 @@
             <label v-else>
               <div class="shop-list-item aui-bg-white">
                 <div class="shop-list-left" v-bind:class="{ 'shop-list-left-edit': isEdit }">
-                  <input class="aui-radio" type="checkbox" readonly v-show="isEdit">
+                  <input class="aui-radio" type="checkbox" v-show="isEdit" v-model="entity.checked">
                   <img :src="imgPath + entity.stockPic">
                 </div>
                 <div class="shop-list-right relative">
@@ -68,8 +68,8 @@
                   <div class="shop-btn1 margin-top-12">
                     <div class="shop-kc absolute">{{entity.stockPrice}} 云仓</div>
                     <div class="font-12 color-red">{{entity.validStatusMsg}}</div>
-                    <div class="shop-delete" @click="deleteSorts(index)">
-                      <img src="../../image/delete.svg">
+                    <div class="shop-delete" @click.prevent="deleteSorts(index)">
+                      <img src="../../../image/delete.svg">
                     </div>
                   </div>
                 </div>
@@ -105,7 +105,7 @@
             <label v-else>
               <div class="shop-list-item aui-bg-white">
                 <div class="shop-list-left" v-bind:class="{ 'shop-list-left-edit': isEdit }">
-                  <input class="aui-radio" type="checkbox" readonly v-show="isEdit">
+                  <input class="aui-radio" type="checkbox" v-show="isEdit" v-model="entity.checked">
                   <img :src="imgPath + entity.stockPic">
                 </div>
                 <div class="shop-list-right relative">
@@ -114,8 +114,8 @@
                   <div class="shop-btn1 margin-top-12">
                     <div class="shop-kc absolute">￥ {{entity.stockPrice}}</div>
                     <div class="font-12 color-red">{{entity.validStatusMsg}}</div>
-                    <div class="shop-delete" @click="deleteSorts(index)">
-                      <img src="../../image/delete.svg">
+                    <div class="shop-delete" @click.prevent="deleteSorts(index)">
+                      <img src="../../../image/delete.svg">
                     </div>
                   </div>
                 </div>
@@ -141,17 +141,16 @@
           <div v-if="isCheckedAll">全不选</div>
           <div v-else>全选</div>
       </div>
-      <div class="shop-foot-right background-color-febb1f" @click="deleteSel()">删除(<span>{{selectNum}}</span>)</div>
+      <div class="shop-foot-right background-color-febb1f" @click="confirmDeleteSel()">删除(<span>{{selectNum}}</span>)</div>
     </footer>
     </div>
 </body>
-<script src="../../script/api.js"></script>
-<script src="../../script/api-ajax.js"></script>
-<script src="../../script/api-local.js"></script>
-<script src="../../script/api-loading.js"></script>
-<script src="../../script/vue.min.js"></script>
-<script src="../../script/aui/aui-tab.js"></script>
-<script src="../../script/aui/aui-dialog.js" ></script>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-local.js"></script>
+<script src="../../../script/api-loading.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script src="../../../script/aui/aui-tab.js"></script>
+<script src="../../../script/aui/aui-dialog.js" ></script>
 <script src="index.js"></script>
-<script></script>
 </html>

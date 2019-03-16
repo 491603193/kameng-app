@@ -1,0 +1,137 @@
+/* add_comment end*/
+/* my index */
+.my-head {
+    width: 100%;
+    height: 162.5px;
+    background-image: url('../../image/my/back.jpg');
+    background-size: 100% 100%;
+    background-position: center;
+    padding: 0 15px;
+    overflow: hidden;
+}
+.my-flex {
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+}
+.my-head-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff;
+}
+.my-head-img img {
+    width: 100%;
+    height: 100%;
+}
+.my-head-name {
+    width: calc(100% - 79px);
+    margin-left: 17px;
+}
+.my-head-name .name {
+    margin-top: 5px;
+    font-size: 15px;
+}
+.my-head-name .rank {
+    margin-top: 5px;
+}
+.my-head-name .right {
+    float: right;
+}
+.my-card {
+    width: 90%;
+    height: 133px;
+    padding: 17px 0;
+    background-color: #fffaf4;
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px #c9c2b8;
+    position: absolute;
+    left: 50%;
+    margin-left: -45%;
+    top: 161px;
+    display: flex;
+}
+.my-card .el {
+    width: 50%;
+    padding: 0 15px;
+}
+.my-card .left {
+    border-right: 1px solid #eee;
+}
+.my-card .incom {
+    font-size: 15px;
+    color: #333;
+    margin-top: 10px;
+}
+.my-card .money {
+    font-size: 19px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+.my-card .look {
+    font-size: 11px;
+    text-align: right;
+    margin-top: 20px;
+}
+.my-click {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+.my-click-row {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+.my-click-row:last-of-type {
+    border: none;
+}
+.my-click-row .el {
+    width: 50%;
+    height: 35px;
+    display: flex;
+    font-size: 14px;
+    color: #333;
+    align-items: center;
+    justify-content: center;
+}
+.my-click-icon {
+    width: 29px;
+    height: 29px;
+    position: relative;
+}
+.my-click-icon img {
+    width: 100%;
+    height: 100%;
+}
+.my-click-row .font-14 {
+    margin-left: 25px;
+}
+.my-click-row .left {
+    border-right: 1px solid  #eee;
+}
+.my-click-icon .dot {
+    width: 13px;
+    height: 13px;
+    font-size: 8px;
+    background-color: #dc0024;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 13px;
+    position: absolute;
+    right: -6px;
+    top: -3px;
+}
+.color-f7931e {
+    color: #f7931e;
+}
+.color-999 {
+    color: #999;
+}
+.color-ccc {
+    color: #ccc;
+}
+.color-333 {
+    color: #333;
+}

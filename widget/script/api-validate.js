@@ -6,10 +6,10 @@
     var current = {};
 
     current.valEmpty = function (text, options){
-        if(text == null){
+        if(text == null || text === ''){
             setErrorMessage(options+'内容为空')
             return false
-        } else if(text.replace(/\s*/g,'') === ''){
+        } else if((text+'').replace(/\s*/g, '') === ''){
             setErrorMessage(options+'内容为空')
             return false
         } else {

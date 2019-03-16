@@ -21,7 +21,7 @@
           <a href="#detail" class="aui-tab-item" :class="title === 2 ? 'aui-active' : ''" @click="setTitle(2)">详情</a>
           <a href="#comment" class="aui-tab-item" :class="title === 3 ? 'aui-active' : ''" @click="setTitle(3)">评价</a>
         </div>
-        <div class="share-icon">
+        <div class="share-icon" v-show="false">
           <img src="../../image/share.svg">
         </div>
       </header>

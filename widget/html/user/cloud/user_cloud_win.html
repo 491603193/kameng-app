@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>收货地址</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+</head>
+<body>
+  <header class="aui-bar aui-bar-nav aui-bar-light" id="aui-header">
+    <a class="aui-pull-left aui-btn" onclick="api.closeWin()">
+      <span class="aui-iconfont aui-icon-left"></span>
+    </a>
+    <div class="aui-title" id="title"></div>
+  </header>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+  apiready = function(){
+    api.parseTapmode();
+    $api.html($api.byId('title'), api.pageParam.isEdit? '编辑收货地址': '添加收货地址')
+    var header = $api.byId('aui-header');
+    $api.fixStatusBar(header);
+    api.openFrame({
+        name: '/html/user/address/address_edit_frm',
+        url: api.wgtRootDir + '/html/user/address/address_edit_frm.html',
+        bounces: false,
+        rect: {
+          x: 0,
+          y:  $api.offset(header).h,
+          w: 'auto',
+          h: 'auto'
+        },
+        pageParam: api.pageParam
+    })
+  }
+</script>
+</html>

@@ -12,7 +12,7 @@
     <a class="aui-pull-left aui-btn" onclick="api.closeWin()">
       <span class="aui-iconfont aui-icon-left"></span>
     </a>
-    <div class="aui-title" id="title"></div>
+    <div class="aui-title" id="title">我的云仓</div>
   </header>
 </body>
 <script src="../../../script/api.js"></script>
@@ -20,12 +20,11 @@
 <script>
   apiready = function(){
     api.parseTapmode();
-    $api.html($api.byId('title'), api.pageParam.isEdit? '编辑收货地址': '添加收货地址')
     var header = $api.byId('aui-header');
     $api.fixStatusBar(header);
     api.openFrame({
-        name: '/html/user/address/address_edit_frm',
-        url: api.wgtRootDir + '/html/user/address/address_edit_frm.html',
+        name: '/html/user/cloud/user_cloud_frm',
+        url: api.wgtRootDir + '/html/user/cloud/user_cloud_frm.html',
         bounces: false,
         rect: {
           x: 0,

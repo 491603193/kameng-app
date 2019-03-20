@@ -39,11 +39,11 @@
 </head>
 <body>
   <div id="app" class="record-back">
-    <div class="record-item background-fff" v-for="(item, index) in records" :key="index">
+    <div class="record-item aui-bg-white" v-for="(item, index) in records" :key="index">
       <div class="record-ddbh font-13 background-fffaf3">订单编号：{{item.code}}</div>
-      <div class="record-text font-16">
+      <div class="record-text aui-font-size-16">
         {{item.text}}
-        <p class="record-num font-16" :class="item.state === 1 ? 'color-red' : 'color-666'">{{item.state === 1 ? '+' + item.num : '-' + item.num}}</p>
+        <p class="record-num aui-font-size-16" :class="item.state === 1 ? 'color-red' : 'color-666'">{{item.state === 1 ? '+' + item.num : '-' + item.num}}</p>
       </div>
       <p class="record-time color-999">{{item.time}}</p>
     </div>

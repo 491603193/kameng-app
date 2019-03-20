@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name = "format-detection" content = "telephone=no">
   <title>我的订单</title>
-  <link rel="stylesheet" href="../../css/aui.css">
-  <link rel="stylesheet" href="../../css/km.css">
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/km.css">
 </head>
 <body>
  <div id="app">
@@ -21,19 +21,19 @@
     订单编号：{{item.code}}
     <span class="span-float-right">{{item.state}}</span>
     </header>
-    <div class="shop-pay-site background-fff">
+    <div class="shop-pay-site aui-bg-white">
       <div class="shop-pay-site-line">
         <span>收货人：{{item.name}}</span>
         <span class="right">{{item.mobel}}</span>
       </div>
       <div class="shop-pay-site-line2">
-        <img src="../../image/site.svg" class="site-icon">
+        <img src="../../../image/site.svg" class="site-icon">
         <div class="shop-pay-site-msg">收货地址：{{item.site}}</div>
-        <img src="../../image/go.svg" class="go-icon">
+        <img src="../../../image/go.svg" class="go-icon">
       </div>
     </div>
     <div class="shop-pay-site-ban"></div>
-    <div class="background-fff"
+    <div class="aui-bg-white"
       v-for="(el, elIndex) in item.productDetails"
       :key="elIndex"
     >
@@ -53,19 +53,19 @@
         </div>
       </div>
     </div>
-    <div class="my-roder-total background-fff">
+    <div class="my-roder-total aui-bg-white">
       共计{{item.productDetails.length}}件商品 合计：
       <span class="color-red">￥{{item.total}}</span>
     </div>
-    <div class="my-roder-btn background-fff">
+    <div class="my-roder-btn aui-bg-white">
       <div class="pay">立即付款</div>
       <div class="cancel">取消订单</div>
     </div>
   </div>
  </div>
 </body>
-<script src="../../script/api.js"></script>
-<script src="../../script/vue.min.js"></script>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/vue.min.js"></script>
 <script>
   new Vue({
     el: '#app',
@@ -84,7 +84,7 @@
           code: 'YT16546401',
           price: '150.00',
           freight: '10.00',
-          img: '../../image/index/zhanwei.png'
+          img: '../../../image/index/zhanwei.png'
         },{
           name: '卡萌·萌动装纸尿裤L码',
           num: 5,
@@ -92,7 +92,7 @@
           code: 'YT16546402',
           price: '190.00',
           freight: '10.00',
-          img: '../../image/index/zhanwei2.png'
+          img: '../../../image/index/zhanwei2.png'
         }]
       },{
         code: 'YT1654646',
@@ -108,7 +108,7 @@
           code: 'YT16546401',
           price: '150.00',
           freight: '10.00',
-          img: '../../image/index/zhanwei.png'
+          img: '../../../image/index/zhanwei.png'
         },{
           name: '卡萌·萌动装纸尿裤L码',
           num: 5,
@@ -116,7 +116,7 @@
           code: 'YT16546402',
           price: '190.00',
           freight: '10.00',
-          img: '../../image/index/zhanwei2.png'
+          img: '../../../image/index/zhanwei2.png'
         }]
       }]
     }

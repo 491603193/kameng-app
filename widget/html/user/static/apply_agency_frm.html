@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>发表评价</title>
-  <link rel="stylesheet" href="../../css/aui.css">
-  <link rel="stylesheet" href="../../css/km.css">
-  <link rel="stylesheet" href="../../css/apply_agency_frm.css">
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/km.css">
+  <link rel="stylesheet" href="../../../css/apply_agency_frm.css">
 </head>
 <body>
   <div id="app" class="agency-back">
-    <div class="agency-content background-fff">
-      <p class="font-16 color-333 line1">您的意向上级为：waiting</p>
-      <p class="font-16 color-333 line2">您的权益：</p>
+    <div class="agency-content aui-bg-white">
+      <p class="aui-font-size-16 color-333 line1">您的意向上级为：waiting</p>
+      <p class="aui-font-size-16 color-333 line2">您的权益：</p>
       <div class="agency-text font-14 color-333">总代可享受约6折拿货折扣，一级享受约7折拿货折扣。超级VIP可享受约8折代理拿货折扣，VIP可享受约9折代理拿货折扣。总代享受团队返点，下级代理下单，上级享受价差返利。</div>
     </div>
     <button class="agency-btn" @click="alert = true">下一步</button>
@@ -24,10 +24,10 @@
         <div class="remind">
           <div class="remind-relative">
             <div class="remind-absolute">
-              <img src="../../image/alert.png">
+              <img src="../../../image/alert.png">
             </div>
             <p class="aui-text-center font-12 color-333">卡萌市场管理规范欢迎您加入卡萌大家庭维护良好的市场环境，是卡萌家人义不容辞的责任。请您仔细阅读<a href="#" class="color-blue">《卡萌市场管理规范》</a>并在授权代理后严格遵守。您同意此项规范，即可加入卡萌大家庭。</p>
-            <div class="background-color-feabc5 color-fff font-15 aui-text-center" @click="alert = false">确定</div>
+            <div class="background-color-feabc5 aui-text-white font-15 aui-text-center" @click="alert = false">确定</div>
           </div>
         </div>
       </div>
@@ -35,8 +35,8 @@
     </div>
   </div>
 </body>
-<script src="../../script/api.js"></script>
-<script src="../../script/vue.min.js"></script>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/vue.min.js"></script>
 <script>
   new Vue({
     el: '#app',

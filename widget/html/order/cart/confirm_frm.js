@@ -94,11 +94,13 @@ var vm = new Vue({
     },
     closeConfirm () {
       this.showPaySuccessRemind = false
-      api.execScript({
-        name: '/html/index.html',
-        frameName: '/html/user/cart/index',
-        script: 'vm.deleteSel()'
-      })
+      if(api.pageParam.isDelCart){
+        api.execScript({
+          name: '/html/index',
+          frameName: '/html/order/cart/index',
+          script: 'vm.deleteSel()'
+        })
+      }
       setTimeout(function () {
         api.closeWin()
       },300)
@@ -137,7 +139,7 @@ var vm = new Vue({
     },
     postOrder () {
       var self = this;
-      $apiAjax.postBody("/user/main/save",{
+      $apiAjax.postBody("/order/main/save",{
         userAddrId: self.userAddrId,
         payType: self.payType,
         productType: self.isCloud? '1' : '2',
@@ -150,7 +152,7 @@ var vm = new Vue({
         if(ret){
           self.showPaySuccessRemind = true
         }
-      }, true);
+      }, 'submit');
     }
   }
 })

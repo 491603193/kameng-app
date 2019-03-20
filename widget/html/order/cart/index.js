@@ -77,6 +77,7 @@ var vm = new Vue({
       if(this.selectNum > 0){
         var cartsParam = {
           isCloud: this.isYun,
+          isDelCart: true,
           list: []
         }
         if (this.isYun) {
@@ -98,7 +99,7 @@ var vm = new Vue({
             }
           }
         }
-        $api.openWin('/html/user/cart/confirm_win', cartsParam)
+        $api.openWin('/html/order/cart/confirm_win', cartsParam)
       } else {
         $api.toast("请先选择要购买的商品呦~")
       }
@@ -160,7 +161,7 @@ var vm = new Vue({
             }
             $api.toast('删除成功！')
             api.execScript({
-              name: '/html/index.html',
+              name: '/html/index',
               script: 'initBadgeNum()'
             })
           }
@@ -222,7 +223,7 @@ var vm = new Vue({
       }
       if(msg) $api.toast(msg)
       api.execScript({
-        name: '/html/index.html',
+        name: '/html/index',
         script: 'initBadgeNum()'
       })
     },
@@ -256,7 +257,7 @@ var vm = new Vue({
         if (entity.productNum > 1){
           --entity.productNum
           // 本地操作
-          cart = $apiLocal.setUserCommonCart()
+          cart = $apiLocal.getUserCommonCart()
           --cart[index].productNum
           $apiLocal.setUserCommonCart(cart)
         } else {

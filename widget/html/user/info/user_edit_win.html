@@ -13,7 +13,7 @@
   <a class="aui-pull-left aui-btn" onclick="api.closeWin()">
     <span class="aui-iconfont aui-icon-left"></span>
   </a>
-  <div class="aui-title" id="title">代理设置</div>
+  <div class="aui-title" id="title">个人信息修改</div>
 </header>
 </body>
 <script src="../../../script/api.js"></script>
@@ -23,8 +23,8 @@
     var header = $api.byId('aui-header');
     $api.fixStatusBar(header);
     api.openFrame({
-      name: '/html/user/info/user_info_frm',
-      url: api.wgtRootDir + '/html/user/info/user_info_frm.html',
+      name: '/html/user/info/user_edit_frm',
+      url: api.wgtRootDir + '/html/user/info/user_edit_frm.html',
       bounces: false,
       rect: {
         x: 0,

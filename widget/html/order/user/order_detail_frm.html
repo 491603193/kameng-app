@@ -28,7 +28,8 @@
          :key="item.orderDealSplitId" v-bind:class="{ 'order-details-el': index !== 0 }">
       <div class="my-order-small-code">
         订单编号：{{item.orderDealSplitNo}}
-        <span class="aui-text-danger" style="float: right;">{{getOrderStateName(item.orderState)}}</span>
+        <span v-bind:class="{ 'aui-text-danger': item.orderState !== '3' && item.orderState !== '4', 'aui-text-success': item.orderState === '3' || item.orderState === '4'}"
+              style="float: right;">{{getOrderStateName(item.orderState)}}</span>
       </div>
       <div class="shop-pay-state">
         <div>
@@ -53,7 +54,7 @@
               <template v-else>{{item.productMoney + item.freightMoney}} 元</template>
             </span>
           </div>
-          <div class="weiquan" v-if="item.orderState === '2'">
+          <div class="weiquan" v-if="item.orderState === '2' && item.isReturn === '0' ">
             <div class="weiquan-btn aui-font-size-12 color-333" @click="showReturn(item.orderDealSplitId)">维权</div>
           </div>
           <div class="yfh" v-if="item.orderState === '3'">

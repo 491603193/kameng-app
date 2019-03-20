@@ -6,129 +6,196 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name = "format-detection" content = "telephone=no">
   <title>个人信息修改</title>
-  <link rel="stylesheet" href="../../css/aui.css">
-  <link rel="stylesheet" href="../../css/km.css">
-  <link rel="stylesheet" href="../../css/change_personal_details.css">
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/change_personal_details.css">
 </head>
 <body>
   <div id="app" class="content">
     <div class="padding-0-15 aui-bg-white margin-top-10">
       <div class="change-title">基本信息</div>
-      <ul class="color-333 font-15">
+      <ul class="color-333 aui-font-size-14">
         <li class="change-item">
           <div class="name">姓名：</div>
-          <input type="text" placeholder="填写姓名" value="Windir">
+          <input class="aui-margin-l-10" type="text" placeholder="填写姓名" v-model="entity.name">
         </li>
         <li class="change-item">
           <div class="name">性别：</div>
-          <div class="flex align-center">
+          <div class="flex align-center aui-margin-l-10">
             <div class="margin-left-10">
               <label>
-                <input type="radio" class="aui-radio" name="sex"> 男
+                <input type="radio" class="aui-radio" name="sex" value="1" v-model="entity.sex"> 男
               </label>
             </div>
             <div class="margin-left-27">
               <label>
-                <input type="radio" class="aui-radio" name="sex"> 女
+                <input type="radio" class="aui-radio" name="sex" value="0" v-model="entity.sex"> 女
               </label>
             </div>
           </div>
         </li>
         <li class="change-item">
           <div class="name">生日：</div>
-          <div class="color-ccc flex align-center margin-left-5" @click="getBirthday()">
-            {{birthday}}
-            <img src="../../image/xla.svg" class="xla-icon margin-left-5" v-show="birthday === '选择生日'">
+          <div class="color-ccc flex align-center aui-margin-l-10 aui-col-xs-9 "
+               :class="{ 'aui-text-333': birthdayStr !== '选择生日' }" @click="openDataPicker()">
+            {{birthdayStr}}
           </div>
+          <img src="../../../image/xla.svg" class="xla-icon aui-margin-l-10">
         </li>
         <li class="change-item">
           <div class="name">手机号码：</div>
-          <input type="text" placeholder="填写手机号码">
+          <input type="text" placeholder="填写手机号码" v-model="entity.name">
         </li>
         <li class="change-item">
           <div class="name">身份证号码：</div>
-          <input type="text" placeholder="填写身份证号码">
+          <input type="text" placeholder="填写身份证号码" v-model="entity.idCard">
         </li>
         <li class="change-item">
-          <div class="name">所在地区：</div>
-          <input type="text" placeholder="填写详细地址">
+          <div class="name">所在省市区：</div>
+          <input type="text" placeholder="填写省市区" v-model="cityName">
+        </li>
+        <li class="change-item">
+          <div class="name">详情地址：</div>
+          <input type="text" placeholder="填写详细地址" v-model="entity.address">
         </li>
       </ul>
     </div>
     <div class="padding-0-15 aui-bg-white margin-top-10">
       <div class="change-title">紧急联系人</div>
-      <ul class="color-333 font-15">
+      <ul class="color-333 aui-font-size-14">
         <li class="change-item">
           <div class="name">姓名：</div>
-          <input type="text" placeholder="填写姓名" value="Windir">
+          <input type="text" placeholder="填写姓名" v-model="entity.dangerLinkMan">
         </li>
         <li class="change-item">
           <div class="name">电话：</div>
-          <input type="number" placeholder="填写电话" value="130636521458">
+          <input type="number" placeholder="填写电话" v-model="entity.dangerLinkPhone">
         </li>
       </ul>
     </div>
     <div class="padding-0-15 aui-bg-white margin-top-10">
       <div class="change-title">财务信息</div>
-      <ul class="color-333 font-15">
+      <ul class="color-333 aui-font-size-14">
+        <li class="change-item">
+          <div class="name">银行名称：</div>
+          <input type="text" placeholder="填写银行名称" v-model="entity.bankName">
+        </li>
         <li class="change-item">
           <div class="name">银行账号：</div>
-          <input type="number" placeholder="填写银行账号" value="6626523652354">
+          <input type="number" placeholder="填写银行账号" v-model="entity.bankCardNum">
         </li>
         <li class="change-item">
           <div class="name">银卡户名：</div>
-          <input type="text" placeholder="填写银卡户名" value="工行">
-        </li>
-        <li class="change-item">
-          <div class="name">银行名称：</div>
-          <input type="text" placeholder="填写银行名称" value="工行">
+          <input type="text" placeholder="填写银卡户名" v-model="entity.bankCardName">
         </li>
         <li class="change-item">
           <div class="name">开户行所属省市：</div>
-          <input type="text" placeholder="填写开户行所属省市" value="烟台">
+          <input type="text" placeholder="填写开户行所属省市" v-model="entity.bankCardCity">
         </li>
         <li class="change-item">
           <div class="name">支付宝账号：</div>
-          <input type="text" placeholder="填写支付宝账号" value="130636521458">
+          <input type="text" placeholder="填写支付宝账号" v-model="entity.zfbNum">
+        </li>
+        <li class="change-item">
+          <div class="name">微信账号：</div>
+          <input type="text" placeholder="填写微信账号" v-model="entity.wxNum">
         </li>
         <li class="change-item">收款码：</li>
       </ul>
       <div class="qr-code aui-row">
-        <div class="aui-col-xs-5 qr-code-el background-ef">
+        <div class="aui-col-xs-5 qr-code-el background-ef" @click="uploadZfb()">
           <div class="position-center">
-            <img src="../../image/upewm.svg">
+            <img src="../../../image/upewm.svg">
             <p class="color-666 font-12">上传收款码</p>
           </div>
         </div>
-        <div class="aui-col-xs-5 qr-code-el background-ef">
+        <div class="aui-col-xs-5 qr-code-el background-ef" @click="uploadWx()">
           <div class="position-center">
-            <img src="../../image/upewm.svg">
+            <img src="../../../image/upewm.svg">
             <p class="color-666 font-12">上传收款码</p>
           </div>
         </div>
       </div>
     </div>
-    <button class="background-fda9c5 aui-text-white aui-font-size-16 change-btn">下一步</button>
+    <button class="background-fda9c5 aui-text-white aui-font-size-16 change-btn" @click="updateData">保存</button>
   </div>
 </body>
-<script src="../../script/api.js"></script>
-<script src="../../script/vue.min.js"></script>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/aui/aui-dialog.js"></script>
+<script src="../../../script/lib/common-media.js"></script>
+<script src="../../../script/vue.min.js"></script>
 <script>
-  function getBirthday () {
-    api.openPicker({
-      type: 'date',
-      date: '2014-05-01 12:30',
-      title: '选择时间'
-    }, function(ret, err) {
-      app.birthday = ret.year + '-' + ret.month + '-' + ret.day
-    });
-  }
-  var app = new Vue({
+  apiready = function(){
+    vm.getData()
+  };
+  var dialog = new auiDialog({})
+  var vm = new Vue({
     el: '#app',
     data: {
-      birthday: '选择生日'
+      entity: {
+        province: '1312',
+        city: '',
+        country: '',
+        birthday: ''
+      },
+    },
+    computed: {
+      cityName: function () {
+        return (this.entity.province || '') + (this.entity.city || '')  + (this.entity.country || '')
+      },
+      birthdayStr: function () {
+        if(this.entity.birthday){
+          return this.entity.birthday
+        } else {
+          return '选择生日'
+        }
+      },
     },
     methods: {
+      openDataPicker: function() {
+        api.openPicker({
+          type: 'date',
+          date: '2016-04-28',
+          title: '选择时间'
+        }, function(ret, err) {
+          vm.entity.birthday = ret.year + '-' + ret.month + '-' + ret.day
+        });
+      },
+      uploadZfb: function() {
+        this.openActionsheet()
+      },
+      uploadWx: function() {
+        this.openActionsheet()
+      },
+      getData: function() {
+        var self = this;
+        $apiAjax.postBody("/user/getInfo", {},function (ret) {
+          if (ret) {
+            self.entity = ret
+          }
+        }, true);
+      },
+      updateData: function() {
+        $apiAjax.postBody("/user/getInfo", {
+          param: {},
+          page: $apiLoading.page
+        },function (ret) {
+          if (ret) {
+            dialog.alert({
+              title:"提示",
+              msg:"保存成功",
+              buttons:['确定']
+            },function (ret1) {
+
+              alert(ret1);
+            });
+          }
+        }, true);
+      },
+      openActionsheet: function () {
+        media.openPhoto(function () {
+        }, 1);
+      }
     }
   })
 </script>

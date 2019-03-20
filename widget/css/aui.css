@@ -208,10 +208,10 @@ button,input,select,textarea {
 	margin: 0.75rem !important;
 }
 .aui-margin-t-0 {
-	margin-top: 0.25rem !important;
+	margin-top: 0 !important;
 }
 .aui-margin-t-5 {
-	margin-top: 0 !important;
+	margin-top: 0.25rem !important;
 }
 .aui-margin-t-10 {
 	margin-top: 0.5rem !important;
@@ -339,8 +339,14 @@ img {
 .aui-font-size-20 {
 	font-size: 1rem !important;
 }
+.aui-text-333 {
+	color: #333 !important;
+}
 .aui-text-gray {
 	color: #666 !important;
+}
+.aui-text-999 {
+	color: #999 !important;
 }
 .aui-text-default {
 	color: #212121 !important;

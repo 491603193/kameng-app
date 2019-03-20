@@ -45,7 +45,7 @@
 }
 .change-item input::-webkit-input-placeholder {
   color: #ccc;
-  font-size: 15px;
+  font-size: 14px;
 }
 .flex {
   display: flex;
@@ -101,4 +101,13 @@
   margin-top: 30px;
   border: none;
   text-align: center;
+}
+.color-ccc {
+  color: #ccc;
+}
+.margin-top-10 {
+  margin-top: 10px;
+}
+.background-fda9c5 {
+  background-color: #fda9c5;
 }

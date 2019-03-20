@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>代理设置</title>
+  <title>收货地址</title>
   <link rel="stylesheet" href="../../../css/aui.css">
   <link rel="stylesheet" href="../../../css/km.css">
 </head>
 <body>
-  <header class="win bacground-f7" id="aui-header">
-    <div class="back-icon" onclick="api.closeWin()">
-      <img src="../../../image/back.svg">
-    </div>
-    <div class="win-title">代理设置</div>
-  </header>
+<header class="aui-bar aui-bar-nav aui-bar-light" id="aui-header">
+  <a class="aui-pull-left aui-btn" onclick="api.closeWin()">
+    <span class="aui-iconfont aui-icon-left"></span>
+  </a>
+  <div class="aui-title" id="title">系统设置</div>
+</header>
 </body>
 <script src="../../../script/api.js"></script>
 <script>
@@ -22,18 +22,17 @@
     api.parseTapmode();
     var header = $api.byId('aui-header');
     $api.fixStatusBar(header);
-    var headerPos = $api.offset(header);
-    var body_h = $api.offset($api.dom('body')).h;
     api.openFrame({
-        name: '/html/my/agency_set_frm',
-        url: api.wgtRootDir + '/html/my/agency_set_frm.html',
-        bounces: true,
-        rect: {
-          x: 0,
-          y: headerPos.h,
-          w: 'auto',
-          h: 'auto'
-        }
+      name: '/html/user/info/user_info_frm',
+      url: api.wgtRootDir + '/html/user/info/user_info_frm.html',
+      bounces: false,
+      rect: {
+        x: 0,
+        y: $api.offset(header).h,
+        w: 'auto',
+        h: 'auto'
+      },
+      pageParam: api.pageParam
     })
   };
 </script>

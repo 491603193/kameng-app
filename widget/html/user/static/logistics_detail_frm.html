@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name = "format-detection" content = "telephone=no">
   <title>我的订单</title>
-  <link rel="stylesheet" href="../../css/aui.css">
-  <link rel="stylesheet" href="../../css/km.css">
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/km.css">
 </head>
-<body class="background-fff">
+<body class="aui-bg-white">
  <div id="app">
-   <div class="logistics-head background-fff">
+   <div class="logistics-head aui-bg-white">
      <img :src="wuliu.img" class="logistics-detail-img">
      <div class="logistics-detail-text color-666">
        <p class="color-333 font-15">
@@ -23,17 +23,17 @@
      </div>
    </div>
    <div style="height: 10px; background: #f5f5f5;"></div>
-   <div class="logistics-detail-list background-fff">
-     <p class="title font-16 color-333">物流详情</p>
+   <div class="logistics-detail-list aui-bg-white">
+     <p class="title aui-font-size-16 color-333">物流详情</p>
       <div class="logistics-detail-row" v-for="(item, index) in detail" :key="index">
         <div class="icon1" v-if="index === 0">
-          <img src="../../image/wlblue.svg" class="logistics-blue-dot">
+          <img src="../../../image/wlblue.svg" class="logistics-blue-dot">
           <div class="logistics-long-line"></div>
         </div>
         <div class="icon" v-else>
-          <img src="../../image/wlline.svg" class="logistics-short-line">
-          <img src="../../image/wlhui.svg" class="logistics-hui-dot">
-          <img src="../../image/wlline.svg" class="logistics-long-line">
+          <img src="../../../image/wlline.svg" class="logistics-short-line">
+          <img src="../../../image/wlhui.svg" class="logistics-hui-dot">
+          <img src="../../../image/wlline.svg" class="logistics-long-line">
         </div>
         <div class="text color-999" :class="index === (detail.length - 1) ? 'logistics-detail-text' : ''">
           <p class="font-15 title-overflow"
@@ -47,8 +47,8 @@
    </div>
  </div>
 </body>
-<script src="../../script/api.js"></script>
-<script src="../../script/vue.min.js"></script>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/vue.min.js"></script>
 <script>
   new Vue({
     el: '#app',
@@ -58,7 +58,7 @@
         compant: '顺丰速度运',
         code: '4646413546546',
         mobel: '95338',
-        img: '../../image/index/zhanwei.png'
+        img: '../../../image/index/zhanwei.png'
       },
       detail: [
         {text: '[烟台市]烟台市莱山区集散撒发生萨芬飒飒发案说法撒啊发撒中心 已发出', time: '2016-11-30 08:20:56'},

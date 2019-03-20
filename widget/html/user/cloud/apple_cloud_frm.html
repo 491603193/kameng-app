@@ -7,19 +7,19 @@
   <meta name = "format-detection" content = "telephone=no">
   <title>我的云仓</title>
   <link rel="stylesheet" href="../../../css/aui.css">
-  <link rel="stylesheet" href="../../../css/km.css">
-  <link rel="stylesheet" href="../../../css/my/my_yc1.css">
+  <link rel="stylesheet" href="../../../css/user/my_yc1.css">
+  <link rel="stylesheet" href="../../../css/user/apple_cloud.css">
 </head>
 <body>
   <div id="app" class="record-back">
     <div class="yc-head aui-bg-white">
-      <p class="yc-title aui-font-size-16 color-333">请输入购入库存数量</p>
+      <p class="yc-title aui-font-size-16 aui-text-333">请输入购入库存数量</p>
       <input type="number" class="yc-num">
-      <p class="font-12 color-999">每个库存单价为：60元</p>
-      <p class="font-15">合计：<span class="color-red">￥600.00</span></p>
+      <p class="aui-font-size-14 aui-text-999 aui-margin-t-5">每个库存单价为：60元</p>
+      <p class="aui-font-size-14 aui-text-right aui-margin-t-10">合计：<span class="aui-text-danger">￥600.00</span></p>
     </div>
     <div class="aui-bg-white margin-top-10 yc3-pay">
-      <p class="font-13 color-333">您将向您的上级代理XXX(186*****2)购入云仓库存，以下为其支付宝和微信收款码，请先打款后提交购入申请</p>
+      <p class="aui-font-size-14 aui-text-333">您将向您的上级代理XXX(186*****2)购入云仓库存，以下为其支付宝和微信收款码，请先打款后提交购入申请</p>
       <div class="aui-row">
         <div class="aui-col-xs-12">
           <img src="holder.js/139x128">
@@ -28,24 +28,76 @@
       </div>
     </div>
     <div class="aui-bg-white margin-top-10 yc3-remark">
-      <p class="font-15 color-333">打款备注</p>
+      <p class="aui-font-size-14 aui-text-333">打款备注</p>
       <textarea placeholder="请填写打款备注内容" class="font-13"></textarea>
-      <p class="font-15 color-333 margin-top-20">打款凭证</p>
+      <p class="aui-font-size-14 aui-text-333 aui-margin-t-15">打款凭证</p>
       <div class="yc3-imgs">
         <img src="../../../image/takephoto.png" class="yc3-img-el">
       </div>
       <button class="yc-btn background-color-feabc5">提交</button>
     </div>
+    <div class="shop-pay-remind" v-show="showRemind">
+      <div class="film"></div>
+      <div class="remind">
+        <div class="remind-relative">
+          <div class="remind-absolute">
+            <img src="../../../image/alert.png">
+          </div>
+          <p class="aui-text-center aui-font-size-16 aui-text-333">提醒</p>
+          <p class="aui-text-center aui-font-size-14 aui-text-333 aui-margin-t-10">您还没有上级，请联系客服。</p>
+          <div class="background-color-feabc5 aui-text-white aui-font-size-14 aui-text-center" @click="api.closeWin()">确定并关闭</div>
+        </div>
+      </div>
+    </div>
+    <div class="shop-pay-remind" v-show="showPaySuccessRemind">
+      <div class="film"></div>
+      <div class="remind">
+        <div class="remind-relative">
+          <div class="remind-absolute">
+            <img src="../../../image/success.svg">
+          </div>
+          <p class="aui-text-center font-17 color-333">支付成功</p>
+          <p class="aui-text-center font-14 color-333">您的订单已成功支付，您可以到我的订单中查看订单状态。</p>
+          <div class="background-color-feabc5 color-fff font-15 aui-text-center" @click="closeConfirm">确定并关闭</div>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
-<script src="../../../script/holder.js"></script>
 <script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-local.js"></script>
 <script src="../../../script/vue.min.js"></script>
 <script>
-  new Vue({
+  apiready = function() {
+    vm.isCore = $apiLocal.getUser().isCore
+    vm.getData();
+  }
+  var vm = new Vue({
     el: '#app',
     data: {
+      showRemind: false,
+      showPaySuccessRemind: false,
+      entity: {}
+    },
+    methods: {
+      closeConfirm() {
 
+      },
+      openBuyCloud () {
+        $api.openWin('/html/user/cloud/apple_cloud_win')
+      },
+      getData () {
+        var self = this;
+        $apiAjax.postBody("/user/stock/getLevelHigherCustUser", {},function (ret) {
+          if (ret) {
+            self.entity = ret
+            alert(JSON.stringify(ret));
+          } else {
+            self.showRemind = true
+          }
+        }, true);
+      },
     }
   })
 </script>

@@ -41,7 +41,6 @@
 }
 .my-card {
     width: 90%;
-    height: 133px;
     padding: 17px 0;
     background-color: #fffaf4;
     border-radius: 5px;
@@ -50,34 +49,39 @@
     left: 50%;
     margin-left: -45%;
     top: 161px;
-    display: flex;
 }
 .my-card .el {
     width: 50%;
     padding: 0 15px;
+    font-size: 12px;
 }
 .my-card .left {
     border-right: 1px solid #eee;
 }
-.my-card .incom {
-    font-size: 15px;
+.incom {
+    font-size: 13px;
     color: #333;
-    margin-top: 10px;
+    margin-top: 0;
+}
+.my-card .el .incom {
+    font-size: 12px;
+    color: #666;
+    margin-top: 0;
 }
 .my-card .money {
     font-size: 19px;
     font-weight: 700;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 .my-card .look {
     font-size: 11px;
     text-align: right;
-    margin-top: 20px;
+    margin-top: 5px;
 }
 .my-click {
     width: 90%;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 156px;
 }
 .my-click-row {
     display: flex;
@@ -134,4 +138,19 @@
 }
 .color-333 {
     color: #333;
+}
+.flex {
+    display: flex;
+    padding-top: 10px;
+}
+.my-card-top {
+    padding: 0 15px 10px 15px;
+    border-bottom: 1px solid #eee;
+}
+.my-card-top .incom,
+.my-card-top .money {
+    text-align: center;
+}
+.money1 {
+    font-size: 17px;
 }

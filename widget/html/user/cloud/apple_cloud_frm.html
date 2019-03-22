@@ -33,7 +33,7 @@
       <p class="aui-font-size-14 aui-text-333 aui-margin-t-15">打款凭证</p>
       <div class="img-box">
         <div class="yc3-imgs" v-for="(img, index) in imgArray" :key="index">
-          <img :src="imgPath + img" class="yc3-img-el">
+          <img :src="imgPath + img" class="yc3-img-el" @click="openImg(imgArray, index)">
           <img src="../../../image/deleteImg.svg" class="yc3-img-del" @click="deleteImg(index)">
         </div>
         <div class="yc3-imgs" @click="openPhoto()" v-show="imgArray.length < 4">
@@ -78,6 +78,7 @@
 <script src="../../../script/api-validate.js"></script>
 <script src="../../../script/vue.min.js"></script>
 <script src="../../../script/lib/album_browser.js"></script>
+<script src="../../../script/lib/photo_browser.js"></script>
 <script>
   apiready = function() {
     vm.isCore = $apiLocal.getUser().isCore
@@ -112,6 +113,9 @@
       }
     },
     methods: {
+      openImg (imageArray, index) {
+        photo.openWidthArray(imageArray, index)
+      },
       submit () {
         var self = this;
         if(!parseInt(self.stockApplyNum)) {

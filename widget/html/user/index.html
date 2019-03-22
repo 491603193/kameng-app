@@ -24,8 +24,9 @@
         </div>
         <div class='my-head-name'>
           <p class="name aui-font-size-16 aui-text-white">{{user.name}}</p>
-          <p class="rank aui-text-white">一级  去升级>>
-            <span class="right">保证金：¥1000 >></span>
+          <p class="rank aui-text-white">
+            <span @click="openWin('/html/user/info/user_edit_win')">一级  去升级>></span>
+            <span class="right" @click="openWin('/html/user/deposit/cash_win')">保证金：¥1000 >></span>
           </p>
         </div>
       </div>

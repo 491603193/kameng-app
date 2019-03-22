@@ -28,9 +28,14 @@
         }
     };
 
-    current.valMoney = function (val) {
+    current.valMoney = function (val, type) {
         if (val) {
-            var money = parseInt(val)
+            var money = 0;
+            if(type === '1') {
+                money = parseFloat(val)
+            } else {
+                money = parseInt(val)
+            }
             if (money) {
                 if (money >= 0){
                     var maxNum = 999999

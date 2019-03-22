@@ -28,19 +28,18 @@
     </div>
     <div class="aui-row yc1-row3">
       <div class="aui-col-xs-3 margin-top-10">申请凭证：</div>
-      <div class="aui-col-xs-9">
-        <img v-for="(item, index) in imgs" :key="index" :src="item" class="margin-top-10 yc1-el">
-        <div
-          v-if="(imgs.length % 3) !== 0"
-          class="margin-top-10 yc1-el"
-          v-for="(el, zwIndex) in (3 - (imgs.length % 3))"
-          :key="zwIndex"
-        ></div>
+      <div class="aui-col-xs-9" >
+        <img src="../../../image/index/zhanwei.png" class="margin-top-10 yc1-el">
+        <img src="../../../image/index/zhanwei.png" class="margin-top-10 yc1-el">
+        <img src="../../../image/index/zhanwei.png" class="margin-top-10 yc1-el">
+        <img src="../../../image/index/zhanwei.png" class="margin-top-10 yc1-el">
       </div>
     </div>
     <div class="yc1-row4">
-      <div class="yc1-turn yc1-select" @click="juJue = true">拒绝</div>
-      <div class="yc1-affirm yc1-select" @click="tongYi = true">同意</div>
+      <div class="aui-col-xs-3 margin-top-10">状态：</div>
+      <div class="aui-col-xs-9" >12312</div>
+      <!--<div class="yc1-turn yc1-select" @click="juJue = true">拒绝</div>-->
+      <!--<div class="yc1-affirm yc1-select" @click="tongYi = true">同意</div>-->
     </div>
   </div>
     <div v-show="juJue || tongYi">

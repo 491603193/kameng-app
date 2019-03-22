@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>管理仓变动记录</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/apply_log.css">
+  <style>
+
+  </style>
+</head>
+<body>
+  <div id="app" class="record-back">
+    <div class="record-item aui-bg-white" v-for="(item, index) in entities" :key="item.stockChangeLogId">
+      <div class="record-ddbh aui-font-size-12 background-fffaf3">订单编号：{{item.orderNo}}</div>
+      <div class="record-text aui-font-size-14">
+        {{item.stockChangeRemark}}
+        <p class="record-num aui-font-size-14"
+           :class="item.stockChangeNum > 0 ? 'aui-text-danger' : 'aui-text-success'">
+          <template v-if="item.stockChangeNum > 0">+</template>
+          {{item.stockChangeNum}}
+        </p>
+      </div>
+      <p class="record-time aui-text-gray">{{item.createTime}}</p>
+    </div>
+
+    <div class="no_line aui-bg-default" v-show="noMoreData"><span class="aui-bg-default">没有更多了</span></div>
+
+    <div class="aui-no-data " v-show="noData">
+      <img src="../../../image/shopping/no_order.svg">
+      <div class="text">没有查到云仓申请记录</div>
+    </div>
+  </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-local.js"></script>
+<script src="../../../script/api-loading.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+  apiready = function (){
+    vm.loading(true);
+    $apiLoading.loadModel(function () {
+      vm.loading(false);
+    });
+  };
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      noData: false,
+      noMoreData: false,
+      entities: []
+    },
+    methods: {
+      loading: function(isFlush){
+        var self = this;
+        $apiAjax.postBody("/stock/change/log/page", {
+          param: {
+            stockType: api.pageParam.stockType
+          },
+          page: $apiLoading.page
+        },function (data, page) {
+          $apiLoading.setPage(page);
+          self.noData = false;
+          if (page.pageNo === 1) {
+            if(data.length === 0) self.noData = true;
+            else self.entities = data
+          } else {
+            self.entities = self.entities.concat(data);
+          }
+          self.noMoreData = page.pageNo > 1 && !page.hasNext && !self.noData;
+        }, isFlush);
+      }
+    }
+  })
+</script>
+</html>

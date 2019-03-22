@@ -106,8 +106,37 @@
     } else {
       $api.setErrorMessage(errorMessage);
     }
+  };
 
 
+  u.postFileSingle = function(filePath, fnSuc, progressType){
+    var postJson = {
+      url: u.kameng_api + '/upload/image/single',
+      method: 'post',
+      dataType: 'json',
+      returnAll: false,
+      data: {
+        files: {
+          file: filePath
+        }
+      }
+    };
+    apiAjax(postJson, fnSuc, progressType)
+  };
+
+  u.postFileMultiple = function(filePath, fnSuc, progressType){
+    var postJson = {
+      url: u.kameng_api + '/upload/image/multiple',
+      method: 'post',
+      dataType: 'json',
+      returnAll: false,
+      data: {
+        files: {
+          files: filePath
+        }
+      }
+    };
+    apiAjax(postJson, fnSuc, progressType)
   };
 
   u.postBody = function(url, data, fnSuc, progressType){

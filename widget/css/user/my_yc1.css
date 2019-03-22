@@ -45,7 +45,7 @@
   border-bottom: 2px solid #feabc5;
 }
 .yc1-template {
-  margin-top: 3px;
+  margin-top: 5px;
 }
 .yc1-template .aui-row {
   padding: 0 15px;
@@ -62,27 +62,29 @@
 }
 .yc1-row1 {
   padding: 0 15px;
-  margin-top: 10px;
+  margin: 6px 0;
 }
 .yc1-row2 {
-  margin-top: 13px;
+  margin: 6px 0;
 }
 .yc1-template .yc1-row3 {
   margin-top: 3px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
 }
 .margin-top-10 {
   margin-top: 10px;
 }
 .yc1-el {
-  width: 30%;
-  height: 85px;
+  padding: 5px;
+  width: 60px;
+  height: 60px;
   display: block;
+  float: left;
+  border-radius: 10px;
 }
 .yc1-row3 .aui-col-xs-9 {
   display: flex;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
 }
 .yc1-row4 {
   width: 100%;
@@ -92,16 +94,16 @@
   flex-direction: row-reverse;
 }
 .yc1-select {
-  width: 90px;
-  height: 36px;
+  width: 80px;
+  height: 30px;
   text-align: center;
-  line-height: 36px;
+  line-height: 30px;
   font-size: 14px;
   border-radius: 20px;
 }
 .yc1-affirm {
-  border: 1px solid #63c1db;
-  color: #63c1db;
+  border: 1px solid #feabc5;
+  color: #feabc5;
   margin-right: 10px;
 }
 .yc1-turn {
@@ -150,7 +152,7 @@
   padding: 12px 15px 30px 15px;
 }
 .yc3-pay .aui-row {
-  margin-top: 30px;
+  margin-top: 10px;
 }
 .yc3-pay .aui-col-xs-12 {
   display: flex;
@@ -167,28 +169,58 @@
 .yc3-remark {
   padding: 20px 15px;
 }
-.yc3-remark .font-13 {
+.yc3-remark .yc3-remark-textarea {
   width: 100%;
-  height: 120px;
+  height: 60px;
   padding: 10px;
   margin-top: 10px;
   border: 1px solid #ddd;
 }
-.yc3-remark .font-13::-webkit-input-placeholder {
+.yc3-remark .aui-font-size-12::-webkit-input-placeholder {
   color: #ddd;
 }
-.yc3-img-el {
-  width: 81px;
-  height: 81px;
+.img-box {
+  overflow: hidden;
+}
+.yc3-imgs {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  float: left;
   margin-top: 10px;
 }
+
+.yc3-img-el {
+  width: 60px;
+  height: 60px;
+  margin: 10px 5px;
+  float: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.yc3-imgs .yc3-img-del {
+  width: 23px;
+  height: 23px;
+  position: absolute;
+  top: 5px;
+  right: 0;
+}
+
+.yc-btn-bg {
+  height: 60px;
+}
+
 /* yc3 end */
 /* yc4 */
 .yc4-state {
-  height: 45px;
-  line-height: 45px;
-  padding: 0 15px;
+  height: 35px;
+  line-height: 35px;
+  padding: 0 15px 20px 15px;
 }
+
 /* yc4 end */
 .background-color-feabc5 {
   background-color: #feabc5;
@@ -197,6 +229,7 @@
   background-color: #fda9c5;
 }
 
+/* 遮罩 */
 .shop-pay-remind .film {
   display: block;
   height: 100vh;
@@ -237,8 +270,11 @@
   left: 50%;
   margin-left: -27.5px;
 }
-.shop-pay-remind .font-17 {
-  margin-top: 36px;
+.shop-pay-remind .aui-font-size-18 {
+  margin-top: 20px;
+}
+.shop-pay-remind .aui-font-size-14 {
+  margin-top: 10px;
 }
 .shop-pay-remind .background-color-feabc5 {
   width: 47%;

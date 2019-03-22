@@ -72,13 +72,16 @@
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
 }
+.yc1-row3 .yc1-row3-img{
+
+}
 .margin-top-10 {
   margin-top: 10px;
 }
 .yc1-el {
-  width: 30%;
+  width: 85px;
   height: 85px;
-  display: block;
+  float: left;
 }
 .yc1-row3 .aui-col-xs-9 {
   display: flex;

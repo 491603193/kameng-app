@@ -49,9 +49,9 @@
           <div class="name">身份证号码：</div>
           <input type="text" placeholder="填写身份证号码" v-model="entity.idCard">
         </li>
-        <li class="change-item">
+        <li class="change-item" @click="selAddress">
           <div class="name">所在省市区：</div>
-          <input type="text" placeholder="填写省市区" v-model="cityName">
+          <input type="text" placeholder="填写省市区" v-model="cityName" readonly >
         </li>
         <li class="change-item">
           <div class="name">详情地址：</div>
@@ -102,17 +102,23 @@
         <li class="change-item">收款码：</li>
       </ul>
       <div class="qr-code aui-row">
-        <div class="aui-col-xs-5 qr-code-el background-ef" @click="uploadZfb()">
+        <div class="aui-col-xs-5 qr-code-el background-ef" @click="picOpen('zfb')" v-if="!entity.zfbQrcode">
           <div class="position-center">
             <img src="../../../image/upewm.svg">
-            <p class="color-666 font-12">上传收款码</p>
+            <p class="color-666 font-12">上传支付宝收款码</p>
           </div>
         </div>
-        <div class="aui-col-xs-5 qr-code-el background-ef" @click="uploadWx()">
+        <div class="aui-col-xs-5 qr-code-el" @click="picOpen('zfb')" v-if="entity.zfbQrcode">
+          <img class="pic" :src="imgPath + entity.zfbQrcode">
+        </div>
+        <div class="aui-col-xs-5 qr-code-el background-ef" @click="picOpen('wx')" v-if="!entity.wxQrcode">
           <div class="position-center">
             <img src="../../../image/upewm.svg">
-            <p class="color-666 font-12">上传收款码</p>
+            <p class="color-666 font-12">上传微信收款码</p>
           </div>
+        </div>
+        <div class="aui-col-xs-5 qr-code-el" @click="picOpen('wx')" v-if="entity.wxQrcode">
+          <img class="pic" :src="imgPath + entity.wxQrcode">
         </div>
       </div>
     </div>
@@ -122,26 +128,38 @@
 <script src="../../../script/api.js"></script>
 <script src="../../../script/api-ajax.js"></script>
 <script src="../../../script/aui/aui-dialog.js"></script>
-<script src="../../../script/lib/common-media.js"></script>
+<script src="../../../script/lib/album_browser.js"></script>
 <script src="../../../script/vue.min.js"></script>
 <script>
+  var addressView
   apiready = function(){
+    addressView = api.require('addressView');
     vm.getData()
   };
   var dialog = new auiDialog({})
   var vm = new Vue({
     el: '#app',
     data: {
+      showZfb: false,
+      showWx: false,
+      imgPath: $apiAjax.kameng_image,
       entity: {
-        province: '1312',
+        province: '',
         city: '',
         country: '',
-        birthday: ''
-      },
+        birthday: '',
+        zfbQrcode: '',
+        wxQrcode: ''
+      }
     },
     computed: {
       cityName: function () {
-        return (this.entity.province || '') + (this.entity.city || '')  + (this.entity.country || '')
+        var name = (this.entity.province || '') + (this.entity.city || '')  + (this.entity.country || '')
+        if (name === ''){
+          return '请选择省市区'
+        } else {
+          return name
+        }
       },
       birthdayStr: function () {
         if(this.entity.birthday){
@@ -152,6 +170,26 @@
       },
     },
     methods: {
+      setUserAddress: function (regionCodes) {
+        addressView.open({
+          file_addr: 'widget://res/region.txt', //数据源地址
+          selected_color: '#fda9c5', //颜色
+          pro_id: regionCodes[0], //省id
+          city_id: regionCodes[1], //市id
+          dir_id: regionCodes[2] //区id
+        });
+      },
+      selAddress: function () {
+        var self = this;
+        addressView.show({}, function(ret) {
+          if (ret.status) {
+            self.entity.province = ret.data[0].name;
+            self.entity.city = ret.data[1].name;
+            self.entity.country = ret.data[2].name;
+            self.entity.regionCode = ret.data[2].id + '000000';
+          }
+        });
+      },
       openDataPicker: function() {
         api.openPicker({
           type: 'date',
@@ -161,39 +199,51 @@
           vm.entity.birthday = ret.year + '-' + ret.month + '-' + ret.day
         });
       },
-      uploadZfb: function() {
-        this.openActionsheet()
-      },
-      uploadWx: function() {
-        this.openActionsheet()
-      },
       getData: function() {
         var self = this;
-        $apiAjax.postBody("/user/getInfo", {},function (ret) {
+        $apiAjax.postBody("/user/getInfo", {}, function (ret) {
           if (ret) {
+            if(!ret.zfbQrcode) ret['zfbQrcode'] = ''
+            if(!ret.wxQrcode) ret['wxQrcode'] = ''
+            if(!ret.province) ret['province'] = ''
+            if(!ret.city) ret['city'] = ''
+            if(!ret.country) ret['country'] = ''
+            if(ret.regionCode) {
+              var regions = []
+              regions.push(parseInt(ret.regionCode.substring(0,2)+'0000'))
+              regions.push(parseInt(ret.regionCode.substring(0,4)+'00'))
+              regions.push(parseInt(ret.regionCode.substring(0,6)))
+              self.setUserAddress(regions);
+            } else {
+              ret['regionCode'] = ''
+            }
             self.entity = ret
           }
         }, true);
       },
       updateData: function() {
-        $apiAjax.postBody("/user/getInfo", {
-          param: {},
-          page: $apiLoading.page
-        },function (ret) {
+        var self = this;
+        $apiAjax.postBody("/user/update", self.entity, function (ret) {
           if (ret) {
             dialog.alert({
               title:"提示",
               msg:"保存成功",
               buttons:['确定']
             },function (ret1) {
-
-              alert(ret1);
             });
           }
         }, true);
       },
-      openActionsheet: function () {
-        media.openPhoto(function () {
+      picOpen: function (index) {
+        var self = this;
+        media.open(function (ret) {
+          $apiAjax.postFileSingle(ret[0].thumbPath, function (ret) {
+            if(index === 'zfb'){
+              self.entity.zfbQrcode = ret
+            } else {
+              self.entity.wxQrcode = ret
+            }
+          },true)
         }, 1);
       }
     }

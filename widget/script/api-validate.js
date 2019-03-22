@@ -28,6 +28,32 @@
         }
     };
 
+    current.valMoney = function (val) {
+        if (val) {
+            var money = parseInt(val)
+            if (money) {
+                if (money >= 0){
+                    var maxNum = 999999
+                    if (money > maxNum) {
+                        setErrorMessage('数值太大')
+                        return maxNum
+                    } else {
+                        return money
+                    }
+                } else {
+                    setErrorMessage('不能输入负数')
+                    return 0
+                }
+            } else {
+                setErrorMessage('请输入数字')
+                return false
+            }
+        } else {
+            return false
+        }
+    };
+
+
     function setErrorMessage(msg){
         $apiAjax.setErrorMessage(msg);
         return false

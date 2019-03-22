@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>我的云仓</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/apple_core_cloud.css">
+</head>
+<body>
+  <div id="app" class="record-back">
+    <div class="yc-head aui-bg-white">
+      <p class="yc-title aui-font-size-16 aui-text-333">请输入购入库存数量</p>
+      <input type="number" class="yc-num" v-model="stockApplyNum">
+      <p class="aui-font-size-12 aui-text-999">每个库存单价为：{{cloudPrice}}元</p>
+      <p class="aui-font-size-14">合计：<span class="aui-text-danger">￥{{totalMoney}}</span></p>
+    </div>
+    <div class="shop-pay-lan aui-bg-white">
+      <div class="line1">支付方式</div>
+      <label>
+        <div class="line aui-border-t">
+          <div>
+            <input type="radio" id="zx" name="pay" checked>
+            <div class="box"></div>
+          </div>
+          <div class="aui-margin-l-10 aui-text-gray">在线支付</div>
+        </div>
+      </label>
+    </div>
+    <div class="shop-pay-remind" v-show="showPaySuccessRemind">
+      <div class="film"></div>
+      <div class="remind">
+        <div class="remind-relative">
+          <div class="remind-absolute">
+            <img src="../../../image/success.svg">
+          </div>
+          <p class="aui-text-center aui-font-size-16 aui-text-333">购买成功</p>
+          <p class="aui-text-center aui-font-size-14 aui-text-333 aui-margin-t-15">您的云币即将到账。</p>
+          <div class="background-color-feabc5 aui-text-white aui-font-size-16 aui-text-center" @click="closeConfirm">确定并关闭</div>
+        </div>
+      </div>
+    </div>
+    <button class="yc-btn background-color-feabc5" @click="submit()">确认支付</button>
+  </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-local.js"></script>
+<script src="../../../script/api-validate.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+  apiready = function() {
+    vm.getData();
+  }
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      payType: '1',
+      stockApplyNum: null,
+      showPaySuccessRemind: false,
+      cloudPrice: 0,
+    },
+    watch: {
+      stockApplyNum: function (val) {
+        if($val.valMoney(val)){
+          this.stockApplyNum = $val.valMoney(val)
+        }
+      }
+    },
+    computed: {
+      totalMoney: function () {
+        return this.stockApplyNum * this.cloudPrice
+      }
+    },
+    methods: {
+      pay() {
+        alert(this.payType);
+      },
+      submit () {
+        var self = this;
+        if(!parseInt(self.stockApplyNum)) {
+          $api.toast('请输入正确的金额')
+          return
+        }
+        $apiAjax.postBody("/stock/apply/addAdminisWarehouse", {
+          payType: '2',
+          stockApplyNum: self.stockApplyNum
+        },function (ret) {
+          if (ret) {
+            self.showPaySuccessRemind = true
+          }
+        }, true);
+      },
+      closeConfirm() {
+        api.execScript({
+          name: '/html/user/cloud/user_cloud_win',
+          frameName: '/html/user/cloud/user_cloud_frm',
+          script: 'vm.getData()'
+        })
+        api.closeWin();
+      },
+      getData () {
+        var self = this;
+        $apiAjax.postBody("/user/stock/getCloudPrice", {},function (ret) {
+          if (ret) {
+            self.cloudPrice = ret.cloudPrice
+          }
+        }, true);
+      },
+    }
+  })
+</script>
+</html>

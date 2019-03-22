@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+  <title>title</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css" />
+  <style>
+    body {
+      padding-top: 60px;
+    }
+
+    .imgcontainter {
+      display: flex;
+      display: -webkit-flex;
+      /*display: -webkit-box;*/
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      /*justify-content: center;*/
+      align-items: center;
+      /*align-content: stretch;*/
+      height: 100%;
+      padding: 5px;
+    }
+
+    .imgcontainter img {
+      flex: 1 1 auto;
+      -webkit-flex: 1 1 auto;
+      width: 145px;
+      height: 145px;
+      margin: 5px;
+    }
+
+    button {
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<img src="" id="img" width='300' >
+
+<button tapmode type="button" onclick="UIAlbumBrowser_imagePicker()" name="button">UIAlbumBrowser_imagePicker</button>
+<button tapmode type="button" onclick="UIAlbumBrowser_open()" name="button">UIAlbumBrowser_open</button>
+<div id='bd' class="imgcontainter">
+  <!-- <img src="../image/10801920.png" alt="">
+  <img src="../image/10801920.png" alt="">
+  <img src="../image/10801920.png" alt="">
+  <img src="../image/10801920.png" alt=""> -->
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+  var UIAlbumBrowser;
+  var i = 0;
+  var imgarr = [];
+  apiready = function() {
+    UIAlbumBrowser = api.require('UIAlbumBrowser');
+  };
+
+  //打开图片选择器
+  function UIAlbumBrowser_imagePicker() {
+    UIAlbumBrowser.imagePicker({
+      max: 9,
+      styles: {
+        bg: '#000000',
+        //cameraImg: 'widget://res/cameraImg.png',
+        mark: {
+          position: 'top_right',
+          size: 20
+        },
+        nav: {
+          bg: '#000000',
+          cancelColor: '#fff',
+          cancelSize: 16,
+          nextStepColor: '#7fff00',
+          nextStepSize: 16
+        },
+        thumbnail: { //（可选项）返回的缩略图配置，**建议本图片不要设置过大** 若已有缩略图，则使用已有的缩略图。若要重新生成缩略图，可先调用清除缓存接口api.clearCache()。
+          w: 100, //（可选项）数字类型；返回的缩略图的宽；默认：原图的宽度
+          h: 100 //（可选项）数字类型；返回的缩略图的宽；默认：原图的高度
+        }
+      },
+      animation: true,
+    }, function(ret) {
+      if (ret.eventType == 'nextStep') {
+        if (ret.list && ret.list.length > 0) {
+          imgarr = ret.list;
+          UIAlbumBrowser_transPath();
+        }
+        UIAlbumBrowser.closePicker();
+        //alert(JSON.stringify(ret));
+      }
+      if (ret.originalPath && ret.originalPath.length > 0) {
+        document.getElementById('img').src = ret.originalPath;
+      }
+    });
+  }
+
+  function UIAlbumBrowser_open() {
+    UIAlbumBrowser.open({
+      max: 9,
+      type: 'all',
+      isOpenPreview: true,
+      styles: {
+        bg: '#000000',
+        mark: {
+          position: 'bottom_left',
+          size: 20
+        },
+        nav: {
+          bg: '#000000',
+          titleColor: '#ffffff',
+          titleSize: 18,
+          cancelColor: '#00ff00',
+          cancelSize: 16,
+          finishColor: '#00ff00',
+          finishSize: 16
+        }
+      },
+      rotation: false  //无效
+    }, function(ret) {
+      if (ret) {
+        alert(JSON.stringify(ret));
+      }
+    });
+
+  }
+
+  function UIAlbumBrowser_transPath() {
+    UIAlbumBrowser.transPath({
+      path: imgarr[i].path
+    }, function(ret, err) {
+      if (ret) {
+        i++;
+        if (i < imgarr.length) {
+          UIAlbumBrowser_transPath();
+        } else {
+          i = 0;
+        }
+        var img = document.createElement('img');
+        img.src = ret.path;
+        document.getElementById('bd').appendChild(img);
+        console.log("ret.path:" + ret.path);
+      } else {
+        console.log(JSON.stringify(err));
+      }
+    });
+  }
+</script>
+
+</html>

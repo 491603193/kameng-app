@@ -1,4 +1,3 @@
-
 .yc-head {
     padding: 16px 10px 16px 15px;
 }
@@ -10,7 +9,13 @@
     border: 1px solid #eee;
     padding: 5px;
 }
-
+.yc-head .aui-font-size-12 {
+    margin-top: 10px;
+}
+.yc-head .aui-font-size-14 {
+    margin-top: 20px;
+    text-align: right;
+}
 .yc-btn {
     width: 86.66%;
     height: 43px;
@@ -22,9 +27,60 @@
     margin: 0 auto;
     border: none;
     border-radius: 22px;
-
+    margin-top: 60px;
 }
 
+.shop-pay-lan .box {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    position: relative;
+    transform: translateY(2px);
+}
+.shop-pay-lan .box::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    margin-top: -4px;
+    left: 50%;
+    margin-left: -4px;
+}
+.shop-pay-lan input[type='radio'] {
+    display: none;
+}
+.shop-pay-lan input[type='radio']:checked + .box::before {
+    background: #a0c161;
+}
+.shop-pay-lan {
+    margin-top: 10px;
+    padding: 0 15px;
+}
+.shop-pay-lan .line {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    padding: 15px 0;
+}
+.shop-pay-lan .line1 {
+    color: #333;
+    font-size: 16px;
+    padding: 15px 0;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #eee;
+}
+
+
+.background-color-feabc5 {
+    background-color: #feabc5;
+}
 .shop-pay-remind .film {
     display: block;
     height: 100vh;

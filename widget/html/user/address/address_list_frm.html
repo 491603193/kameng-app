@@ -21,8 +21,13 @@
         <img src="../../../image/compile.svg" class="address-compile" @click.stop = "openEditAddress(true,item.userAddrId)">
       </div>
     </div>
-    <footer class="foot background-fff" @click="openEditAddress(false, '')">
-      <button class="address-btn-list background-fda9c5 color-fff font-15">新增收货地址</button>
+    <!--暂无数据-->
+    <div class="aui-no-data" v-show="noData">
+      <img src="../../../image/user/nodata.svg">
+      <div class="text">没有收货地址</div>
+    </div>
+    <footer class="foot aui-bg-white" @click="openEditAddress(false, '')">
+      <button class="address-btn-list background-fda9c5 aui-text-white font-15">新增收货地址</button>
     </footer>
   </div>
 </body>

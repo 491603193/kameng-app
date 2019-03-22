@@ -1,0 +1,33 @@
+.bzj-head {
+    width: 100%;
+    height: 133px;
+    overflow: hidden;
+}
+.bzj-head-text {
+    margin-top: 25px;
+    text-align: center;
+}
+.bzj-price {
+    margin-top: 10px;
+    font-size: 30px;
+    text-align: center;
+}
+.bzj-content {
+    padding: 0 15px;
+    overflow: hidden;
+}
+.bzj-detail-el {
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+.bzj-detail-el .aui-text-success,
+.bzj-detail-el .aui-text-danger {
+    float: right;
+}
+.bzj-detail-el:not(:last-of-type) {
+    border-bottom: 1px solid #eee;
+}
+/* my_bzj end */
+.background-fda9c5 {
+    background-color: #fda9c5;
+}

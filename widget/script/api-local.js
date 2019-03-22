@@ -28,6 +28,13 @@
         '3': '不同意维权'
     }
 
+    var LEVEL_NAME = { // 维权状态 0:未申请维权，1.申请维权， 2.同意维权，3.不同意维权
+        '1': '总代',
+        '2': '一级',
+        '3': '超级VIP',
+        '4': 'VIP'
+    }
+
     u.USER_ID = USER_ID;
     u.USER_NAME = USER_NAME;
     u.USER = USER;
@@ -103,6 +110,10 @@
 
     u.getReturnStateName = function(state){
         return RETURN_STATE[state]
+    };
+
+    u.getUserLevelName = function(state){
+        return LEVEL_NAME[state]
     };
 
     window.$apiLocal = u;

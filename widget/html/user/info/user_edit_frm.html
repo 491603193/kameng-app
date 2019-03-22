@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>个人信息修改</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/change_personal_details.css">
+</head>
+<body>
+  <div id="app" class="content">
+    <div class="padding-0-15 aui-bg-white margin-top-10">
+      <div class="change-title">基本信息</div>
+      <ul class="color-333 aui-font-size-14">
+        <li class="change-item">
+          <div class="name">姓名：</div>
+          <input class="aui-margin-l-10" type="text" placeholder="填写姓名" v-model="entity.name">
+        </li>
+        <li class="change-item">
+          <div class="name">性别：</div>
+          <div class="flex align-center aui-margin-l-10">
+            <div class="margin-left-10">
+              <label>
+                <input type="radio" class="aui-radio" name="sex" value="1" v-model="entity.sex"> 男
+              </label>
+            </div>
+            <div class="margin-left-27">
+              <label>
+                <input type="radio" class="aui-radio" name="sex" value="0" v-model="entity.sex"> 女
+              </label>
+            </div>
+          </div>
+        </li>
+        <li class="change-item">
+          <div class="name">生日：</div>
+          <div class="color-ccc flex align-center aui-margin-l-10 aui-col-xs-9 "
+               :class="{ 'aui-text-333': birthdayStr !== '选择生日' }" @click="openDataPicker()">
+            {{birthdayStr}}
+          </div>
+          <img src="../../../image/xla.svg" class="xla-icon aui-margin-l-10">
+        </li>
+        <li class="change-item">
+          <div class="name">手机号码：</div>
+          <input type="text" placeholder="填写手机号码" v-model="entity.name">
+        </li>
+        <li class="change-item">
+          <div class="name">身份证号码：</div>
+          <input type="text" placeholder="填写身份证号码" v-model="entity.idCard">
+        </li>
+        <li class="change-item" @click="selAddress">
+          <div class="name">所在省市区：</div>
+          <input type="text" placeholder="填写省市区" v-model="cityName" readonly >
+        </li>
+        <li class="change-item">
+          <div class="name">详情地址：</div>
+          <input type="text" placeholder="填写详细地址" v-model="entity.address">
+        </li>
+      </ul>
+    </div>
+    <div class="padding-0-15 aui-bg-white margin-top-10">
+      <div class="change-title">紧急联系人</div>
+      <ul class="color-333 aui-font-size-14">
+        <li class="change-item">
+          <div class="name">姓名：</div>
+          <input type="text" placeholder="填写姓名" v-model="entity.dangerLinkMan">
+        </li>
+        <li class="change-item">
+          <div class="name">电话：</div>
+          <input type="number" placeholder="填写电话" v-model="entity.dangerLinkPhone">
+        </li>
+      </ul>
+    </div>
+    <div class="padding-0-15 aui-bg-white margin-top-10">
+      <div class="change-title">财务信息</div>
+      <ul class="color-333 aui-font-size-14">
+        <li class="change-item">
+          <div class="name">银行名称：</div>
+          <input type="text" placeholder="填写银行名称" v-model="entity.bankName">
+        </li>
+        <li class="change-item">
+          <div class="name">银行账号：</div>
+          <input type="number" placeholder="填写银行账号" v-model="entity.bankCardNum">
+        </li>
+        <li class="change-item">
+          <div class="name">银卡户名：</div>
+          <input type="text" placeholder="填写银卡户名" v-model="entity.bankCardName">
+        </li>
+        <li class="change-item">
+          <div class="name">开户行所属省市：</div>
+          <input type="text" placeholder="填写开户行所属省市" v-model="entity.bankCardCity">
+        </li>
+        <li class="change-item">
+          <div class="name">支付宝账号：</div>
+          <input type="text" placeholder="填写支付宝账号" v-model="entity.zfbNum">
+        </li>
+        <li class="change-item">
+          <div class="name">微信账号：</div>
+          <input type="text" placeholder="填写微信账号" v-model="entity.wxNum">
+        </li>
+        <li class="change-item">收款码：</li>
+      </ul>
+      <div class="qr-code aui-row">
+        <div class="aui-col-xs-5 qr-code-el background-ef" @click="picOpen('zfb')" v-if="!entity.zfbQrcode">
+          <div class="position-center">
+            <img src="../../../image/upewm.svg">
+            <p class="color-666 font-12">上传支付宝收款码</p>
+          </div>
+        </div>
+        <div class="aui-col-xs-5 qr-code-el" @click="picOpen('zfb')" v-if="entity.zfbQrcode">
+          <img class="pic" :src="imgPath + entity.zfbQrcode">
+        </div>
+        <div class="aui-col-xs-5 qr-code-el background-ef" @click="picOpen('wx')" v-if="!entity.wxQrcode">
+          <div class="position-center">
+            <img src="../../../image/upewm.svg">
+            <p class="color-666 font-12">上传微信收款码</p>
+          </div>
+        </div>
+        <div class="aui-col-xs-5 qr-code-el" @click="picOpen('wx')" v-if="entity.wxQrcode">
+          <img class="pic" :src="imgPath + entity.wxQrcode">
+        </div>
+      </div>
+    </div>
+    <button class="background-fda9c5 aui-text-white aui-font-size-16 change-btn" @click="updateData">保存</button>
+  </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/aui/aui-dialog.js"></script>
+<script src="../../../script/lib/album_browser.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+  var addressView
+  apiready = function(){
+    addressView = api.require('addressView');
+    vm.getData()
+  };
+  var dialog = new auiDialog({})
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      showZfb: false,
+      showWx: false,
+      imgPath: $apiAjax.kameng_image,
+      entity: {
+        province: '',
+        city: '',
+        country: '',
+        birthday: '',
+        zfbQrcode: '',
+        wxQrcode: ''
+      }
+    },
+    computed: {
+      cityName: function () {
+        var name = (this.entity.province || '') + (this.entity.city || '')  + (this.entity.country || '')
+        if (name === ''){
+          return '请选择省市区'
+        } else {
+          return name
+        }
+      },
+      birthdayStr: function () {
+        if(this.entity.birthday){
+          return this.entity.birthday
+        } else {
+          return '选择生日'
+        }
+      },
+    },
+    methods: {
+      setUserAddress: function (regionCodes) {
+        addressView.open({
+          file_addr: 'widget://res/region.txt', //数据源地址
+          selected_color: '#fda9c5', //颜色
+          pro_id: regionCodes[0], //省id
+          city_id: regionCodes[1], //市id
+          dir_id: regionCodes[2] //区id
+        });
+      },
+      selAddress: function () {
+        var self = this;
+        addressView.show({}, function(ret) {
+          if (ret.status) {
+            self.entity.province = ret.data[0].name;
+            self.entity.city = ret.data[1].name;
+            self.entity.country = ret.data[2].name;
+            self.entity.regionCode = ret.data[2].id + '000000';
+          }
+        });
+      },
+      openDataPicker: function() {
+        api.openPicker({
+          type: 'date',
+          date: '2016-04-28',
+          title: '选择时间'
+        }, function(ret, err) {
+          vm.entity.birthday = ret.year + '-' + ret.month + '-' + ret.day
+        });
+      },
+      getData: function() {
+        var self = this;
+        $apiAjax.postBody("/user/getInfo", {}, function (ret) {
+          if (ret) {
+            if(!ret.zfbQrcode) ret['zfbQrcode'] = ''
+            if(!ret.wxQrcode) ret['wxQrcode'] = ''
+            if(!ret.province) ret['province'] = ''
+            if(!ret.city) ret['city'] = ''
+            if(!ret.country) ret['country'] = ''
+            if(ret.regionCode) {
+              var regions = []
+              regions.push(parseInt(ret.regionCode.substring(0,2)+'0000'))
+              regions.push(parseInt(ret.regionCode.substring(0,4)+'00'))
+              regions.push(parseInt(ret.regionCode.substring(0,6)))
+              self.setUserAddress(regions);
+            } else {
+              ret['regionCode'] = ''
+            }
+            self.entity = ret
+          }
+        }, true);
+      },
+      updateData: function() {
+        var self = this;
+        $apiAjax.postBody("/user/update", self.entity, function (ret) {
+          if (ret) {
+            dialog.alert({
+              title:"提示",
+              msg:"保存成功",
+              buttons:['确定']
+            },function (ret1) {
+            });
+          }
+        }, true);
+      },
+      picOpen: function (index) {
+        var self = this;
+        media.open(function (ret) {
+          $apiAjax.postFileSingle(ret[0].thumbPath, function (ret) {
+            if(index === 'zfb'){
+              self.entity.zfbQrcode = ret
+            } else {
+              self.entity.wxQrcode = ret
+            }
+          },true)
+        }, 1);
+      }
+    }
+  })
+</script>
+</html>

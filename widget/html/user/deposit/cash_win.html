@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>我的保证金</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+</head>
+<body>
+<header class="aui-bar aui-bar-nav aui-bar-light" id="aui-header">
+  <a class="aui-pull-left aui-btn" onclick="api.closeWin()">
+    <span class="aui-iconfont aui-icon-left"></span>
+  </a>
+  <div class="aui-title" id="title">我的保证金</div>
+  <a class="aui-pull-right aui-btn" onclick="openWin()">
+    <span class="aui-iconfont aui-icon-plus"></span>
+  </a>
+</header>
+</body>
+<script src="../../../script/api.js"></script>
+<script>
+  apiready = function(){
+    api.parseTapmode();
+    var header = $api.byId('aui-header');
+    $api.fixStatusBar(header);
+    api.openFrame({
+      name: '/html/user/deposit/cash_frm',
+      url: api.wgtRootDir + '/html/user/deposit/cash_frm.html',
+      bounces: true,
+      rect: {
+        x: 0,
+        y: $api.offset(header).h,
+        w: 'auto',
+        h: 'auto'
+      },
+      pageParam: api.pageParam
+    })
+  };
+  function openWin () {
+    $api.openWin('/html/user/deposit/add_cash_win',{})
+  }
+</script>
+</html>

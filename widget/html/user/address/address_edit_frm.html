@@ -35,9 +35,9 @@
         <input type="checkbox" class="aui-radio default-address" v-model="address.isDefault">
       </li>
     </ul>
-    <button class="address-btn background-fda9c5 aui-text-white font-16" @click="addAddress()" v-if="!isEdit">添加收货地址</button>
-    <button class="address-btn background-fda9c5 aui-text-white font-16" @click="updateAddress()" v-if="isEdit">保存收货地址</button>
-    <button class="address-btn aui-bg-white color-999 font-16" @click="deleteAddress()"  v-if="isEdit">删除收货地址</button>
+    <button class="address-btn background-fda9c5 aui-text-white aui-font-size-16" @click="addAddress()" v-if="!isEdit">添加收货地址</button>
+    <button class="address-btn background-fda9c5 aui-text-white aui-font-size-16" @click="updateAddress()" v-if="isEdit">保存收货地址</button>
+    <button class="address-btn aui-bg-white color-999 aui-font-size-16" @click="deleteAddress()"  v-if="isEdit">删除收货地址</button>
   </div>
 </body>
 <script src="../../../script/api.js"></script>

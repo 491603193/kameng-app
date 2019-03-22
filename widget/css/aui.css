@@ -65,6 +65,7 @@ html,body,header,section,footer,div,ul,ol,li,img,a,span,em,del,legend,center,str
 		font-size: 25.6px !important;
 	}
 }
+
 ul, li {
 	list-style: none;
 }
@@ -91,6 +92,13 @@ button,input,select,textarea {
 	font: inherit;
 	color: inherit;
 }
+/*遮罩不弹动*/
+.aui-static {
+	height: 100vh;
+	display: block;
+	overflow: hidden;
+}
+
 /*自动隐藏文字*/
 .aui-ellipsis-1 {
 	overflow: hidden;
@@ -117,6 +125,23 @@ button,input,select,textarea {
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 }
+/** 没有更多数据了 */
+.no_line{
+	font-size: 13px;
+	height: 25px;
+	border-top: 1px solid #eee;
+	text-align: center;
+	background-color: #fff;
+	margin-top: 28px;
+}
+.no_line span{
+	position: relative;
+	top: -12px;
+	background: #fff;
+	padding: 0 20px;
+	color: #bbb;
+}
+
 /*水平线*/
 .aui-hr {
 	width: 100%;
@@ -208,10 +233,10 @@ button,input,select,textarea {
 	margin: 0.75rem !important;
 }
 .aui-margin-t-0 {
-	margin-top: 0.25rem !important;
+	margin-top: 0 !important;
 }
 .aui-margin-t-5 {
-	margin-top: 0 !important;
+	margin-top: 0.25rem !important;
 }
 .aui-margin-t-10 {
 	margin-top: 0.5rem !important;
@@ -339,8 +364,14 @@ img {
 .aui-font-size-20 {
 	font-size: 1rem !important;
 }
+.aui-text-333 {
+	color: #333 !important;
+}
 .aui-text-gray {
 	color: #666 !important;
+}
+.aui-text-999 {
+	color: #999 !important;
 }
 .aui-text-default {
 	color: #212121 !important;

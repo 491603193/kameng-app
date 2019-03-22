@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>我的保证金</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/cash.css">
+</head>
+<body>
+ <div id="app">
+   <header class="bzj-head background-fda9c5">
+     <p class="bzj-head-text aui-text-white font-12">我的保证金</p>
+     <p class="bzj-price aui-text-white">￥ {{protectMoney}}</p>
+   </header>
+   <div class="bzj-content aui-bg-white aui-margin-t-10">
+     <div class="font-16 aui-text-333 aui-margin-t-10">明细</div>
+     <div class="bzj-detail-el" v-for="(item, index) in entities" :key="item.cashDepositId">
+       <p class="aui-font-size-14 aui-text-333">
+         <template v-if="item.operationCash === '1'">充值</template>
+         <template v-else>系统添加</template>
+         <span :class="item.operationCash > 0 ? 'aui-text-danger' : 'aui-text-success'">
+           <template v-if="item.operationCash > 0">+</template>
+           <template>{{item.operationCash}}</template> 元
+         </span>
+       </p>
+       <p class="bzj-time aui-font-size-12 aui-text-999 aui-margin-t-5">{{item.createTime}}</p>
+     </div>
+   </div>
+
+   <div class="no_line aui-bg-default" v-show="noMoreData"><span class="aui-bg-default">没有更多了</span></div>
+
+   <div class="aui-no-data " v-show="noData">
+     <img src="../../../image/shopping/no_order.svg" alt="">
+     <div class="text">没有查到保证金记录</div>
+   </div>
+ </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-local.js"></script>
+<script src="../../../script/api-loading.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+  apiready = function (){
+    vm.getData()
+    vm.loading(true);
+    $apiLoading.loadModel(function () {
+      vm.loading(false);
+    });
+  };
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      protectMoney: 0,
+      noData: false,
+      noMoreData: false,
+      entities: []
+    },
+    methods: {
+      getData: function(){
+        var self = this;
+        $apiAjax.postBody("/user/getProtectMoney", {}, function (data) {
+          if (data) {
+            self.protectMoney = data.protectMoney
+          }
+        }, false);
+      },
+      loading: function(isFlush){
+        var self = this;
+        $apiAjax.postBody("/cash/deposit/page", {
+          param: {},
+          page: $apiLoading.page
+        },function (data, page) {
+          $apiLoading.setPage(page);
+          self.noData = false;
+          if (page.pageNo === 1) {
+            if(data.length === 0) self.noData = true;
+            else self.entities = data
+          } else {
+            self.entities = self.entities.concat(data);
+          }
+          self.noMoreData = page.pageNo > 1 && !page.hasNext && !self.noData;
+        }, isFlush);
+      }
+    }
+  })
+</script>
+</html>

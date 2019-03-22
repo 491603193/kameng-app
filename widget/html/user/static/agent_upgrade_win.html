@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>代理升级</title>
-  <link rel="stylesheet" href="../../css/aui.css">
-  <link rel="stylesheet" href="../../css/km.css">
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/km.css">
   <style>
     .win {
       border-bottom: 1px solid #eee;
@@ -55,11 +55,11 @@
   <div id="aui-header">
     <header class="win bacground-f7">
       <div class="back-icon" onclick="api.closeWin()">
-        <img src="../../image/back.svg">
+        <img src="../../../image/back.svg">
       </div>
       <div class="win-title">代理升级</div>
     </header>
-    <div class="my-order-win background-fff" id="head">
+    <div class="my-order-win aui-bg-white" id="head">
       <div class="item">
         <div class="agent-num" :class="state === 0 ? 'agent-num1' : ''">1</div>
         <div class="margin-left-5 font-13 color-999" :class="state === 0 ? 'color-pink' : ''">选择升级级别</div>
@@ -77,8 +77,8 @@
     </div>
   </div>
 </body>
-<script src="../../script/api.js"></script>
-<script src="../../script/vue.min.js"></script>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/vue.min.js"></script>
 <script>
   apiready = function(){
     api.parseTapmode();

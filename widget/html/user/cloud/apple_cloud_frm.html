@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>我的云仓</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/my_yc1.css">
+  <link rel="stylesheet" href="../../../css/user/apple_cloud.css">
+</head>
+<body>
+  <div id="app" class="record-back" :class="(showRemind || showPaySuccessRemind) ? 'aui-static' : ''">
+    <div class="yc-head aui-bg-white">
+      <p class="yc-title aui-font-size-16 aui-text-333">请输入购入云币数量</p>
+      <input type="number" class="yc-num" v-model="stockApplyNum">
+      <p class="aui-font-size-14 aui-text-999 aui-margin-t-5">每个库存单价为：{{cloudPrice}}元</p>
+      <p class="aui-font-size-14 aui-text-right">合计：<span class="aui-text-danger">￥{{totalMoney}}</span></p>
+    </div>
+    <div class="aui-bg-white margin-top-10 yc3-pay">
+      <p class="aui-font-size-14 aui-text-333">您将向代理{{higherCustUser.name}}({{higherCustUser.phone}})购入云币，以下为其支付宝和微信收款码，请先打款后提交购入申请</p>
+      <div class="aui-row">
+        <div class="aui-col-xs-12">
+          <img :src="imgPath + zfbQrcode" v-show="zfbQrcode" >
+          <img :src="imgPath + wxQrcode" v-show="wxQrcode">
+        </div>
+      </div>
+    </div>
+    <div class="aui-bg-white margin-top-10 yc3-remark">
+      <p class="aui-font-size-14 aui-text-333">打款备注</p>
+      <textarea placeholder="请填写打款备注内容" class="aui-font-size-14 yc3-remark-textarea" v-model="stockApplyRemark"></textarea>
+      <p class="aui-font-size-14 aui-text-333 aui-margin-t-15">打款凭证</p>
+      <div class="img-box">
+        <div class="yc3-imgs" v-for="(img, index) in imgArray" :key="index">
+          <img :src="imgPath + img" class="yc3-img-el" @click="openImg(imgArray, index)">
+          <img src="../../../image/deleteImg.svg" class="yc3-img-del" @click="deleteImg(index)">
+        </div>
+        <div class="yc3-imgs" @click="openPhoto()" v-show="imgArray.length < 4">
+          <img src='../../../image/takephoto.png' class="yc3-img-el" >
+        </div>
+      </div>
+    </div>
+    <div class="aui-bg-white yc-btn-bg">
+      <button class="yc-btn background-color-feabc5" @click="submit()">提交</button>
+    </div>
+    <div class="shop-pay-remind" v-show="showRemind">
+      <div class="film"></div>
+      <div class="remind">
+        <div class="remind-relative">
+          <div class="remind-absolute">
+            <img src="../../../image/alert.png">
+          </div>
+          <p class="aui-text-center aui-font-size-16 aui-text-333">提醒</p>
+          <p class="aui-text-center aui-font-size-14 aui-text-333 aui-margin-t-10">您还没有上级，请联系客服。</p>
+          <div class="background-color-feabc5 aui-text-white aui-font-size-14 aui-text-center" @click="api.closeWin()">确定并关闭</div>
+        </div>
+      </div>
+    </div>
+    <div class="shop-pay-remind" v-show="showPaySuccessRemind">
+      <div class="film"></div>
+      <div class="remind">
+        <div class="remind-relative">
+          <div class="remind-absolute">
+            <img src="../../../image/success.svg">
+          </div>
+          <p class="aui-text-center aui-font-size-18 aui-text-333">申请成功</p>
+          <p class="aui-text-center aui-font-size-14 aui-text-333">您的购买申请已成功提交，您可以到我的订单中查看订单状态。</p>
+          <div class="background-color-feabc5 aui-text-white aui-font-size-16 aui-text-center" @click="closeConfirm">确定并关闭</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-local.js"></script>
+<script src="../../../script/api-validate.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script src="../../../script/lib/album_browser.js"></script>
+<script src="../../../script/lib/photo_browser.js"></script>
+<script>
+  apiready = function() {
+    vm.isCore = $apiLocal.getUser().isCore
+    vm.getData();
+  }
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      stockApplyRemark: '',
+      zfbQrcode: '',
+      wxQrcode: '',
+      stockApplyNum: null,
+      imgPath: $apiAjax.kameng_image,
+      showRemind: false,
+      showPaySuccessRemind: false,
+      higherCustUser: {},
+      cloudPrice: 0,
+      imgArray: [],
+      maxImage: 4,
+      showAddPic: true
+    },
+    watch: {
+      stockApplyNum: function (val) {
+        if($val.valMoney(val)){
+          this.stockApplyNum = $val.valMoney(val)
+        }
+      }
+    },
+    computed: {
+      totalMoney: function () {
+        return this.stockApplyNum * this.cloudPrice
+      }
+    },
+    methods: {
+      openImg (imageArray, index) {
+        photo.openWidthArray(imageArray, index)
+      },
+      submit () {
+        var self = this;
+        if(!parseInt(self.stockApplyNum)) {
+          $api.toast('请输入正确的金额')
+          return
+        }
+        $apiAjax.postBody("/stock/apply/add", {
+          payType: '1',
+          stockApplyRemark: self.stockApplyRemark,
+          higherLevelId: self.higherCustUser.userId,
+          stockApplyNum: self.stockApplyNum,
+          stockApplyVoucher: self.imgArray.join()
+        },function (ret) {
+          if (ret) {
+            self.showPaySuccessRemind = true
+          }
+        }, true);
+      },
+      openPhoto () {
+        var readyNum = this.imgArray.length;
+        var self = this;
+        if (readyNum < this.maxImage) {
+          media.imagePicker(function (ret) {
+            self.postImg(ret)
+          }, (this.maxImage - readyNum))
+        }
+      },
+      postImg: function (imgs) {
+        var self = this;
+        $apiAjax.postFileMultiple(imgs, function (ret) {
+          if (ret) {
+            self.imgArray = self.imgArray.concat(ret)
+          }
+        },true)
+      },
+      deleteImg: function (index) {
+        this.imgArray.splice(index, 1)
+      },
+      closeConfirm() {
+        api.closeWin();
+      },
+      getData () {
+        var self = this;
+        $apiAjax.postBody("/user/stock/getLevelHigherCustUser", {},function (ret) {
+          if (ret) {
+            self.higherCustUser = ret.higherCustUser
+            if(ret.higherCustUser.zfbQrcode) self.zfbQrcode = ret.higherCustUser.zfbQrcode
+            if(ret.higherCustUser.wxQrcode) self.wxQrcode = ret.higherCustUser.wxQrcode
+            self.cloudPrice = ret.cloudPrice
+          } else {
+            self.showRemind = true
+          }
+        }, true);
+      },
+    }
+  })
+</script>
+</html>

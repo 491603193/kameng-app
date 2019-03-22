@@ -28,7 +28,7 @@ function openDetail () {
   $api.openWin('/demo/classify/product_detail')
 }
 function openIncome () {
-  $api.openWin('/demo/my/income_statistics_win')
+  $api.openWin('/demo/user/income_statistics_win')
 }
 function zheZhaoHidden () {
   $api.byId('indexZhe').style.display = "none"

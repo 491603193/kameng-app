@@ -6,37 +6,37 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name = "format-detection" content = "telephone=no">
   <title>我的云仓</title>
-  <link rel="stylesheet" href="../../css/aui.css">
-  <link rel="stylesheet" href="../../css/km.css">
-  <link rel="stylesheet" href="../../css/my/order_details_frm.css">
-  <link rel="stylesheet" href="../../css/my/my_yc1.css">
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/km.css">
+  <link rel="stylesheet" href="../../../css/my/order_details_frm.css">
+  <link rel="stylesheet" href="../../../css/my/my_yc1.css">
 </head>
 <body>
   <div id="app" :class="(juJue || tongYi) ? 'pay' : ''">
-    <header class="aui-row background-fff yc1-head">
+    <header class="aui-row aui-bg-white yc1-head">
       <div class="aui-col-xs-6">
         <p class="font-15 color-333">我的管理仓</p>
         <p class="yc1-num color-333">50</p>
-        <p class="font-11 color-999">查看变动记录>></p>
-        <button class="yc1-btn color-fff font-16 background-color-feabc5">购买</button>
+        <p class="aui-font-size-12 color-999">查看变动记录>></p>
+        <button class="yc1-btn aui-text-white aui-font-size-16 background-color-feabc5">购买</button>
       </div>
       <div class="aui-col-xs-6">
         <p class="font-15 color-333">我的个人仓</p>
         <p class="yc1-num color-333">30</p>
-        <p class="font-11 color-999">查看变动记录>></p>
-        <button class="yc1-btn color-fff font-16 background-blue" @click="diaoRu = true">调入</button>
+        <p class="aui-font-size-12 color-999">查看变动记录>></p>
+        <button class="yc1-btn aui-text-white aui-font-size-16 background-blue" @click="diaoRu = true">调入</button>
       </div>
     </header>
-    <div class="yc1-title color-333 font-16">云仓购买订单</div>
-    <div class="aui-row yc1-title-item background-fff">
+    <div class="yc1-title color-333 aui-font-size-16">云仓购买订单</div>
+    <div class="aui-row yc1-title-item aui-bg-white">
       <div class="aui-col-xs-6">
-        <div class="yc1-dd font-16 color-333"
+        <div class="yc1-dd aui-font-size-16 color-333"
           :class="who === 'templateA' ? 'yc1-dd-active' : ''"
           @click="who = 'templateA'"
         >下级订单</div>
       </div>
       <div class="aui-col-xs-6">
-        <div class="yc1-dd font-16 color-333"
+        <div class="yc1-dd aui-font-size-16 color-333"
           :class="who === 'templateB' ? 'yc1-dd-active' : ''"
           @click="who = 'templateB'"
         >我的订单</div>
@@ -57,7 +57,7 @@
         <textarea placeholder="请填写拒绝原因" class="alert-text yc1-alert-text"></textarea>
         <div class="alert-btn">
           <div class="font-12 color-333" @click="juJue = false">取消</div>
-          <div class="background-fda9c5 color-fff font-12">确定</div>
+          <div class="background-fda9c5 aui-text-white font-12">确定</div>
         </div>
       </div>
         <!-- 提醒 -->
@@ -65,11 +65,11 @@
         <div class="remind">
           <div class="remind-relative">
             <div class="remind-absolute">
-              <img src="../../image/alert.png">
+              <img src="../../../image/alert.png">
             </div>
             <p class="aui-text-center font-17 color-333">提醒</p>
             <p class="aui-text-center font-14 color-333 margin-top-10">您的个人库存不足，请先购入库存后，再继续调拨</p>
-            <div class="background-color-feabc5 color-fff font-15 aui-text-center" @click="tongYi = false">确定</div>
+            <div class="background-color-feabc5 aui-text-white font-15 aui-text-center" @click="tongYi = false">确定</div>
           </div>
         </div>
       </div>
@@ -80,20 +80,20 @@
         <input type="number" placeholder="请填写数量（<=50）" class="yc1-num-text">
         <div class="alert-btn">
           <div class="font-12 color-333" @click="diaoRu = false">取消</div>
-          <div class="background-fda9c5 color-fff font-12">确定</div>
+          <div class="background-fda9c5 aui-text-white font-12">确定</div>
         </div>
       </div>
      <!-- 调入 end -->
     </div>
   </div>
 </body>
-<script src="../../script/api.js"></script>
-<script src="../../script/vue.min.js"></script>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/vue.min.js"></script>
 <script type="text/x-template" id="xjdd">
-  <div class="background-fff yc1-template">
-    <p class="background-fff yc1-row font-13 color-333">
+  <div class="aui-bg-white yc1-template">
+    <p class="aui-bg-white yc1-row font-13 color-333">
       魏婷(186*****222)-总代
-      <span class="font-11 color-999">2019-2-13 08:30:19</span>
+      <span class="aui-font-size-12 color-999">2019-2-13 08:30:19</span>
     </p>
     <div class="aui-row yc1-row1">
       <div class="aui-col-xs-3">申请购入：</div>
@@ -122,10 +122,10 @@
   </div>
 </script>
 <script type="text/x-template" id="mydd">
- <div class="background-fff yc1-template">
-    <p class="background-fff yc1-row font-13 color-333">
+ <div class="aui-bg-white yc1-template">
+    <p class="aui-bg-white yc1-row font-13 color-333">
       魏二婷(186*****222)-总代
-      <span class="font-11 color-999">2019-2-13 08:30:19</span>
+      <span class="aui-font-size-12 color-999">2019-2-13 08:30:19</span>
     </p>
     <div class="aui-row yc1-row1">
       <div class="aui-col-xs-3">申请购入：</div>
@@ -186,7 +186,7 @@
     el: '#app',
     data: {
       who: 'templateA',
-      imgs: ['../../image/index/zhanwei.png', '../../image/index/zhanwei.png'],
+      imgs: ['../../../image/index/zhanwei.png', '../../../image/index/zhanwei.png'],
       juJue: false,
       tongYi: false,
       diaoRu: false

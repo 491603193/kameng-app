@@ -1,0 +1,28 @@
+﻿(function () {
+  var m = {}
+  m.isInstalled  = function () {
+    var SPay = api.require('SPay');
+    SPay.isInstalled(function(ret, err) {
+      if (ret.installed) {
+        return true
+      } else {
+        $api.setErrorMessage("当前设备未安装微信客户端")
+        return false
+      }
+    })
+  }
+
+  m.wxPay  = function (config, fun) {
+    var SPay = api.require('SPay');
+    SPay.wxPay({
+      service: config.service,
+      token: config.token,
+      amount: config.amount
+    }, function(ret) {
+      fun(ret)
+    });
+  }
+
+  window.spay = m
+})()
+

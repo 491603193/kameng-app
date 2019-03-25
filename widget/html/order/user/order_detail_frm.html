@@ -57,9 +57,9 @@
           <div class="weiquan" v-if="item.orderState === '2' && item.isReturn === '0' ">
             <div class="weiquan-btn aui-font-size-12 color-333" @click="showReturn(item.orderDealSplitId)">维权</div>
           </div>
-          <div class="yfh" v-if="item.orderState === '3'">
-            <div class="yfh-btn right aui-font-size-12 color-333">确认收货</div>
-            <div class="yfh-btn aui-font-size-12 color-333">查看物流</div>
+          <div class="yfh" v-if="item.orderState === '3' || item.orderState === '4'">
+            <div class="yfh-btn right aui-font-size-12 color-333" v-if="item.orderState === '3'" @click="complete(item.orderDealSplitId)">确认收货</div>
+            <div class="yfh-btn aui-font-size-12 color-333" @click="openLogistics(item.orderDealSplitId)">查看物流</div>
           </div>
           <div class="wqxx" v-if="item.isReturn !== '0'">
             <div class="wqxx-title aui-font-size-14 color-333">维权信息</div>
@@ -127,6 +127,21 @@
       entity: {}
     },
     methods: {
+      complete: function (orderDealSplitId) {
+        $apiAjax.postBody("/order/deal/split/complete", {
+          orderDealSplitId: orderDealSplitId,
+        },function (ret) {
+          if (ret) {
+            $api.toast('确认收货成功！')
+            self.getData()
+          }
+        }, true)
+      },
+      openLogistics: function (orderDealSplitId) {
+        $api.openWin("/html/order/logistics/logistics_win",{
+          orderDealSplitId: orderDealSplitId
+        })
+      },
       showReturn: function(orderDealSplitId) {
         this.orderDealSplitId = orderDealSplitId
         this.showActivist = true

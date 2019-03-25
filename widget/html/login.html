@@ -67,6 +67,11 @@
     }
     var smsCode = $api.val($api.byId('smsCode'));
     if (!$val.valEmpty(smsCode,'短信验证码')) return;
+    var loginN = $api.val($api.byId('loginName'))
+    if (loginN !== loginName){
+      $apiAjax.setErrorMessage("手机号不是发送验证码的手机号");
+      return;
+    }
     $apiAjax.postBody("/login/login",{
       loginName: loginName,
       smsCode: smsCode

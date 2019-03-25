@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>我的订单</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/order/logistics.css">
+</head>
+<body class="aui-bg-white">
+ <div id="app">
+   <div class="logistics-head aui-bg-white">
+     <img :src="imgPath + productStockPic" class="logistics-detail-img">
+     <div class="logistics-detail-text aui-text-gray">
+       <p class="aui-text-333 aui-font-size-16">
+         物流状态 <span class="aui-text-primary">{{getStateName(entity.State)}}</span>
+      </p>
+      <p class="aui-font-size-12">物流公司：{{entity.compant}}</p>
+      <p class="aui-font-size-12">运单编号：{{entity.LogisticCode}} <span class="copy color-febb1f" @click="setClip()">复制单号</span></p>
+      <p class="aui-font-size-12">官方电话：{{wuliu.mobel}}</p>
+     </div>
+   </div>
+   <div style="height: 10px; background: #f5f5f5;"></div>
+   <div class="logistics-detail-list aui-bg-white">
+     <p class="title aui-font-size-16 aui-text-333">物流详情</p>
+      <div class="logistics-detail-row" v-for="(item, index) in detail" :key="index">
+        <div class="icon1" v-if="index === 0">
+          <img src="../../../image/wlblue.svg" class="logistics-blue-dot">
+          <div class="logistics-long-line"></div>
+        </div>
+        <div class="icon" v-else>
+          <img src="../../../image/wlline.svg" class="logistics-short-line">
+          <img src="../../../image/wlhui.svg" class="logistics-hui-dot">
+          <img src="../../../image/wlline.svg" class="logistics-long-line">
+        </div>
+        <div class="text aui-text-999" :class="index === (detail.length - 1) ? 'logistics-detail-text' : ''">
+          <p class="aui-font-size-14 title-overflow"
+            :class="index === 0 ? 'aui-text-primary' : ''"
+          >{{item.text}}</p>
+          <p class="aui-font-size-14"
+            :class="index === 0 ? 'aui-text-primary' : ''"
+          >{{item.time}}</p>
+        </div>
+      </div>
+   </div>
+ </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+  apiready = function () {
+    vm.productStockPic = api.pageParam.productStockPic
+    vm.getData();
+  };
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      imgPath: $apiAjax.kameng_image,
+      productStockPic: '',
+      entity: {},
+      wuliu: {
+        state: '运输中',
+        compant: '顺丰速度运',
+        code: '4646413546546',
+        mobel: '95338',
+        img: '../../../image/index/zhanwei.png'
+      },
+      detail: [
+        {text: '[烟台市]烟台市莱山区集散撒发生萨芬飒飒发案说法撒啊发撒中心 烟台市莱山区集散撒发生萨芬飒飒发案说法撒啊发撒中心已发出', time: '2016-11-30 08:20:56'},
+        {text: '[烟台市]烟台市莱山区集散中心 已发出', time: '2016-11-30 08:20:56'},
+        {text: '[烟台市]烟台市莱山区集散中心 已发出', time: '2016-11-30 08:20:56'},
+        {text: '[烟台市]烟台市莱山区集散中心 已发出', time: '2016-11-30 08:20:56'}
+      ],
+    },
+    methods: {
+      getStateName: function (State) {
+        if (State === '2'){
+          return '在途中'
+        }if (State === '3'){
+          return '签收'
+        }if (State === '4'){
+          return '问题件'
+        } else {
+          return '未知'
+        }
+      },
+      setClip: function(text) {
+        var clipBoard = api.require('clipBoard');
+        clipBoard.set({
+          value: text
+        }, function(ret, err) {
+          if (ret) {
+            $api.toast("拷贝成功")
+          }
+        });
+      },
+      getData: function () {
+        var self = this;
+        $apiAjax.postBody("/order/logistics/get", {
+          expressNo: api.pageParam.expressNo,
+          expressCom: api.pageParam.expressCom
+        },function (ret) {
+          if (ret) {
+            self.entity = ret
+          }
+        }, true)
+      }
+    }
+  })
+</script>
+</html>

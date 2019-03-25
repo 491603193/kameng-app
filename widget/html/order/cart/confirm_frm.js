@@ -135,7 +135,43 @@ var vm = new Vue({
           }
         }
       }
-      this.postOrder()
+      if(this.payType === '4'){
+        this.postOrder()
+      }
+      if(this.payType === '1'){
+        //wft
+        this.getTocken()
+      }
+    },
+    getTocken () {
+      if(spay.isInstalled()){
+        var self = this;
+        self.spay ()
+        return
+        $apiAjax.postBody("/order/main/save",{
+          userAddrId: self.userAddrId,
+          payType: self.payType,
+          productType: self.isCloud? '1' : '2',
+          payMoney: self.payMoney,
+          totalProductNum: self.totalProductNum,
+          totalStockNum: self.isCloud? self.totalMoney : 0,
+          orderRemark: self.remark,
+          list: self.entity
+        },function (ret) {
+          if(ret){
+            self.spay ()
+          }
+        }, 'submit');
+      }
+    },
+    spay () {
+      spay.wxPay({
+        service: 'pay.weixin.app',
+        token: '147430b88ea3622250ae32eca5151ffba',
+        amount: 1
+      },function (ret) {
+        api.alert({msg:JSON.stringify(ret)});
+      })
     },
     postOrder () {
       var self = this;

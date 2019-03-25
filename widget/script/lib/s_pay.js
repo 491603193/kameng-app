@@ -13,9 +13,6 @@
   }
 
   m.wxPay  = function (config, fun) {
-    alert(config.service);
-    alert(config.token);
-    alert(config.amount);
     var SPay = api.require('SPay');
     SPay.wxPay({
       service: config.service,

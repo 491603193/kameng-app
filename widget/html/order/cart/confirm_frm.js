@@ -169,7 +169,6 @@ var vm = new Vue({
     },
     spay (config) {
       spay.wxPay(config,function (ret) {
-        alert(JSON.stringify(ret));
       })
     },
   }

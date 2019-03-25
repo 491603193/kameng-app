@@ -1,0 +1,59 @@
+.head {
+  width: 100%;
+  padding: 10px 15px;
+  overflow: hidden;
+}
+.text-center {
+  text-align: center;
+}
+.big-price {
+  font-size: 30px;
+}
+.col-left {
+  border-right: 1px solid #eee;
+}
+.head-look {
+  margin-top: 15px;
+  text-align: right;
+}
+.head-flex {
+  width: 100%;
+  display: flex;
+}
+.head-flex div {
+  width: calc(50% - 5px);
+  hight: 44px;
+  line-height: 44px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 3px;
+}
+.right {
+  border: 1px solid #fda9c5;
+}
+.withdraw-title {
+  padding: 0 15px;
+  height: 30px;
+  line-height: 45px;
+}
+.withdraw-list-item {
+  padding: 15px 15px 0 15px;
+}
+.line1 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.line2 {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+.line3 {
+  height: 40px;
+  line-height: 40px;
+  text-align: right;
+}
+.withdraw-list > .withdraw-list-item:last-of-type > .line2 {
+  border: none;
+}

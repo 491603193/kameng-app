@@ -1986,6 +1986,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 /*信息提示条*/
 .aui-tips {
+	top: 0;
     padding: 0 0.75rem;
     width: 100%;
     z-index: 99;

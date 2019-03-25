@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>提现申请</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/advance_apply.css">
+</head>
+<body>
+  <div id="app" :class="tiXian || tiXing ? 'pay' : ''">
+    <div class="head aui-bg-white">
+      <p class="aui-margin-t-10  aui-font-size-14 aui-text-gray text-center">可提现金额</p>
+      <p class="big-price aui-text-danger aui-margin-t-5 text-center">￥12000</p>
+      <div class="aui-row aui-margin-t-10">
+        <div class="aui-col-xs-6 col-left">
+          <p class="aui-font-size-14 aui-text-999  text-center">扣税金额</p>
+          <p class="aui-font-size-14 aui-text-333 aui-margin-t-5 text-center">4000.00</p>
+        </div>
+        <div class="aui-col-xs-6">
+          <p class="aui-font-size-14 aui-text-999 text-center">实际到账金额</p>
+          <p class="aui-font-size-14 aui-text-333 aui-margin-t-5 text-center">8000.00</p>
+        </div>
+      </div>
+      <p class="aui-font-size-12 aui-text-999 head-look" @click="openDetail()">查看明细>></p>
+      <div class="head-flex aui-margin-t-10">
+        <div class="left background-pink aui-text-white" @click="tiXian = true">全部提现</div>
+        <div class="right aui-bg-white color-pink aui-margin-l-10" @click="tiXian = true">全部转到余额</div>
+      </div>
+    </div>
+    <div class="withdraw-title aui-font-size-16 aui-text-333">提现记录</div>
+    <div class="withdraw-list">
+      <div class="withdraw-list-item aui-bg-white">
+        <div class="line1">
+          <div class="aui-font-size-16 aui-text-danger">12000 <span class="color-a0c161 aui-font-size-12">已提现</span></div>
+          <div class="aui-text-999 aui-font-size-12">02-13 10:12:23</div>
+        </div>
+        <p class="line2 aui-text-gray aui-font-size-14">扣税金额4000.00，实际到账金额8000.00</p>
+        <div class="line3 aui-font-size-12 aui-text-primary" @click="openDetail()">查看明细>></div>
+      </div>
+      <div class="withdraw-list-item aui-bg-white">
+        <div class="line1">
+          <div class="aui-font-size-16 aui-text-danger">12000 <span class="color-a0c161 aui-font-size-12">已提现</span></div>
+          <div class="aui-text-999 aui-font-size-12">02-13 10:12:23</div>
+        </div>
+        <p class="line2 aui-text-gray aui-font-size-14">扣税金额4000.00，实际到账金额8000.00</p>
+        <div class="line3 aui-font-size-12 aui-text-primary" @click="openDetail()">查看明细>></div>
+      </div>
+    </div>
+    <div v-show="tiXian || tiXing">
+      <div class="zhezhao-back" @click="zhezhao()"></div>
+      <div class="shop-pay-remind" v-show="tiXian">
+        <div class="remind">
+          <div class="remind-relative">
+            <div class="remind-absolute">
+              <img src="../../../image/alert.png">
+            </div>
+            <p class="aui-text-center font-17 aui-text-333">提醒</p>
+            <p class="aui-text-center aui-font-size-14 aui-text-333">提现到银行卡需要您先完善个人信息</p>
+            <div class="background-color-feabc5 aui-text-white font-15 aui-text-center" @click="tiXian = false">去完善</div>
+          </div>
+        </div>
+      </div>
+      <div class="shop-pay-remind" v-show="tiXing">
+        <div class="remind">
+          <div class="remind-relative">
+            <div class="remind-absolute">
+              <img src="../../../image/alert.png">
+            </div>
+            <p class="aui-text-center font-17 aui-text-333">提醒</p>
+            <p class="aui-text-center aui-font-size-14 aui-text-333">未到提现时间不可提现（每月2号到5号可提现）</p>
+            <div class="background-color-feabc5 aui-text-white font-15 aui-text-center" @click="tiXian = false">确定</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      tiXian: false,
+      tiXing: false
+    },
+    methods: {
+      zhezhao () {
+        this.tiXian = false
+        this.tiXing = false
+      },
+      openDetail () {
+        $api.openWin('/demo/my/income_detail_win')
+      }
+    }
+  })
+</script>
+</html>

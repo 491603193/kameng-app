@@ -1,7 +1,7 @@
 apiready = function() {
   api.parseTapmode();
   $api.fixStatusBar($api.byId('aui-header'));
-  $api.fixStatusBar($api.byId('aui-header'));
+  $api.fixStatusBar($api.byId('team-head'));
   vm.userId = $apiLocal.getUserId()
   vm.loadData();
   vm.loadTeam();
@@ -15,12 +15,12 @@ var vm = new Vue({
     defaultImg: '../../../image/user/header1.png',
     userId: '',
     user: {},
-    otherUser: {},
     teamNum: {},
     month: 'now',
     floor: 1,
     teamList: [],
-    index: 0
+    index: 0,
+    changeHeader: false
   },
   created () {
   },
@@ -51,9 +51,8 @@ var vm = new Vue({
       },function (data) {
         if (data) {
           if (data.success) {
-            self.userId = data.user.userId
-            self.teamNum = data.user.teamNum
-            self.otherUser = data
+            self.userId = data.teamNum.userId
+            self.teamNum = data.teamNum
             self.isMy = false
             self.loadTeam()
           } else {
@@ -62,27 +61,16 @@ var vm = new Vue({
         }
       }, true);
     },
-    loadTeam () {
+    loadData () {
       var self = this;
-      $apiAjax.postBody("/user/team/list", {
-        userId: self.userId,
-        floor: self.floor,
-        month: self.month
-      },function (data) {
+      $apiAjax.postBody("/user/team/findMyInfo", {},function (data) {
         if (data) {
-          if(self.floor === 1){
-            self.teamList = data
-          } else {
-            for(var i=0; i < data.length; i++){
-              var entity =  data[i]
-              entity['indexF'] = i + 1
-              self.teamList.splice(self.index+i+1, 0, entity)
-            }
-          }
+          self.user = data.user
+          self.teamNum = data.teamNum
         }
       }, true);
     },
-    loadData () {
+    loadTeam () {
       var self = this;
       $apiAjax.postBody("/user/team/list", {
         userId: self.userId,
@@ -150,3 +138,16 @@ searchBarBtn.onclick = function(){
     searchBarInput.blur();
   }
 }
+
+
+var scroll = new auiScroll({
+  listen:true,
+  distance:200 //判断到达底部的距离，isToBottom为true
+},function(ret){
+  if (ret.scrollTop > 210 && !vm.changeHeader) {
+    vm.changeHeader = true
+  }
+  if (ret.scrollTop <= 210 && vm.changeHeader) {
+    vm.changeHeader = false
+  }
+});

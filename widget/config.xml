@@ -36,5 +36,5 @@
 		<param name="appid" value="wx2a5538052969956e"/>
 	</feature>
 	<!-- 微信 URL Scheme 白名单-->
-	<preference name="querySchemes" value="wechat, weixin" />
+	<preference name="querySchemes" value="wechat,weixin" />
 </widget>

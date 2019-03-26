@@ -19,6 +19,7 @@
       token: config.token,
       amount: config.amount
     }, function(ret) {
+      alert(JSON.stringify(ret));
       fun(ret)
     });
   }

@@ -10,31 +10,31 @@
   <link rel="stylesheet" href="../../../css/my_team.css">
 </head>
 <body>
-<header class="aui-bar aui-bar-nav " id="aui-header">
-  <a class="aui-pull-left aui-btn" onclick="api.closeWin()">
-    <span class="aui-iconfont aui-icon-left"></span>
-  </a>
-  <div class="aui-title" id="title">我的团队</div>
-  <a class="aui-pull-right aui-btn" @click="openWin()">
-    <span class="aui-iconfont aui-icon-menu"></span>
-  </a>
-</header>
-<div id="app" style="padding-bottom: 20px;">
+<div id="app" style="padding-bottom: 20px;" v-cloak>
+  <header class="aui-bar aui-bar-nav" id="aui-header" v-bind:class="{'aui-bar-nav-pink': !changeHeader, 'aui-bar-nav-white': changeHeader}">
+    <a class="aui-pull-left aui-btn" onclick="api.closeWin()">
+      <span class="aui-iconfont aui-icon-left"></span>
+    </a>
+    <div class="aui-title" id="title">我的团队</div>
+    <a class="aui-pull-right aui-btn" @click="openWin()">
+      <span class="aui-iconfont aui-icon-menu"></span>
+    </a>
+  </header>
   <header class="team-head" id="team-head">
     <p class="aui-font-size-14 aui-text-white team-grade">本月团队绩效</p>
-    <p class="aui-text-white aui-margin-l-5 price">￥{{56800.00}}</p>
+    <p class="aui-text-white aui-margin-l-5 price">￥{{user.monthOrderAmount}}</p>
     <div class="aui-row aui-margin-t-15">
       <div class="aui-col-xs-4 border-right">
         <p class="text-center aui-font-size-12 aui-text-white">团队返点金额</p>
-        <p class="text-center aui-font-size-14 aui-text-white aui-margin-t-5">4000.00</p>
+        <p class="text-center aui-font-size-14 aui-text-white aui-margin-t-5">{{user.teamClearingMoney}}</p>
       </div>
       <div class="aui-col-xs-4 border-right">
         <p class="text-center aui-font-size-12 aui-text-white">个人返点金额</p>
-        <p class="text-center aui-font-size-14 aui-text-white aui-margin-t-5">4000.00</p>
+        <p class="text-center aui-font-size-14 aui-text-white aui-margin-t-5">{{user.selfClearingMoney}}</p>
       </div>
       <div class="aui-col-xs-4">
         <p class="text-center aui-font-size-12 aui-text-white">直属奖励</p>
-        <p class="text-center aui-font-size-14 aui-text-white aui-margin-t-5">4000.00</p>
+        <p class="text-center aui-font-size-14 aui-text-white aui-margin-t-5">{{user.awardMoney}}</p>
       </div>
     </div>
   </header>
@@ -50,13 +50,13 @@
   </div>
   <div class="bacground-fffbe6 aui-row">
     <div class="aui-col-xs-6">
-      <p class="row-text aui-font-size-12 aui-text-gray">代理姓名：{{otherUser.name}}</p>
+      <p class="row-text aui-font-size-12 aui-text-gray">代理姓名：{{teamNum.name}}</p>
       <p class="row-text aui-font-size-12 aui-text-gray">团队总人数：{{teamNum.totalNum}}</p>
       <p class="row-text aui-font-size-12 aui-text-gray">团队总代人数：{{teamNum.levelANum}}</p>
       <p class="row-text aui-font-size-12 aui-text-gray">团队超级VIP人数：{{teamNum.levelCNum}}</p>
     </div>
     <div class="aui-col-xs-6 right2">
-      <p class="row-text aui-font-size-12 aui-text-gray">代理级别：{{otherUser.levelName}}</p>
+      <p class="row-text aui-font-size-12 aui-text-gray">代理级别：{{teamNum.levelName}}</p>
       <p class="row-text aui-font-size-12 aui-text-gray">直属代理人数：{{teamNum.dirNum}}</p>
       <p class="row-text aui-font-size-12 aui-text-gray">团队一级人数：{{teamNum.levelBNum}}</p>
       <p class="row-text aui-font-size-12 aui-text-gray">团队VIP人数：{{teamNum.levelDNum}}</p>
@@ -64,7 +64,7 @@
   </div>
   <div class="rank-title horizontal aui-border-b">
     <div class="flex-1">
-      <template v-if="isMy">我的</template><template v-else>{{otherUser.name}}</template>团队本月总销售额（元）</div>
+      <template v-if="isMy">我的</template><template v-else>{{teamNum.name}}</template>团队本月总销售额（元）</div>
   </div>
   <div class="team-my">
     <div class="horizontal" v-for="(item, index) in teamList"
@@ -87,7 +87,7 @@
         <div class="score-box flex-1">
           <div class="name flex-1 ellipsis">{{item.name}}（{{item.levelName}}）</div>
           <div class="score flex-1 horizontal">
-            <p class="amount ellipsis">业绩:{{item.teamAmount}}元</p>
+            <p class="amount ellipsis">业绩:{{item.monthOrderAmount}}元</p>
             <p class="amount ellipsis">销售额:{{item.teamSale}}元</p>
           </div>
         </div>
@@ -100,5 +100,6 @@
 <script src="../../../script/api-ajax.js"></script>
 <script src="../../../script/api-local.js"></script>
 <script src="../../../script/vue.min.js"></script>
+<script src="../../../script/aui/aui-scroll.js" ></script>
 <script src="./my_team.js"></script>
 </html>

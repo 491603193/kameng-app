@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>我的余额</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/my_advance.css">
+</head>
+<body>
+  <div id="app">
+    <div class="head aui-bg-white">
+      <p class="aui-margin-t-10 aui-font-size-14 aui-text-gray text-center">可用余额</p>
+      <p class="big-price aui-text-danger aui-margin-t-5 text-center">￥{{advance}}</p>
+    </div>
+    <div class="withdraw-list aui-bg-white aui-margin-t-10">
+      <div class="withdraw-title aui-font-size-16 aui-text-333 aui-border-b">收支记录</div>
+      <div class="withdraw-list-item" v-for="item in entities">
+        <div class="line1">
+          <div class="aui-font-size-16"
+               :class="item.changeMoney < 0 ? 'color-a0c161' : 'aui-text-danger'">
+            <template v-if="item.changeMoney > 0">+</template>
+            {{item.changeMoney}} 元
+          </div>
+          <div class="aui-text-999 aui-font-size-12">{{item.createTime}}</div>
+        </div>
+        <p class="line2 aui-text-gray aui-font-size-14">{{item.remark}}</p>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-local.js"></script>
+<script src="../../../script/api-loading.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script src="../../../script/aui/aui-dialog.js"></script>
+<script>
+  apiready = function (){
+    api.parseTapmode();
+    vm.loading(true);
+    vm.loadAdvance();
+    $apiLoading.loadModel(function () {
+      vm.loading(false);
+    });
+  };
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      userId: '',
+      advance: 0,
+      entities: [],
+      noData: false,
+      noMoreData: false
+    },
+    created () {
+    },
+    methods: {
+      loadAdvance () {
+        var self = this;
+        $apiAjax.postBody("/user/advance/payment/log/getAdvancePayment", {},function (data) {
+          if (data) {
+            self.advance = data.advancePayment
+          }
+        }, true);
+      },
+      loading: function(isFlush){
+        var self = this;
+        $apiAjax.postBody("/user/advance/payment/log/page", {
+          param: {
+            orderState: ''
+          },
+          page: $apiLoading.page
+        },function (data, page) {
+          $apiLoading.setPage(page);
+          self.noData = false;
+          if (page.pageNo === 1) {
+            if(data.length === 0) self.noData = true;
+            else self.entities = data
+          } else {
+            self.entities = self.entities.concat(data);
+          }
+          self.noMoreData = page.pageNo > 1 && !page.hasNext && !self.noData;
+        }, isFlush);
+      }
+    }
+  })
+</script>
+</html>

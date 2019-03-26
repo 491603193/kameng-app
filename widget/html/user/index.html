@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="my-card">
-      <div class="my-card-top">
+      <div class="my-card-top" @click="openWin('/html/user/income/my_income_win')">
         <p class="incom">我的总收入</p>
         <p class="money color-f7931e">￥100000</p>
         <!--<p class="look color-ccc">查看明细 >></p>-->
@@ -40,7 +40,7 @@
         <div class="el left">
         <p class="incom">可提现收入</p>
         <p class="money1 color-333">￥5000</p>
-        <p class="look color-ccc">查看明细 >></p>
+        <p class="look color-ccc" @click="openWin('/html/user/income/income_apply_win')">查看明细 >></p>
       </div>
       <div class="el">
         <p class="incom">待生效</p>
@@ -51,7 +51,7 @@
     </div>
     <div class="my-click">
       <div class="my-click-row">
-        <div class="el left" @click="openWin('html/order/order/my_order_win')">
+        <div class="el left" @click="openWin('/html/user/income/my_advance_win')">
           <div class="my-click-icon">
             <img src="../../image/user/wdye.png">
           </div>

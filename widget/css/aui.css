@@ -99,6 +99,16 @@ button,input,select,textarea {
 	overflow: hidden;
 }
 
+.aui-static-back {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.3);
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+
 /*自动隐藏文字*/
 .aui-ellipsis-1 {
 	overflow: hidden;
@@ -395,7 +405,7 @@ img {
 	color: #e51c23 !important;
 }
 .aui-text-pink {
-	color: #e91e63 !important;
+	color: #feabc5 !important;
 }
 .aui-text-purple {
 	color: #673ab7 !important;
@@ -2050,6 +2060,7 @@ input[type="search"]::-webkit-search-cancel-button {
     display: inline-block;
     -webkit-animation: rotate 1s 0s linear infinite;
         	animation: rotate 1s 0s linear infinite;
+	z-index: 999;
 }
 /*dialog*/
 .aui-dialog {

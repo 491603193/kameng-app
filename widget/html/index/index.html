@@ -9,61 +9,61 @@
   <link rel="stylesheet" href="../../css/aui/aui-slide.css">
   <link rel="stylesheet" href="../../css/index/index.css">
 </head>
-<body class="aui-bg-white" >
-    <div class="index-flex" id="header">
-      <div class="index-search-logo">
-        <img src="../../image/index/logo.png">
+<body class="aui-bg-white">
+<div class="index-flex" id="header">
+  <div class="index-search-logo">
+    <img src="../../image/index/logo.png">
+  </div>
+  <div class="index-search">
+    <div class="index-search-icon">
+      <img src="../../image/index/search.svg">
+    </div>
+    <input type="text" placeholder="搜索商品" class="index-input-search">
+  </div>
+  <div class="index-msg-icon">
+    <div class="index-msg-top">
+      <img src="../../image/index/msg.svg">
+      <div class="aui-dot index-msg-dot"></div>
+    </div>
+    <p class="index-msg-text">消息</p>
+  </div>
+</div>
+<header class="index-head">
+  <div id="aui-slide3" style="top: 75px;">
+    <div class="aui-slide-wrap" id="arraySlide">
+    </div>
+    <div class="aui-slide-page-wrap"><!--分页容器--></div>
+  </div>
+</header>
+<div class="index-section">
+  <section class="aui-grid ">
+    <div class="aui-row">
+      <div class="aui-col-xs-3" onclick="openlogistics()">
+        <img src="../../image/index/icon1.png" class="aui-iconfont" alt="">
+        <div class="aui-grid-label">云仓</div>
       </div>
-      <div class="index-search">
-        <div class="index-search-icon">
-          <img src="../../image/index/search.svg">
-        </div>
-        <input type="text" placeholder="搜索商品" class="index-input-search">
+      <div class="aui-col-xs-3">
+        <img src="../../image/index/icon2.png" class="aui-iconfont" alt="">
+        <div class="aui-grid-label">非云仓</div>
       </div>
-      <div class="index-msg-icon">
-        <div class="index-msg-top">
-          <img src="../../image/index/msg.svg">
-          <div class="aui-dot index-msg-dot"></div>
-        </div>
-        <p class="index-msg-text">消息</p>
+      <div class="aui-col-xs-3">
+        <img src="../../image/index/icon3.png" class="aui-iconfont" alt="">
+        <div class="aui-grid-label">品牌专区</div>
+      </div>
+      <div class="aui-col-xs-3">
+        <img src="../../image/index/icon4.png" class="aui-iconfont" alt="">
+        <div class="aui-grid-label">我的收入</div>
       </div>
     </div>
-    <header class="index-head">
-      <div id="aui-slide3" style="top: 75px;">
-        <div class="aui-slide-wrap" id="arraySlide">
-        </div>
-        <div class="aui-slide-page-wrap"><!--分页容器--></div>
-      </div>
-    </header>
-    <div class="index-section">
-      <section class="aui-grid ">
-        <div class="aui-row">
-          <div class="aui-col-xs-3" onclick="openlogistics()">
-                <img src="../../image/index/icon1.png" class="aui-iconfont">
-              <div class="aui-grid-label">云仓</div>
-          </div>
-          <div class="aui-col-xs-3">
-              <img src="../../image/index/icon2.png" class="aui-iconfont">
-              <div class="aui-grid-label">非云仓</div>
-          </div>
-          <div class="aui-col-xs-3">
-              <img src="../../image/index/icon3.png" class="aui-iconfont">
-              <div class="aui-grid-label">品牌专区</div>
-          </div>
-          <div class="aui-col-xs-3">
-              <img src="../../image/index/icon4.png" class="aui-iconfont">
-              <div class="aui-grid-label">我的收入</div>
-          </div>
-        </div>
-      </section>
-    </div>
-    <div class="index-content-logo">
-      <div class="index-line"></div>
-      <img src="../../image/index/indexlogo.png" class="index-centent-logo">
-      <div class="index-line"></div>
-    </div>
-    <div class="index-product-list" id="index-product-list">
-    </div>
+  </section>
+</div>
+<div class="index-content-logo">
+  <div class="index-line"></div>
+  <img src="../../image/index/indexlogo.png" class="index-centent-logo">
+  <div class="index-line"></div>
+</div>
+<div class="index-product-list" id="index-product-list">
+</div>
 </body>
 <script src="../../script/api.js"></script>
 <script src="../../script/api-ajax.js"></script>
@@ -72,54 +72,55 @@
 <script src="../../script/template.js"></script>
 <script type="text/html" id="templateHeader">
   {{each images as entity i}}
-    <div class="aui-slide-node bg-dark" onclick="openPage('{{entity.name}}','{{entity.linkType}}','{{entity.linkUrl}}','{{entity.linkParam}}')">
-      <img src="{{imgPath}}{{entity.adPic}}" />
-    </div>
+  <div class="aui-slide-node bg-dark"
+       onclick="openPage('{{entity.name}}','{{entity.linkType}}','{{entity.linkUrl}}','{{entity.linkParam}}')">
+    <img src="{{imgPath}}{{entity.adPic}}"/>
+  </div>
   {{/each}}
 </script>
 <script type="text/html" id="index-product-list-item">
   {{each itemArray as entity i}}
-    <div class="index-product-list-item" onclick="openDetail('{{entity.productId}}')">
-      <div class="index-product-img">
-        <img src="{{imgPath}}{{entity.productListPic}}">
-        {{if entity.isTimingUp}}
-          <div class="index-product-buy">{{entity.downTime | dateFormat:'MM.dd hh:mm'}} 开售</div>
-        {{/if}}
-      </div>
-      <div class="index-product-text">
-        <p class="index-product-title">{{entity.productName}}</p>
-        <p class="index-product-describe">{{entity.productRemark}}</p>
-        <p class="index-product-price">
-          {{if entity.productType == '1'}}  云仓
-            {{if entity.stockMinPrice == entity.stockMaxPrice}}
-              {{entity.stockMinPrice}}
-            {{else}}
-              {{entity.stockMinPrice}} - {{entity.stockMaxPrice}}
-            {{/if}}个
-          {{else}} ￥
-            {{if entity.productMinPriceE == entity.productMaxPriceE}}
-              {{entity.productMinPriceE}}
-            {{else}}
-              {{entity.productMinPriceE}} - {{entity.productMaxPriceE}}
-            {{/if}}
-          {{/if}}
-        </p>
-      </div>
+  <div class="index-product-list-item" onclick="openDetail('{{entity.productId}}')">
+    <div class="index-product-img">
+      <img src="{{imgPath}}{{entity.productListPic}}">
+      {{if entity.isTimingUp}}
+      <div class="index-product-buy">{{entity.downTime | dateFormat:'MM.dd hh:mm'}} 开售</div>
+      {{/if}}
     </div>
+    <div class="index-product-text">
+      <p class="index-product-title">{{entity.productName}}</p>
+      <p class="index-product-describe">{{entity.productRemark}}</p>
+      <p class="index-product-price">
+        {{if entity.productType == '1'}} 云仓
+        {{if entity.stockMinPrice == entity.stockMaxPrice}}
+        {{entity.stockMinPrice}}
+        {{else}}
+        {{entity.stockMinPrice}} - {{entity.stockMaxPrice}}
+        {{/if}}个
+        {{else}} ￥
+        {{if entity.productMinPriceE == entity.productMaxPriceE}}
+        {{entity.productMinPriceE}}
+        {{else}}
+        {{entity.productMinPriceE}} - {{entity.productMaxPriceE}}
+        {{/if}}
+        {{/if}}
+      </p>
+    </div>
+  </div>
   {{/each}}
   <div class="no_line aui-text-white"><span>没有更多了</span></div>
 </script>
 <script src="../../script/aui/aui-pull-refresh.js"></script>
 <script>
-  apiready = function(){
-    var header = $api.byId('header');
-    $api.fixStatusBar(header);
-    getAuiSlide();
-    getHotProducts();
+  apiready = function () {
+    var header = $api.byId('header')
+    $api.fixStatusBar(header)
+    getAuiSlide()
+    getHotProducts()
   }
 
   function openPage (name, linkType, linkUrl, linkParam) {
-    if (linkType === '1'){
+    if (linkType === '1') {
       api.openWin({
         name: 'web_win',
         url: './web_win.html',
@@ -127,52 +128,52 @@
           linkUrl: linkUrl,
           name: name
         }
-      });
+      })
     }
   }
 
-  function  getHotProducts () {
-    $apiAjax.postBody("/product/listFirstPage",{
+  function getHotProducts () {
+    $apiAjax.postBody("/product/listFirstPage", {
       level: $apiLocal.getUser().level
-    },function (ret) {
+    }, function (ret) {
       var html = template('index-product-list-item', {
         itemArray: ret,
         imgPath: $apiAjax.kameng_image
-      });
-      $api.html($api.byId('index-product-list'), html);
-    }, true);
+      })
+      $api.html($api.byId('index-product-list'), html)
+    }, true)
   }
 
-  function  getAuiSlide () {
-    $apiAjax.postBody("/activity/common/ad/list",{
-    },function (ret) {
-       var html = template('templateHeader', {
-         images: ret,
-         imgPath: $apiAjax.kameng_image
-       });
-      $api.html($api.byId('arraySlide'), html);
-      new auiSlide({
-        container:document.getElementById("aui-slide3"),
-        "height":161,
-        "speed":500,
-        "autoPlay": 3000, //自动播放
-        "loop":true,
-        "pageShow":true,
-        "pageStyle":'dot',
-        'dotPosition':'center'
+  function getAuiSlide () {
+    $apiAjax.postBody("/activity/common/ad/list", {}, function (ret) {
+      var html = template('templateHeader', {
+        images: ret,
+        imgPath: $apiAjax.kameng_image
       })
-    }, true);
+      $api.html($api.byId('arraySlide'), html)
+      new auiSlide({
+        container: document.getElementById("aui-slide3"),
+        "height": 161,
+        "speed": 500,
+        "autoPlay": 3000, //自动播放
+        "loop": true,
+        "pageShow": true,
+        "pageStyle": 'dot',
+        'dotPosition': 'center'
+      })
+    }, true)
   }
 
   function openDetail (productId) {
-    var url = $apiAjax.kameng_web + '/goods/' + productId + '/' + $apiLocal.getUserId();
+    var url = $apiAjax.kameng_web + '/goods/' + productId + '/' + $apiLocal.getUserId()
     $api.openWin('/html/goods/product/product_detail_win', {
       url: url
     })
   }
+
   function openlogistics () {
-  $api.openWin('/html/my/logistics_detail_win')
-}
+    $api.openWin('/html/my/logistics_detail_win')
+  }
 </script>
 
 

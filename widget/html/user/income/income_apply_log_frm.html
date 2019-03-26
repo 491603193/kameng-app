@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>提现明细</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/not_widthdrow_detail.css">
+</head>
+<body>
+ <div id="app" v-cloak>
+   <div class="not-detail-list">
+     <div class="not-detail-item aui-bg-white" v-for="item in entities" :key="item.commissionClearingLogId">
+       <div class="not-detail-time aui-font-size-14 aui-text-333">{{item.commissionClearingMonth}} </div>
+       <div class="not-detail-content">
+         <p class="not-detail-money aui-text-danger aui-font-size-16">
+           {{item.totalMoney}} 元
+         </p>
+         <p class="not-detail-text aui-text-333  aui-font-size-14 aui-margin-t-5">
+           需扣除个人税费{{item.taxMoney}}元，实际到账金额为{{item.realMoney}}元
+         </p>
+       </div>
+     </div>
+   </div>
+   <div class="aui-no-data " v-show="noData">
+     <img src="../../../image/shopping/no_order.svg" alt="">
+     <div class="text">没有查到记录...</div>
+   </div>
+ </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-local.js"></script>
+<script src="../../../script/api-loading.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+  apiready = function (){
+    api.parseTapmode();
+    vm.loading(true);
+  };
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      entities: [],
+      noData: false,
+      noMoreData: false
+    },
+    created () {
+    },
+    methods: {
+      loading: function(isFlush){
+        var self = this;
+        $apiAjax.postBody("/commission/clearing/log/listByIds", {
+          commissionClearingLogIds: api.pageParam.commissionClearingLogIds
+        },function (data) {
+          if (data) {
+            self.entities = data
+            if (data.length === 0)  self.noData = true
+            if (data.length > 10)  self.noMoreData = true
+          }
+        }, isFlush);
+      }
+    }
+  })
+
+
+</script>
+</html>

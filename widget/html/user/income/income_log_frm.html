@@ -5,29 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name = "format-detection" content = "telephone=no">
-  <title>我的余额</title>
+  <title>收入统计</title>
   <link rel="stylesheet" href="../../../css/aui.css">
-  <link rel="stylesheet" href="../../../css/user/my_advance.css">
+  <link rel="stylesheet" href="../../../css/user/income_detail.css">
 </head>
 <body>
-  <div id="app" v-cloak>
-    <div class="head aui-bg-white">
-      <p class="aui-margin-t-10 aui-font-size-14 aui-text-gray text-center">可用余额</p>
-      <p class="big-price aui-text-danger aui-margin-t-5 text-center">￥{{advance}}</p>
-    </div>
-    <div class="withdraw-list aui-bg-white aui-margin-t-10">
-      <div class="withdraw-title aui-font-size-16 aui-text-333 aui-border-b">收支记录</div>
-      <div class="withdraw-list-item" v-for="item in entities">
-        <div class="line1">
-          <div class="aui-font-size-16"
-               :class="item.changeMoney < 0 ? 'color-a0c161' : 'aui-text-danger'">
-            <template v-if="item.changeMoney > 0">+</template>
-            {{item.changeMoney}} 元
+  <div id="app">
+    <div class="padding-0-15">
+      <div class="day-detail-item" v-for="item in entities">
+        <p class="day">02-13</p>
+        <div class="day-list-item">
+          <div class="code aui-font-size-14 aui-text-333 aui-text-333 background-fffbf3">订单编号：{{item.orderNo}}</div>
+          <div class="aui-bg-white day-list-item-bottom">
+            <p class="aui-font-size-18 aui-text-333 aui-text-danger">
+              +100
+              <span class="aui-margin-l-10 aui-text-danger aui-font-size-12">{{item.withdrawCashState}}</span>
+              <span class="aui-margin-l-10 aui-text-danger aui-font-size-12">{{item.withdrawCashState}}</span>
+              <span class="aui-margin-l-10 aui-text-danger aui-font-size-12">{{item.withdrawCashState}}</span>
+              <span class="time aui-font-size-12 aui-text-999 income-float-right">{{item.createTime}}</span>
+            </p>
+            <p class="aui-margin-t-5 aui-font-size-12 aui-text-gray">下级代理XXX购买卡萌纸尿裤XL一箱返利</p>
           </div>
-          <div class="aui-text-999 aui-font-size-12">{{item.createTime}}</div>
         </div>
-        <p class="line2 aui-text-gray aui-font-size-14">{{item.remark}}</p>
       </div>
+    </div>
+    <div class="aui-no-data " v-show="noData">
+      <img src="../../../image/shopping/no_order.svg" alt="">
+      <div class="text">没有查到可提现的记录</div>
     </div>
   </div>
 </body>
@@ -38,10 +42,10 @@
 <script src="../../../script/vue.min.js"></script>
 <script src="../../../script/aui/aui-dialog.js"></script>
 <script>
+
   apiready = function (){
     api.parseTapmode();
     vm.loading(true);
-    vm.loadAdvance();
     $apiLoading.loadModel(function () {
       vm.loading(false);
     });
@@ -50,8 +54,6 @@
   var vm = new Vue({
     el: '#app',
     data: {
-      userId: '',
-      advance: 0,
       entities: [],
       noData: false,
       noMoreData: false
@@ -59,20 +61,10 @@
     created () {
     },
     methods: {
-      loadAdvance () {
-        var self = this;
-        $apiAjax.postBody("/user/advance/payment/log/getAdvancePayment", {},function (data) {
-          if (data) {
-            self.advance = data.advancePayment
-          }
-        }, true);
-      },
       loading: function(isFlush){
         var self = this;
-        $apiAjax.postBody("/user/advance/payment/log/page", {
-          param: {
-            orderState: ''
-          },
+        $apiAjax.postBody("/commission/clearing/log/pageWait", {
+          param: {},
           page: $apiLoading.page
         },function (data, page) {
           $apiLoading.setPage(page);

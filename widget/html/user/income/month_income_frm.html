@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>收入明细</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/month_income.css">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <div class="income-month-item" v-for="item in entities" :key="item.commissionClearingLogId">
+      <p class="income-time aui-font-size-12 aui-text-999 text-center">{{item.commissionClearingMonth}}</p>
+      <div class="income-item-content aui-bg-white">
+        <div class="statistics-top">
+          <p class="aui-font-size-16 aui-text-333 text-center statistics-relative">
+            总收入
+            <span class="aui-font-size-14 aui-text-primary float-right" @click="openDetail()">明细>></span>
+          </p>
+          <p class="aui-text-danger statistics-price aui-margin-t-5 text-center">¥<span class="aui-margin-l-10">{{item.totalMoney}}</span></p>
+        </div>
+        <div class="statistics-bottom aui-row">
+          <div class="aui-col-xs-3 aui-border-r">
+            <p class="aui-font-size-14 aui-text-666 text-center">返利</p>
+            <p class="aui-font-size-14 aui-text-warning text-center">{{item.rebateMoney}}</p>
+          </div>
+          <div class="aui-col-xs-3 aui-border-r">
+            <p class="aui-font-size-14 aui-text-666 text-center">终端返利</p>
+            <p class="aui-font-size-14 aui-text-warning text-center">{{item.customerMoney}}</p>
+          </div>
+          <div class="aui-col-xs-3 aui-border-r">
+            <p class="aui-font-size-14 aui-text-666 text-center">个人返点</p>
+            <p class="aui-font-size-14 aui-text-warning text-center">{{item.selfClearingMoney}}</p>
+          </div>
+          <div class="aui-col-xs-3">
+            <p class="aui-font-size-14 aui-text-666 text-center">平级奖励</p>
+            <p class="aui-font-size-14 aui-text-warning text-center">{{item.awardMoney}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="aui-no-data " v-show="noData">
+      <img src="../../../image/shopping/no_order.svg" alt="">
+      <div class="text">没有查到历史结算月份</div>
+    </div>
+  </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-local.js"></script>
+<script src="../../../script/api-loading.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script src="../../../script/aui/aui-dialog.js"></script>
+<script>
+
+  apiready = function (){
+    api.parseTapmode();
+    vm.loading(true);
+    $apiLoading.loadModel(function () {
+      vm.loading(false);
+    });
+  };
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      entities: [],
+      noData: false,
+      noMoreData: false
+    },
+    created () {
+    },
+    methods: {
+      loading: function(isFlush){
+        var self = this;
+        $apiAjax.postBody("/commission/clearing/log/page", {
+          param: {},
+          page: $apiLoading.page
+        },function (data, page) {
+          $apiLoading.setPage(page);
+          self.noData = false;
+          if (page.pageNo === 1) {
+            if(data.length === 0) self.noData = true;
+            else self.entities = data
+          } else {
+            self.entities = self.entities.concat(data);
+          }
+          self.noMoreData = page.pageNo > 1 && !page.hasNext && !self.noData;
+        }, isFlush);
+      }
+    }
+  })
+</script>
+</html>

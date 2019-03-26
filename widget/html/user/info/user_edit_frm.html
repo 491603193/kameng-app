@@ -230,6 +230,13 @@
               msg:"保存成功",
               buttons:['确定']
             },function (ret1) {
+              if (api.pageParam.flushIncome) {
+                api.execScript({
+                  name: '/html/user/income/income_apply_win',
+                  frameName: '/html/user/income/income_apply_frm',
+                  script: 'vm.loadIncome()'
+                })
+              }
             });
           }
         }, true);

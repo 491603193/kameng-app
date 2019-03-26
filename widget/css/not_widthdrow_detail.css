@@ -1,0 +1,13 @@
+.not-detail-list {
+  overflow: hidden;
+}
+.not-detail-list > .not-detail-item:not(:first-of-type) {
+  margin-top: 10px;
+}
+.not-detail-time {
+  border-bottom: 1px solid #eee;
+}
+.not-detail-content,
+.not-detail-time {
+  padding: 10px 15px;
+}

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name = "format-detection" content = "telephone=no">
-  <title>收入统计</title>
+  <title>待生效明细</title>
   <link rel="stylesheet" href="../../../css/aui.css">
   <link rel="stylesheet" href="../../../css/user/income_detail.css">
 </head>
@@ -13,16 +13,13 @@
   <div id="app">
     <div class="padding-0-15 aui-padded-b-10">
       <div class="day-detail-item" v-for="(item, index) in entities" :key="item.orderCommissionLogId">
-        <p class="day" v-if="showMonth(index)">{{getMonthDate(item.receivingTime)}}</p>
+        <p class="day" v-if="showMonth(index)">{{getMonthDate(item.createTime)}}</p>
         <div class="day-list-item">
           <div class="code aui-font-size-14 aui-text-333 aui-text-333 background-fffbf3">商品订单编号：{{item.orderNo}}</div>
           <div class="aui-bg-white day-list-item-bottom">
             <p class="aui-font-size-18 aui-text-333 aui-text-danger">
               {{item.commissionMoney}}元
-              <span class="aui-margin-l-10 aui-text-gray aui-font-size-12" v-if="item.withdrawCashState === '0'">未提现</span>
-              <span class="aui-margin-l-10 aui-text-aui-text-primary aui-font-size-12" v-if="item.withdrawCashState === '1'">提现中</span>
-              <span class="aui-margin-l-10 aui-text-success aui-font-size-12" v-if="item.withdrawCashState === '2'">已通过</span>
-              <span class="time aui-font-size-12 aui-text-999 income-float-right">{{item.receivingTime}}</span>
+              <span class="time aui-font-size-12 aui-text-999 income-float-right">{{item.createTime}}</span>
             </p>
             <p class="aui-margin-t-5 aui-font-size-12 aui-text-gray">{{item.commissionRemark}}</p>
           </div>
@@ -30,8 +27,6 @@
       </div>
       <div class="no_line color-999 gray" v-show="noMoreData"><span class="gray">没有更多记录了</span></div>
     </div>
-
-
 
     <div class="aui-no-data " v-show="noData">
       <img src="../../../image/shopping/no_order.svg" alt="">
@@ -77,10 +72,10 @@
       },
       showMonth: function(index){
         if(index>0){
-          var devData = new Date(this.entities[index-1].receivingTime)
+          var devData = new Date(this.entities[index-1].createTime)
           if (devData) {
             var devStr = devData.getMonth() * 100 + devData.getDate()
-            var thisData = new Date(this.entities[index].receivingTime)
+            var thisData = new Date(this.entities[index].createTime)
             if (thisData) {
               var thisStr = thisData.getMonth() * 100 + thisData.getDate()
               return devStr !== thisStr
@@ -96,10 +91,8 @@
       },
       loading: function(isFlush){
         var self = this;
-        $apiAjax.postBody("/order/commission/log/page", {
-          param: {
-            commissionClearingLogId: api.pageParam.commissionClearingLogId
-          },
+        $apiAjax.postBody("/order/commission/log/pageWaitTakeEffect", {
+          param: {},
           page: $apiLoading.page
         },function (data, page) {
           $apiLoading.setPage(page);

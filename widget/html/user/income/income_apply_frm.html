@@ -10,9 +10,9 @@
   <link rel="stylesheet" href="../../../css/user/income_apply.css">
 </head>
 <body>
-  <div id="app" :class="remind.show? 'aui-static' : ''">
+  <div id="app" :class="remind.show? 'aui-static' : ''" v-cloak>
     <div class="head aui-bg-white">
-      <p class="aui-margin-t-10  aui-font-size-14 aui-text-gray text-center">可提现金额</p>
+      <p class="aui-margin-t-5  aui-font-size-14 aui-text-gray text-center">可提现金额</p>
       <p class="big-price aui-text-danger aui-margin-t-5 text-center">￥{{entity.waitTotalMoney}}</p>
       <div class="aui-row aui-margin-t-5">
         <div class="aui-col-xs-6 col-left">
@@ -49,7 +49,10 @@
           <template v-if="item.withdrawCashType === '2'">(转至余额)</template>
 
         </p>
-        <div class="line3 aui-font-size-12 aui-text-primary" @click="openDetail(item.commissionClearingLogIds)">查看明细>></div>
+        <div class="line3 aui-font-size-12" @click="openDetail(item.commissionClearingLogIds)">
+          <span class="aui-text-gray"> 编号: {{item.orderNo}}</span>
+          <span class="aui-text-primary aui-pull-right">查看明细>></span>
+        </div>
       </div>
 
     </div>
@@ -108,7 +111,7 @@
       vm.loading(false);
     });
   };
-
+  var dialog = new auiDialog({})
   var vm = new Vue({
     el: '#app',
     data: {
@@ -118,7 +121,11 @@
       },
       showSuccess: false,
       userId: '',
-      entity: {},
+      entity: {
+        waitTotalMoney: 0,
+        waitTaxMoney: 0,
+        waitRealMoney: 0
+      },
       entities: [],
       noData: false,
       noMoreData: false
@@ -164,7 +171,18 @@
           this.remind.msg = '提现到银行卡需要完善您的个人信息。'
           this.remind.but = '去完善'
         }  else {
-          this.postChange(type)
+          var self = this;
+          dialog.alert({
+            title:"转入提示",
+            msg:'确定要全部转入么？',
+            buttons:['取消','确定']
+          },function(ret){
+            if(ret){
+              if (ret.buttonIndex === 2) {
+                self.postChange(type)
+              }
+            }
+          })
         }
       },
       postChange (type){

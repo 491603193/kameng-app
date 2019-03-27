@@ -52,7 +52,7 @@
 .line3 {
   height: 40px;
   line-height: 40px;
-  text-align: right;
+  /*text-align: right;*/
 }
 .withdraw-list-item:not(:first-of-type) {
   margin-top: 10px;

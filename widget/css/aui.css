@@ -152,6 +152,14 @@ button,input,select,textarea {
 	color: #bbb;
 }
 
+.no_line,.gray {
+	background-color: #f5f5f5;
+}
+.no_line .gray{
+	background: #f5f5f5;
+}
+
+
 /*水平线*/
 .aui-hr {
 	width: 100%;

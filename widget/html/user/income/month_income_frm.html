@@ -17,7 +17,7 @@
         <div class="statistics-top">
           <p class="aui-font-size-16 aui-text-333 text-center statistics-relative">
             总收入
-            <span class="aui-font-size-14 aui-text-primary float-right" @click="openDetail()">明细>></span>
+            <span class="aui-font-size-14 aui-text-primary float-right" @click="openDetail(item.commissionClearingLogId)">明细>></span>
           </p>
           <p class="aui-text-danger statistics-price aui-margin-t-5 text-center">¥<span class="aui-margin-l-10">{{item.totalMoney}}</span></p>
         </div>
@@ -41,6 +41,7 @@
         </div>
       </div>
     </div>
+
     <div class="aui-no-data " v-show="noData">
       <img src="../../../image/shopping/no_order.svg" alt="">
       <div class="text">没有查到历史结算月份</div>
@@ -73,6 +74,11 @@
     created () {
     },
     methods: {
+      openDetail: function(commissionClearingLogId) {
+        $api.openWin("/html/user/income/income_log_win",{
+          commissionClearingLogId: commissionClearingLogId
+        })
+      },
       loading: function(isFlush){
         var self = this;
         $apiAjax.postBody("/commission/clearing/log/page", {

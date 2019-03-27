@@ -91,7 +91,8 @@
         var self = this;
         $apiAjax.postBody("/product/page", {
           param: {
-            productLabelId: api.pageParam.productLabelId
+            productLabelId: api.pageParam.productLabelId,
+            productType: api.pageParam.productType
           },
           page: $apiLoading.page
         },function (data, page) {

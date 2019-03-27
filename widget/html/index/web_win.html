@@ -18,22 +18,21 @@
 <script src="../../script/api.js"></script>
 <script>
   apiready = function(){
-    $api.html($api.byId('title'),api.pageParam.name)
     api.parseTapmode();
     var header = $api.byId('aui-header');
     $api.fixStatusBar(header);
-    var headerPos = $api.offset(header);
-    var body_h = $api.offset($api.dom('body')).h;
+    $api.html($api.byId('title'),api.pageParam.name)
     api.openFrame({
         name: '/html/classify/product_frm',
         url: api.pageParam.linkUrl,
         bounces: true,
         rect: {
           x: 0,
-          y: headerPos.h,
+          y: $api.offset(header).h,
           w: 'auto',
           h: 'auto'
-        }
+        },
+        pageParam: api.pageParam.pageParam
     })
   };
 </script>

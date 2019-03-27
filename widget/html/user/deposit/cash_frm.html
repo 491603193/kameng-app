@@ -62,7 +62,7 @@
     methods: {
       getData: function(){
         var self = this;
-        $apiAjax.postBody("/user/getProtectMoney", {}, function (data) {
+        $apiAjax.postBody("/cash/deposit/getProtectMoney", {}, function (data) {
           if (data) {
             self.protectMoney = data.protectMoney
           }

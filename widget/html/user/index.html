@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../../css/user/index.css">
 </head>
 <body class="aui-bg-white">
-  <div id="app">
+  <div id="app" v-cloak="">
     <header class="aui-bar aui-bar-nav aui-bar-light" id="aui-header">
       <div class="aui-title" id="title">个人中心</div>
       <a class="aui-pull-right aui-btn" @click="openWin('/html/user/info/user_info_win')">
@@ -25,7 +25,7 @@
           <p class="name aui-font-size-16 aui-text-white">{{user.name}}</p>
           <p class="rank aui-text-white">
             <span @click="openWin('/html/user/info/user_edit_win')">一级  去升级>></span>
-            <span class="right" @click="openWin('/html/user/deposit/cash_win')">保证金：¥1000 >></span>
+            <span class="right" @click="openWin('/html/user/deposit/cash_win')">保证金：¥{{user.protectMoney}} >></span>
           </p>
         </div>
       </div>
@@ -33,18 +33,20 @@
     <div class="my-card">
       <div class="my-card-top" @click="openWin('/html/user/income/month_income_win')">
         <p class="incom">我的总收入</p>
-        <p class="money color-f7931e">￥100000</p>
+        <p class="money color-f7931e">
+          ￥{{user.totalMoney}}
+        </p>
         <!--<p class="look color-ccc">查看明细 >></p>-->
       </div>
       <div class="flex">
         <div class="el left">
         <p class="incom">可提现收入</p>
-        <p class="money1 color-333">￥5000</p>
+        <p class="money1 color-333">￥{{user.waitTakeEffectCommissionMoney}}</p>
         <p class="look color-ccc" @click="openWin('/html/user/income/income_apply_win')">查看明细 >></p>
       </div>
       <div class="el">
         <p class="incom">待生效</p>
-        <p class="money1 color-999">￥6026</p>
+        <p class="money1 color-999">￥{{user.waitTakeEffectCommissionMoney}}</p>
         <p class="look color-ccc"  @click="openWin('/html/user/income/income_log_ready_win')">查看明细 >></p>
       </div>
       </div>
@@ -74,6 +76,7 @@
         <div class="el" @click="openWin('/html/user/cloud/user_cloud_win')">
           <div class="my-click-icon">
             <img src="../../image/user/wdyc.png">
+            <div class="dot aui-text-white" v-if="stockApplyWaitCheckNum>0">{{stockApplyWaitCheckNum}}</div>
           </div>
           <p class="font-14 color-333">我的云仓</p>
         </div>
@@ -82,7 +85,7 @@
         <div class="el left" @click="openWin('/html/order/order/my_order_win')">
           <div class="my-click-icon">
             <img src="../../image/user/dlsj.png">
-            <div class="dot aui-text-white">1</div>
+            <div class="dot aui-text-white" v-if="userLevelUpWaitCheckNum>0">{{userLevelUpWaitCheckNum}}</div>
           </div>
           <p class="font-14 color-333">代理升级</p>
         </div>
@@ -123,13 +126,17 @@
     if(vm.user.photo){
       vm.headerImg = $apiAjax.kameng_image + vm.user.photo
     }
+    vm.getDate()
   }
   var vm = new Vue({
     el: '#app',
     data: {
       headerImg: '../../image/user/header.png',
       isEdit: false,
-      user: {}
+      user: {},
+      entity: {},
+      userLevelUpWaitCheckNum: 0,
+      stockApplyWaitCheckNum: 0
     },
     computed: {
       addressAllName: function () {
@@ -139,20 +146,21 @@
     },
     created: function () {},
     methods: {
+      getDate () {
+        var self = this;
+        $apiAjax.postBody("/user/getPersonalCenter", {},function (data) {
+          if (data) {
+            self.user = data.custUser
+            self.userLevelUpWaitCheckNum = data.userLevelUpWaitCheckNum
+            self.stockApplyWaitCheckNum = data.stockApplyWaitCheckNum
+          }
+        }, true);
+      },
       openWin (winName) {
         $api.openWin(winName)
       }
     }
   })
-  function openWin (winName) {
 
-    // api.openWin({
-    //   name: '/html/user/my_order_win',
-    //   url: api.wgtRootDir + '/html/user/order_win.html',
-    //   bounces: false,
-    //   slidBackEnabled: true,
-    //   vScrollBarEnabled: false
-    // });
-  }
 </script>
 </html>

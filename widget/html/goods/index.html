@@ -154,8 +154,9 @@
   });
   function openProductList (productLabelId, productLabelName) {
     $api.openWin('/html/goods/product/product_win', {
-      productLabelName: productLabelName,
-      productLabelId: productLabelId
+      title: productLabelName,
+      productLabelId: productLabelId,
+      productType: '',
     })
   }
 </script>

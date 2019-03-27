@@ -19,17 +19,16 @@
 <script>
   apiready = function(){
     api.parseTapmode();
-    $api.html($api.byId('title'), api.pageParam.productLabelName)
+    $api.html($api.byId('title'), api.pageParam.title)
     var header = $api.byId('aui-header');
     $api.fixStatusBar(header);
-    var headerPos = $api.offset(header);
     api.openFrame({
         name: '/html/goods/product/product_frm',
         url: api.wgtRootDir + '/html/goods/product/product_frm.html',
         bounces: true,
         rect: {
           x: 0,
-          y: headerPos.h,
+          y: $api.offset(header).h,
           w: 'auto',
           h: 'auto'
         },

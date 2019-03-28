@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name = "format-detection" content = "telephone=no">
+  <title>购入库存</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/my_yc1.css">
+  <link rel="stylesheet" href="../../../css/user/apple_cloud.css">
+  <style>
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak class="record-back" :class="(showRemind || showPaySuccessRemind) ? 'aui-static' : ''">
+    <div class="agent3-content aui-bg-white aui-margin-t-10">
+      <p class="aui-font-size-16 aui-text-333">升级所需购入库存云币为{{upStockNum}}</p>
+      <p class="aui-font-size-16 aui-text-333">合计：<span class="aui-text-danger">￥{{upStockMoney}}</span></p>
+    </div>
+    <div class="aui-bg-white yc3-pay">
+      <p class="font-13 aui-text-333">您将向您的上级代理{{higherCustUser.name}}({{higherCustUser.phone}})购入云仓库存，以下为其支付宝和微信收款码，请先打款后提交购入申请</p>
+      <div class="aui-row">
+        <div class="aui-col-xs-12">
+          <img :src="imgPath + zfbQrcode" v-show="zfbQrcode" >
+          <img :src="imgPath + wxQrcode" v-show="wxQrcode">
+        </div>
+      </div>
+    </div>
+    <div class="aui-bg-white margin-top-10 yc3-remark">
+      <p class="aui-font-size-14 aui-text-333">打款备注</p>
+      <textarea placeholder="请填写打款备注内容" class="aui-font-size-14 yc3-remark-textarea" v-model="stockApplyRemark"></textarea>
+      <p class="aui-font-size-14 aui-text-333 aui-margin-t-15">打款凭证</p>
+      <div class="img-box">
+        <div class="yc3-imgs" v-for="(img, index) in imgArray" :key="index">
+          <img :src="imgPath + img" class="yc3-img-el" @click="openImg(imgArray, index)">
+          <img src="../../../image/deleteImg.svg" class="yc3-img-del" @click="deleteImg(index)">
+        </div>
+        <div class="yc3-imgs" @click="openPhoto()" v-show="imgArray.length < 4">
+          <img src='../../../image/takephoto.png' class="yc3-img-el" >
+        </div>
+      </div>
+    </div>
+    <div class="aui-bg-white yc-btn-bg">
+      <button class="yc-btn background-color-feabc5" @click="submit()">提交</button>
+    </div>
+    <div class="shop-pay-remind" v-show="showRemind">
+      <div class="film"></div>
+      <div class="remind">
+        <div class="remind-relative">
+          <div class="remind-absolute">
+            <img src="../../../image/alert.png">
+          </div>
+          <p class="aui-text-center aui-font-size-16 aui-text-333">提醒</p>
+          <p class="aui-text-center aui-font-size-14 aui-text-333 aui-margin-t-10">您还没有上级，请联系客服。</p>
+          <div class="background-color-feabc5 aui-text-white aui-font-size-14 aui-text-center" @click="api.closeWin()">确定并关闭</div>
+        </div>
+      </div>
+    </div>
+    <div class="shop-pay-remind" v-show="showPaySuccessRemind">
+      <div class="film"></div>
+      <div class="remind">
+        <div class="remind-relative">
+          <div class="remind-absolute">
+            <img src="../../../image/success.svg">
+          </div>
+          <p class="aui-text-center aui-font-size-18 aui-text-333">申请成功</p>
+          <p class="aui-text-center aui-font-size-14 aui-text-333">您的升级申请已成功提交，请您耐心等待上级申请。</p>
+          <div class="background-color-feabc5 aui-text-white aui-font-size-16 aui-text-center" @click="closeConfirm">确定并关闭</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-local.js"></script>
+<script src="../../../script/api-validate.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script src="../../../script/lib/album_browser.js"></script>
+<script src="../../../script/lib/photo_browser.js"></script>
+<script src="../../../script/aui/aui-dialog.js"></script>
+<script>
+  var dialog = new auiDialog({})
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      stockApplyRemark: '',
+      zfbQrcode: '',
+      wxQrcode: '',
+      imgPath: $apiAjax.kameng_image,
+      showRemind: false,
+      showPaySuccessRemind: false,
+      higherCustUser: {},
+      cloudPrice: 0,
+      imgArray: [],
+      maxImage: 4,
+      showAddPic: true,
+      upStockMoney: 0,
+      upStockNum: 0,
+      level: "1"
+    },
+    methods: {
+      openImg (imageArray, index) {
+        photo.openWidthArray(imageArray, index)
+      },
+      submit () {
+        var self = this;
+        dialog.alert({
+          title: "温馨提示",
+          msg: self.higherCustUser.name + "将收到您的申请",
+          buttons:['取消','确定']
+        },function(ret){
+          if(ret){
+            if (ret.buttonIndex === 2) {
+              self.postApply()
+            }
+          }
+        })
+
+      },
+      postApply () {
+        var self = this;
+        $apiAjax.postBody("/user/level/up/add", {
+          payType: '1',
+          stockApplyRemark: self.stockApplyRemark,
+          stockCheckUserId: self.higherCustUser.userId,
+          newLevel: self.level,
+          stockApplyVoucher: self.imgArray.join()
+        },function (ret) {
+          if (ret) {
+            self.showPaySuccessRemind = true
+          }
+        }, true);
+      },
+      openPhoto () {
+        var readyNum = this.imgArray.length;
+        var self = this;
+        if (readyNum < this.maxImage) {
+          media.imagePicker(function (ret) {
+            self.postImg(ret)
+          }, (this.maxImage - readyNum))
+        }
+      },
+      postImg: function (imgs) {
+        var self = this;
+        $apiAjax.postFileMultiple(imgs, function (ret) {
+          if (ret) {
+            self.imgArray = self.imgArray.concat(ret)
+          }
+        },true)
+      },
+      deleteImg: function (index) {
+        this.imgArray.splice(index, 1)
+      },
+      closeConfirm() {
+        api.closeWin();
+      },
+      getData (level) {
+        var self = this;
+        self.level = level
+        $apiAjax.postBody("/user/level/up/getNewLevelHigherCustUser", {
+          newLevel: level
+        },function (ret) {
+          if (ret) {
+            self.higherCustUser = ret.higherCustUser
+            if(ret.higherCustUser.zfbQrcode) self.zfbQrcode = ret.higherCustUser.zfbQrcode
+            if(ret.higherCustUser.wxQrcode) self.wxQrcode = ret.higherCustUser.wxQrcode
+            self.cloudPrice = ret.cloudPrice
+            self.upStockMoney = ret.upStockMoney
+            self.upStockNum = ret.upStockNum
+          } else {
+            self.showRemind = true
+          }
+        }, true);
+      },
+    }
+  })
+</script>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>选择升级级别</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/up_level_frm.css">
+  <!--<link rel="stylesheet" href="../../../css/km.css">-->
+</head>
+<body>
+<div id="app" class="aui-margin-t-10">
+  <ul class="agent1-list aui-bg-white">
+    <li class="agent1-list-item aui-font-size-16 aui-text-gray">请确认您要加入的代理级别</li>
+    <template v-for="item in entities">
+      <label>
+        <li class="agent1-list-item">
+          <input type="radio" class="aui-radio" name="grade" :disabled="checkDis(item.userLevel)" :value="item.userLevel" v-model="selLevel">
+          <p class="aui-font-size-14 aui-text-gray  aui-margin-l-10">{{item.userLevelName}}（{{item.upCashDeposit}}保证金+初次购入库存{{item.upStockNum}}）</p>
+        </li>
+      </label>
+    </template>
+  </ul>
+  <button class="agent1-btn aui-bg-pink aui-text-white" @click="openFrm()">下一步</button>
+</div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-local.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+  apiready = function () {
+    api.parseTapmode();
+    vm.userLevel = $apiLocal.getUserLevel()
+    vm.getDate()
+  }
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      userLevel: "1",
+      selLevel: "1",
+      entities: [],
+    },
+    methods: {
+      checkDis (level) {
+        if (parseInt(level) < parseInt(this.userLevel)) {
+          return false
+        } else {
+          return true
+        }
+      },
+      getDate () {
+        var self = this;
+        $apiAjax.postBody("/user/level/list", {}, function (data) {
+          if (data) {
+            self.entities = data
+          }
+        }, true);
+      },
+      openFrm () {
+        api.setFrameGroupIndex({
+          name: 'group',
+          scroll: true,
+          index: 1
+        })
+        api.execScript({
+          name: '/html/user/upLevel/upgrade_win',
+          frameName: '/html/user/upLevel/upgrade_frm2',
+          script: 'vm.init("' +this.selLevel+ '")'
+        })
+
+      }
+    }
+  })
+
+</script>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>确认保证金</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/up_level_frm.css">
+</head>
+<body>
+  <div id="app" class="aui-margin-t-15">
+    <div class="agent2-content aui-bg-white">
+      <p class="aui-text-gray aui-font-size-16" v-if="hasMoney > 0">
+        您当前保证金金额为¥{{entity.protectMoney}}，还需充值¥{{hasMoney}}
+      </p>
+      <p class="aui-text-gray aui-font-size-16" v-else>
+        您当前保证金金额为¥{{entity.protectMoney}}，升级需要保证金¥{{entity.upCashDeposit}}
+      </p>
+      <input type="text" class="aui-text-danger aui-font-size-14 aui-margin-t-5" v-if="hasMoney > 0" v-model="money">
+    </div>
+    <button class="agent1-btn aui-bg-pink aui-text-white" @click="summit()" v-if="hasMoney > 0">立即充值</button>
+    <button class="agent1-btn aui-bg-pink aui-text-white" @click="openFrm()" v-else>下一步</button>
+  </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      money: null,
+      level: "1",
+      entity: {
+        upCashDeposit: 0,
+        protectMoney: 0
+      },
+    },
+    computed: {
+      hasMoney: function () {
+        return this.entity.upCashDeposit - this.entity.protectMoney
+      },
+    },
+    methods: {
+      summit () {
+        alert(this.money);
+      },
+      init (level){
+        var self = this;
+        self.level = level
+        $apiAjax.postBody("/user/level/up/getProtectMoney", {
+          newLevel: level
+        }, function (data) {
+          if (data) {
+            self.entity = data
+          }
+        }, true);
+      },
+      openFrm () {
+        api.setFrameGroupIndex({
+          name: 'group',
+          scroll: true,
+          index: 2
+        })
+        api.execScript({
+          name: '/html/user/upLevel/upgrade_win',
+          frameName: '/html/user/upLevel/upgrade_frm3',
+          script: 'vm.getData("' + this.level + '")'
+        })
+      }
+    }
+  })
+
+
+</script>
+</html>

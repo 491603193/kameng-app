@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="format-detection" content="telephone=no">
+  <title>我的云仓</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/order_details_frm.css">
+  <link rel="stylesheet" href="../../../css/user/my_yc1.css">
+</head>
+<body>
+<div id="app" v-cloak :class="{'aui-static': showCommit || showRemind || showReturn }">
+  <div class="aui-tab" id="tab">
+    <div class="aui-tab-item aui-active">下级申请</div>
+    <div class="aui-tab-item">我的申请</div>
+  </div>
+  <!--下级订单-->
+  <div class="aui-bg-white yc1-template" v-for="(entity, index) in entitiesA" v-show="showApply">
+    <p class="aui-bg-white yc1-row aui-font-size-14 aui-text-333">
+      {{entity.userName}}({{entity.phone}}) - {{getHigherLevelName(entity.userLevel)}}
+      <span class="aui-font-size-12 aui-text-999">{{entity.createTime}}</span>
+    </p>
+    <div class="aui-row yc1-row1">
+      <div class="aui-col-xs-3 aui-text-gray">申请购入：</div>
+      <div class="aui-col-xs-9 aui-text-danger">{{entity.stockApplyNum}}云币</div>
+    </div>
+    <div class="aui-row yc1-row2">
+      <div class="aui-col-xs-3 aui-text-gray">申请备注：</div>
+      <div class="aui-col-xs-9 aui-text-gray">
+        <template v-if="entity.stockApplyRemark"> {{entity.stockApplyRemark}}</template>
+        <template v-else>无</template>
+      </div>
+    </div>
+    <div class="aui-row yc1-row2">
+      <div class="aui-col-xs-3  aui-text-gray">申请凭证：</div>
+      <div class="aui-col-xs-9 aui-text-gray">
+        <template v-if="entity.stockApplyVoucher" >
+          <img v-for="(item, index) in entity.stockApplyVoucher.split(',')" :key="index"
+               :src="imgPath + item" class="yc1-el"  @click="openPic(entity.stockApplyVoucher, index)">
+        </template>
+        <template v-else>无</template>
+      </div>
+    </div>
+    <div class="yc1-row4" v-if="entity.checkState === '0'">
+      <div class="yc1-turn yc1-select" @click="refused(index)">拒绝</div>
+      <div class="yc1-affirm yc1-select" @click="agreed(index)">同意</div>
+    </div>
+    <p class="yc4-state aui-font-size-14 aui-text-333 aui-border-t aui-padded-t-5">
+      状态：<span :class="{'aui-text-gray': entity.checkState === '0',
+                            'aui-text-success': entity.checkState === '1',
+                            'aui-text-warning': entity.checkState === '2'}">{{getCheckStateName(entity.checkState)}}</span>
+    </p>
+    <p class="yc4-state aui-font-size-14 aui-text-333" v-if="entity.checkState === '2'">审核消息：
+      <template v-if="entity.checkReason"> {{entity.checkReason}}</template>
+      <template v-else> 无</template>
+    </p>
+  </div>
+  <!--我的订单-->
+  <div class="aui-bg-white yc1-template" v-for="entity in entitiesB" v-show="!showApply">
+    <p class="aui-bg-white yc1-row aui-font-size-14 aui-text-333">
+      <template v-if="entity.higherLevelId !== 'sys'">
+        {{entity.higherLevelName}}({{entity.higherLevelPhone}}) - {{getHigherLevelName(entity.higherLevelLevel)}}
+      </template>
+      <template v-else>{{entity.higherLevelName}}</template>
+      <span class="aui-font-size-12 aui-text-999">{{entity.createTime}}</span>
+    </p>
+    <div class="aui-row yc1-row1">
+      <div class="aui-col-xs-3 aui-text-gray">申请购入：</div>
+      <div class="aui-col-xs-9 aui-text-danger">{{entity.stockApplyNum}}云币</div>
+    </div>
+    <div class="aui-row yc1-row2">
+      <div class="aui-col-xs-3 aui-text-gray">申请备注：</div>
+      <div class="aui-col-xs-9 aui-text-gray">
+        <template v-if="entity.stockApplyRemark"> {{entity.stockApplyRemark}}</template>
+        <template v-else>无</template>
+      </div>
+    </div>
+    <div class="aui-row yc1-row2">
+      <div class="aui-col-xs-3  aui-text-gray">申请凭证：</div>
+      <div class="aui-col-xs-9 aui-text-gray">
+        <template v-if="entity.stockApplyVoucher">
+          <img v-for="(item, index) in entity.stockApplyVoucher.split(',')" :key="index"
+               :src="imgPath + item" class="yc1-el" @click="openPic(entity.stockApplyVoucher, index)">
+        </template>
+        <template v-else>无</template>
+      </div>
+    </div>
+    <p class="yc4-state aui-font-size-14 aui-text-333 aui-border-t aui-padded-t-5">
+      状态：<span :class="{'aui-text-gray': entity.checkState === '0',
+                            'aui-text-success': entity.checkState === '1',
+                            'aui-text-warning': entity.checkState === '2'}">{{getCheckStateName(entity.checkState)}}</span>
+    </p>
+    <p class="yc4-state aui-font-size-14 aui-text-333">审核消息：
+      <template v-if="entity.checkReason"> {{entity.checkReason}}</template>
+      <template v-else> 无</template>
+    </p>
+    <div class="no_line aui-text-white" v-show="noMoreData"><span>没有更多了</span></div>
+  </div>
+  <!--暂无数据-->
+  <div class="aui-no-data" v-show="noData">
+    <img src="../../../image/user/nodata.svg">
+    <div class="text">没有查到申请记录~</div>
+  </div>
+  <!-- 提醒 -->
+  <div class="zhezhao" @click="showRemind = false" v-show="showRemind || showCommit"></div>
+  <div class="shop-pay-remind" v-show="showRemind">
+    <div class="remind">
+      <div class="remind-relative">
+        <div class="remind-absolute">
+          <img src="../../../image/alert.png">
+        </div>
+        <p class="aui-text-center aui-font-size-18 aui-text-333">提醒</p>
+        <p class="aui-text-center aui-font-size-14 aui-text-333 margin-top-10">您的{{cloudName}}不足，请先购入库存后，再继续调拨</p>
+        <div class="background-color-feabc5 aui-text-white font-15 aui-text-center" @click="showRemind = false">确定</div>
+      </div>
+    </div>
+  </div>
+  <!-- 提醒 end-->
+  <!-- 调入 -->
+  <div class="alert-weiquan" v-show="showCommit">
+    <p class="title aui-font-size-14 aui-text-333">请填写从管理仓调入个人仓数量</p>
+    <input type="number" :placeholder="commonMsg" class="yc1-num-text" v-model="commitNum">
+    <div class="alert-btn">
+      <div class="aui-font-size-12 aui-text-333" @click="showCommit = false">取消</div>
+      <div class="background-fda9c5 aui-text-white aui-font-size-12" @click="commitCloud()">确定</div>
+    </div>
+  </div>
+  <!-- 调入 end -->
+</div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-loading.js"></script>
+<script src="../../../script/api-local.js"></script>
+<script src="../../../script/api-validate.js"></script>
+<script src="../../../script/lib/photo_browser.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script src="../../../script/aui/aui-dialog.js"></script>
+<script src="../../../script/aui/aui-tab.js"></script>
+<script src="./check_level_up_frm.js"></script>
+</html>

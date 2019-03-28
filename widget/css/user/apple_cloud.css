@@ -91,3 +91,11 @@
     z-index: 200;
     display: block;
 }
+
+.agent3-content {
+    padding: 18px 15px 10px 15px;
+    border-bottom: 1px solid #eee;
+}
+.agent3-content .aui-font-size-14 {
+    margin-top: 16px;
+}

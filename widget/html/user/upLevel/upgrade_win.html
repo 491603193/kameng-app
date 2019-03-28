@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>代理升级</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/up_level.css">
+  <!--<link rel="stylesheet" href="../../../css/km.css">-->
+</head>
+<body>
+  <div id="aui-header">
+    <header class="aui-bar aui-bar-nav aui-bar-light">
+      <a class="aui-pull-left aui-btn" onclick="api.closeWin()">
+        <span class="aui-iconfont aui-icon-left"></span>
+      </a>
+      <div class="aui-title" id="title">代理升级</div>
+    </header>
+    <div class="my-order-win aui-bg-white" id="app">
+      <div class="item" :class="{ active: state === 0 }">
+        <div class="agent-num">1</div>
+        <div class="aui-margin-l-5 aui-font-size-14 aui-text-999 agent-text">选择升级级别</div>
+      </div>
+      <div class="aui-margin-l-5 agent-line"></div>
+
+      <div class="item" :class="{ active: state === 1 }">
+        <div class="agent-num">2</div>
+        <div class="aui-margin-l-5 aui-font-size-14 aui-text-999 agent-text">确认保证金</div>
+      </div>
+
+      <div class="aui-margin-l-5 agent-line"></div>
+
+      <div class="item" :class="{ active: state === 2 }">
+        <div class="agent-num">3</div>
+        <div class="aui-margin-l-5 aui-font-size-14 aui-text-999 agent-text">购入库存</div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+  apiready = function(){
+    api.parseTapmode();
+    var header = $api.byId('aui-header');
+    $api.fixStatusBar(header);
+    api.openFrameGroup({
+      name: 'group',
+      scrollEnabled: false,
+      rect: {
+        x: 0,
+        y: $api.offset(header).h,
+        w: 'auto',
+        h: 'auto'
+      },
+      index: 0,
+      preload: 2,
+      frames: [{
+          name: '/html/user/upLevel/upgrade_frm1',
+          url: api.wgtRootDir + '/html/user/upLevel/upgrade_frm1.html',
+        }, {
+          name: '/html/user/upLevel/upgrade_frm2',
+          url: api.wgtRootDir + '/html/user/upLevel/upgrade_frm2.html',
+      }, {
+          name: '/html/user/upLevel/upgrade_frm3',
+          url: api.wgtRootDir + '/html/user/upLevel/upgrade_frm3.html',
+      }]
+    }, function(ret, err) {
+      vm.state = ret.index;
+    });
+  };
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      state: 0,
+    },
+    methods: {
+    }
+  })
+</script>
+</html>

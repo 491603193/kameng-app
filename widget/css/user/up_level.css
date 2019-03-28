@@ -1,0 +1,51 @@
+
+.my-order-win {
+    width: 100%;
+    display: flex;
+    padding: 5px 15px;
+    justify-content: space-between;
+    align-items: center;
+}
+.my-order-win .item {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.agent-num {
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 10px;
+    padding: 4px;
+    border-radius: 50%;
+    border: 1px solid #999;
+}
+
+.agent-line {
+    width: 13px;
+    height: 1px;
+    background-color: #999;
+}
+.font-13 {
+    font-size: 3.2vw;
+}
+.active .agent-num{
+    border: none;
+    background-color: #fda9c5;
+    color: #fff;
+}
+.active .agent-num{
+    border: none;
+    background-color: #fda9c5;
+    color: #fff;
+}
+.active .agent-text{
+    color: #feabc5 !important;
+}

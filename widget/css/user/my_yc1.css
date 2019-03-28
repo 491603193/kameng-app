@@ -291,3 +291,18 @@
 .aui-no-data {
   top: 56% !important;
 }
+
+
+.yc-btn {
+  width: 86.66%;
+  height: 43px;
+  line-height: 43px;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  border-radius: 22px;
+  margin-top: 60px;
+}

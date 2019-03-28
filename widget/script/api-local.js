@@ -7,6 +7,7 @@
 
     var USER_ID = 'userId'; // 用户id
     var USER_NAME = 'userName';  // 用户姓名
+    var USER_LEVEL = 'userLevel';  // 用户姓名
     var USER = 'user';  // 代理信息
     var SMS_CODE_TIME = 'smsCodeTime'; // 短信验证码倒计时
 
@@ -37,6 +38,7 @@
 
     u.USER_ID = USER_ID;
     u.USER_NAME = USER_NAME;
+    u.USER_LEVEL = USER_LEVEL;
     u.USER = USER;
     u.SMS_CODE_TIME = SMS_CODE_TIME;
 
@@ -49,6 +51,10 @@
 
     u.getUserName = function(){
         return $api.getPrefs(USER_NAME)
+    };
+
+    u.getUserLevel = function(){
+        return $api.getPrefs(USER_LEVEL)
     };
 
     u.getUser = function(){
@@ -65,6 +71,10 @@
 
     u.setUserName = function(userName){
         $api.setPrefs(USER_NAME, userName)
+    };
+
+    u.setUserLevel = function(userLevel){
+        $api.setPrefs(USER_LEVEL, userLevel)
     };
 
     u.setUser = function(user){

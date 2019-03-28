@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../../css/user/index.css">
 </head>
 <body class="aui-bg-white">
-  <div id="app" v-cloak="">
+  <div id="app" v-cloak>
     <header class="aui-bar aui-bar-nav aui-bar-light" id="aui-header">
       <div class="aui-title" id="title">个人中心</div>
       <a class="aui-pull-right aui-btn" @click="openWin('/html/user/info/user_info_win')">
@@ -18,13 +18,14 @@
     </header>
     <div class="my-head">
       <div class="my-flex">
-        <div class="my-head-img"  @click="openWin('/html/user/info/user_edit_win')">
+        <div class="my-head-img" @click="openWin('/html/user/info/user_edit_win')">
           <img  :src='headerImg'>
         </div>
         <div class='my-head-name'>
           <p class="name aui-font-size-16 aui-text-white">{{user.name}}</p>
           <p class="rank aui-text-white">
-            <span @click="openWin('/html/user/info/user_edit_win')">一级  去升级>></span>
+            <span v-if="user.level === '1'">{{getUserLevelName(user.level)}}</span>
+            <span @click="checkLevel()" v-else>{{getUserLevelName(user.level)}} 去升级>></span>
             <span class="right" @click="openWin('/html/user/deposit/cash_win')">保证金：¥{{user.protectMoney}} >></span>
           </p>
         </div>
@@ -47,7 +48,7 @@
       <div class="el">
         <p class="incom">待生效</p>
         <p class="money1 color-999">￥{{user.waitTakeEffectCommissionMoney}}</p>
-        <p class="look color-ccc"  @click="openWin('/html/user/income/income_log_ready_win')">查看明细 >></p>
+        <p class="look color-ccc" @click="openWin('/html/user/income/income_log_ready_win')">查看明细 >></p>
       </div>
       </div>
     </div>
@@ -82,10 +83,10 @@
         </div>
       </div>
       <div class="my-click-row">
-        <div class="el left" @click="openWin('/html/order/order/my_order_win')">
+        <div class="el left" @click="openWin('/html/user/upLevel/upgrade_win')">
           <div class="my-click-icon">
             <img src="../../image/user/dlsj.png">
-            <div class="dot aui-text-white" v-if="userLevelUpWaitCheckNum>0">{{userLevelUpWaitCheckNum}}</div>
+            <div class="dot aui-text-white" v-if="userLevelUpWaitCheckNum > 0">{{userLevelUpWaitCheckNum}}</div>
           </div>
           <p class="font-14 color-333">代理升级</p>
         </div>
@@ -117,6 +118,7 @@
 <script src="../../script/api-ajax.js"></script>
 <script src="../../script/api-local.js"></script>
 <script src="../../script/vue.min.js"></script>
+<script src="../../script/aui/aui-dialog.js"></script>
 <script>
   apiready = function () {
     api.parseTapmode();
@@ -128,6 +130,7 @@
     }
     vm.getDate()
   }
+  var dialog = new auiDialog({})
   var vm = new Vue({
     el: '#app',
     data: {
@@ -146,6 +149,25 @@
     },
     created: function () {},
     methods: {
+      getUserLevelName (level) {
+        return $apiLocal.getUserLevelName(level)
+      },
+      checkLevel () {
+        var self = this;
+        $apiAjax.postBody("/user/level/up/getWaitCheck", {},function (data) {
+          if (data) {
+            if (data.exist) {
+              dialog.alert({
+                title:"提示",
+                msg:"上级代理" + data.stockCheckUserName + "正在审核中。",
+                buttons:['确定']
+              });
+            } else {
+              $api.openWin('/html/user/upLevel/upgrade_win')
+            }
+          }
+        }, true);
+      },
       getDate () {
         var self = this;
         $apiAjax.postBody("/user/getPersonalCenter", {},function (data) {
@@ -161,6 +183,5 @@
       }
     }
   })
-
 </script>
 </html>

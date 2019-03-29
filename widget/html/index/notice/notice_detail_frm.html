@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" href="../../css/base.css"/>
+    <style>
+        body {
+            background-color: #eee;
+        }
+        .announce-detail * {
+            /*width: 100% !important;*/
+            box-sizing: border-box !important;
+        }
+        img{
+            width: 100% !important;
+        }
+    </style>
+</head>
+<body>
+<div id="data">
+</div>
+<script type="text/javascript" src="../../script/lib/jquery.js"></script>
+<script type="text/javascript" src="../../script/lib/template.js"></script>
+<script type="text/javascript" src="../../script/lib/base.js"></script>
+<script type="text/javascript" src="./notice_detail_frm.js"></script>
+<script type="text/html" id="content">
+    <div class="announce-detail">
+        <ul class="margin-top-no no-active announce-ul">
+            <li class="li-two">
+                <div class="ellipsis">{{title}}</div>
+                <p class="font-size-12 color-999">
+                    {{createTime | dateFormat:'yyyy.MM.dd'}}
+                </p>
+            </li>
+        </ul>
+        <div class="detail">
+            <div id="context">
+                {{#content}}
+            </div>
+        </div>
+    </div>
+</script>
+
+</body>
+</html>

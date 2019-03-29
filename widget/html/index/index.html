@@ -139,11 +139,12 @@
   }
 
   function getPopup () {
-    $apiAjax.postBody("/user/popup/list", {}, function (ret) {
-      // alert(JSON.stringify(ret));
-    }, false)
+    setTimeout(function () {
+      $apiAjax.postBody("/user/popup/list", {}, function (ret) {
+        alert(JSON.stringify(ret));
+      }, false)
+    },3000)
   }
-
 
   function getHotProducts () {
     $apiAjax.postBody("/product/listFirstPage", {

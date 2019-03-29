@@ -188,6 +188,7 @@
     }
     api.ajax(postJson, function(ret, err) {
       toast.hide();
+      alert(JSON.stringify(ret));
       if(ret){
         if (ret.code === 0) {
           callBack(ret.data || true, ret.page || {})

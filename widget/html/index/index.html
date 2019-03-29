@@ -141,7 +141,9 @@
   function getPopup () {
     setTimeout(function () {
       $apiAjax.postBody("/user/popup/list", {}, function (ret) {
-        alert(JSON.stringify(ret));
+        if (ret) {
+          $dialogBox.setText(ret.text)
+        }
       }, false)
     },3000)
   }

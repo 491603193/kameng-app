@@ -35,3 +35,12 @@
     color: #666;
     line-height: 20px;
 }
+
+.li-two {
+    padding: 10px 15px;
+    line-height: 18px;
+}
+
+.li-two p {
+    padding-top: 4px;
+}

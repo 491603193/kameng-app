@@ -32,7 +32,6 @@
     }
   }
 
-
   m.open = function (images, index) {
     var photoBrowser = api.require('photoBrowser');
     photoBrowser.open({

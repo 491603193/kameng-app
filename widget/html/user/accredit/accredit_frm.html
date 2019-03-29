@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+  <title></title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <style>
+    .img-wrap {
+      padding: 10px;
+      background-color: #fff;
+      min-height: 212px;
+    }
+    .link-content {
+      padding: 15px 15px;
+    }
+  </style>
+</head>
+<body>
+<div class="link-content">
+  <div class="img-wrap" onclick="openPic()">
+    <img id="codeUrl" class="width-full cover" src=""/>
+  </div>
+</div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/lib/photo_browser.js"></script>
+<script>
+  var url = ""
+  apiready = function () {
+    api.parseTapmode()
+    getData()
+  }
+
+  function getData () {
+    $apiAjax.postBody("/user/notice/get", {}, function (data) {
+      if (data) {
+        api.imageCache({
+          url: $apiAjax.kameng_image + data,
+          thumbnail: false
+        }, function(ret) {
+          url = ret.url;
+          document.getElementById("codeUrl").src = url
+        });
+      }
+    }, true)
+  }
+
+  function openPic () {
+    if (url) {
+      photo.open([url], 0)
+    } else {
+      $api.toast("正在生成中,请稍后。。。")
+    }
+  }
+
+</script>
+</html>

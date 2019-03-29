@@ -132,17 +132,21 @@
   }
 
 
-  new auiTab({
+  var aui = new auiTab({
     element:document.getElementById("tab"),
   },function(ret){
+    setIndex(ret.index);
+  });
+
+  function setIndex (index) {
     var fyc = $api.byId('fyc')
     var yc = $api.byId('yc')
     var yxx = $api.byId('yxx')
-    if (ret.index === 1) {
+    if (index === 1) {
       fyc.style.display = 'block';
       yc.style.display = 'none';
       yxx.style.display = 'none';
-    } else if (ret.index === 2) {
+    } else if (index === 2) {
       fyc.style.display = 'none';
       yc.style.display = 'block';
       yxx.style.display = 'none';
@@ -151,7 +155,14 @@
       yc.style.display = 'none';
       yxx.style.display = 'block';
     }
-  });
+  }
+
+
+  function setAuiIndex (type) {
+    aui.setActive(type)
+    setIndex(parseInt(type))
+  }
+
   function openProductList (productLabelId, productLabelName) {
     $api.openWin('/html/goods/product/product_win', {
       title: productLabelName,

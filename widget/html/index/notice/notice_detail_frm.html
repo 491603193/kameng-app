@@ -1,48 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-    <title></title>
-    <link rel="stylesheet" href="../../css/base.css"/>
-    <style>
-        body {
-            background-color: #eee;
-        }
-        .announce-detail * {
-            /*width: 100% !important;*/
-            box-sizing: border-box !important;
-        }
-        img{
-            width: 100% !important;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+  <title></title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/user/notice.css">
+  <style>
+    body {
+      background-color: #eee;
+    }
+
+    .announce-detail * {
+      /*width: 100% !important;*/
+      box-sizing: border-box !important;
+    }
+
+    img {
+      width: 100% !important;
+    }
+  </style>
 </head>
 <body>
-<div id="data">
-</div>
-<script type="text/javascript" src="../../script/lib/jquery.js"></script>
-<script type="text/javascript" src="../../script/lib/template.js"></script>
-<script type="text/javascript" src="../../script/lib/base.js"></script>
-<script type="text/javascript" src="./notice_detail_frm.js"></script>
-<script type="text/html" id="content">
+  <div id="app">
     <div class="announce-detail">
-        <ul class="margin-top-no no-active announce-ul">
-            <li class="li-two">
-                <div class="ellipsis">{{title}}</div>
-                <p class="font-size-12 color-999">
-                    {{createTime | dateFormat:'yyyy.MM.dd'}}
-                </p>
-            </li>
-        </ul>
-        <div class="detail">
-            <div id="context">
-                {{#content}}
-            </div>
+      <ul class="margin-top-no no-active announce-ul">
+        <li class="li-two">
+          <div class="ellipsis">{{entity.title}}</div>
+          <p class="aui-font-size-12 aui-text-999">
+            {{entity.createTime}}
+          </p>
+        </li>
+      </ul>
+      <div class="detail">
+        <div id="context" v-html="entity.content">
         </div>
+      </div>
     </div>
-</script>
+  </div>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+  apiready = function () {
+    api.parseTapmode()
+    vm.getData()
+  }
 
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      entity: {}
+    },
+    created () {
+    },
+    methods: {
+      getData: function () {
+        var self = this
+        $apiAjax.postBody("/user/notice/get", {
+          noticeId: api.pageParam.noticeId
+        }, function (data) {
+          if (data) {
+            self.entity = data
+          }
+        }, true)
+      }
+    }
+  })
+</script>
 </body>
 </html>

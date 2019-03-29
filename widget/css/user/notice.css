@@ -44,3 +44,21 @@
 .li-two p {
     padding-top: 4px;
 }
+
+
+body {
+    background-color: #eee;
+}
+.announce-detail * {
+    /*width: 100% !important;*/
+    box-sizing: border-box !important;
+}
+img{
+    width: 100% !important;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

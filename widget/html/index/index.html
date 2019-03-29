@@ -20,7 +20,7 @@
       </div>
       <input id="searchVal" type="text" placeholder="搜索商品" class="index-input-search" onkeypress="return onKeyPress(event)" >
     </div>
-    <div class="index-msg-icon">
+    <div class="index-msg-icon" onclick="openWin('/html/index/notice/notice_win')">
       <div class="index-msg-top">
         <img src="../../image/index/msg.svg">
         <div class="aui-dot index-msg-dot"></div>
@@ -38,11 +38,11 @@
   <div class="index-section">
     <section class="aui-grid ">
       <div class="aui-row">
-        <div class="aui-col-xs-3" onclick="openProductList('云仓', '1')">
+        <div class="aui-col-xs-3" onclick="openProductList('1')">
           <img src="../../image/index/icon1.png" class="aui-iconfont" alt="">
           <div class="aui-grid-label">云仓</div>
         </div>
-        <div class="aui-col-xs-3" onclick="openProductList('非云仓', '2')">
+        <div class="aui-col-xs-3" onclick="openProductList('2')">
           <img src="../../image/index/icon2.png" class="aui-iconfont" alt="">
           <div class="aui-grid-label">非云仓</div>
         </div>
@@ -145,7 +145,7 @@
           $dialogBox.setText(ret.text)
         }
       }, false)
-    },3000)
+    }, 2000)
   }
 
   function getHotProducts () {
@@ -191,11 +191,10 @@
     $api.openWin(name)
   }
 
-  function openProductList (title, productType) {
-    $api.openWin('/html/goods/product/product_win', {
-      title: title,
-      productLabelId: '',
-      productType: productType
+  function openProductList (productType) {
+    api.execScript({
+      name: '/html/index',
+      script: 'openProductType("'+productType+'")'
     })
   }
 

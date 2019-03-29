@@ -16,18 +16,78 @@
   </style>
 </head>
 <body>
-<div id="data-list">
+<div id="app">
   <div class="absolute-wrap">
-    <ul class="margin-top-no no-active announce-ul" id="content">
-      <li class="li-two" >
-        <div class="ellipsis aui-text-999">其31231231</div>
+    <ul class="margin-top-no no-active announce-ul">
+      <li class="li-two" v-for="(item, index) in entities" :key="item.noticeId" @click="openDetail(index)">
+        <div class="ellipsis " :class="{'aui-text-999': item.isRead}">{{item.title}}</div>
         <p class="aui-font-size-12 aui-text-999">
-          2012-12-12 01:12:12
+          {{item.createTime}}
         </p>
       </li>
     </ul>
   </div>
 </div>
-</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-loading.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script>
+  apiready = function (){
+    api.parseTapmode();
+    vm.loading(true);
+    $apiLoading.loadModel(function () {
+      vm.loading(false);
+    });
+  };
 
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      entities: [],
+      noData: false,
+      noMoreData: false
+    },
+    created () {
+    },
+    methods: {
+      openDetail: function (index){
+        var self = this;
+        $api.openWin('/html/index/notice/notice_detail_win', {
+          noticeId: self.entities[index].noticeId
+        })
+        if (!self.entities[index].isRead) {
+          setTimeout(function () {
+            self.entities[index].isRead = true
+          }, 2000)
+          $apiAjax.postBody("/user/notice/read/add", {
+            noticeId: self.entities[index].noticeId
+          },function (data) {
+          }, false);
+        }
+
+      },
+      loading: function(isFlush){
+        var self = this;
+        $apiAjax.postBody("/user/notice/page", {
+          param: {
+            orderState: ''
+          },
+          page: $apiLoading.page
+        },function (data, page) {
+          $apiLoading.setPage(page);
+          self.noData = false;
+          if (page.pageNo === 1) {
+            if(data.length === 0) self.noData = true;
+            else self.entities = data
+          } else {
+            self.entities = self.entities.concat(data);
+          }
+          self.noMoreData = page.pageNo > 1 && !page.hasNext && !self.noData;
+        }, isFlush);
+      }
+    }
+  })
+</script>
+</body>
 </html>

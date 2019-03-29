@@ -298,7 +298,7 @@
     // });
   }
 
-  function openCart(){
+  function openCart() {
     initBadgeNum()
     var NVTabBar = api.require('NVTabBar');
     NVTabBar.setSelect({
@@ -318,6 +318,28 @@
         index: 2,
         scroll: true
       });
+    },300)
+  }
+
+  function openProductType(type){
+    setTimeout(function () {
+      var NVTabBar = api.require('NVTabBar');
+      NVTabBar.setSelect({
+        index: 1,
+        selected: true,
+      });
+      api.setFrameGroupIndex({
+        name: 'group',
+        index: 1,
+        scroll: true
+      });
+      setTimeout(function () {
+        api.execScript({
+          name: '/html/index',
+          frameName: '/html/goods/index',
+          script: 'setAuiIndex("'+type+'")'
+        })
+      }, 300)
     },300)
   }
 

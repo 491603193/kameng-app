@@ -536,6 +536,11 @@ img.aui-img-round {
 	position: absolute;
 	top: 35%;
 }
+
+/* 暂无数据 */
+.aui-no-data,.top{
+	top: 56%!important;
+}
 .aui-no-data img {
 	width: 100%;
 	height: 50px;

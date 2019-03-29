@@ -122,6 +122,11 @@ var vm = new Vue({
                 self.getData()
                 $apiLoading.page.pageNo = 1
                 self.loadLower(false)
+                api.execScript({
+                  name: '/html/index',
+                  frameName: '/html/user/index',
+                  script: 'vm.getDate()'
+                })
               }
             }, true);
           }

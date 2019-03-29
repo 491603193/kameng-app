@@ -137,3 +137,7 @@
   z-index: 200;
   display: block;
 }
+
+.aui-no-data {
+  top: 56% !important;
+}

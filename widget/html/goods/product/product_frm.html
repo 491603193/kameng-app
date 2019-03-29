@@ -92,7 +92,8 @@
         $apiAjax.postBody("/product/page", {
           param: {
             productLabelId: api.pageParam.productLabelId,
-            productType: api.pageParam.productType
+            productType: api.pageParam.productType,
+            productName: api.pageParam.productName
           },
           page: $apiLoading.page
         },function (data, page) {

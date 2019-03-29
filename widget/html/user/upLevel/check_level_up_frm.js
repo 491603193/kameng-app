@@ -33,9 +33,6 @@ var vm = new Vue({
     }
   },
   computed: {
-    commonMsg: function () {
-      return "请填写数量（<= " + this.entity.adminisWarehouse + " ）"
-    },
     noData: function () {
       if (this.showApply) {
         return this.entitiesA.length === 0;
@@ -45,29 +42,11 @@ var vm = new Vue({
     }
   },
   methods: {
+    getLevelName (level) {
+      return $apiLocal.getUserLevelName(level)
+    },
     openPic (pics, index) {
       photo.openWidthUrl(pics, index)
-    },
-    commitCloud () {
-      var stockApplyNum = parseInt(this.commitNum)
-      if (!stockApplyNum) {
-        $apiAjax.setErrorMessage("请输入整数")
-      } else if (stockApplyNum <= 0) {
-        $apiAjax.setErrorMessage("至少要买一个云币")
-      } else if (stockApplyNum > this.entity.adminisWarehouse) {
-        $apiAjax.setErrorMessage("管理仓云币数量不够")
-      } else {
-        var self = this;
-        self.showCommit = false
-        $apiAjax.postBody("/user/stock/giveSelf", {
-          stockApplyNum: stockApplyNum
-        },function (ret) {
-          if (ret) {
-            $api.toast("调拨成功~")
-            self.getData()
-          }
-        }, true);
-      }
     },
     openAppleCloud () {
       $api.openWin('/html/user/cloud/apple_core_cloud_win')
@@ -81,20 +60,25 @@ var vm = new Vue({
       var entityA = this.entitiesA[index]
       var self = this;
       dialog.alert({
-        title: "温馨提示",
-        msg: '将从您的' + title + '调拨'+ entityA.stockApplyNum + '云币给' + entityA.userName + '。',
+        title: "申请通过",
+        msg: '将从您的云仓调拨'+ entityA.stockApplyNum + '云币给' + entityA.userName + '。',
         buttons:['取消','确定']
       },function(ret){
         if(ret){
           if (ret.buttonIndex === 2) {
-            $apiAjax.postBody("/stock/apply/checkPass", {
-              stockApplyId: entityA.stockApplyId
+            $apiAjax.postBody("/user/level/up/check", {
+              userLevelUpId: entityA.userLevelUpId,
+              checkState: '1'
             },function (ret) {
               if (ret) {
                 $api.toast(entityA.userName+"的申请已完成~")
-                self.getData()
                 $apiLoading.page.pageNo = 1
                 self.loadLower(false)
+                api.execScript({
+                  name: '/html/index',
+                  frameName: '/html/user/index',
+                  script: 'vm.getDate()'
+                })
               }
             }, true);
           }
@@ -105,14 +89,15 @@ var vm = new Vue({
       var entity = this.entitiesA[index]
       var self = this
       dialog.prompt({
-        title:"取消原因",
+        title:"取消申请",
         text:'请输入您的取消原因',
         type:'text',
         buttons:['取消','确定']
       },function(ret){
         if(ret.buttonIndex === 2){
-          $apiAjax.postBody("/stock/apply/checkRefuse", {
-            stockApplyId: entity.stockApplyId,
+          $apiAjax.postBody("/user/level/up/check", {
+            userLevelUpId: entity.userLevelUpId,
+            checkState: '2',
             checkReason: ret.text
           },function (ret) {
             if (ret) {
@@ -127,9 +112,6 @@ var vm = new Vue({
     getCheckStateName (state) {
       return this.checkStateName[state]
     },
-    getHigherLevelName (higherLevel) {
-      return $apiLocal.getUserLevelName(higherLevel)
-    },
     openBuyCloud () {
       $api.openWin('/html/user/cloud/apple_cloud_win')
     },
@@ -142,7 +124,7 @@ var vm = new Vue({
     },
     loadLower: function(isFlush) {
       var self = this;
-      $apiAjax.postBody("/stock/apply/pageLowerLevel", {
+      $apiAjax.postBody("/user/level/up/pageLowerLevel", {
         param: {},
         page: $apiLoading.page
       },function (data, page) {
@@ -159,7 +141,7 @@ var vm = new Vue({
     },
     loadMy: function(isFlush) {
       var self = this;
-      $apiAjax.postBody("/stock/apply/page", {
+      $apiAjax.postBody("/user/level/up/page", {
         param: {},
         page: $apiLoading.page
       },function (data, page) {

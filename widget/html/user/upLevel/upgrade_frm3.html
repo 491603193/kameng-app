@@ -107,7 +107,7 @@
       submit () {
         var self = this;
         dialog.alert({
-          title: "温馨提示",
+          title: "申请确认",
           msg: self.higherCustUser.name + "将收到您的申请",
           buttons:['取消','确定']
         },function(ret){
@@ -117,7 +117,6 @@
             }
           }
         })
-
       },
       postApply () {
         var self = this;

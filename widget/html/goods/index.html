@@ -13,7 +13,7 @@
     <img src="../../image/index/indexlogo.png" class="classify-logo">
     <div class="classify-search">
       <img src="../../image/classify/search.svg">
-      <input type="text" placeholder="搜索商品">
+      <input id="searchVal" type="text" placeholder="搜索商品" onkeypress="return onKeyPress(event)" >
     </div>
   </header>
   <div class="classify-content">
@@ -159,5 +159,21 @@
       productType: '',
     })
   }
+
+  function onKeyPress(e) {
+    var keyCode = null;
+    if(e.which) keyCode = e.which;
+    else if(e.keyCode) keyCode = e.keyCode;
+    if(keyCode === 13) {
+      $api.openWin('/html/goods/product/product_win', {
+        title: $api.val($api.byId("searchVal")),
+        productLabelId: '',
+        productName: $api.val($api.byId("searchVal"))
+      })
+      return false;
+    }
+    return true;
+  }
+
 </script>
 </html>

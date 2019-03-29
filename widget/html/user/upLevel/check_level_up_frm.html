@@ -19,15 +19,18 @@
   <!--下级订单-->
   <div class="aui-bg-white yc1-template" v-for="(entity, index) in entitiesA" v-show="showApply">
     <p class="aui-bg-white yc1-row aui-font-size-14 aui-text-333">
-      {{entity.userName}}({{entity.phone}}) - {{getHigherLevelName(entity.userLevel)}}
+      {{entity.userName}}({{entity.phone}}) - {{getLevelName(entity.olderLevel)}}
       <span class="aui-font-size-12 aui-text-999">{{entity.createTime}}</span>
     </p>
+    <div class="aui-row yc1-row1">
+      <div class="aui-text-gray">升级成为{{getLevelName(entity.newLevel)}}，原级别为：{{getLevelName(entity.olderLevel)}}</div>
+    </div>
     <div class="aui-row yc1-row1">
       <div class="aui-col-xs-3 aui-text-gray">申请购入：</div>
       <div class="aui-col-xs-9 aui-text-danger">{{entity.stockApplyNum}}云币</div>
     </div>
     <div class="aui-row yc1-row2">
-      <div class="aui-col-xs-3 aui-text-gray">申请备注：</div>
+      <div class="aui-col-xs-3 aui-text-gray">申请说明：</div>
       <div class="aui-col-xs-9 aui-text-gray">
         <template v-if="entity.stockApplyRemark"> {{entity.stockApplyRemark}}</template>
         <template v-else>无</template>
@@ -60,12 +63,12 @@
   <!--我的订单-->
   <div class="aui-bg-white yc1-template" v-for="entity in entitiesB" v-show="!showApply">
     <p class="aui-bg-white yc1-row aui-font-size-14 aui-text-333">
-      <template v-if="entity.higherLevelId !== 'sys'">
-        {{entity.higherLevelName}}({{entity.higherLevelPhone}}) - {{getHigherLevelName(entity.higherLevelLevel)}}
-      </template>
-      <template v-else>{{entity.higherLevelName}}</template>
+      {{entity.newHigherUserName}}({{entity.higherLevelPhone}}) - {{getLevelName(entity.newHigherLevel)}}
       <span class="aui-font-size-12 aui-text-999">{{entity.createTime}}</span>
     </p>
+    <div class="aui-row yc1-row1">
+      <div class="aui-text-gray">升级成为{{getLevelName(entity.newLevel)}}，原级别为：{{getLevelName(entity.olderLevel)}}</div>
+    </div>
     <div class="aui-row yc1-row1">
       <div class="aui-col-xs-3 aui-text-gray">申请购入：</div>
       <div class="aui-col-xs-9 aui-text-danger">{{entity.stockApplyNum}}云币</div>
@@ -118,16 +121,6 @@
     </div>
   </div>
   <!-- 提醒 end-->
-  <!-- 调入 -->
-  <div class="alert-weiquan" v-show="showCommit">
-    <p class="title aui-font-size-14 aui-text-333">请填写从管理仓调入个人仓数量</p>
-    <input type="number" :placeholder="commonMsg" class="yc1-num-text" v-model="commitNum">
-    <div class="alert-btn">
-      <div class="aui-font-size-12 aui-text-333" @click="showCommit = false">取消</div>
-      <div class="background-fda9c5 aui-text-white aui-font-size-12" @click="commitCloud()">确定</div>
-    </div>
-  </div>
-  <!-- 调入 end -->
 </div>
 </body>
 <script src="../../../script/api.js"></script>

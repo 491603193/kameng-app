@@ -6,9 +6,13 @@
 
   var u = {};
 
-  u.kameng_api = 'http://192.168.0.199:8031';
+  // u.kameng_api = 'http://192.168.0.199:8031';
+  // u.kameng_image = 'http://res.qiangdaoapp.com/kameng';
+  // u.kameng_web = 'http://192.168.0.199:8081';
+
+  u.kameng_api = 'http://121.42.157.174:8195/kameng-app';
   u.kameng_image = 'http://res.qiangdaoapp.com/kameng';
-  u.kameng_web = 'http://192.168.0.199:8081';
+  u.kameng_web = 'http://121.42.157.174:8195/kamneg-web';
 
   var auiToast = function() {};
   auiToast.prototype = {

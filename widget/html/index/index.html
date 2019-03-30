@@ -23,7 +23,7 @@
     <div class="index-msg-icon" onclick="openWin('/html/index/notice/notice_win')">
       <div class="index-msg-top">
         <img src="../../image/index/msg.svg">
-        <div class="aui-dot index-msg-dot"></div>
+        <div class="aui-dot index-msg-dot" id="notice-read"></div>
       </div>
       <p class="index-msg-text">公告</p>
     </div>
@@ -117,6 +117,7 @@
     getAuiSlide()
     getHotProducts()
     getPopup()
+    getNoticeNum()
   }
 
   function openPage (name, linkType, linkUrl, linkParam) {
@@ -159,6 +160,19 @@
       $api.html($api.byId('index-product-list'), html)
     }, true)
   }
+
+  function getNoticeNum () {
+    $apiAjax.postBody("/user/notice/getNoReadCount", {}, function (ret) {
+      if (ret) {
+        if (typeof ret !== 'boolean' && ret > 0) {
+          document.getElementById("notice-read").style.visibility = "visible"
+        } else {
+          document.getElementById("notice-read").style.visibility = "hidden"
+        }
+      }
+    }, false)
+  }
+
 
   function getAuiSlide () {
     $apiAjax.postBody("/activity/common/ad/list", {}, function (ret) {

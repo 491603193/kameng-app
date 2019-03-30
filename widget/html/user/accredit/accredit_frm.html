@@ -35,7 +35,7 @@
   }
 
   function getData () {
-    $apiAjax.postBody("/user/notice/get", {}, function (data) {
+    $apiAjax.postBody("/accredit/findAccredit", {}, function (data) {
       if (data) {
         api.imageCache({
           url: $apiAjax.kameng_image + data,

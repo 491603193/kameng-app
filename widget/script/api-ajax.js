@@ -12,7 +12,7 @@
 
   u.kameng_api = 'http://121.42.157.174:8195/kameng-app';
   u.kameng_image = 'http://res.qiangdaoapp.com/kameng';
-  u.kameng_web = 'http://121.42.157.174:8195/kamneg-web';
+  u.kameng_web = 'http://xpg.5ishequ.com.cn';
 
   var auiToast = function() {};
   auiToast.prototype = {

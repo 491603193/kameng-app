@@ -81,7 +81,15 @@
         $apiLocal.setUserName(ret.name)
         $apiLocal.setUserLevel(ret.level)
         $apiLocal.setUser(ret)
-        $api.openWin('/html/index')
+        api.openWin({
+          name: '/html/index',
+          url: api.wgtRootDir + '/html/index.html',
+          bounces: false,
+          delay: 400,
+          slidBackEnabled: true,
+          vScrollBarEnabled: false,
+          pageParam: {}
+        })
       }
     }, true);
   }

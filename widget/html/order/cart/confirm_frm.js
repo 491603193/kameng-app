@@ -158,6 +158,23 @@ var vm = new Vue({
       },function (ret) {
         if(ret){
           if(self.payType === '1'){ //在线支付
+
+            alert(JSON.stringify(ret));
+            alert(ret.payInfo.prepayid);
+            var wxPay = api.require('wxPay');
+            wxPay.payOrder({
+              orderId: ret.payInfo.prepayid,
+              mchId: '755437000006',
+              nonceStr: ret.payInfo.noncestr,
+              timeStamp: ret.payInfo.timestamp,
+              package: ret.payInfo.package,
+              sign: ret.payInfo.sign
+            }, function(ret, err) {
+              alert(JSON.stringify(ret));
+              alert(JSON.stringify(err));
+            });
+
+            return;
             ret['service'] = 'pay.weixin.app'
             self.spay(ret)
           }

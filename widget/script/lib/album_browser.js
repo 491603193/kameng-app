@@ -14,8 +14,8 @@
       styles: {
         bg: '#ffffff',
         mark: {
-          position: 'bottom_left',
-          size: 20
+          position: 'top_right',
+          size: 30
         },
         nav: {
           bg: '#ffffff',

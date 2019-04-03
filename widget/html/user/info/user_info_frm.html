@@ -13,7 +13,7 @@
 <div id="app">
   <header class="agency-set-head">
     <div class="head-content">
-      <img :src="headerImg" class="head-img">
+      <img :src="headerImg" class="head-img" @click="openSelPhoto()">
       <div class="head-text aui-margin-l-15">
         <p class="name aui-text-white aui-font-size-16">{{name}}</p>
         <p class="grade aui-text-white aui-font-size-14 aui-margin-t-5">{{levelName}}</p>
@@ -25,6 +25,13 @@
       <div class="list-left">
         <img src="../../../image/personal.png">
         <p class="aui-font-size-16 aui-text-gray aui-margin-l-10">个人信息</p>
+      </div>
+      <img src="../../../image/go.svg" class="set-go-icon">
+    </li>
+    <li class="set-list-el" @click="openWebPage()">
+      <div class="list-left">
+        <img src="../../../image/shopping/help.png">
+        <p class="aui-font-size-16 aui-text-gray aui-margin-l-10">帮助中心</p>
       </div>
       <img src="../../../image/go.svg" class="set-go-icon">
     </li>
@@ -42,6 +49,7 @@
 <script src="../../../script/api-local.js"></script>
 <script src="../../../script/api-ajax.js"></script>
 <script src="../../../script/vue.min.js"></script>
+<script src="../../../script/lib/album_browser.js"></script>
 <script src="../../../script/aui/aui-dialog.js" ></script>
 <script>
   apiready = function () {
@@ -66,8 +74,62 @@
       headerImg: '../../../image/user/header.png',
     },
     methods: {
+      openSelPhoto: function() {
+        var self = this;
+        api.actionSheet({
+          title: '更换头像',
+          cancelTitle: '关闭',
+          buttons: ['打开相册']
+        }, function(ret, err) {
+          var index = ret.buttonIndex;
+          if (index === 1) {
+            self.openPhoto()
+          }
+        });
+      },
+      openPhoto () {
+        var self = this;
+        media.imagePicker(function (ret) {
+          self.postImg(ret)
+        }, 1)
+      },
+      postImg: function (images) {
+        var self = this;
+        $apiAjax.postFileSingle(images[0], function (ret) {
+          if (ret) {
+            $apiAjax.postBody("/user/update", {
+              userId: $apiLocal.getUserId(),
+              photo: ret
+            }, function (retUser) {
+              if (retUser) {
+                self.headerImg = $apiAjax.kameng_image + ret
+                // 刷新首页 头像
+                var user = $apiLocal.getUser();
+                user.photo = ret
+                $apiLocal.setUser(user)
+                api.execScript({
+                  name: '/html/index',
+                  frameName: '/html/user/index',
+                  script: 'vm.changePhoto()'
+                })
+                $api.toast("上传头像成功！")
+              }
+            }, true);
+          }
+        },true)
+      },
       openWin: function(name) {
         $api.openWin(name)
+      },
+      openWebPage: function() {
+        api.openWin({
+          name: 'web_win',
+          url: '../../index/web_win.html',
+          pageParam: {
+            linkUrl: $apiAjax.kameng_web + '/help',
+            name: '帮助中心'
+          }
+        })
       },
       loginOut: function () {
         dialog.alert({

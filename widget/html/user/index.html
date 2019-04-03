@@ -19,7 +19,7 @@
     <div class="my-head">
       <div class="my-flex">
         <div class="my-head-img" @click="openWin('/html/user/info/user_edit_win')">
-          <img  :src='headerImg'>
+          <img :src='headerImg'>
         </div>
         <div class='my-head-name'>
           <p class="name aui-font-size-16 aui-text-white">{{user.name}}</p>
@@ -42,7 +42,7 @@
       <div class="flex">
         <div class="el left">
         <p class="incom">可提现收入</p>
-        <p class="money1 color-333">￥{{user.waitTakeEffectCommissionMoney}}</p>
+        <p class="money1 color-333">￥{{waitTotalMoney}}</p>
         <p class="look color-ccc" @click="openWin('/html/user/income/income_apply_win')">查看明细 >></p>
       </div>
       <div class="el">
@@ -125,9 +125,7 @@
     var header = $api.byId('aui-header');
     $api.fixStatusBar(header);
     vm.user = $apiLocal.getUser();
-    if(vm.user.photo){
-      vm.headerImg = $apiAjax.kameng_image + vm.user.photo
-    }
+    vm.changePhoto()
     vm.getDate()
   }
   var dialog = new auiDialog({})
@@ -138,6 +136,7 @@
       isEdit: false,
       user: {},
       entity: {},
+      waitTotalMoney: 0, // 可提现收入
       userLevelUpWaitCheckNum: 0,
       stockApplyWaitCheckNum: 0
     },
@@ -175,8 +174,17 @@
             self.user = data.custUser
             self.userLevelUpWaitCheckNum = data.userLevelUpWaitCheckNum
             self.stockApplyWaitCheckNum = data.stockApplyWaitCheckNum
+            self.waitTotalMoney = data.waitTotalMoney
           }
         }, true);
+      },
+      changePhoto (){
+        if($apiLocal.getUser().photo){
+          this.headerImg = $apiAjax.kameng_image + $apiLocal.getUser().photo
+        }
+      },
+      changeName (){
+        this.user.name = $apiLocal.getUser().name;
       },
       openWin (winName) {
         $api.openWin(winName)

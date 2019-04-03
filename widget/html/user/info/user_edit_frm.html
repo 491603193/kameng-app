@@ -15,6 +15,12 @@
       <div class="change-title">基本信息</div>
       <ul class="color-333 aui-font-size-14">
         <li class="change-item">
+          <div class="name">手机号码：</div>
+          <div class="color-ccc flex align-center aui-margin-l-10 aui-col-xs-9 aui-font-size-16">
+            {{entity.phone}}
+          </div>
+        </li>
+        <li class="change-item">
           <div class="name">姓名：</div>
           <input class="aui-margin-l-10" type="text" placeholder="填写姓名" v-model="entity.name">
         </li>
@@ -40,10 +46,6 @@
             {{birthdayStr}}
           </div>
           <img src="../../../image/xla.svg" class="xla-icon aui-margin-l-10">
-        </li>
-        <li class="change-item">
-          <div class="name">手机号码：</div>
-          <input type="text" placeholder="填写手机号码" v-model="entity.name">
         </li>
         <li class="change-item">
           <div class="name">身份证号码：</div>
@@ -121,12 +123,17 @@
           <img class="pic" :src="imgPath + entity.wxQrcode">
         </div>
       </div>
+      <div class="qr-code aui-row aui-text-center aui-font-size-12 aui-text-gray">
+        <div class="aui-col-xs-5">支付宝</div>
+        <div class="aui-col-xs-5">微信</div>
+      </div>
     </div>
     <button class="background-fda9c5 aui-text-white aui-font-size-16 change-btn" @click="updateData">保存</button>
   </div>
 </body>
 <script src="../../../script/api.js"></script>
 <script src="../../../script/api-ajax.js"></script>
+<script src="../../../script/api-local.js"></script>
 <script src="../../../script/aui/aui-dialog.js"></script>
 <script src="../../../script/lib/album_browser.js"></script>
 <script src="../../../script/vue.min.js"></script>
@@ -230,6 +237,7 @@
               msg:"保存成功",
               buttons:['确定']
             },function (ret1) {
+              // 刷新收入的二维码
               if (api.pageParam.flushIncome) {
                 api.execScript({
                   name: '/html/user/income/income_apply_win',
@@ -237,6 +245,15 @@
                   script: 'vm.loadIncome()'
                 })
               }
+              // 刷新首页的名字
+              var user = $apiLocal.getUser();
+              user.name = self.entity.name
+              $apiLocal.setUser(user)
+              api.execScript({
+                name: '/html/index',
+                frameName: '/html/user/index',
+                script: 'vm.changeName()'
+              })
             });
           }
         }, true);

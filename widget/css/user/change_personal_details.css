@@ -22,7 +22,7 @@
 .color-333 .change-item {
   display: flex;
   align-items: center;
-  padding: 15px 0;
+  padding: 12px 0;
   border-bottom: 1px solid #eee;
 }
 .color-333 .change-item:last-of-type {
@@ -96,7 +96,7 @@
   margin-top: 5px;
 }
 .qr-code {
-  padding: 0 5px 20px 5px;
+  padding: 0 5px 5px 5px;
   display: flex;
   justify-content: space-between;
 }

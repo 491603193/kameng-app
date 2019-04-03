@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+  <title></title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <style>
+    html, body {
+      background-color: #eee;
+    }
+
+    .unselectable {
+      -webkit-user-select: text;
+    }
+
+    .link-content .btn {
+      width: 100px;
+      display: inline-block;
+      margin: 0 7%;
+      border-radius: 20px;
+    }
+
+    .link-content {
+      padding: 0 15px;
+    }
+
+    .link-content .title {
+      color: #666;
+      line-height: 21px;
+      padding: 4.9% 0;
+    }
+
+    .link-content .link {
+      background-color: #fff;
+      font-size: 14px;
+      line-height: 19px;
+      padding: 8px 10px 3px;
+      border-radius: 2px;
+      word-break: break-all;
+    }
+
+    .link-content .link textarea {
+      width: 100%;
+      font-size: 14px;
+      line-height: 19px;
+      word-break: break-all;
+      background-color: #fff;
+      padding: 0;
+      border: 0;
+    }
+
+    .link-content .img-wrap {
+      margin-top: 5.8%;
+      background-color: #fff;
+      border-radius: 2px;
+      padding: 15px;
+    }
+
+    .btn {
+      display: block;
+      height: 30px;
+      line-height: 30px;
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      background-color: #fc9abe;
+      border-radius: 2px;
+      width: 100%;
+    }
+
+    .btn-active:active {
+      opacity: 0.9;
+      -moz-opacity: 0.9;
+    }
+
+    .btn-wrap {
+      box-sizing: border-box;
+      padding: 12% 15px 5%;
+    }
+  </style>
+</head>
+<body>
+<div class="link-content">
+  <div class="title">长按可复制复制链接</div>
+  <div class="link unselectable" unselectable="on" id="url"></div>
+  <div class="img-wrap">
+    <img id="codeUrl" class="width-full" src=""/>
+  </div>
+  <div class="btn-wrap">
+    <a class="btn btn-active" onclick="savePhoto()">保存二维码</a>
+    <a class="btn btn-active" onclick="saveUrl()">复制链接地址</a>
+  </div>
+</div>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/api-ajax.js"></script>
+<script src="./share_code_frm.js"></script>
+</body>
+</html>

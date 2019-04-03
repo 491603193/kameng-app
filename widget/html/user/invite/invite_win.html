@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>邀请新的代理</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/km.css">
+</head>
+<body>
+<header class="aui-bar aui-bar-nav aui-bar-light" id="aui-header">
+  <a class="aui-pull-left aui-btn" onclick="api.closeWin()">
+    <span class="aui-iconfont aui-icon-left"></span>
+  </a>
+  <div class="aui-title" id="title">邀请代理</div>
+</header>
+</body>
+<script src="../../../script/api.js"></script>
+<script>
+  apiready = function(){
+    api.parseTapmode();
+    var header = $api.byId('aui-header');
+    $api.fixStatusBar(header);
+    api.openFrame({
+      name: '/html/user/invite/invite_frm',
+      url: api.wgtRootDir + '/html/user/invite/invite_frm.html',
+      bounces: false,
+      rect: {
+        x: 0,
+        y: $api.offset(header).h,
+        w: 'auto',
+        h: 'auto'
+      },
+      pageParam: api.pageParam
+    })
+  };
+</script>
+</html>

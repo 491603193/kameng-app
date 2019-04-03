@@ -121,6 +121,7 @@
       postApply () {
         var self = this;
         $apiAjax.postBody("/user/level/up/add", {
+          upType: '1',
           payType: '1',
           stockApplyRemark: self.stockApplyRemark,
           stockCheckUserId: self.higherCustUser.userId,
@@ -159,7 +160,8 @@
         var self = this;
         self.level = level
         $apiAjax.postBody("/user/level/up/getNewLevelHigherCustUser", {
-          newLevel: level
+          newLevel: level,
+          upType: "1"
         },function (ret) {
           if (ret) {
             self.higherCustUser = ret.higherCustUser

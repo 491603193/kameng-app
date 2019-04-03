@@ -17,11 +17,18 @@
       margin: 0 auto;
       width: 30%;
     }
+
+    .logo div {
+      margin: 0 auto;
+      width: 30%;
+    }
+
   </style>
 </head>
 <body>
-<div class="logo ">
+<div class="logo">
   <img src="image/index/indexlogo.png">
+  <div class="aui-btn aui-bg-pink aui-text-white " id="flush" style="margin-top: 40%; display: none" onclick="flush()">点击重试</div>
 </div>
 </body>
 <script type="text/javascript" src="./script/api.js"></script>
@@ -56,10 +63,14 @@
         $apiLocal.setUser(ret)
         $api.openWin('/html/index')
       } else {
-
-        // $apiLocal.setUserId('')
+        $api.css($api.byId("flush"), 'display: block')
       }
     }, false)
+  }
+
+  function flush () {
+    $api.css($api.byId("flush"), 'display: none')
+    loadData($apiLocal.getUserId())
   }
 
   //退出登录 todo

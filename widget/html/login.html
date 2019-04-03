@@ -104,7 +104,8 @@
     $apiAjax.postBody("/login/sendSmsCode",{
       verifyCode: verifyCode,
       loginName: loginName,
-      verifyKey: verifyKey
+      verifyKey: verifyKey,
+      type: 'login'
     },function (ret) {
         if(!ret){
           getCodeImage()

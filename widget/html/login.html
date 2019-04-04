@@ -81,15 +81,20 @@
         $apiLocal.setUserName(ret.name)
         $apiLocal.setUserLevel(ret.level)
         $apiLocal.setUser(ret)
+        $apiAjax.loadingShow("正在登录..")
         api.openWin({
           name: '/html/index',
           url: api.wgtRootDir + '/html/index.html',
           bounces: false,
-          delay: 400,
+          delay: 2000,
           slidBackEnabled: true,
           vScrollBarEnabled: false,
           pageParam: {}
         })
+        setTimeout(function () {
+          $apiAjax.loadingHide()
+        },1900)
+
       }
     }, true);
   }

@@ -61,7 +61,7 @@ var vm = new Vue({
       var self = this;
       dialog.alert({
         title: "申请通过",
-        msg: '将从您的云仓调拨'+ entityA.stockApplyNum + '云币给' + entityA.userName + '。',
+        msg: '将从您的云仓调拨'+ entityA.stockApplyNum + '库存给' + entityA.userName + '。',
         buttons:['取消','确定']
       },function(ret){
         if(ret){

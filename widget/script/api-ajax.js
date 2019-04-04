@@ -13,7 +13,6 @@
   // u.kameng_api = 'http://121.42.157.174:8195/kameng-app';
   // u.kameng_image = 'http://res.qiangdaoapp.com/kameng';
   // u.kameng_web = 'http://xpg.5ishequ.com.cn';
-
   var auiToast = function() {};
   auiToast.prototype = {
     create: function(params,callback) {
@@ -92,12 +91,23 @@
     }
   };
 
+  var toast = new auiToast();
+
   u.successToast = function(text) {
-    var toast = new auiToast();
     toast.success({
       title: text || "提交成功",
-      duration:2000
+      duration: 200000
     })
+  }
+
+  u.loadingShow = function (title) {
+    toast.loading({
+      title: title
+    })
+  }
+
+  u.loadingHide = function () {
+    toast.hide();
   }
 
   u.setErrorMessage = function(errorMessage){
@@ -177,21 +187,16 @@
     apiAjax(postJson, fnSuc, progressType)
   };
 
-
   function apiAjax(postJson, callBack, progressType){
-    var toast = new auiToast();
     if(progressType){
       var title = '加载中';
       if(progressType === 'submit'){
         title = '正在提交';
       }
-      toast.loading({
-        title: title,
-        duration:2000
-      })
+      u.loadingShow(title)
     }
     api.ajax(postJson, function(ret, err) {
-      toast.hide();
+      u.loadingHide()
       if(ret){
         if (ret.code === 0) {
           callBack(ret.data || true, ret.page || {})
@@ -206,7 +211,6 @@
       }
     });
   }
-
 
   /*end*/
   window.$apiAjax = u;

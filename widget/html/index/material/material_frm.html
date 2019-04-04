@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="format-detection" content="telephone=no">
+  <title>卡萌宝宝</title>
+  <link rel="stylesheet" href="../../../css/aui.css">
+  <link rel="stylesheet" href="../../../css/index/material.css">
+</head>
+<body>
+<div class="aui-content aui-margin-b-15">
+  <ul class="aui-list aui-media-list">
+    <li class="aui-list-item">
+      <div class="aui-list-item-inner">
+        <div class="aui-list-item-title">多张图片列表一</div>
+        <p>借助栅格来实现图片列表借助栅格来实现图片列表借助栅格来实现图片列表借助栅格来实现图片列表</p>
+        <div class="aui-row aui-row-padded">
+          <div class="aui-col-xs-4">
+            <img src="../../../image/bg01.png"/>
+          </div>
+          <div class="aui-col-xs-4">
+            <img src="../../../image/bg01.png"/>
+          </div>
+          <div class="aui-col-xs-4">
+            <img src="../../../image/head1.jpg"/>
+          </div>
+        </div>
+      </div>
+      <div class="aui-info" style="padding-top:0">
+        <div class="aui-info-item">
+          <img src="../../../image/head.jpg" style="width:1rem" class="aui-img-round"/>
+          <span class="aui-margin-l-5 user-info">流浪男
+            <span class="aui-margin-l-10 aui-font-size-12">一小时前</span>
+          </span>
+
+        </div>
+        <div class="aui-info-item aui-margin-r-15">
+          <i class="aui-iconfont aui-icon-wechat"></i>
+          <span class="share">转发</span>
+        </div>
+      </div>
+    </li>
+    <li class="aui-list-item">
+      <div class="aui-media-list-item-inner">
+        <div class="aui-list-item-media">
+          <img src="../../../image/triangle.png">
+        </div>
+        <div class="aui-list-item-inner">
+          <div class="aui-list-item-text">
+            <div class="aui-list-item-title">带有媒体的列表二</div>
+            <div class="aui-list-item-right">08:00</div>
+          </div>
+          <div class="aui-list-item-text">
+            在下方我们加入了aui-info信息条在下方我们加入了aui-info信息条在下方我们加入了aui-info信息条在下方我们加入了aui-info信息条在下方我们加入了aui-info信息条
+          </div>
+        </div>
+      </div>
+      <div class="aui-info" style="padding-top:0">
+        <div class="aui-info-item">
+          <img src="../../../image/head.jpg" style="width:1rem" class="aui-img-round" />
+          <span class="aui-margin-l-5 user-info">流浪男
+            <span class="aui-margin-l-10 aui-font-size-12">一小时前</span>
+          </span>
+        </div>
+        <div class="aui-info-item">
+          <i class="aui-iconfont aui-icon-wechat"></i>
+          <span class="share">转发</span>
+        </div>
+      </div>
+    </li>
+    <li class="aui-list-item">
+      <div class="aui-list-item-inner">
+        <div class="aui-list-item-title">多张图片列表一</div>
+        <p>借助栅格来实现图片列表</p>
+        <div class="aui-row aui-row-padded">
+          <div class="aui-col-xs-4">
+            <img src="../../../image/triangle.png"/>
+          </div>
+          <div class="aui-col-xs-4">
+            <img src="../../../image/bg01.png"/>
+          </div>
+          <div class="aui-col-xs-4">
+            <img src="../../../image/head1.jpg"/>
+          </div>
+          <div class="aui-col-xs-4">
+            <img src="../../../image/triangle.png"/>
+          </div>
+          <div class="aui-col-xs-4">
+            <img src="../../../image/bg01.png"/>
+          </div>
+          <div class="aui-col-xs-4">
+            <img src="../../../image/head1.jpg"/>
+          </div>
+        </div>
+      </div>
+      <div class="aui-info" style="padding-top:0">
+        <div class="aui-info-item">
+          <img src="../../../image/head.jpg" style="width:1rem" class="aui-img-round"/>
+          <span class="aui-margin-l-5 user-info">流浪男
+            <span class="aui-margin-l-10 aui-font-size-12">一小时前</span>
+          </span>
+        </div>
+        <div class="aui-info-item aui-margin-r-15">
+          <i class="aui-iconfont aui-icon-wechat"></i>
+          <span class="share">转发</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+<script src="../../../script/api.js"></script>
+<script src="../../../script/vue.min.js"></script>
+<script type="text/javascript" src="../../../script/aui/aui-popup-new.js"></script>
+<script>
+  var popup = new auiPopup()
+
+  function showPopup () {
+    popup.init({
+      frameBounces: true,//当前页面是否弹动，（主要针对安卓端）
+      location: 'top-right',//位置，top(默认：顶部中间),top-left top-right,bottom,bottom-left,bottom-right
+      buttons: [{
+        image: '../../../image/share/graphic.png',
+        text: '图文消息',
+        value: 'wx'//可选
+      }, {
+        image: '../../../image/share/article.png',
+        text: '写文章',
+        value: 'wx-circle'
+      }],
+    }, function (ret) {
+      if (ret) {
+        if(ret.buttonIndex === 1) {
+          $api.openWin("/html/index/material/add_graphic_frm")
+        }
+      }
+    })
+  }
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      imgs: ['../../../image/index/zhanwei.png', '../../../image/index/zhanwei2.png', '../../../image/index/zhanwei.png', '../../../image/index/zhanwei2.png', '../../../image/index/zhanwei.png'],
+      wxShare: false
+    },
+    methods: {
+      setUserAddress: function (regionCodes) {
+        addressView.open({
+          file_addr: 'widget://res/region.txt', //数据源地址
+          selected_color: '#fda9c5', //颜色
+          pro_id: regionCodes[0], //省id
+          city_id: regionCodes[1], //市id
+          dir_id: regionCodes[2] //区id
+        })
+      }
+    }
+  })
+</script>
+</html>

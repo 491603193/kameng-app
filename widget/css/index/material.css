@@ -1,0 +1,12 @@
+.aui-list [class*=aui-col-xs-] img {
+    height: 100px;
+}
+
+.user-info{
+    line-height: 24px;
+    margin-top: 4px;
+}
+
+.share {
+    margin: 0 2px 2px 6px;
+}

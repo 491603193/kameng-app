@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>购买库存</title>
+  <title>品牌专区</title>
   <link rel="stylesheet" href="../../../css/aui.css">
 </head>
 <body>
@@ -12,20 +12,22 @@
     <a class="aui-pull-left aui-btn" onclick="api.closeWin()">
       <span class="aui-iconfont aui-icon-left"></span>
     </a>
-    <div class="aui-title" id="title">购买库存</div>
+    <div class="aui-title" id="title">品牌专区</div>
+    <a class="aui-pull-right aui-btn" onclick="writeArticle()">
+      <span class="aui-iconfont aui-icon-pencil"></span>
+    </a>
   </header>
 </body>
 <script src="../../../script/api.js"></script>
-<script src="../../../script/vue.min.js"></script>
 <script>
   apiready = function(){
     api.parseTapmode();
     var header = $api.byId('aui-header');
     $api.fixStatusBar(header);
     api.openFrame({
-        name: '/html/user/cloud/apple_cloud_frm',
-        url: api.wgtRootDir + '/html/user/cloud/apple_cloud_frm.html',
-        bounces: false,
+        name: '/html/index/material/material_frm',
+        url: api.wgtRootDir + '/html/index/material/material_frm.html',
+        bounces: true,
         rect: {
           x: 0,
           y:  $api.offset(header).h,
@@ -33,6 +35,12 @@
           h: 'auto'
         },
         pageParam: api.pageParam
+    })
+  }
+  function writeArticle () {
+    api.execScript({
+      frameName: '/html/index/material/material_frm',
+      script: 'showPopup()'
     })
   }
 </script>

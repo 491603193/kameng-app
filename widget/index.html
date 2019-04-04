@@ -36,7 +36,6 @@
 <script type="text/javascript" src="./script/api-local.js"></script>
 <script type="text/javascript">
   apiready = function () {
-    // $api.setPrefs('cart1',[])
     api.parseTapmode()
     var userId = $apiLocal.getUserId()
     if (!userId || userId === 'undefined') {
@@ -65,11 +64,15 @@
           name: '/html/index',
           url: api.wgtRootDir + '/html/index.html',
           bounces: false,
-          delay: 400,
+          delay: 1000,
           slidBackEnabled: true,
           vScrollBarEnabled: false,
           pageParam: {}
         })
+        $apiAjax.loadingShow("正在登录..")
+        setTimeout(function () {
+          $apiAjax.loadingHide()
+        },1900)
       } else {
         $api.css($api.byId("flush"), 'display: block')
       }
@@ -101,7 +104,7 @@
         vScrollBarEnabled: false,
         pageParam: {}
       })
-    }, 500)
+    }, 300)
   }
 </script>
 </html>

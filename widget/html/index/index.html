@@ -46,7 +46,7 @@
           <img src="../../image/index/icon2.png" class="aui-iconfont" alt="">
           <div class="aui-grid-label">非云仓</div>
         </div>
-        <div class="aui-col-xs-3" onclick="openWin('/html/user/income/month_income_win')">
+        <div class="aui-col-xs-3" onclick="openWin('/html/index/material/material_win')">
           <img src="../../image/index/icon3.png" class="aui-iconfont" alt="">
           <div class="aui-grid-label">品牌专区</div>
         </div>
@@ -82,9 +82,9 @@
   {{each itemArray as entity i}}
   <div class="index-product-list-item" onclick="openDetail('{{entity.productId}}')">
     <div class="index-product-img">
-      <img src="{{imgPath}}{{entity.productListPic}}">
+        <img src="{{imgPath}}{{entity.productListPic}}">
       {{if entity.isTimingUp}}
-      <div class="index-product-buy">{{entity.downTime | dateFormat:'MM.dd hh:mm'}} 开售</div>
+        <div class="index-product-buy">{{entity.downTime | dateFormat:'MM.dd hh:mm'}} 正在开售</div>
       {{/if}}
     </div>
     <div class="index-product-text">
@@ -96,7 +96,7 @@
             {{entity.stockMinPrice}}
           {{else}}
             {{entity.stockMinPrice}} - {{entity.stockMaxPrice}}
-          {{/if}} 云币
+          {{/if}} 库存
         {{else}} ￥
           {{if entity.productMinPriceE == entity.productMaxPriceE}}
            {{entity.productMinPriceE}}
